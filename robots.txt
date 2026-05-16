@@ -1,0 +1,9 @@
+# robots.txt — trust-lionel.com
+# Lionel Mosley | ahr-ki-tekt | IT Consultant & Innovative Thought Leader
+
+# Allow all crawlers full access
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://trust-lionel.com/sitemap.xml

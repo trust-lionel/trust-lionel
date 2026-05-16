@@ -1,0 +1,71 @@
+# Site settings
+title: "Lionel Mosley | ahr-ki-tekt"
+description: "IT Consultant · Innovative Thought Leader · Subject Matter Expert · Houston, TX"
+url: "https://trust-lionel.com"
+baseurl: ""
+
+# Author
+author:
+  name: "Lionel Mosley"
+  email: ""
+  url: "https://trust-lionel.com"
+
+# SEO
+lang: en
+timezone: America/Chicago
+
+# Keywords for SEO
+keywords:
+  - IT Consultant
+  - Innovative Thought Leader
+  - Subject Matter Expert
+  - Cloud Services
+  - Cybersecurity
+  - Infrastructure Governance
+  - Technology Strategy
+  - Data Center Architecture
+  - Microsoft CSP
+  - Digital Transformation
+  - Houston Texas
+  - Lionel Mosley
+  - ahr-ki-tekt
+  - trust-lionel
+
+# Build settings
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Exclude from build
+exclude:
+  - README_DEV.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# Collections
+collections:
+  blog:
+    output: true
+    permalink: /blog/:name
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: "blog"
+      type: "blog"
+    values:
+      layout: "post"
