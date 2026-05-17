@@ -6,7 +6,7 @@
 -->
 
 <div align="center">
-<a href="/blog/macsystools.html">← Previous</a> &nbsp;·&nbsp; <a href="/">🏠 Home</a> &nbsp;·&nbsp; <a href="/">Next →</a>
+<a href="/blog/macsystools.html">← Previous</a> &nbsp;·&nbsp; <a href="/">🏠 Home</a> &nbsp;·&nbsp; <a href="/blog/three-questions.html">Next →</a>
 </div>
 
 ---
@@ -127,7 +127,7 @@ That's the difference between having something to say and having a place to say 
 
 <div align="center">
 
-<a href="/blog/macsystools.html">← Previous</a> &nbsp;·&nbsp; <a href="/">🏠 Home</a> &nbsp;·&nbsp; <a href="/">Next →</a>
+<a href="/blog/macsystools.html">← Previous</a> &nbsp;·&nbsp; <a href="/">🏠 Home</a> &nbsp;·&nbsp; <a href="/blog/three-questions.html">Next →</a>
 
 <hr/>
 
