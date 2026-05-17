@@ -17,6 +17,22 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- MacSysTools GitHub Repository -->
+  <url>
+    <loc>https://github.com/trust-lionel/macsystools</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog: Three Questions -->
+  <url>
+    <loc>https://trust-lionel.com/blog/three-questions</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Blog: Vibe Coding -->
   <url>
     <loc>https://trust-lionel.com/blog/vibe-coding</loc>

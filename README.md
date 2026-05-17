@@ -43,8 +43,9 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 |---|---|
 | [4TH AND BAILEY](https://github.com/4thandbailey) | Cloud Services · Cybersecurity · Infrastructure Governance · Technology Strategy |
 | [Infrastructure Placement Framework](https://framework.4thandbailey.com) | A comprehensive decision framework for infrastructure placement strategy |
-| [MacSysTools](blog/macsystools.md) | Native macOS system administration app built with SwiftUI + Xcode for macOS Tahoe |
-| [Vibe Coding — How I Built My Personal Brand in One Night](blog/vibe-coding.md) | From zero GitHub presence to a fully live personal brand at trust-lionel.com |
+| [MacSysTools](https://github.com/trust-lionel/macsystools) | Native macOS system administration app built with SwiftUI + Xcode for macOS Tahoe |
+| [Three Questions](blog/three-questions.html) | Thought leadership — coming soon |
+| [Vibe Coding — How I Built My Personal Brand in One Night](blog/vibe-coding.md) | From zero GitHub presence to a fully live personal brand at trust-lionel.com — in one session |
 
 ---
 
