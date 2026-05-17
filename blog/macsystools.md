@@ -38,6 +38,8 @@ It provides a clean, professional graphical interface for common macOS Terminal 
 
 **The core philosophy:** encode the knowledge of *what command to run and when*, not just how. The app handles version detection, privilege elevation, output parsing, and error display — the user selects a tool and clicks Run.
 
+**Repository:** [github.com/trust-lionel/macsystools](https://github.com/trust-lionel/macsystools)
+
 ---
 
 ## Why SwiftUI + Xcode Instead of Electron
@@ -79,6 +81,8 @@ The project started as a brainstorm around Electron. After evaluating both optio
 ---
 
 ## Project File Structure
+
+**GitHub:** [github.com/trust-lionel/macsystools](https://github.com/trust-lionel/macsystools)
 
 ```
 MacSysTools/
