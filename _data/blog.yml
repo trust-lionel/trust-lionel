@@ -4,6 +4,7 @@ posts:
     description: "A native macOS system administration app built with SwiftUI + Xcode for macOS Tahoe — eliminating the need to remember Terminal command syntax."
     date: "2026-03-05"
     date_display: "March 05, 2026"
+    repository: "https://github.com/trust-lionel/macsystools"
     tags:
       - macOS
       - SwiftUI
