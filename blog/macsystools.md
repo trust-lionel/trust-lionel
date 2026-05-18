@@ -1,3 +1,10 @@
+---
+layout: post
+title: "MacSysTools"
+description: "A native macOS system administration app built with SwiftUI + Xcode for macOS Tahoe — eliminating the need to remember Terminal command syntax."
+tags: [macOS, SwiftUI, Xcode, macOS-Tahoe, system-administration, developer-tools, networking]
+---
+
 <!--
   SEO Meta: MacSysTools | macOS System Administration App | SwiftUI | Xcode | macOS Tahoe
   Keywords: MacSysTools, macOS Tahoe, SwiftUI, Xcode, system administration, macOS tools,

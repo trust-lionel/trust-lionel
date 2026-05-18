@@ -1,3 +1,10 @@
+---
+layout: post
+title: "Three Questions Every CEO and Board Should Be Able to Answer About Their Technology"
+description: "Cyber resilience, AI governance, and business continuity — the three questions that determine whether an organization survives what is coming."
+tags: [Cyber Resilience, AI Governance, BCDR, NIST, Enterprise IT, Infrastructure Governance, Technology Strategy, SMB, Thought Leadership]
+---
+
 <!--
   SEO Meta: Three Questions Every CEO and Board Should Be Able to Answer About Their Technology
   Keywords: cyber resilience, AI governance, business continuity, disaster recovery, BCDR,

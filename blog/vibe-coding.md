@@ -1,3 +1,10 @@
+---
+layout: post
+title: "Vibe Coding — How I Built My Personal Brand in One Night"
+description: "From zero GitHub presence to a fully live personal brand at trust-lionel.com in one session."
+tags: [Personal Brand, GitHub Pages, Jekyll, SEO, Vibe Coding, Thought Leadership]
+---
+
 <!--
   SEO Meta: Vibe Coding | Personal Brand | GitHub Pages | Jekyll | trust-lionel.com
   Keywords: vibe coding, personal brand, GitHub Pages, Jekyll, SEO, microblogging,
