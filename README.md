@@ -30,7 +30,7 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 ```
 ☁  Cloud Services & Infrastructure        🔐  Cybersecurity
 🏛  Infrastructure Governance              🤝  Microsoft CSP
-📐  Technology Strategy                    🔄  Digital Transformation
+📐  Technology Strategy                   🔄  Digital Transformation
 🖥  Data Center Architecture               🌐  Enterprise IT Solutions
 ```
 
