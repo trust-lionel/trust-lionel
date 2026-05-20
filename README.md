@@ -42,6 +42,7 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 | Project | Description |
 |---|---|
 | [4TH AND BAILEY](https://github.com/4thandbailey) | Cloud Services · Cybersecurity · Infrastructure Governance · Technology Strategy |
+| [Houston Alert](https://devops.houstonalert.com/) | Real-time road, flood & emergency monitoring for 160 Houston metro ZIP codes. Built by 4th and Bailey. |
 | [Infrastructure Placement Framework](https://framework.4thandbailey.com) | A comprehensive decision framework for infrastructure placement strategy |
 | [MacSysTools](https://github.com/trust-lionel/macsystools) | Native macOS system administration app built with SwiftUI + Xcode for macOS Tahoe |
 | [Three Questions Every CEO and Board Should Be Able to Answer About Their Technology](blog/three-questions.md) | Cyber resilience, AI governance, and business continuity — the three questions that determine whether an organization survives what is coming |
