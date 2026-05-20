@@ -9,6 +9,14 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- Houston Alert DevOps Blog -->
+  <url>
+    <loc>https://devops.houstonalert.com</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Blog: MacSysTools -->
   <url>
     <loc>https://trust-lionel.com/blog/macsystools</loc>
