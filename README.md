@@ -45,6 +45,7 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 | [Houston Alert](https://devops.houstonalert.com/) | Real-time road, flood & emergency monitoring for 160 Houston metro ZIP codes. Built by 4th and Bailey. |
 | [Infrastructure Placement Framework](https://framework.4thandbailey.com) | A comprehensive decision framework for infrastructure placement strategy |
 | [MacSysTools](https://github.com/trust-lionel/macsystools) | Native macOS system administration app built with SwiftUI + Xcode for macOS Tahoe |
+[Shopify ↔ Sage BusinessWorks Middleware Agent](https://github.com/4thandBailey/shopify-bw-agent) | Windows background service that automatically synchronizes data between Shopify and Sage BusinessWorks. |
 | [Three Questions Every CEO and Board Should Be Able to Answer About Their Technology](blog/three-questions.md) | Cyber resilience, AI governance, and business continuity — the three questions that determine whether an organization survives what is coming |
 | [Vibe Coding — How I Built My Personal Brand in One Night](blog/vibe-coding.md) | From zero GitHub presence to a fully live personal brand at trust-lionel.com |
 
