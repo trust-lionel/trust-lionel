@@ -71,7 +71,8 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 <a href="https://nodejs.org"><img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js" /></a>&nbsp;
 <a href="https://swift.org"><img src="https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=swift&logoColor=white" alt="Swift" /></a>&nbsp;
 <a href="https://developer.apple.com/xcode"><img src="https://img.shields.io/badge/Xcode-147EFB?style=for-the-badge&logo=xcode&logoColor=white" alt="Xcode" /></a>&nbsp;
-<a href="https://learn.microsoft.com/powershell"><img src="https://img.shields.io/badge/PowerShell-5391FE?style=for-the-badge&logo=powershell&logoColor=white" alt="PowerShell" /></a>
+<a href="https://learn.microsoft.com/powershell"><img src="https://img.shields.io/badge/PowerShell-5391FE?style=for-the-badge&logo=powershell&logoColor=white" alt="PowerShell" /></a>&nbsp;
+<a href="https://developer.mozilla.org/docs/Web/HTML"><img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" /></a>
 
 ---
 
@@ -161,7 +162,7 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 
 <td width="33%" valign="top" align="center">
 <a href="blog/microsoft-notification-abuse.html">
-<img src="assets/WHEN_MICROSOFT_S_EMAIL_BECOMES_THE_WEAPON.png" width="100%" alt="When Microsoft's Own Email Becomes the Weapon" />
+<img src="https://img.shields.io/badge/When%20Microsoft's%20Email%20Becomes%20the%20Weapon-CC0000?style=for-the-badge&logo=microsoftoutlook&logoColor=white" width="100%" alt="When Microsoft's Own Email Becomes the Weapon" />
 </a>
 <br/><br/>
 <strong><a href="blog/microsoft-notification-abuse.html">When Microsoft's Own Email Becomes the Weapon</a></strong>
@@ -171,15 +172,7 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 <sub>📝 Thought Leadership · May 22, 2026</sub>
 </td>
 
-<td width="33%" valign="top" align="center">
-<br/>
-<div align="center">
-<a href="https://4nb.cloud/lmosley">
-<img src="https://img.shields.io/badge/Schedule%20an%20Advisory%20Consultation-0072C6?style=for-the-badge&logo=microsoftoutlook&logoColor=white" alt="Schedule an Advisory Consultation" />
-</a>
-<br/><br/>
-<sub>Have a technology challenge that needs an <em>ahr-ki-tekt</em>?<br/>Let's talk.</sub>
-</div>
+<td width="33%" valign="top">
 </td>
 
 <td width="33%" valign="top">
@@ -222,9 +215,10 @@ Currently listening to music that creates that space — because some problems n
 
 <div align="center">
 
-<a href="https://linkedin.com/in/lionelmosley"><img src="https://img.shields.io/badge/LinkedIn-E8F0FB?style=for-the-badge&logo=linkedin&logoColor=0A66C2" alt="LinkedIn" /></a>&nbsp;
-<a href="https://github.com/4thandbailey"><img src="https://img.shields.io/badge/4TH%20AND%20BAILEY-F0F0F0?style=for-the-badge&logo=github&logoColor=1A1A1A" alt="4TH AND BAILEY" /></a>&nbsp;
-<a href="https://reddit.com/u/trust-lionel"><img src="https://img.shields.io/badge/Reddit-FFF0E8?style=for-the-badge&logo=reddit&logoColor=FF4500" alt="Reddit" /></a>
+<a href="https://linkedin.com/in/lionelmosley"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>&nbsp;
+<a href="https://github.com/4thandbailey"><img src="https://img.shields.io/badge/4TH%20AND%20BAILEY-181717?style=for-the-badge&logo=github&logoColor=white" alt="4TH AND BAILEY" /></a>&nbsp;
+<a href="https://reddit.com/u/trust-lionel"><img src="https://img.shields.io/badge/Reddit-FF4500?style=for-the-badge&logo=reddit&logoColor=white" alt="Reddit" /></a>&nbsp;
+<a href="https://open.spotify.com/user/lmosley002-spotify?si=5378efbde0b14063"><img src="https://img.shields.io/badge/Spotify-1DB954?style=for-the-badge&logo=spotify&logoColor=white" alt="Spotify" /></a>
 
 <br/><br/>
 
