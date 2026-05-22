@@ -32,6 +32,23 @@ posts:
       - Thought Leadership
     author: "Lionel Mosley"
 
+  - title: "When Microsoft's Own Email Becomes the Weapon — A Microsoft CSP's Analysis Through the SCuBA Lens"
+    file: "blog/microsoft-notification-abuse"
+    description: "Scammers abused Microsoft's legitimate notification email address to send spam that bypasses SPF, DKIM, and DMARC. A Microsoft CSP's analysis through CISA SCuBA, MITRE ATT&CK, NIST SP 800-53, and CIS Benchmarks."
+    date: "2026-05-22"
+    date_display: "May 22, 2026"
+    tags:
+      - Microsoft 365
+      - SCuBA CISA
+      - MITRE ATT&CK
+      - NIST SP 800-53
+      - CIS Benchmarks
+      - Microsoft CSP
+      - Threat Intelligence
+      - Email Security
+      - Thought Leadership
+    author: "Lionel Mosley"
+
   - title: "Vibe Coding — How I Built My Personal Brand in One Night"
     file: "blog/vibe-coding"
     description: "From zero GitHub presence to a fully live personal brand at trust-lionel.com in one session."
