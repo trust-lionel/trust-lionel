@@ -5,8 +5,11 @@
             Data Center Architect, Lionel Mosley, trust-lionel.com, 4th and Bailey, Houston Texas,
             SCuBA CISA, MITRE ATT&CK, NIST SP 800-53, CIS Benchmarks, Microsoft 365 security,
             cyber resilience, AI governance, BCDR, email security, threat intelligence,
-            AWS, Microsoft Azure, Google Cloud, GitHub, PowerShell, Swift, Node.js, Xcode,
-            Netlify, Railway, Bunny.net, Google Workspace, advisory consultation
+            AWS Amazon Web Services, Microsoft Azure, Google Cloud Platform, Backblaze B2,
+            GitHub, PowerShell, Swift, Node.js, Xcode, HTML5, Netlify, Railway, Bunny.net,
+            Google Workspace, advisory consultation, IT consulting Houston Texas,
+            multi-cloud architecture, open cloud storage, vendor-neutral infrastructure,
+            Schedule Advisory Consultation, 4nb.cloud
 -->
 
 <div align="center">
@@ -54,6 +57,7 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 <a href="https://aws.amazon.com"><img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=FF9900" alt="Amazon AWS" /></a>&nbsp;
 <a href="https://azure.microsoft.com"><img src="https://img.shields.io/badge/Microsoft%20Azure-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Microsoft Azure" /></a>&nbsp;
 <a href="https://cloud.google.com"><img src="https://img.shields.io/badge/Google%20Cloud-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white" alt="Google Cloud" /></a>&nbsp;
+<a href="https://www.backblaze.com/cloud-storage"><img src="https://img.shields.io/badge/Backblaze%20B2-E91E26?style=for-the-badge&logo=backblaze&logoColor=white" alt="Backblaze B2" /></a>&nbsp;
 <a href="https://netlify.com"><img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white" alt="Netlify" /></a>&nbsp;
 <a href="https://railway.app"><img src="https://img.shields.io/badge/Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white" alt="Railway" /></a>&nbsp;
 <a href="https://bunny.net"><img src="https://img.shields.io/badge/Bunny.net-FF6633?style=for-the-badge&logo=bunny&logoColor=white" alt="Bunny.net" /></a>
