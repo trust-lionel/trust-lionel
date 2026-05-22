@@ -9,7 +9,9 @@
             GitHub, PowerShell, Swift, Node.js, Xcode, HTML5, Netlify, Railway, Bunny.net,
             Google Workspace, advisory consultation, IT consulting Houston Texas,
             multi-cloud architecture, open cloud storage, vendor-neutral infrastructure,
-            Schedule Advisory Consultation, 4nb.cloud
+            Schedule Advisory Consultation, 4nb.cloud,
+            Shopify Sage BusinessWorks integration, middleware agent, Windows Service,
+            e-commerce ERP synchronization, ODBC BWGACCESS
 -->
 
 <div align="center">
@@ -136,6 +138,18 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 </td>
 
 <td width="33%" valign="top" align="center">
+<a href="https://github.com/4thandBailey/shopify-bw-agent">
+<img src="https://img.shields.io/badge/Shopify%20%E2%86%94%20Sage%20BusinessWorks-96BF48?style=for-the-badge&logo=shopify&logoColor=white" width="100%" alt="Shopify Sage BusinessWorks Middleware Agent" />
+</a>
+<br/><br/>
+<strong><a href="https://github.com/4thandBailey/shopify-bw-agent">Shopify ↔ Sage BusinessWorks Middleware Agent</a></strong>
+<br/>
+<sub>Windows background service that automatically synchronizes orders, inventory, fulfillments, customers, and pricing between Shopify and Sage BusinessWorks</sub>
+<br/><br/>
+<sub>⚙️ Node.js · JavaScript · Windows Service</sub>
+</td>
+
+<td width="33%" valign="top" align="center">
 <a href="blog/three-questions.html">
 <img src="https://img.shields.io/badge/Three%20Questions%20Every%20CEO%20Should%20Answer-FF6B35?style=for-the-badge&logo=buffer&logoColor=white" width="100%" alt="Three Questions Every CEO and Board Should Be Able to Answer" />
 </a>
@@ -145,18 +159,6 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 <sub>Cyber resilience, AI governance, and business continuity — the three questions that determine whether an organization survives</sub>
 <br/><br/>
 <sub>📝 Thought Leadership · May 17, 2026</sub>
-</td>
-
-<td width="33%" valign="top" align="center">
-<a href="blog/vibe-coding.html">
-<img src="https://img.shields.io/badge/Vibe%20Coding-1DB954?style=for-the-badge&logo=spotify&logoColor=white" width="100%" alt="Vibe Coding" />
-</a>
-<br/><br/>
-<strong><a href="blog/vibe-coding.html">Vibe Coding — How I Built My Personal Brand in One Night</a></strong>
-<br/>
-<sub>From zero GitHub presence to a fully live personal brand at trust-lionel.com — in one session</sub>
-<br/><br/>
-<sub>📝 Thought Leadership · May 16, 2026</sub>
 </td>
 
 </tr>
