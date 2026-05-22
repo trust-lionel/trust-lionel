@@ -10,15 +10,13 @@
 -->
 
 <div align="center">
-  <img src="assets/banner.svg" width="100%" alt="Lionel Mosley — ahr-ki-tekt | IT Consultant & Innovative Thought Leader | Houston TX | trust-lionel.com" />
+
+[Home](#who-i-am) &nbsp;·&nbsp; [Published Work](#published-work--frameworks) &nbsp;·&nbsp; [Thought Leadership](#thought-leadership) &nbsp;·&nbsp; [Beyond the Work](#beyond-the-work) &nbsp;·&nbsp; [Connect](#connect) &nbsp;&nbsp;|&nbsp;&nbsp; <a href="https://4nb.cloud/lmosley"><img src="https://img.shields.io/badge/Schedule%20an%20Advisory%20Consultation-0072C6?style=flat-square&logo=microsoftoutlook&logoColor=white" alt="Schedule an Advisory Consultation" /></a>
+
 </div>
 
-<br/>
-
 <div align="center">
-  <a href="https://4nb.cloud/lmosley">
-    <img src="https://img.shields.io/badge/Schedule%20an%20Advisory%20Consultation-0072C6?style=for-the-badge&logo=microsoftoutlook&logoColor=white" alt="Schedule an Advisory Consultation" />
-  </a>
+  <img src="assets/banner.svg" width="100%" alt="Lionel Mosley — ahr-ki-tekt | IT Consultant & Innovative Thought Leader | Houston TX | trust-lionel.com" />
 </div>
 
 ---
@@ -219,12 +217,6 @@ Currently listening to music that creates that space — because some problems n
 <a href="https://github.com/4thandbailey"><img src="https://img.shields.io/badge/4TH%20AND%20BAILEY-181717?style=for-the-badge&logo=github&logoColor=white" alt="4TH AND BAILEY" /></a>&nbsp;
 <a href="https://reddit.com/u/trust-lionel"><img src="https://img.shields.io/badge/Reddit-FF4500?style=for-the-badge&logo=reddit&logoColor=white" alt="Reddit" /></a>&nbsp;
 <a href="https://open.spotify.com/user/lmosley002-spotify?si=5378efbde0b14063"><img src="https://img.shields.io/badge/Spotify-1DB954?style=for-the-badge&logo=spotify&logoColor=white" alt="Spotify" /></a>
-
-<br/><br/>
-
-<a href="https://4nb.cloud/lmosley">
-  <img src="https://img.shields.io/badge/Schedule%20an%20Advisory%20Consultation-0072C6?style=for-the-badge&logo=microsoftoutlook&logoColor=white" alt="Schedule an Advisory Consultation" />
-</a>
 
 </div>
 
