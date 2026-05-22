@@ -4,7 +4,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://trust-lionel.com/</loc>
-    <lastmod>2026-05-15</lastmod>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -37,6 +37,14 @@
   <url>
     <loc>https://trust-lionel.com/blog/three-questions</loc>
     <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog: When Microsoft's Own Email Becomes the Weapon -->
+  <url>
+    <loc>https://trust-lionel.com/blog/microsoft-notification-abuse</loc>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
