@@ -6,8 +6,8 @@
             SCuBA CISA, MITRE ATT&CK, NIST SP 800-53, CIS Benchmarks, Microsoft 365 security,
             cyber resilience, AI governance, BCDR, email security, threat intelligence,
             AWS Amazon Web Services, Microsoft Azure, Google Cloud Platform, Backblaze B2,
-            GitHub, PowerShell, Swift, Node.js, Xcode, HTML5, Netlify, Railway, Bunny.net,
-            Google Workspace, advisory consultation, IT consulting Houston Texas,
+            GitHub, PowerShell, Swift, Node.js, Xcode, HTML5, Java, Netlify, Railway, Bunny.net,
+            Google Workspace, macOS, Windows Server, Linux, advisory consultation, IT consulting Houston Texas,
             multi-cloud architecture, open cloud storage, vendor-neutral infrastructure,
             Schedule Advisory Consultation, 4nb.cloud,
             Shopify Sage BusinessWorks integration, middleware agent, Windows Service,
@@ -76,7 +76,14 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 <a href="https://swift.org"><img src="https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=swift&logoColor=white" alt="Swift" /></a>&nbsp;
 <a href="https://developer.apple.com/xcode"><img src="https://img.shields.io/badge/Xcode-147EFB?style=for-the-badge&logo=xcode&logoColor=white" alt="Xcode" /></a>&nbsp;
 <a href="https://learn.microsoft.com/powershell"><img src="https://img.shields.io/badge/PowerShell-5391FE?style=for-the-badge&logo=powershell&logoColor=white" alt="PowerShell" /></a>&nbsp;
-<a href="https://developer.mozilla.org/docs/Web/HTML"><img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" /></a>
+<a href="https://developer.mozilla.org/docs/Web/HTML"><img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" /></a>&nbsp;
+<a href="https://java.com"><img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java" /></a>
+
+**Operating Systems & Platforms**
+
+<a href="https://www.apple.com/macos"><img src="https://img.shields.io/badge/macOS-000000?style=for-the-badge&logo=apple&logoColor=white" alt="macOS" /></a>&nbsp;
+<a href="https://www.microsoft.com/windows-server"><img src="https://img.shields.io/badge/Windows%20Server-0078D4?style=for-the-badge&logo=windows&logoColor=white" alt="Windows Server" /></a>&nbsp;
+<a href="https://www.linux.org"><img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux" /></a>
 
 ---
 
