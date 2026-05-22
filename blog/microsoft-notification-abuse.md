@@ -16,6 +16,12 @@
 
 ---
 
+<div align="center">
+<img src="/assets/WHEN_MICROSOFT_S_EMAIL_BECOMES_THE_WEAPON.png" width="100%" alt="When Microsoft's Email Becomes the Weapon — In-depth cybersecurity analysis through the SCuBA Lens regarding Microsoft's notification abuse | Lionel Mosley | ahr-ki-tekt | trust-lionel.com" />
+</div>
+
+---
+
 # When Microsoft's Own Email Becomes the Weapon — A Microsoft CSP's Analysis Through the SCuBA Lens
 
 **Published:** May 22, 2026 &nbsp;·&nbsp; **Author:** [Lionel Mosley](https://github.com/trust-lionel) &nbsp;·&nbsp; **Platform:** trust-lionel.com · GitHub Pages
