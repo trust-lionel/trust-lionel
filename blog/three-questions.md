@@ -1,10 +1,3 @@
----
-layout: post
-title: "Three Questions Every CEO and Board Should Be Able to Answer About Their Technology"
-description: "Cyber resilience, AI governance, and business continuity — the three questions that determine whether an organization survives what is coming."
-tags: [Cyber Resilience, AI Governance, BCDR, NIST, Enterprise IT, Infrastructure Governance, Technology Strategy, SMB, Thought Leadership]
----
-
 <!--
   SEO Meta: Three Questions Every CEO and Board Should Be Able to Answer About Their Technology
   Keywords: cyber resilience, AI governance, business continuity, disaster recovery, BCDR,
@@ -17,7 +10,7 @@ tags: [Cyber Resilience, AI Governance, BCDR, NIST, Enterprise IT, Infrastructur
 -->
 
 <div align="center">
-<a href="/blog/vibe-coding.html">← Previous</a> &nbsp;·&nbsp; <a href="/">🏠 Home</a> &nbsp;·&nbsp; <a href="/">Next →</a>
+<a href="/blog/vibe-coding.html">← Previous</a> &nbsp;·&nbsp; <a href="/">🏠 Home</a> &nbsp;·&nbsp; <a href="/blog/microsoft-notification-abuse.html">Next →</a>
 </div>
 
 ---
@@ -168,7 +161,7 @@ The 'what if' is no longer hypothetical. The question is whether your organizati
 
 <div align="center">
 
-<a href="/blog/vibe-coding.html">← Previous</a> &nbsp;·&nbsp; <a href="/">🏠 Home</a> &nbsp;·&nbsp; <a href="/">Next →</a>
+<a href="/blog/vibe-coding.html">← Previous</a> &nbsp;·&nbsp; <a href="/">🏠 Home</a> &nbsp;·&nbsp; <a href="/blog/microsoft-notification-abuse.html">Next →</a>
 
 <hr/>
 
