@@ -11,7 +11,7 @@
 
 <div align="center">
 
-[Home](#who-i-am) &nbsp;·&nbsp; [Published Work](#published-work--frameworks) &nbsp;·&nbsp; [Thought Leadership](#thought-leadership) &nbsp;·&nbsp; [Beyond the Work](#beyond-the-work) &nbsp;·&nbsp; [Connect](#connect) &nbsp;&nbsp;|&nbsp;&nbsp; <a href="https://4nb.cloud/lmosley"><img src="https://img.shields.io/badge/Schedule%20an%20Advisory%20Consultation-0072C6?style=flat-square&logo=microsoftoutlook&logoColor=white" alt="Schedule an Advisory Consultation" /></a>
+<a href="#who-i-am">Home</a> &nbsp;·&nbsp; <a href="#published-work--frameworks">Published Work</a> &nbsp;·&nbsp; <a href="#thought-leadership">Thought Leadership</a> &nbsp;·&nbsp; <a href="#beyond-the-work">Beyond the Work</a> &nbsp;·&nbsp; <a href="#connect">Connect</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="https://4nb.cloud/lmosley"><img src="https://img.shields.io/badge/Schedule%20an%20Advisory%20Consultation-0072C6?style=flat-square&logo=microsoftoutlook&logoColor=white" alt="Schedule an Advisory Consultation" /></a>
 
 </div>
 
