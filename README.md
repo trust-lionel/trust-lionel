@@ -2,7 +2,9 @@
   SEO Meta: Lionel Mosley | ahr-ki-tekt | IT Consultant | Innovative Thought Leader | Houston TX
   Keywords: IT Consultant, Innovative Thought Leader, Cloud Services, Cybersecurity,
             Infrastructure Governance, Technology Strategy, Microsoft CSP, Digital Transformation,
-            Data Center Architect, Lionel Mosley, trust-lionel.com, 4th and Bailey, Houston Texas
+            Data Center Architect, Lionel Mosley, trust-lionel.com, 4th and Bailey, Houston Texas,
+            SCuBA CISA, MITRE ATT&CK, NIST SP 800-53, CIS Benchmarks, Microsoft 365 security,
+            cyber resilience, AI governance, BCDR, email security, threat intelligence
 -->
 
 <div align="center">
@@ -30,7 +32,7 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 ```
 ☁  Cloud Services & Infrastructure        🔐  Cybersecurity
 🏛  Infrastructure Governance              🤝  Microsoft CSP
-📐  Technology Strategy                   🔄  Digital Transformation
+📐  Technology Strategy                    🔄  Digital Transformation
 🖥  Data Center Architecture               🌐  Enterprise IT Solutions
 ```
 
@@ -42,12 +44,12 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 | Project | Description |
 |---|---|
 | [4TH AND BAILEY](https://github.com/4thandbailey) | Cloud Services · Cybersecurity · Infrastructure Governance · Technology Strategy |
-| [Houston Alert](https://devops.houstonalert.com/) | Real-time road, flood & emergency monitoring for 160 Houston metro ZIP codes. Built by 4th and Bailey. |
+| [Houston Alert](https://devops.houstonalert.com) | DevOps Blog — insights, tools, and strategies from the field |
 | [Infrastructure Placement Framework](https://framework.4thandbailey.com) | A comprehensive decision framework for infrastructure placement strategy |
 | [MacSysTools](https://github.com/trust-lionel/macsystools) | Native macOS system administration app built with SwiftUI + Xcode for macOS Tahoe |
-[Shopify ↔ Sage BusinessWorks Middleware Agent](https://github.com/4thandBailey/shopify-bw-agent) | Windows background service that automatically synchronizes data between Shopify and Sage BusinessWorks. |
-| [Three Questions Every CEO and Board Should Be Able to Answer About Their Technology](blog/three-questions.md) | Cyber resilience, AI governance, and business continuity — the three questions that determine whether an organization survives what is coming |
-| [Vibe Coding — How I Built My Personal Brand in One Night](blog/vibe-coding.md) | From zero GitHub presence to a fully live personal brand at trust-lionel.com |
+| [Three Questions Every CEO and Board Should Be Able to Answer About Their Technology](blog/three-questions.html) | Cyber resilience, AI governance, and business continuity — the three questions that determine whether an organization survives what is coming |
+| [Vibe Coding — How I Built My Personal Brand in One Night](blog/vibe-coding.md) | From zero GitHub presence to a fully live personal brand at trust-lionel.com — in one session |
+| [When Microsoft's Own Email Becomes the Weapon](blog/microsoft-notification-abuse.html) | A Microsoft CSP's analysis of the msonlineservicesteam abuse through CISA SCuBA, MITRE ATT&CK, NIST SP 800-53, and CIS Benchmarks |
 
 ---
 
