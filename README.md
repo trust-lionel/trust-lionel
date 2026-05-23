@@ -176,7 +176,7 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 <img src="https://img.shields.io/badge/Three%20Questions%20Every%20CEO%20Should%20Answer-FF6B35?style=for-the-badge&logo=buffer&logoColor=white" width="100%" alt="Three Questions Every CEO and Board Should Be Able to Answer" />
 </a>
 <br/><br/>
-<strong><a href="blog/three-questions">Three Questions Every CEO and Board Should Be Able to Answer</a></strong>
+<strong><a href="https://github.com/trust-lionel/trust-lionel/blob/main/blog/three-questions.md">Three Questions Every CEO and Board Should Be Able to Answer</a></strong>
 <br/>
 <sub>Cyber resilience, AI governance, and business continuity — the three questions that determine whether an organization survives</sub>
 <br/><br/>
@@ -191,7 +191,7 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 <img src="https://img.shields.io/badge/When%20Microsoft's%20Email%20Becomes%20the%20Weapon-CC0000?style=for-the-badge&logo=microsoftoutlook&logoColor=white" width="100%" alt="When Microsoft's Own Email Becomes the Weapon" />
 </a>
 <br/><br/>
-<strong><a href="blog/microsoft-notification-abuse">When Microsoft's Own Email Becomes the Weapon</a></strong>
+<strong><a href="https://github.com/trust-lionel/trust-lionel/blob/main/blog/microsoft-notification-abuse.md">When Microsoft's Own Email Becomes the Weapon</a></strong>
 <br/>
 <sub>A Microsoft CSP's analysis through CISA SCuBA, MITRE ATT&CK, NIST SP 800-53, and CIS Benchmarks</sub>
 <br/><br/>
