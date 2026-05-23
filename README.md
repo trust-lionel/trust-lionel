@@ -91,8 +91,6 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 **Artificial Intelligence & Emerging Technology**
 
 <a href="https://www.nist.gov/artificial-intelligence"><img src="https://img.shields.io/badge/Artificial%20Intelligence-412991?style=for-the-badge&logo=openai&logoColor=white" alt="Artificial Intelligence" /></a>&nbsp;
-<a href="https://www.microsoft.com/microsoft-copilot"><img src="https://img.shields.io/badge/Microsoft%20Copilot-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Microsoft Copilot" /></a>&nbsp;
-<a href="https://github.com/features/copilot"><img src="https://img.shields.io/badge/GitHub%20Copilot-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Copilot" /></a>&nbsp;
 <a href="https://www.nist.gov/system/files/documents/2023/01/26/AI%20RMF%201.0.pdf"><img src="https://img.shields.io/badge/NIST%20AI%20RMF-005A8E?style=for-the-badge&logo=checkmarx&logoColor=white" alt="NIST AI RMF" /></a>
 
 **Cybersecurity & Compliance**
