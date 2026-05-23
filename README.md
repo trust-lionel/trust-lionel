@@ -7,7 +7,10 @@
             cyber resilience, AI governance, BCDR, email security, threat intelligence,
             AWS Amazon Web Services, Microsoft Azure, Google Cloud Platform, Backblaze B2,
             GitHub, PowerShell, Swift, Node.js, Xcode, HTML5, Java, Netlify, Railway, Bunny.net,
-            Google Workspace, macOS, Windows Server, Linux, advisory consultation, IT consulting Houston Texas,
+            Google Workspace, macOS, Windows Server, Linux, artificial intelligence, machine learning,
+            Microsoft Copilot, GitHub Copilot, NIST AI RMF, CISA SCuBA, MITRE ATT&CK,
+            NIST SP 800-53, CIS Benchmarks, Microsoft Defender, cybersecurity compliance,
+            advisory consultation, IT consulting Houston Texas,
             multi-cloud architecture, open cloud storage, vendor-neutral infrastructure,
             Schedule Advisory Consultation, 4nb.cloud,
             Shopify Sage BusinessWorks integration, middleware agent, Windows Service,
@@ -84,6 +87,21 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 <a href="https://www.apple.com/macos"><img src="https://img.shields.io/badge/macOS-000000?style=for-the-badge&logo=apple&logoColor=white" alt="macOS" /></a>&nbsp;
 <a href="https://www.microsoft.com/windows-server"><img src="https://img.shields.io/badge/Windows%20Server-0078D4?style=for-the-badge&logo=windows&logoColor=white" alt="Windows Server" /></a>&nbsp;
 <a href="https://www.linux.org"><img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux" /></a>
+
+**Artificial Intelligence & Emerging Technology**
+
+<a href="https://www.nist.gov/artificial-intelligence"><img src="https://img.shields.io/badge/Artificial%20Intelligence-412991?style=for-the-badge&logo=openai&logoColor=white" alt="Artificial Intelligence" /></a>&nbsp;
+<a href="https://www.microsoft.com/microsoft-copilot"><img src="https://img.shields.io/badge/Microsoft%20Copilot-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Microsoft Copilot" /></a>&nbsp;
+<a href="https://github.com/features/copilot"><img src="https://img.shields.io/badge/GitHub%20Copilot-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Copilot" /></a>&nbsp;
+<a href="https://www.nist.gov/system/files/documents/2023/01/26/AI%20RMF%201.0.pdf"><img src="https://img.shields.io/badge/NIST%20AI%20RMF-005A8E?style=for-the-badge&logo=checkmarx&logoColor=white" alt="NIST AI RMF" /></a>
+
+**Cybersecurity & Compliance**
+
+<a href="https://www.cisa.gov/resources-tools/services/secure-cloud-business-applications-scuba-project"><img src="https://img.shields.io/badge/CISA%20SCuBA-00B050?style=for-the-badge&logo=checkmarx&logoColor=white" alt="CISA SCuBA" /></a>&nbsp;
+<a href="https://attack.mitre.org"><img src="https://img.shields.io/badge/MITRE%20ATT%26CK-DA3B2B?style=for-the-badge&logo=shield&logoColor=white" alt="MITRE ATT&CK" /></a>&nbsp;
+<a href="https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final"><img src="https://img.shields.io/badge/NIST%20SP%20800--53-005A8E?style=for-the-badge&logo=checkmarx&logoColor=white" alt="NIST SP 800-53" /></a>&nbsp;
+<a href="https://www.cisecurity.org/cis-benchmarks"><img src="https://img.shields.io/badge/CIS%20Benchmarks-003087?style=for-the-badge&logo=shield&logoColor=white" alt="CIS Benchmarks" /></a>&nbsp;
+<a href="https://www.microsoft.com/security/business/microsoft-defender"><img src="https://img.shields.io/badge/Microsoft%20Defender-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Microsoft Defender" /></a>
 
 ---
 
