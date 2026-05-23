@@ -172,11 +172,11 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 </td>
 
 <td width="33%" valign="top" align="center">
-<a href="blog/three-questions.html">
+<a href="https://github.com/trust-lionel/trust-lionel/blob/main/blog/three-questions.md">
 <img src="https://img.shields.io/badge/Three%20Questions%20Every%20CEO%20Should%20Answer-FF6B35?style=for-the-badge&logo=buffer&logoColor=white" width="100%" alt="Three Questions Every CEO and Board Should Be Able to Answer" />
 </a>
 <br/><br/>
-<strong><a href="blog/three-questions.html">Three Questions Every CEO and Board Should Be Able to Answer</a></strong>
+<strong><a href="https://github.com/trust-lionel/trust-lionel/blob/main/blog/three-questions.md">Three Questions Every CEO and Board Should Be Able to Answer</a></strong>
 <br/>
 <sub>Cyber resilience, AI governance, and business continuity — the three questions that determine whether an organization survives</sub>
 <br/><br/>
@@ -187,11 +187,11 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 <tr>
 
 <td width="33%" valign="top" align="center">
-<a href="blog/vibe-coding.html">
+<a href="https://github.com/trust-lionel/trust-lionel/blob/main/blog/vibe-coding.md">
 <img src="https://img.shields.io/badge/Vibe%20Coding-1DB954?style=for-the-badge&logo=spotify&logoColor=white" width="100%" alt="Vibe Coding — How I Built My Personal Brand in One Night" />
 </a>
 <br/><br/>
-<strong><a href="blog/vibe-coding.html">Vibe Coding — How I Built My Personal Brand in One Night</a></strong>
+<strong><a href="https://github.com/trust-lionel/trust-lionel/blob/main/blog/vibe-coding.md">Vibe Coding — How I Built My Personal Brand in One Night</a></strong>
 <br/>
 <sub>From zero GitHub presence to a fully live personal brand at trust-lionel.com — in one session</sub>
 <br/><br/>
@@ -199,11 +199,11 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 </td>
 
 <td width="33%" valign="top" align="center">
-<a href="blog/microsoft-notification-abuse.html">
+<a href="https://github.com/trust-lionel/trust-lionel/blob/main/blog/microsoft-notification-abuse.md">
 <img src="https://img.shields.io/badge/When%20Microsoft's%20Email%20Becomes%20the%20Weapon-CC0000?style=for-the-badge&logo=microsoftoutlook&logoColor=white" width="100%" alt="When Microsoft's Own Email Becomes the Weapon" />
 </a>
 <br/><br/>
-<strong><a href="blog/microsoft-notification-abuse.html">When Microsoft's Own Email Becomes the Weapon</a></strong>
+<strong><a href="https://github.com/trust-lionel/trust-lionel/blob/main/blog/microsoft-notification-abuse.md">When Microsoft's Own Email Becomes the Weapon</a></strong>
 <br/>
 <sub>A Microsoft CSP's analysis through CISA SCuBA, MITRE ATT&CK, NIST SP 800-53, and CIS Benchmarks</sub>
 <br/><br/>
