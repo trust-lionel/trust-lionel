@@ -99,7 +99,6 @@ Frameworks. Infrastructure. Solutions for problems that haven't been named yet. 
 <a href="https://attack.mitre.org"><img src="https://img.shields.io/badge/MITRE%20ATT%26CK-DA3B2B?style=for-the-badge&logo=shield&logoColor=white" alt="MITRE ATT&CK" /></a>&nbsp;
 <a href="https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final"><img src="https://img.shields.io/badge/NIST%20SP%20800--53-005A8E?style=for-the-badge&logo=checkmarx&logoColor=white" alt="NIST SP 800-53" /></a>&nbsp;
 <a href="https://www.cisecurity.org/cis-benchmarks"><img src="https://img.shields.io/badge/CIS%20Benchmarks-003087?style=for-the-badge&logo=shield&logoColor=white" alt="CIS Benchmarks" /></a>&nbsp;
-<a href="https://www.microsoft.com/security/business/microsoft-defender"><img src="https://img.shields.io/badge/Microsoft%20Defender-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Microsoft Defender" /></a>
 
 ---
 
