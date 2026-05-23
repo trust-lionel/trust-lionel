@@ -10,8 +10,26 @@
             T1566 phishing MITRE, email governance enterprise, SPF DKIM DMARC bypass
 -->
 
+<!-- Article-specific Open Graph meta tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="When Microsoft's Own Email Becomes the Weapon — A Microsoft CSP's Analysis Through the SCuBA Lens" />
+<meta property="og:description" content="Scammers abused Microsoft's legitimate notification address to send spam that bypasses SPF, DKIM, and DMARC. A Microsoft CSP's analysis through CISA SCuBA, MITRE ATT&CK, NIST SP 800-53, and CIS Benchmarks — with actionable defenses you can deploy today." />
+<meta property="og:url" content="https://trust-lionel.com/blog/microsoft-notification-abuse.html" />
+<meta property="og:image" content="https://trust-lionel.com/assets/WHEN_MICROSOFT_S_EMAIL_BECOMES_THE_WEAPON.png" />
+<meta property="og:image:width" content="1536" />
+<meta property="og:image:height" content="640" />
+<meta property="og:site_name" content="Lionel Mosley | ahr-ki-tekt" />
+<meta property="article:published_time" content="2026-05-22" />
+<meta property="article:author" content="Lionel Mosley" />
+
+<!-- Article-specific Twitter Card meta tags -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="When Microsoft's Own Email Becomes the Weapon — A Microsoft CSP's Analysis Through the SCuBA Lens" />
+<meta name="twitter:description" content="Scammers abused Microsoft's legitimate notification address to send spam that bypasses SPF, DKIM, and DMARC. A Microsoft CSP's analysis through CISA SCuBA, MITRE ATT&CK, NIST SP 800-53, and CIS Benchmarks." />
+<meta name="twitter:image" content="https://trust-lionel.com/assets/WHEN_MICROSOFT_S_EMAIL_BECOMES_THE_WEAPON.png" />
+
 <div align="center">
-<a href="/blog/three-questions.html">← Previous</a> &nbsp;·&nbsp; <a href="/">🏠 Home</a> &nbsp;·&nbsp; <a href="/">Next →</a>
+<a href="/blog/three-questions.html">← Previous</a> &nbsp;·&nbsp; <a href="/">🏠 Home</a> &nbsp;·&nbsp; <a href="/blog/">More Thought Leadership</a>
 </div>
 
 ---
@@ -288,7 +306,7 @@ The 'what if' here is: what if the email your employee just acted on came from M
 
 <div align="center">
 
-<a href="/blog/three-questions.html">← Previous</a> &nbsp;·&nbsp; <a href="/">🏠 Home</a> &nbsp;·&nbsp; <a href="/">Next →</a>
+<a href="/blog/three-questions.html">← Previous</a> &nbsp;·&nbsp; <a href="/">🏠 Home</a> &nbsp;·&nbsp; <a href="/blog/">More Thought Leadership</a>
 
 <hr/>
 

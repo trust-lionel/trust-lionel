@@ -1,16 +1,25 @@
----
-layout: post
-title: "Vibe Coding — How I Built My Personal Brand in One Night"
-description: "From zero GitHub presence to a fully live personal brand at trust-lionel.com in one session."
-tags: [Personal Brand, GitHub Pages, Jekyll, SEO, Vibe Coding, Thought Leadership]
----
-
 <!--
   SEO Meta: Vibe Coding | Personal Brand | GitHub Pages | Jekyll | trust-lionel.com
   Keywords: vibe coding, personal brand, GitHub Pages, Jekyll, SEO, microblogging,
             GitHub profile, ahr-ki-tekt, Lionel Mosley, trust-lionel.com, lo-fi,
             Spotify, data center, banner design, DNS configuration, thought leadership
 -->
+
+<!-- Article-specific Open Graph meta tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Vibe Coding — How I Built My Personal Brand in One Night" />
+<meta property="og:description" content="From zero GitHub presence to a fully live personal brand at trust-lionel.com — DNS configured, Jekyll powered, GA4 tracked, all while lo-fi played in the background. A story about owning your presence on the open web." />
+<meta property="og:url" content="https://trust-lionel.com/blog/vibe-coding.html" />
+<meta property="og:image" content="https://trust-lionel.com/assets/banner.svg" />
+<meta property="og:site_name" content="Lionel Mosley | ahr-ki-tekt" />
+<meta property="article:published_time" content="2026-05-16" />
+<meta property="article:author" content="Lionel Mosley" />
+
+<!-- Article-specific Twitter Card meta tags -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Vibe Coding — How I Built My Personal Brand in One Night" />
+<meta name="twitter:description" content="From zero GitHub presence to a fully live personal brand at trust-lionel.com in one session — DNS, Jekyll, GA4, and lo-fi beats." />
+<meta name="twitter:image" content="https://trust-lionel.com/assets/banner.svg" />
 
 <div align="center">
 <a href="/blog/macsystools.html">← Previous</a> &nbsp;·&nbsp; <a href="/">🏠 Home</a> &nbsp;·&nbsp; <a href="/blog/three-questions.html">Next →</a>

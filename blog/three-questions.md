@@ -9,6 +9,22 @@
             AI acceptable use policy, infrastructure placement framework
 -->
 
+<!-- Article-specific Open Graph meta tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Three Questions Every CEO and Board Should Be Able to Answer About Their Technology — And Why Most Can't" />
+<meta property="og:description" content="The organizations that survive the next major incident will be the ones who asked the right questions before the crisis began. Cyber resilience, AI governance, and business continuity — mapped to the Infrastructure Placement Framework." />
+<meta property="og:url" content="https://trust-lionel.com/blog/three-questions.html" />
+<meta property="og:image" content="https://trust-lionel.com/assets/banner.svg" />
+<meta property="og:site_name" content="Lionel Mosley | ahr-ki-tekt" />
+<meta property="article:published_time" content="2026-05-17" />
+<meta property="article:author" content="Lionel Mosley" />
+
+<!-- Article-specific Twitter Card meta tags -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Three Questions Every CEO and Board Should Be Able to Answer About Their Technology" />
+<meta name="twitter:description" content="The organizations that survive the next major incident will be the ones who asked the right questions before the crisis began. Cyber resilience, AI governance, and business continuity." />
+<meta name="twitter:image" content="https://trust-lionel.com/assets/banner.svg" />
+
 <div align="center">
 <a href="/blog/vibe-coding.html">← Previous</a> &nbsp;·&nbsp; <a href="/">🏠 Home</a> &nbsp;·&nbsp; <a href="/blog/microsoft-notification-abuse.html">Next →</a>
 </div>

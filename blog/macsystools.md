@@ -1,16 +1,25 @@
----
-layout: post
-title: "MacSysTools"
-description: "A native macOS system administration app built with SwiftUI + Xcode for macOS Tahoe — eliminating the need to remember Terminal command syntax."
-tags: [macOS, SwiftUI, Xcode, macOS-Tahoe, system-administration, developer-tools, networking]
----
-
 <!--
   SEO Meta: MacSysTools | macOS System Administration App | SwiftUI | Xcode | macOS Tahoe
   Keywords: MacSysTools, macOS Tahoe, SwiftUI, Xcode, system administration, macOS tools,
             Flush DNS Cache, macOS terminal commands, Lionel Mosley, ahr-ki-tekt, trust-lionel.com,
             Intel MacBook Pro, native macOS app, Liquid Glass, macOS 26
 -->
+
+<!-- Article-specific Open Graph meta tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="MacSysTools — Native macOS System Administration App" />
+<meta property="og:description" content="A native macOS system administration app built with SwiftUI + Xcode for macOS Tahoe. 23 tools, one click away. Because the frustration wasn't Terminal — it was remembering the syntax." />
+<meta property="og:url" content="https://trust-lionel.com/blog/macsystools.html" />
+<meta property="og:image" content="https://trust-lionel.com/assets/banner.svg" />
+<meta property="og:site_name" content="Lionel Mosley | ahr-ki-tekt" />
+<meta property="article:published_time" content="2026-03-05" />
+<meta property="article:author" content="Lionel Mosley" />
+
+<!-- Article-specific Twitter Card meta tags -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="MacSysTools — Native macOS System Administration App" />
+<meta name="twitter:description" content="Built with SwiftUI + Xcode for macOS Tahoe. 23 tools, one click away. The difference between a workaround and an architecture." />
+<meta name="twitter:image" content="https://trust-lionel.com/assets/banner.svg" />
 
 <div align="center">
 <a href="/">← Previous</a> &nbsp;·&nbsp; <a href="/">🏠 Home</a> &nbsp;·&nbsp; <a href="/blog/vibe-coding.html">Next →</a>
