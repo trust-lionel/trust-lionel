@@ -1,0 +1,294 @@
+---
+// src/pages/index.astro
+// Blog index — the main page of trust-lionel.com.
+// Implements the Untitled UI Minimal Blog Post design (Jordan Hughes, Dribbble #20860486).
+// Layout: Nav → Header (grid texture, title, subtitle) → HeroPost → Divider →
+//         3-column PostCard grid → Pagination → CTA Band → Footer
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import HeroPost from '../components/HeroPost.astro';
+import PostCard from '../components/PostCard.astro';
+import Footer from '../components/Footer.astro';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+// Fetch all posts, sort by date descending (newest first)
+const allPosts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+// Hero post: first post with featured: true, or fall back to the most recent post
+const heroPost: CollectionEntry<'blog'> =
+  allPosts.find(p => p.data.featured) ?? allPosts[0];
+
+// Remaining posts (all except the hero) go into the card grid
+const gridPosts = allPosts.filter(p => p.id !== heroPost.id);
+
+// Pagination config (Phase 1: single page — paginate in Phase 2 if needed)
+const currentPage = 1;
+const totalPages = 1; // Update when pagination is implemented
+---
+
+<BaseLayout
+  title="Lionel Mosley | ahr-ki-tekt — Design Journal"
+  description="Carefully selected frameworks, insights, and solutions from Lionel Mosley — IT Consultant & Innovative Thought Leader based in Houston, TX."
+>
+  <Nav />
+
+  <main id="main-content">
+
+    <!-- ── HEADER ── -->
+    <header class="site-header" aria-label="Design Journal header">
+      <div class="header-grid-texture" aria-hidden="true"></div>
+      <div class="header-inner">
+        <div class="header-tag" aria-label="Section: Design Journal">Design Journal</div>
+        <h1 class="header-title">
+          The <em>ahr-ki-tekt</em><br />Design Journal
+        </h1>
+        <p class="header-subtitle">
+          Carefully selected frameworks, insights, and solutions from&nbsp;<strong>Lionel Mosley</strong>
+          — IT Consultant &amp; Innovative Thought Leader. Subscribe for new posts in your inbox.
+        </p>
+      </div>
+    </header>
+
+    <!-- ── HERO POST ── -->
+    {heroPost && <HeroPost post={heroPost} />}
+
+    <!-- ── SECTION DIVIDER ── -->
+    <div class="section-divider" aria-hidden="true">
+      <hr />
+    </div>
+
+    <!-- ── POSTS GRID ── -->
+    {gridPosts.length > 0 ? (
+      <section class="posts-section" aria-label="Recent posts">
+        <div class="posts-grid">
+          {gridPosts.map((post, i) => (
+            <PostCard post={post} index={i} />
+          ))}
+        </div>
+      </section>
+    ) : (
+      <section class="posts-section posts-section--empty" aria-label="Recent posts">
+        <p class="posts-empty">More posts coming soon.</p>
+      </section>
+    )}
+
+    <!-- ── PAGINATION ── -->
+    <nav class="pagination" role="navigation" aria-label="Page navigation">
+      <button
+        class="pagination-btn"
+        class:list={[{ disabled: currentPage <= 1 }]}
+        aria-disabled={currentPage <= 1}
+        aria-label="Previous page"
+        disabled={currentPage <= 1}
+      >
+        ← Previous
+      </button>
+      <span class="pagination-info" aria-current="page">
+        Page {currentPage} of {totalPages}
+      </span>
+      <button
+        class="pagination-btn"
+        class:list={[{ disabled: currentPage >= totalPages }]}
+        aria-disabled={currentPage >= totalPages}
+        aria-label="Next page"
+        disabled={currentPage >= totalPages}
+      >
+        Next →
+      </button>
+    </nav>
+
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--color-bg-header);
+    position: relative;
+    overflow: hidden;
+    padding: 3.5rem 2rem 3rem;
+  }
+
+  /* Dot-grid texture */
+  .header-grid-texture {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+  }
+
+  .header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* "Design Journal" label pill */
+  .header-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 1.25rem;
+    opacity: 0.9;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .header-title {
+    font-family: var(--font-sans);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--color-text-primary);
+    max-width: 640px;
+    margin-bottom: 1rem;
+    animation: fadeUp 0.5s 0.08s ease both;
+  }
+
+  .header-title em {
+    font-style: italic;
+    color: var(--color-accent);
+    font-weight: 400;
+  }
+
+  .header-subtitle {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--color-text-secondary);
+    max-width: 520px;
+    line-height: 1.65;
+    animation: fadeUp 0.5s 0.16s ease both;
+  }
+
+  .header-subtitle strong {
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 3rem 2rem 0;
+  }
+
+  .section-divider hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* ── POSTS GRID ── */
+  .posts-section {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .posts-section--empty {
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+
+  .posts-empty {
+    font-size: 16px;
+    color: var(--color-text-muted);
+  }
+
+  /* ── PAGINATION ── */
+  .pagination {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 2rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .pagination-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    padding: 8px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color var(--transition);
+    font-family: var(--font-sans);
+  }
+
+  .pagination-btn:not(:disabled):hover {
+    color: var(--color-text-primary);
+  }
+
+  .pagination-btn:disabled,
+  .pagination-btn.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .pagination-info {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .posts-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .site-header {
+      padding: 2.5rem 1.25rem 2rem;
+    }
+
+    .posts-section {
+      padding: 2rem 1.25rem;
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .pagination {
+      padding: 0 1.25rem 2rem;
+    }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>

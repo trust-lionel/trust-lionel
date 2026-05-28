@@ -1,0 +1,305 @@
+---
+// src/components/Footer.astro
+// Full-width footer: CTA band above the 6-column link grid.
+// CTA band has a subtle radial accent glow matching the prototype.
+// Footer has a dark background independent of light/dark mode (always dark).
+---
+
+<!-- CTA BAND -->
+<section class="cta-band" aria-label="Consultation call to action">
+  <div class="cta-band-inner">
+    <div class="cta-icon" aria-hidden="true">◎</div>
+    <h2 class="cta-title">Let's architect something great</h2>
+    <p class="cta-subtitle">
+      Join organizations nationwide already working with Lionel Mosley and 4TH AND BAILEY
+      on cloud services, cybersecurity, and infrastructure governance.
+    </p>
+    <a
+      href="https://4nb.cloud/lmosley"
+      class="cta-btn"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Schedule an advisory consultation with Lionel Mosley (opens in new tab)"
+    >
+      Schedule an Advisory Consultation →
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+
+    <!-- 6-column link grid -->
+    <div class="footer-top">
+
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-col-links" role="list">
+          <li><a href="/#services">Overview</a></li>
+          <li><a href="/#cloud">Cloud Services</a></li>
+          <li><a href="/#cybersecurity">Cybersecurity</a></li>
+          <li><a href="/#infrastructure">Infrastructure</a></li>
+          <li><a href="/#consulting">Consulting</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-col-links" role="list">
+          <li><a href="/#about">About</a></li>
+          <li><a href="https://github.com/4thandbailey" target="_blank" rel="noopener noreferrer">4TH AND BAILEY</a></li>
+          <li><a href="/#frameworks">Frameworks</a></li>
+          <li><a href="/#press">Press</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <ul class="footer-col-links" role="list">
+          <li><a href="/">Blog</a></li>
+          <li><a href="/rss.xml">RSS Feed</a></li>
+          <li><a href="https://github.com/trust-lionel" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="/#newsletter">Newsletter</a></li>
+          <li><a href="/#support">Support</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Expertise</div>
+        <ul class="footer-col-links" role="list">
+          <li><a href="/#microsoft-csp">Microsoft CSP</a></li>
+          <li><a href="/#cisa-scuba">CISA SCuBA</a></li>
+          <li><a href="/#nist">NIST SP 800-53</a></li>
+          <li><a href="/#mitre">MITRE ATT&amp;CK</a></li>
+          <li><a href="/#cis">CIS Benchmarks</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Social</div>
+        <ul class="footer-col-links" role="list">
+          <li><a href="https://linkedin.com/in/lionelmosley" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in new tab)">LinkedIn</a></li>
+          <li><a href="https://github.com/trust-lionel" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in new tab)">GitHub</a></li>
+          <li><a href="https://reddit.com/u/trust-lionel" target="_blank" rel="noopener noreferrer" aria-label="Reddit (opens in new tab)">Reddit</a></li>
+          <li><a href="https://open.spotify.com/user/lmosley002-spotify" target="_blank" rel="noopener noreferrer" aria-label="Spotify (opens in new tab)">Spotify</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-col-links" role="list">
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms</a></li>
+          <li><a href="/cookies">Cookies</a></li>
+          <li><a href="/licenses">Licenses</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Footer bottom bar -->
+    <div class="footer-bottom">
+      <div class="footer-brand">
+        <span class="footer-logo">Lionel Mosley</span>
+        <span class="footer-badge" aria-label="ahr-ki-tekt">ahr-ki-tekt</span>
+      </div>
+      <span class="footer-copy">© 2026 Lionel Mosley · Houston, TX · Serving Organizations Nationwide</span>
+    </div>
+
+  </div>
+</footer>
+
+<style>
+  /* ── CTA BAND ── */
+  .cta-band {
+    background: var(--color-bg-cta);
+    padding: 5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle radial accent glow from center */
+  .cta-band::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(77, 77, 255, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-band-inner {
+    max-width: 560px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .cta-title {
+    font-family: var(--font-sans);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .cta-subtitle {
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px 28px;
+    border-radius: var(--radius-pill);
+    transition: all var(--transition);
+    letter-spacing: 0.01em;
+    text-decoration: none;
+  }
+
+  .cta-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+
+  /* ── FOOTER ── */
+  /* Footer always uses a dark background regardless of OS color scheme */
+  .footer {
+    background: var(--color-bg-footer);
+    padding: 3.5rem 2rem 2rem;
+  }
+
+  .footer-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  /* 6-column grid */
+  .footer-top {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 2rem;
+  }
+
+  .footer-col-title {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+    margin-bottom: 1rem;
+  }
+
+  .footer-col-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-col-links a {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.45);
+    transition: color var(--transition);
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  .footer-col-links a:hover {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  /* Footer bottom bar */
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .footer-logo {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .footer-badge {
+    font-size: 10px;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+  }
+
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.25);
+    font-weight: 300;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .footer-top {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .footer-top {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .cta-band {
+      padding: 3.5rem 1.25rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-top {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,95 @@
+---
+// src/pages/404.astro
+// Custom 404 page — matches the site design system.
+// Netlify serves this automatically for unmatched routes.
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="404 — Page Not Found"
+  description="The page you're looking for doesn't exist. Return to the ahr-ki-tekt Design Journal."
+>
+  <Nav />
+
+  <main id="main-content" class="error-main">
+    <div class="error-inner">
+      <div class="error-code" aria-hidden="true">404</div>
+      <h1 class="error-title">Page not found</h1>
+      <p class="error-message">
+        The page you're looking for doesn't exist or has been moved.
+        Head back to the Design Journal to find what you're looking for.
+      </p>
+      <a href="/" class="error-home-btn">
+        ← Back to Design Journal
+      </a>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .error-main {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+  }
+
+  .error-inner {
+    text-align: center;
+    max-width: 480px;
+  }
+
+  .error-code {
+    font-size: clamp(5rem, 15vw, 9rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--color-border);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .error-title {
+    font-family: var(--font-sans);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .error-message {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+    margin-bottom: 2.5rem;
+  }
+
+  .error-home-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    padding: 10px 24px;
+    border-radius: var(--radius-pill);
+    transition: all var(--transition);
+    text-decoration: none;
+    opacity: 0.9;
+  }
+
+  .error-home-btn:hover {
+    background: var(--color-accent);
+    color: #ffffff;
+    opacity: 1;
+  }
+</style>

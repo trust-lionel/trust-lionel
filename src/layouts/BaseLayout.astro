@@ -1,0 +1,337 @@
+---
+// src/layouts/BaseLayout.astro
+// HTML shell for every page on trust-lionel.com.
+// Responsibilities:
+//   - <head> with full SEO meta (title, description, canonical, OG, Twitter Card)
+//   - Design token CSS (light/dark via prefers-color-scheme — no JS toggle)
+//   - system-ui font stack (no web fonts, no Google Fonts)
+//   - Umami analytics (cookieless, GDPR-compliant — replaces GTM entirely)
+//   - Print stylesheet
+//   - Accessibility: skip-to-content link, reduced-motion, forced-colors
+//   - Global reset and base styles
+
+export interface Props {
+  title: string;
+  description: string;
+  canonicalURL?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  articleDate?: Date;
+  articleAuthor?: string;
+  articleTags?: string[];
+}
+
+const {
+  title,
+  description,
+  canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+  ogImage = '/assets/banner.svg',
+  ogType = 'website',
+  articleDate,
+  articleAuthor,
+  articleTags = [],
+} = Astro.props;
+
+const siteName = 'Lionel Mosley | ahr-ki-tekt';
+const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
+
+// Format article date for meta tags
+const formattedDate = articleDate
+  ? articleDate.toISOString()
+  : undefined;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d0d0d" />
+
+  <!-- Primary Meta -->
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content={ogType} />
+  <meta property="og:site_name" content={siteName} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:image" content={new URL(ogImage, Astro.site).href} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={new URL(ogImage, Astro.site).href} />
+
+  <!-- Article-specific meta (only rendered for blog posts) -->
+  {ogType === 'article' && formattedDate && (
+    <meta property="article:published_time" content={formattedDate} />
+  )}
+  {ogType === 'article' && articleAuthor && (
+    <meta property="article:author" content={articleAuthor} />
+  )}
+  {articleTags.map(tag => (
+    <meta property="article:tag" content={tag} />
+  ))}
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- RSS Feed -->
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title={`${siteName} — RSS Feed`}
+    href="/rss.xml"
+  />
+
+  <!-- Umami Analytics — cookieless, GDPR-compliant, self-hosted on Railway -->
+  <!-- Replaces Google Tag Manager (GTM-543DS8T7) entirely. No consent banner required. -->
+  <!-- Replace the src URL and data-website-id with your Railway Umami instance values. -->
+  <script
+    defer
+    src="https://your-umami-instance.railway.app/script.js"
+    data-website-id="YOUR_WEBSITE_ID"
+  ></script>
+
+  <style>
+    /* ─────────────────────────────────────────────────────────────
+       DESIGN TOKENS — Light mode defaults
+       Token names follow the handoff document (Section 6.3).
+       Extended with prototype tokens for shadows, radii, transitions.
+    ───────────────────────────────────────────────────────────── */
+    :root {
+      /* Core palette */
+      --color-bg-page:    #ffffff;
+      --color-bg-surface: #f9fafb;
+      --color-bg-header:  #f4f4f1;
+      --color-bg-footer:  #0f0f0f;
+      --color-bg-cta:     #111111;
+
+      --color-text-primary:  #101828;
+      --color-text-secondary: #4a4a4a;
+      --color-text-muted:    #667085;
+      --color-text-inverse:  #f5f5f5;
+
+      --color-border:       #e4e7ec;
+      --color-border-strong: #d4d4ce;
+
+      --color-accent:       #2D27C4;
+      --color-accent-hover: #1a1aaa;
+
+      /* Pill tags */
+      --pill-bg:     transparent;
+      --pill-border: #d4d4ce;
+      --pill-text:   #4a4a4a;
+
+      /* Grid texture (header background pattern) */
+      --grid-color: rgba(0, 0, 0, 0.045);
+
+      /* Shadows */
+      --shadow-card:       0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+      --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.1), 0 16px 40px rgba(0,0,0,0.07);
+
+      /* Border radii */
+      --radius-sm:   6px;
+      --radius-md:   10px;
+      --radius-lg:   14px;
+      --radius-pill: 999px;
+
+      /* Typography */
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", "Cascadia Code",
+        "Roboto Mono", Menlo, monospace;
+
+      /* Layout */
+      --max-width: 1280px;
+
+      /* Motion */
+      --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       DESIGN TOKENS — Dark mode
+       Controlled entirely by OS/browser prefers-color-scheme.
+       No JavaScript. No manual toggle. No localStorage.
+    ───────────────────────────────────────────────────────────── */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-bg-page:    #0d0d0d;
+        --color-bg-surface: #161616;
+        --color-bg-header:  #131313;
+        --color-bg-footer:  #080808;
+        --color-bg-cta:     #0a0a0a;
+
+        --color-text-primary:   #f5f5f5;
+        --color-text-secondary: #b0b0b0;
+        --color-text-muted:     #94a3b8;
+
+        --color-border:        #2a2a2a;
+        --color-border-strong: #2e2e2e;
+
+        --color-accent:       #6b67f0;
+        --color-accent-hover: #8885f5;
+
+        --pill-border: #2e2e2e;
+        --pill-text:   #909090;
+
+        --grid-color: rgba(255, 255, 255, 0.03);
+
+        --shadow-card:       0 1px 3px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2);
+        --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.4), 0 16px 40px rgba(0,0,0,0.3);
+      }
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       GLOBAL RESET
+    ───────────────────────────────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--color-text-primary);
+      background: var(--color-bg-page);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      /* Reserve space for scrollbar to prevent layout shift */
+      scrollbar-gutter: stable;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       ACCESSIBILITY
+    ───────────────────────────────────────────────────────────── */
+
+    /* Skip to main content — visible on keyboard focus */
+    .skip-link {
+      position: absolute;
+      top: -9999px;
+      left: 1rem;
+      z-index: 9999;
+      padding: 8px 16px;
+      background: var(--color-accent);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    /* Focus-visible outlines on all interactive elements */
+    :focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
+
+    /* Forced colors (Windows High Contrast mode) */
+    @media (forced-colors: active) {
+      :root {
+        --color-accent: Highlight;
+        --color-text-primary: ButtonText;
+        --color-bg-page: ButtonFace;
+      }
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       SCROLLBAR (Webkit)
+    ───────────────────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--color-bg-page); }
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-border-strong);
+      border-radius: 3px;
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       REDUCED MOTION
+       Wraps all transitions and animations site-wide.
+    ───────────────────────────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       PRINT STYLESHEET
+       Hides all non-content zones. Posts render cleanly as PDFs.
+    ───────────────────────────────────────────────────────────── */
+    @media print {
+      nav,
+      footer,
+      .cta-band,
+      .tag-pills,
+      .post-card-tags,
+      .hero-post-tags,
+      .related-posts,
+      .subscribe-prompt,
+      .pagination,
+      .nav-hamburger {
+        display: none !important;
+      }
+
+      body {
+        font-size: 12pt;
+        color: #000000;
+        background: #ffffff;
+      }
+
+      a::after {
+        content: " (" attr(href) ")";
+        font-size: 10pt;
+        color: #555555;
+      }
+
+      /* Don't print URL for anchors that are clearly internal navigation */
+      a[href^="#"]::after,
+      a[href^="javascript"]::after {
+        content: "";
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip-to-content link for keyboard users (WCAG 2.4.1) -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <slot />
+</body>
+</html>

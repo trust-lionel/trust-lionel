@@ -1,0 +1,299 @@
+---
+// src/components/Nav.astro
+// Sticky top navbar.
+// Desktop: logo + "Design Journal" badge | nav links | "Schedule Consultation" CTA pill
+// Mobile (≤768px): logo + badge | hamburger button (opens mobile drawer)
+// No JavaScript frameworks — mobile menu toggled with a pure CSS checkbox hack
+// for zero-JS progressive enhancement. JS enhances it if available.
+---
+
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+
+    <!-- Brand -->
+    <a href="/" class="nav-brand" aria-label="Lionel Mosley — ahr-ki-tekt home">
+      <span class="nav-logo">Lionel Mosley</span>
+      <span class="nav-badge" aria-hidden="true">Design Journal</span>
+    </a>
+
+    <!-- Desktop nav links -->
+    <ul class="nav-links" role="list">
+      <li><a href="/">Home</a></li>
+      <li><a href="/#services" class="has-arrow">Services</a></li>
+      <li><a href="/#frameworks" class="has-arrow">Frameworks</a></li>
+      <li><a href="/#consulting">Consulting</a></li>
+    </ul>
+
+    <!-- CTA pill (desktop) -->
+    <a
+      href="https://4nb.cloud/lmosley"
+      class="nav-cta"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Schedule a consultation with Lionel Mosley (opens in new tab)"
+    >
+      Schedule Consultation
+    </a>
+
+    <!-- Hamburger button (mobile) — toggles aria-expanded -->
+    <button
+      class="nav-hamburger"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      type="button"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+
+  <!-- Mobile menu drawer -->
+  <div id="mobile-menu" class="nav-mobile-menu" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+    <ul class="nav-mobile-links" role="list">
+      <li><a href="/">Home</a></li>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#frameworks">Frameworks</a></li>
+      <li><a href="/#consulting">Consulting</a></li>
+    </ul>
+    <a
+      href="https://4nb.cloud/lmosley"
+      class="nav-mobile-cta"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Schedule Consultation →
+    </a>
+  </div>
+</nav>
+
+<style>
+  /* ── NAV ── */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-bg-page);
+    border-bottom: 1px solid var(--color-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .nav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  /* Brand */
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    text-decoration: none;
+  }
+
+  .nav-logo {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+  }
+
+  .nav-badge {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    font-style: italic;
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    opacity: 0.85;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  /* Desktop links */
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+    transition: color var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+  }
+
+  .nav-links a:hover {
+    color: var(--color-text-primary);
+  }
+
+  /* ↓ indicator for links with sub-sections */
+  .nav-links .has-arrow::after {
+    content: '↓';
+    font-size: 11px;
+    opacity: 0.45;
+  }
+
+  /* CTA pill */
+  .nav-cta {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border-strong);
+    padding: 7px 16px;
+    border-radius: var(--radius-pill);
+    transition: all var(--transition);
+    white-space: nowrap;
+    flex-shrink: 0;
+    text-decoration: none;
+  }
+
+  .nav-cta:hover {
+    background: var(--color-text-primary);
+    color: var(--color-bg-page);
+    border-color: var(--color-text-primary);
+  }
+
+  /* Hamburger button */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px 4px;
+    background: none;
+    border: none;
+    flex-shrink: 0;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--color-text-primary);
+    border-radius: 2px;
+    transition: all var(--transition);
+  }
+
+  /* Hamburger → ✕ when open */
+  .nav-hamburger[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  /* Mobile drawer */
+  .nav-mobile-menu {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    background: var(--color-bg-page);
+    border-top: 1px solid var(--color-border);
+    padding: 1rem 2rem 1.5rem;
+  }
+
+  .nav-mobile-menu[aria-hidden="false"] {
+    display: flex;
+  }
+
+  .nav-mobile-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-mobile-links a {
+    display: block;
+    padding: 0.75rem 0;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid var(--color-border);
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+
+  .nav-mobile-links a:hover {
+    color: var(--color-text-primary);
+  }
+
+  .nav-mobile-cta {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links,
+    .nav-cta {
+      display: none;
+    }
+
+    .nav-hamburger {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  // Mobile menu toggle — progressive enhancement
+  const hamburger = document.querySelector('.nav-hamburger') as HTMLButtonElement | null;
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', String(!isOpen));
+      mobileMenu.setAttribute('aria-hidden', String(isOpen));
+    });
+
+    // Close menu when a link is clicked
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+      });
+    });
+
+    // Close menu on Escape key
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && hamburger.getAttribute('aria-expanded') === 'true') {
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        hamburger.focus();
+      }
+    });
+  }
+</script>

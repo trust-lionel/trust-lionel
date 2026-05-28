@@ -1,0 +1,61 @@
+---
+// src/components/TagPill.astro
+// Outlined pill tag badge used in post cards, hero post, and post header.
+
+export interface Props {
+  tag: string;
+  // href enables the tag to be a link (e.g., to a filtered tag page in future)
+  href?: string;
+  // variant: 'light' for use on dark hero image backgrounds
+  variant?: 'default' | 'light';
+}
+
+const { tag, href, variant = 'default' } = Astro.props;
+---
+
+{href ? (
+  <a href={href} class={`tag-pill tag-pill--${variant}`}>{tag}</a>
+) : (
+  <span class={`tag-pill tag-pill--${variant}`}>{tag}</span>
+)}
+
+<style>
+  .tag-pill {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 2px 9px;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+    transition: all var(--transition);
+    text-decoration: none;
+    line-height: 1.6;
+  }
+
+  /* Default variant — for post cards and post headers */
+  .tag-pill--default {
+    color: var(--pill-text);
+    border: 1px solid var(--pill-border);
+    background: var(--pill-bg, transparent);
+  }
+
+  /* Light variant — for use on dark hero image overlays */
+  .tag-pill--light {
+    color: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  /* Hover states — only when tag is a link */
+  a.tag-pill--default:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  a.tag-pill--light:hover {
+    color: rgba(255, 255, 255, 1);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+</style>

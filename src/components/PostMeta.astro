@@ -1,0 +1,145 @@
+---
+// src/components/PostMeta.astro
+// Author + date metadata row with vertical divider rule between columns.
+// Used in PostCard footer and PostLayout header.
+
+export interface Props {
+  author: string;
+  date: Date;
+  // variant: 'dark' for use on dark backgrounds (hero post, CTA)
+  variant?: 'default' | 'dark';
+  showAvatar?: boolean;
+}
+
+const { author, date, variant = 'default', showAvatar = false } = Astro.props;
+
+const displayDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+
+const isoDate = date.toISOString();
+
+// Author initials for avatar
+const initials = author
+  .split(' ')
+  .map(n => n[0])
+  .join('')
+  .toUpperCase()
+  .slice(0, 2);
+---
+
+<div class={`post-meta post-meta--${variant}`} aria-label="Post metadata">
+
+  {showAvatar && (
+    <div class="post-meta-author">
+      <div class="author-avatar" aria-hidden="true">{initials}</div>
+      <span class="author-name">{author}</span>
+    </div>
+  )}
+
+  {!showAvatar && (
+    <>
+      <div class="meta-col">
+        <span class="meta-label">Written by</span>
+        <span class="meta-value">{author}</span>
+      </div>
+      <div class="meta-col">
+        <span class="meta-label">Published on</span>
+        <time class="meta-value" datetime={isoDate}>{displayDate}</time>
+      </div>
+    </>
+  )}
+
+  {showAvatar && (
+    <time class="post-date" datetime={isoDate}>{displayDate}</time>
+  )}
+
+</div>
+
+<style>
+  /* ── DEFAULT VARIANT (light background) ── */
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .meta-col {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 0 1.25rem;
+    border-left: 1px solid var(--color-border-strong);
+  }
+
+  .meta-col:first-child {
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .meta-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .meta-value {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+  }
+
+  /* ── DARK VARIANT (for hero post overlay) ── */
+  .post-meta--dark .meta-col {
+    border-left-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .post-meta--dark .meta-label {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .post-meta--dark .meta-value {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  /* ── AVATAR VARIANT (post card footer) ── */
+  .post-meta-author {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .author-avatar {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    color: white;
+    flex-shrink: 0;
+    letter-spacing: 0;
+    user-select: none;
+  }
+
+  .author-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+  }
+
+  .post-date {
+    font-size: 11px;
+    color: var(--color-text-muted);
+    font-weight: 400;
+    margin-left: auto;
+  }
+</style>

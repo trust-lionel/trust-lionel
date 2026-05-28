@@ -1,0 +1,275 @@
+---
+// src/components/PostCard.astro
+// Post card for the 3-column grid on the blog index.
+// Features: tag pills, post title with ↗ arrow, excerpt, author avatar + date footer.
+// All hover effects match the approved prototype.
+
+import TagPill from './TagPill.astro';
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+  post: CollectionEntry<'blog'>;
+  // index is used for staggered entry animation delay
+  index?: number;
+}
+
+const { post, index = 0 } = Astro.props;
+const { title, description, date, author, tags, image, image_alt } = post.data;
+
+const displayDate = date.toLocaleDateString('en-US', {
+  year: 'numeric', timeZone: 'UTC',
+  month: 'short',
+  day: 'numeric',
+});
+
+const isoDate = date.toISOString();
+const postUrl = `/blog/${post.id}`;
+
+// Author initials for avatar
+const displayAuthor = author ?? 'Lionel Mosley';
+const initials = displayAuthor
+  .split(' ')
+  .map((n: string) => n[0])
+  .join('')
+  .toUpperCase()
+  .slice(0, 2);
+
+// Animation delay based on grid position
+const animationDelay = `${0.1 + (index % 3) * 0.08}s`;
+---
+
+<article
+  class="post-card"
+  style={`animation-delay: ${animationDelay}`}
+>
+  <a href={postUrl} class="post-card-link" aria-label={`Read: ${title}`}>
+
+    <!-- Post image -->
+    <div class="post-card-image-wrap" aria-hidden="true">
+      {image ? (
+        <img
+          class="post-card-image"
+          src={image}
+          alt={image_alt ?? title}
+          loading="lazy"
+          width="600"
+          height="375"
+        />
+      ) : (
+        <div class="post-card-image-placeholder" aria-hidden="true">◈</div>
+      )}
+    </div>
+
+    <!-- Post body -->
+    <div class="post-card-body">
+
+      {tags.length > 0 && (
+        <div class="post-card-tags" aria-label="Post categories">
+          {tags.slice(0, 3).map(tag => <TagPill tag={tag} />)}
+        </div>
+      )}
+
+      <!-- Title row with ↗ arrow -->
+      <div class="post-card-title-row">
+        <h3 class="post-card-title">{title}</h3>
+        <span class="post-card-arrow" aria-hidden="true">↗</span>
+      </div>
+
+      {description && (
+        <p class="post-card-excerpt">{description}</p>
+      )}
+
+      <!-- Footer: author avatar + date -->
+      <footer class="post-card-footer">
+        <div class="post-card-author">
+          <div class="author-avatar" aria-hidden="true">{initials}</div>
+          <span class="author-name">{displayAuthor}</span>
+        </div>
+        <time class="post-card-date" datetime={isoDate}>{displayDate}</time>
+      </footer>
+
+    </div>
+  </a>
+</article>
+
+<style>
+  .post-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-bg-page);
+    transition: all var(--transition);
+    display: flex;
+    flex-direction: column;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .post-card:hover {
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-3px);
+  }
+
+  /* Remove default link styling — card is the clickable unit */
+  .post-card-link {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* Image */
+  .post-card-image-wrap {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--color-bg-surface);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .post-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    display: block;
+  }
+
+  .post-card:hover .post-card-image {
+    transform: scale(1.04);
+  }
+
+  .post-card-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    opacity: 0.12;
+    color: var(--color-text-muted);
+  }
+
+  /* Body */
+  .post-card-body {
+    padding: 1.375rem 1.375rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  /* Tags */
+  .post-card-tags {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Tag pill hover: parent card hover drives the color change */
+  .post-card:hover :global(.tag-pill--default) {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  /* Title row */
+  .post-card-title-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 0.625rem;
+  }
+
+  .post-card-title {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--color-text-primary);
+    transition: color var(--transition);
+  }
+
+  .post-card:hover .post-card-title {
+    color: var(--color-accent);
+  }
+
+  /* ↗ arrow */
+  .post-card-arrow {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: all var(--transition);
+  }
+
+  .post-card:hover .post-card-arrow {
+    color: var(--color-accent);
+    transform: translate(2px, -2px);
+  }
+
+  /* Excerpt */
+  .post-card-excerpt {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: auto;
+  }
+
+  /* Footer: author + date */
+  .post-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .post-card-author {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .author-avatar {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    color: white;
+    flex-shrink: 0;
+    letter-spacing: 0;
+    user-select: none;
+  }
+
+  .author-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+  }
+
+  .post-card-date {
+    font-size: 11px;
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+
+  /* ── ANIMATION ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>

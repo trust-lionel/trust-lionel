@@ -1,0 +1,260 @@
+---
+// src/components/HeroPost.astro
+// Featured hero post — full-bleed image with dark gradient overlay and text.
+// Visually matches the approved prototype design.
+// The hero post is the most recently published post flagged featured: true in frontmatter.
+// Falls back to the most recent post if none is flagged.
+
+import TagPill from './TagPill.astro';
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, date, author, tags, image, image_alt } = post.data;
+
+const displayDate = date.toLocaleDateString('en-US', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric', timeZone: 'UTC',
+});
+
+const isoDate = date.toISOString();
+const postUrl = `/blog/${post.id}`;
+
+// Fallback hero image if no image specified in frontmatter
+const heroImage = image ?? 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=80&auto=format&fit=crop';
+const heroAlt = image_alt ?? `Featured post: ${title}`;
+---
+
+<section class="hero-section" aria-label="Featured post">
+  <a
+    href={postUrl}
+    class="hero-post"
+    aria-label={`Read featured post: ${title}`}
+  >
+    <!-- Background image -->
+    <img
+      class="hero-post-image"
+      src={heroImage}
+      alt={heroAlt}
+      loading="eager"
+      fetchpriority="high"
+      width="1280"
+      height="560"
+    />
+
+    <!-- Gradient overlay -->
+    <div class="hero-post-overlay" aria-hidden="true"></div>
+
+    <!-- Content -->
+    <div class="hero-post-content">
+      <div class="hero-post-body">
+
+        {tags.length > 0 && (
+          <div class="hero-post-tags" aria-label="Post categories">
+            {tags.slice(0, 3).map(tag => (
+              <TagPill tag={tag} variant="light" />
+            ))}
+          </div>
+        )}
+
+        <h2 class="hero-post-title">{title}</h2>
+
+        {description && (
+          <p class="hero-post-excerpt">{description}</p>
+        )}
+
+      </div>
+
+      <!-- Author + date metadata (separated by vertical rule) -->
+      <div class="hero-post-meta" aria-label="Post metadata">
+        <div class="meta-col">
+          <div class="meta-label">Written by</div>
+          <div class="meta-value">{author ?? 'Lionel Mosley'}</div>
+        </div>
+        <div class="meta-col">
+          <div class="meta-label">Published on</div>
+          <time class="meta-value" datetime={isoDate}>{displayDate}</time>
+        </div>
+      </div>
+
+    </div>
+  </a>
+</section>
+
+<style>
+  .hero-section {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 3rem 2rem 0;
+  }
+
+  .hero-post {
+    display: block;
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: #0f0f1a;
+    aspect-ratio: 16 / 7;
+    transition: transform var(--transition), box-shadow var(--transition);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .hero-post:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Background image */
+  .hero-post-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.55;
+    transition: opacity var(--transition), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hero-post:hover .hero-post-image {
+    opacity: 0.45;
+    transform: scale(1.02);
+  }
+
+  /* Dark gradient overlay — heavier at bottom for text legibility */
+  .hero-post-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.92) 0%,
+      rgba(0, 0, 0, 0.5) 45%,
+      rgba(0, 0, 0, 0.1) 100%
+    );
+  }
+
+  /* Content positioned at bottom of card */
+  .hero-post-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2.5rem 2.5rem 2rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .hero-post-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .hero-post-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 0.875rem;
+  }
+
+  .hero-post-title {
+    font-family: var(--font-sans);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    margin-bottom: 0.875rem;
+    max-width: 680px;
+  }
+
+  .hero-post-excerpt {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.6;
+    max-width: 600px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Metadata columns — separated by left border on second column */
+  .hero-post-meta {
+    display: flex;
+    gap: 0;
+    flex-shrink: 0;
+    align-self: flex-end;
+  }
+
+  .meta-col {
+    padding: 0 1.25rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .meta-col:first-child {
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .meta-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 4px;
+  }
+
+  .meta-value {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.85);
+    white-space: nowrap;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: 1.5rem 1.25rem 0;
+    }
+
+    .hero-post {
+      aspect-ratio: 4 / 3;
+    }
+
+    .hero-post-content {
+      padding: 1.5rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .hero-post-meta {
+      flex-direction: row;
+      align-self: auto;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-post {
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  /* Entry animation */
+  .hero-post {
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>

@@ -1,0 +1,19 @@
+{
+  "name": "trust-lionel",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "trust-lionel.com — Personal brand and thought leadership blog of Lionel Mosley (ahr-ki-tekt)",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.11",
+    "@astrojs/sitemap": "^3.2.1",
+    "astro": "^6.3.7",
+    "satori": "^0.11.2",
+    "sharp": "^0.33.5"
+  }
+}
