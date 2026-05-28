@@ -5,7 +5,101 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# Internal anchor redirects — send footer links to index page sections
 [[redirects]]
   from = "/blog"
   to = "/blog/"
   status = 301
+
+[[redirects]]
+  from = "/#services"
+  to = "/#services"
+  status = 301
+
+[[redirects]]
+  from = "/services"
+  to = "/#services"
+  status = 301
+
+[[redirects]]
+  from = "/cloud"
+  to = "/#cloud"
+  status = 301
+
+[[redirects]]
+  from = "/cybersecurity"
+  to = "/#cybersecurity"
+  status = 301
+
+[[redirects]]
+  from = "/infrastructure"
+  to = "/#infrastructure"
+  status = 301
+
+[[redirects]]
+  from = "/consulting"
+  to = "/#consulting"
+  status = 301
+
+[[redirects]]
+  from = "/about"
+  to = "/#about"
+  status = 301
+
+[[redirects]]
+  from = "/frameworks"
+  to = "/#frameworks"
+  status = 301
+
+[[redirects]]
+  from = "/press"
+  to = "/#press"
+  status = 301
+
+[[redirects]]
+  from = "/newsletter"
+  to = "/#newsletter"
+  status = 301
+
+# External redirects
+[[redirects]]
+  from = "/contact"
+  to = "https://4nb.cloud/lmosley"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/support"
+  to = "https://support.4thandbailey.com/support/tickets/new"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/microsoft-csp"
+  to = "https://marketplace.microsoft.com/en-us/marketplace/partner-dir/22479281-ab81-4d69-ab39-e39bb2dde0a7/overview"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/cisa-scuba"
+  to = "https://www.cisa.gov/resources-tools/services/secure-cloud-business-applications-scuba-project"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/nist"
+  to = "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/mitre"
+  to = "https://attack.mitre.org/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/cis"
+  to = "https://www.cisecurity.org/cis-benchmarks"
+  status = 301
+  force = true
