@@ -1,10 +1,4 @@
 ---
-// src/pages/index.astro
-// Blog index — the main page of trust-lionel.com.
-// Implements the Untitled UI Minimal Blog Post design (Jordan Hughes, Dribbble #20860486).
-// Layout: Nav → Header (grid texture, title, subtitle) → HeroPost → Divider →
-//         3-column PostCard grid → Pagination → CTA Band → Footer
-
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import HeroPost from '../components/HeroPost.astro';
@@ -13,21 +7,17 @@ import Footer from '../components/Footer.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 
-// Fetch all posts, sort by date descending (newest first)
 const allPosts = (await getCollection('blog')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
 
-// Hero post: first post with featured: true, or fall back to the most recent post
 const heroPost: CollectionEntry<'blog'> =
   allPosts.find(p => p.data.featured) ?? allPosts[0];
 
-// Remaining posts (all except the hero) go into the card grid
 const gridPosts = allPosts.filter(p => p.id !== heroPost.id);
 
-// Pagination config (Phase 1: single page — paginate in Phase 2 if needed)
 const currentPage = 1;
-const totalPages = 1; // Update when pagination is implemented
+const totalPages = 1;
 ---
 
 <BaseLayout
@@ -42,7 +32,7 @@ const totalPages = 1; // Update when pagination is implemented
     <header class="site-header" aria-label="Design Journal header">
       <div class="header-grid-texture" aria-hidden="true"></div>
       <div class="header-inner">
-        <div class="header-tag" aria-label="Section: Design Journal">Design Journal</div>
+        <div class="header-tag">Design Journal</div>
         <h1 class="header-title">
           The <em>ahr-ki-tekt</em><br />Design Journal
         </h1>
@@ -57,9 +47,7 @@ const totalPages = 1; // Update when pagination is implemented
     {heroPost && <HeroPost post={heroPost} />}
 
     <!-- ── SECTION DIVIDER ── -->
-    <div class="section-divider" aria-hidden="true">
-      <hr />
-    </div>
+    <div class="section-divider" aria-hidden="true"><hr /></div>
 
     <!-- ── POSTS GRID ── -->
     {gridPosts.length > 0 ? (
@@ -78,28 +66,124 @@ const totalPages = 1; // Update when pagination is implemented
 
     <!-- ── PAGINATION ── -->
     <nav class="pagination" role="navigation" aria-label="Page navigation">
-      <button
-        class="pagination-btn"
-        class:list={[{ disabled: currentPage <= 1 }]}
-        aria-disabled={currentPage <= 1}
-        aria-label="Previous page"
-        disabled={currentPage <= 1}
-      >
-        ← Previous
-      </button>
-      <span class="pagination-info" aria-current="page">
-        Page {currentPage} of {totalPages}
-      </span>
-      <button
-        class="pagination-btn"
-        class:list={[{ disabled: currentPage >= totalPages }]}
-        aria-disabled={currentPage >= totalPages}
-        aria-label="Next page"
-        disabled={currentPage >= totalPages}
-      >
-        Next →
-      </button>
+      <button class="pagination-btn" aria-disabled={currentPage <= 1} disabled={currentPage <= 1}>← Previous</button>
+      <span class="pagination-info" aria-current="page">Page {currentPage} of {totalPages}</span>
+      <button class="pagination-btn" aria-disabled={currentPage >= totalPages} disabled={currentPage >= totalPages}>Next →</button>
     </nav>
+
+    <!-- ── ABOUT ── -->
+    <section id="about" class="page-section page-section--surface" aria-labelledby="about-heading">
+      <div class="section-inner section-inner--narrow">
+        <div class="section-tag">About</div>
+        <h2 class="section-title" id="about-heading">Lionel Mosley — ahr-ki-tekt</h2>
+        <div class="about-grid">
+          <div class="about-bio">
+            <p>Lionel Mosley is an IT Consultant, Innovative Thought Leader, and Subject Matter Expert based in Houston, TX — serving organizations nationwide through <a href="https://github.com/4thandbailey" target="_blank" rel="noopener noreferrer">4TH AND BAILEY</a>. With over two decades of experience across cloud infrastructure, cybersecurity, Microsoft 365 environments, and enterprise IT governance, Lionel works with organizations from SMBs to large enterprises to build technology architectures that are secure, resilient, and aligned with the frameworks that matter — CISA SCuBA, NIST SP 800-53, MITRE ATT&amp;CK, and CIS Benchmarks.</p>
+            <p>The ahr-ki-tekt Design Journal is where that work gets documented — frameworks, insights, and analysis published on the open web for the organizations and practitioners who need it most.</p>
+          </div>
+          <div class="about-philosophy">
+            <blockquote class="philosophy-quote">
+              <p>"I've spent my career asking 'what if' when everyone else was asking 'how much.' The organizations that survive what's coming will be the ones that asked the right questions before the crisis began."</p>
+              <cite>— Lionel Mosley</cite>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SERVICES ── -->
+    <section id="services" class="page-section" aria-labelledby="services-heading">
+      <div class="section-inner">
+        <div class="section-tag">Services</div>
+        <h2 class="section-title" id="services-heading">Full-Service IT Consulting</h2>
+        <p class="section-subtitle">From cloud migration to enterprise security governance — 4TH AND BAILEY designs, builds, and operates the technology infrastructure that organizations depend on.</p>
+        <div class="services-grid">
+
+          <div id="cloud" class="service-card">
+            <div class="service-icon" aria-hidden="true">☁</div>
+            <h3 class="service-name">Cloud Services</h3>
+            <p class="service-desc">Cloud architecture, migration, and operations across on-premises, AWS, Google Workspace, Microsoft Azure, and Microsoft 365 — hybrid and multi-cloud environments included. IaaS, PaaS, and SaaS strategy built around cost optimization, performance, and vendor portability so your organization is never locked into a platform that stops serving you.</p>
+          </div>
+
+          <div id="cybersecurity" class="service-card">
+            <div class="service-icon" aria-hidden="true">⬡</div>
+            <h3 class="service-name">Cybersecurity</h3>
+            <p class="service-desc">Security posture assessment, hardening, and governance aligned to CISA SCuBA, NIST SP 800-53, MITRE ATT&amp;CK, and CIS Benchmarks. Microsoft 365 Defender configuration, Exchange Online hardening, and incident response readiness.</p>
+          </div>
+
+          <div id="infrastructure" class="service-card">
+            <div class="service-icon" aria-hidden="true">◈</div>
+            <h3 class="service-name">Infrastructure</h3>
+            <p class="service-desc">Enterprise infrastructure design and governance using the <a href="https://framework.4thandbailey.com" target="_blank" rel="noopener noreferrer">Infrastructure Placement Framework</a> — the open-source enterprise IT framework built by 4TH AND BAILEY. Network architecture, server infrastructure, and hybrid cloud integration.</p>
+          </div>
+
+          <div id="consulting" class="service-card">
+            <div class="service-icon" aria-hidden="true">◎</div>
+            <h3 class="service-name">IT Consulting</h3>
+            <p class="service-desc">Advisory and fractional CTO services for organizations navigating technology decisions, vendor selection, compliance requirements, and digital transformation. Structured engagements from one-time assessments to ongoing advisory retainers.</p>
+          </div>
+
+        </div>
+        <div class="section-cta">
+          <a href="https://4nb.cloud/lmosley" class="section-cta-btn" target="_blank" rel="noopener noreferrer">Schedule a Consultation →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PRESS ── -->
+    <section id="press" class="page-section page-section--surface" aria-labelledby="press-heading">
+      <div class="section-inner section-inner--narrow">
+        <div class="section-tag">Press</div>
+        <h2 class="section-title" id="press-heading">Thought Leadership &amp; Recognition</h2>
+        <p class="section-subtitle">Lionel Mosley's work spans enterprise IT consulting, open-source framework development, and published thought leadership on cybersecurity, cloud infrastructure, and AI governance.</p>
+
+        <div class="press-grid">
+          <div class="press-item">
+            <div class="press-label">Published Work</div>
+            <p class="press-desc">Original analysis and frameworks published at trust-lionel.com — covering CISA SCuBA implementation, Microsoft 365 security, AI governance, and business continuity. Read by CISOs, IT directors, and compliance officers nationwide.</p>
+          </div>
+          <div class="press-item">
+            <div class="press-label">Open Source</div>
+            <p class="press-desc">Creator and maintainer of the <a href="https://framework.4thandbailey.com" target="_blank" rel="noopener noreferrer">Infrastructure Placement Framework</a> — a vendor-neutral, NIST-aligned enterprise IT governance framework available under Creative Commons Attribution 4.0.</p>
+          </div>
+          <div class="press-item">
+            <div class="press-label">Microsoft CSP</div>
+            <p class="press-desc">Recognized Microsoft Cloud Solution Provider serving organizations across the United States with Microsoft 365, Azure, and enterprise security deployments aligned to federal security baselines.</p>
+          </div>
+        </div>
+
+        <!-- Open Source Projects row -->
+        <div class="oss-row">
+          <div class="oss-row-label">Open Source Projects</div>
+          <div class="oss-grid">
+            <a href="https://github.com/4thandBailey/infrastructure-placement-framework" class="oss-card" target="_blank" rel="noopener noreferrer">
+              <div class="oss-card-left">
+                <div class="oss-icon" aria-hidden="true">◈</div>
+                <div>
+                  <div class="oss-name">Infrastructure Placement Framework</div>
+                  <div class="oss-org">4TH AND BAILEY · github.com</div>
+                </div>
+              </div>
+              <span class="oss-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a href="https://github.com/4thandBailey/shopify-bw-agent" class="oss-card" target="_blank" rel="noopener noreferrer">
+              <div class="oss-card-left">
+                <div class="oss-icon" aria-hidden="true">⇄</div>
+                <div>
+                  <div class="oss-name">Shopify ↔ Sage BusinessWorks Middleware Agent</div>
+                  <div class="oss-org">4TH AND BAILEY · github.com</div>
+                </div>
+              </div>
+              <span class="oss-arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="section-cta">
+          <a href="https://linkedin.com/in/lionelmosley" class="section-cta-btn" target="_blank" rel="noopener noreferrer">Connect on LinkedIn →</a>
+        </div>
+      </div>
+    </section>
 
   </main>
 
@@ -115,7 +199,6 @@ const totalPages = 1; // Update when pagination is implemented
     padding: 3.5rem 2rem 3rem;
   }
 
-  /* Dot-grid texture */
   .header-grid-texture {
     position: absolute;
     inset: 0;
@@ -133,11 +216,9 @@ const totalPages = 1; // Update when pagination is implemented
     z-index: 1;
   }
 
-  /* "Design Journal" label pill */
   .header-tag {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.06em;
@@ -229,9 +310,6 @@ const totalPages = 1; // Update when pagination is implemented
   }
 
   .pagination-btn {
-    display: flex;
-    align-items: center;
-    gap: 6px;
     font-size: 13px;
     font-weight: 500;
     color: var(--color-text-secondary);
@@ -243,16 +321,8 @@ const totalPages = 1; // Update when pagination is implemented
     font-family: var(--font-sans);
   }
 
-  .pagination-btn:not(:disabled):hover {
-    color: var(--color-text-primary);
-  }
-
-  .pagination-btn:disabled,
-  .pagination-btn.disabled {
-    opacity: 0.3;
-    pointer-events: none;
-    cursor: default;
-  }
+  .pagination-btn:not(:disabled):hover { color: var(--color-text-primary); }
+  .pagination-btn:disabled { opacity: 0.3; pointer-events: none; }
 
   .pagination-info {
     font-size: 12px;
@@ -260,30 +330,337 @@ const totalPages = 1; // Update when pagination is implemented
     letter-spacing: 0.02em;
   }
 
+  /* ── PAGE SECTIONS (shared) ── */
+  .page-section {
+    padding: 5rem 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .page-section--surface {
+    background: var(--color-bg-surface);
+  }
+
+  .section-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .section-inner--narrow {
+    max-width: 900px;
+  }
+
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 1.25rem;
+    opacity: 0.9;
+  }
+
+  .section-title {
+    font-family: var(--font-sans);
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+    max-width: 640px;
+    margin-bottom: 3rem;
+  }
+
+  .section-cta {
+    margin-top: 3rem;
+    text-align: center;
+  }
+
+  .section-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    padding: 10px 24px;
+    border-radius: var(--radius-pill);
+    transition: all var(--transition);
+    text-decoration: none;
+    opacity: 0.9;
+  }
+
+  .section-cta-btn:hover {
+    background: var(--color-accent);
+    color: #ffffff;
+    opacity: 1;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-bio p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.25rem;
+  }
+
+  .about-bio a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+    text-underline-offset: 3px;
+    transition: text-decoration-color var(--transition);
+  }
+
+  .about-bio a:hover {
+    text-decoration-color: var(--color-accent);
+  }
+
+  .philosophy-quote {
+    border-left: 3px solid var(--color-accent);
+    padding-left: 1.5rem;
+    margin: 0;
+  }
+
+  .philosophy-quote p {
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .philosophy-quote cite {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    font-style: normal;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── SERVICES ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    transition: all var(--transition);
+  }
+
+  .service-card:hover {
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+
+  .service-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-accent);
+    opacity: 0.8;
+  }
+
+  .service-name {
+    font-family: var(--font-sans);
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--color-text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+
+  .service-desc a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+    text-underline-offset: 3px;
+    transition: text-decoration-color var(--transition);
+  }
+
+  .service-desc a:hover {
+    text-decoration-color: var(--color-accent);
+  }
+
+  /* ── PRESS ── */
+  .press-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .press-item {
+    border-top: 2px solid var(--color-accent);
+    padding-top: 1.25rem;
+  }
+
+  .press-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .press-desc {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+
+  .press-desc a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+    text-underline-offset: 3px;
+    transition: text-decoration-color var(--transition);
+  }
+
+  .press-desc a:hover {
+    text-decoration-color: var(--color-accent);
+  }
+
+  /* ── OPEN SOURCE PROJECTS ROW ── */
+  .oss-row {
+    border-top: 1px solid var(--color-border);
+    padding-top: 2rem;
+    margin-bottom: 0;
+  }
+
+  .oss-row-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .oss-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .oss-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: var(--color-bg-page);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
+    text-decoration: none;
+    transition: all var(--transition);
+  }
+
+  .oss-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+
+  .oss-card-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 0;
+  }
+
+  .oss-icon {
+    font-size: 1.25rem;
+    color: var(--color-accent);
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+
+  .oss-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.3;
+    transition: color var(--transition);
+  }
+
+  .oss-card:hover .oss-name {
+    color: var(--color-accent);
+  }
+
+  .oss-org {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    margin-top: 2px;
+    letter-spacing: 0.02em;
+  }
+
+  .oss-arrow {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    transition: all var(--transition);
+  }
+
+  .oss-card:hover .oss-arrow {
+    color: var(--color-accent);
+    transform: translate(2px, -2px);
+  }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 1024px) {
-    .posts-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+    .posts-grid { grid-template-columns: repeat(2, 1fr); }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .press-grid { grid-template-columns: repeat(2, 1fr); }
+    .oss-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   @media (max-width: 768px) {
-    .site-header {
-      padding: 2.5rem 1.25rem 2rem;
-    }
-
-    .posts-section {
-      padding: 2rem 1.25rem;
-    }
-
-    .posts-grid {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    .pagination {
-      padding: 0 1.25rem 2rem;
-    }
+    .site-header { padding: 2.5rem 1.25rem 2rem; }
+    .posts-section { padding: 2rem 1.25rem; }
+    .posts-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .pagination { padding: 0 1.25rem 2rem; }
+    .page-section { padding: 3.5rem 1.25rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .press-grid { grid-template-columns: 1fr; }
+    .oss-grid { grid-template-columns: 1fr; }
   }
 
   /* ── ANIMATIONS ── */
