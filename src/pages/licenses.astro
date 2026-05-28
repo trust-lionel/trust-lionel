@@ -1,0 +1,265 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const lastUpdated = 'May 27, 2026';
+const currentYear = new Date().getFullYear();
+---
+
+<BaseLayout
+  title="Licenses"
+  description="Licenses for trust-lionel.com — all content is All Rights Reserved. Third-party open source licenses are listed here."
+>
+  <Nav />
+
+  <main id="main-content" class="legal-main">
+    <div class="legal-header">
+      <div class="legal-header-inner">
+        <div class="legal-tag">Legal</div>
+        <h1 class="legal-title">Licenses</h1>
+        <p class="legal-meta">Last updated: {lastUpdated}</p>
+      </div>
+    </div>
+
+    <div class="legal-body">
+      <div class="legal-prose">
+
+        <h2>Site Content</h2>
+        <p>© {currentYear} Lionel Mosley. All Rights Reserved.</p>
+        <p>All original content on trust-lionel.com — including articles, posts, analyses, frameworks, graphics, code examples, and the site design — is the exclusive intellectual property of Lionel Mosley and is protected under United States copyright law and applicable international treaties.</p>
+        <p>No content from this Site may be reproduced, distributed, modified, published, broadcast, or transmitted in any form or by any means without the prior written permission of Lionel Mosley. Brief quotation (under 50 words) for commentary, criticism, or news reporting is permitted with clear attribution and a link to the original post.</p>
+        <p>To request permission for any other use, contact Lionel Mosley via <a href="https://linkedin.com/in/lionelmosley" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</p>
+
+        <h2>Open Source Software Used to Build This Site</h2>
+        <p>This Site is built with open source software. The following packages and their licenses are acknowledged:</p>
+
+        <div class="license-table-wrap">
+          <table class="license-table">
+            <thead>
+              <tr>
+                <th>Package</th>
+                <th>License</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Astro</td>
+                <td>MIT</td>
+                <td><a href="https://github.com/withastro/astro/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+              </tr>
+              <tr>
+                <td>@astrojs/sitemap</td>
+                <td>MIT</td>
+                <td><a href="https://github.com/withastro/astro/blob/main/packages/integrations/sitemap/LICENSE" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+              </tr>
+              <tr>
+                <td>@astrojs/rss</td>
+                <td>MIT</td>
+                <td><a href="https://github.com/withastro/astro/blob/main/packages/astro-rss/LICENSE" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+              </tr>
+              <tr>
+                <td>Satori</td>
+                <td>Mozilla Public License 2.0</td>
+                <td><a href="https://github.com/vercel/satori/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+              </tr>
+              <tr>
+                <td>Sharp</td>
+                <td>Apache 2.0</td>
+                <td><a href="https://github.com/lovell/sharp/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+              </tr>
+              <tr>
+                <td>Inter Typeface</td>
+                <td>SIL Open Font License 1.1</td>
+                <td><a href="https://github.com/rsms/inter/blob/master/LICENSE.txt" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+              </tr>
+              <tr>
+                <td>Umami</td>
+                <td>MIT</td>
+                <td><a href="https://github.com/umami-software/umami/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Full dependency license information is available in the <a href="https://github.com/trust-lionel/trust-lionel" target="_blank" rel="noopener noreferrer">site repository</a> via <code>package.json</code> and <code>package-lock.json</code>.</p>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .legal-main {
+    min-height: 60vh;
+  }
+
+  .legal-header {
+    background: var(--color-bg-header);
+    position: relative;
+    overflow: hidden;
+    padding: 3.5rem 2rem 3rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .legal-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+  }
+
+  .legal-header-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .legal-tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 1.25rem;
+    opacity: 0.9;
+  }
+
+  .legal-title {
+    font-family: var(--font-sans);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--color-text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .legal-meta {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+
+  .legal-body {
+    padding: 4rem 2rem;
+  }
+
+  .legal-prose {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .legal-prose h2 {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--color-text-primary);
+    margin: 2.5rem 0 0.75rem;
+  }
+
+  .legal-prose h2:first-child {
+    margin-top: 0;
+  }
+
+  .legal-prose p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.25rem;
+  }
+
+  .legal-prose a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+    text-underline-offset: 3px;
+    transition: text-decoration-color var(--transition);
+  }
+
+  .legal-prose a:hover {
+    text-decoration-color: var(--color-accent);
+  }
+
+  .legal-prose code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 1px 6px;
+    color: var(--color-text-primary);
+  }
+
+  /* License table */
+  .license-table-wrap {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .license-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .license-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    border-bottom: 1px solid var(--color-border);
+    padding: 0.75rem 1rem;
+    background: var(--color-bg-surface);
+  }
+
+  .license-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    vertical-align: top;
+  }
+
+  .license-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .license-table a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+    text-underline-offset: 3px;
+  }
+
+  .license-table a:hover {
+    text-decoration-color: var(--color-accent);
+  }
+
+  @media (max-width: 768px) {
+    .legal-header {
+      padding: 2.5rem 1.25rem 2rem;
+    }
+
+    .legal-body {
+      padding: 2.5rem 1.25rem;
+    }
+  }
+</style>

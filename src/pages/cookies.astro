@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const lastUpdated = 'May 27, 2026';
+---
+
+<BaseLayout
+  title="Cookie Policy"
+  description="Cookie Policy for trust-lionel.com — this Site does not use cookies."
+>
+  <Nav />
+
+  <main id="main-content" class="legal-main">
+    <div class="legal-header">
+      <div class="legal-header-inner">
+        <div class="legal-tag">Legal</div>
+        <h1 class="legal-title">Cookie Policy</h1>
+        <p class="legal-meta">Last updated: {lastUpdated} · Governing law: State of Texas, United States</p>
+      </div>
+    </div>
+
+    <div class="legal-body">
+      <div class="legal-prose">
+
+        <h2>This Site Does Not Use Cookies</h2>
+        <p>trust-lionel.com does not set, read, or use cookies of any kind — including advertising cookies, tracking cookies, analytics cookies, or functional cookies.</p>
+        <p>No consent banner is required. No cookie preferences need to be configured. There is nothing to opt out of.</p>
+
+        <h2>What Are Cookies?</h2>
+        <p>Cookies are small text files that websites store on your device to remember information about your visit — such as login state, preferences, or browsing behavior for advertising purposes. Many websites use cookies to track users across sessions and sites.</p>
+        <p>This Site uses none of them.</p>
+
+        <h2>Analytics Without Cookies</h2>
+        <p>This Site uses <a href="https://umami.is" target="_blank" rel="noopener noreferrer">Umami</a>, a cookieless analytics platform. Umami measures anonymous aggregate traffic — page views, referrer sources, browser types, and country-level geography — without identifying individual visitors and without setting any cookies on your device.</p>
+        <p>Umami is self-hosted by Lionel Mosley on Railway. No analytics data is sent to Google, Meta, or any other third party.</p>
+
+        <h2>No Google Analytics, No Google Tag Manager</h2>
+        <p>This Site does not use Google Analytics, Google Tag Manager, Google Ads, Facebook Pixel, or any other third-party advertising or behavioral tracking service. This is a deliberate choice — not a configuration — made because this Site covers enterprise security and privacy frameworks (CISA SCuBA, NIST SP 800-53, GDPR) and the use of such trackers would be inconsistent with that positioning.</p>
+
+        <h2>Third-Party Infrastructure</h2>
+        <p>The hosting infrastructure behind this Site — Netlify and Bunny.net — may set cookies of their own as part of DDoS protection and CDN operation (such as Bunny.net's bot detection). These are infrastructure-level cookies outside of Lionel Mosley's direct control. They are not used for advertising or cross-site tracking. Refer to <a href="https://bunny.net/privacy/" target="_blank" rel="noopener noreferrer">Bunny.net's Privacy Policy</a> and <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener noreferrer">Netlify's Privacy Policy</a> for details.</p>
+
+        <h2>Changes to This Policy</h2>
+        <p>If cookies are introduced to this Site in the future (for example, as part of a newsletter subscription or contact form feature), this Cookie Policy will be updated before any cookies are set, and a consent mechanism will be implemented where required by applicable law.</p>
+
+        <h2>Contact</h2>
+        <p>Questions about this Cookie Policy may be directed to Lionel Mosley via <a href="https://linkedin.com/in/lionelmosley" target="_blank" rel="noopener noreferrer">LinkedIn</a> or through <a href="https://github.com/trust-lionel" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .legal-main {
+    min-height: 60vh;
+  }
+
+  .legal-header {
+    background: var(--color-bg-header);
+    position: relative;
+    overflow: hidden;
+    padding: 3.5rem 2rem 3rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .legal-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+  }
+
+  .legal-header-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .legal-tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 1.25rem;
+    opacity: 0.9;
+  }
+
+  .legal-title {
+    font-family: var(--font-sans);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--color-text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .legal-meta {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+
+  .legal-body {
+    padding: 4rem 2rem;
+  }
+
+  .legal-prose {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .legal-prose h2 {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--color-text-primary);
+    margin: 2.5rem 0 0.75rem;
+  }
+
+  .legal-prose h2:first-child {
+    margin-top: 0;
+  }
+
+  .legal-prose p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.25rem;
+  }
+
+  .legal-prose a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+    text-underline-offset: 3px;
+    transition: text-decoration-color var(--transition);
+  }
+
+  .legal-prose a:hover {
+    text-decoration-color: var(--color-accent);
+  }
+
+  @media (max-width: 768px) {
+    .legal-header {
+      padding: 2.5rem 1.25rem 2rem;
+    }
+
+    .legal-body {
+      padding: 2.5rem 1.25rem;
+    }
+  }
+</style>

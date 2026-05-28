@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const lastUpdated = 'May 27, 2026';
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="Privacy Policy for trust-lionel.com — the personal brand and thought leadership blog of Lionel Mosley (ahr-ki-tekt), Houston, TX."
+>
+  <Nav />
+
+  <main id="main-content" class="legal-main">
+    <div class="legal-header">
+      <div class="legal-header-inner">
+        <div class="legal-tag">Legal</div>
+        <h1 class="legal-title">Privacy Policy</h1>
+        <p class="legal-meta">Last updated: {lastUpdated} · Governing law: State of Texas, United States</p>
+      </div>
+    </div>
+
+    <div class="legal-body">
+      <div class="legal-prose">
+
+        <h2>Overview</h2>
+        <p>This Privacy Policy describes how trust-lionel.com (the "Site") — the personal brand and thought leadership blog of Lionel Mosley, operating as ahr-ki-tekt, Houston, Texas — handles information when you visit the Site.</p>
+        <p>The short version: this Site does not collect, store, or sell your personal data. There are no accounts, no forms, no comments, and no tracking cookies.</p>
+
+        <h2>Information We Do Not Collect</h2>
+        <p>This Site does not collect:</p>
+        <ul>
+          <li>Names, email addresses, or contact information</li>
+          <li>Account credentials or profile data</li>
+          <li>Payment or financial information</li>
+          <li>Location data beyond what your browser sends to any web server</li>
+          <li>Cookies of any kind — advertising, tracking, or functional</li>
+        </ul>
+
+        <h2>Analytics</h2>
+        <p>This Site uses <a href="https://umami.is" target="_blank" rel="noopener noreferrer">Umami</a>, a self-hosted, cookieless analytics platform. Umami collects anonymous aggregate data — page views, referrer, browser type, and country — without identifying individual visitors, setting cookies, or transmitting data to any third party. No consent banner is required because no personal data is processed.</p>
+        <p>Umami is hosted on Railway and operated exclusively by Lionel Mosley. No analytics data is shared with, sold to, or accessible by any third party.</p>
+
+        <h2>Server Logs</h2>
+        <p>Like all websites, this Site's hosting infrastructure (Netlify, behind Bunny.net CDN) may retain standard server logs that include IP addresses, request timestamps, and browser user-agent strings. These logs are retained for security and operational purposes in accordance with Netlify's and Bunny.net's respective privacy policies. Lionel Mosley does not access or process these logs for marketing or tracking purposes.</p>
+
+        <h2>Third-Party Services</h2>
+        <p>This Site uses the following third-party infrastructure:</p>
+        <ul>
+          <li><strong>Netlify</strong> — hosting and build platform. <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener noreferrer">Netlify Privacy Policy</a></li>
+          <li><strong>Bunny.net</strong> — CDN, DDoS protection, and WAF. <a href="https://bunny.net/privacy/" target="_blank" rel="noopener noreferrer">Bunny.net Privacy Policy</a></li>
+          <li><strong>GitHub</strong> — source code repository. <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub Privacy Statement</a></li>
+        </ul>
+        <p>This Site does not use Google Analytics, Google Tag Manager, Facebook Pixel, or any other third-party advertising or tracking service.</p>
+
+        <h2>External Links</h2>
+        <p>Posts on this Site contain links to external websites including GitHub, LinkedIn, CISA, NIST, and other third-party resources. This Privacy Policy applies only to trust-lionel.com. Linked sites have their own privacy policies which govern their data practices.</p>
+
+        <h2>Children's Privacy</h2>
+        <p>This Site is not directed at children under the age of 13. No personal information is knowingly collected from children.</p>
+
+        <h2>Changes to This Policy</h2>
+        <p>This Privacy Policy may be updated as the Site adds new features (such as email subscription or contact forms). Material changes will be reflected in the "Last updated" date at the top of this page. Continued use of the Site after changes constitutes acceptance of the updated policy.</p>
+
+        <h2>Contact</h2>
+        <p>Questions about this Privacy Policy may be directed to Lionel Mosley via <a href="https://linkedin.com/in/lionelmosley" target="_blank" rel="noopener noreferrer">LinkedIn</a> or through <a href="https://github.com/trust-lionel" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .legal-main {
+    min-height: 60vh;
+  }
+
+  .legal-header {
+    background: var(--color-bg-header);
+    position: relative;
+    overflow: hidden;
+    padding: 3.5rem 2rem 3rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .legal-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+  }
+
+  .legal-header-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .legal-tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 1.25rem;
+    opacity: 0.9;
+  }
+
+  .legal-title {
+    font-family: var(--font-sans);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--color-text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .legal-meta {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+
+  .legal-body {
+    padding: 4rem 2rem;
+  }
+
+  .legal-prose {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .legal-prose h2 {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--color-text-primary);
+    margin: 2.5rem 0 0.75rem;
+  }
+
+  .legal-prose h2:first-child {
+    margin-top: 0;
+  }
+
+  .legal-prose p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.25rem;
+  }
+
+  .legal-prose ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .legal-prose li {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.375rem;
+  }
+
+  .legal-prose a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+    text-underline-offset: 3px;
+    transition: text-decoration-color var(--transition);
+  }
+
+  .legal-prose a:hover {
+    text-decoration-color: var(--color-accent);
+  }
+
+  .legal-prose strong {
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  @media (max-width: 768px) {
+    .legal-header {
+      padding: 2.5rem 1.25rem 2rem;
+    }
+
+    .legal-body {
+      padding: 2.5rem 1.25rem;
+    }
+  }
+</style>
