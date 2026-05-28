@@ -15,13 +15,8 @@ export async function getStaticPaths() {
   }));
 }
 
-// Load Inter font from @fontsource package at build time
-const fontRegular = readFileSync(
-  resolve('./node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2')
-);
-const fontBold = readFileSync(
-  resolve('./node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2')
-);
+const fontRegular = readFileSync(resolve('./public/fonts/Inter-Regular.otf'));
+const fontBold = readFileSync(resolve('./public/fonts/Inter-Bold.otf'));
 
 export const GET: APIRoute = async ({ props }) => {
   const { post } = props;
