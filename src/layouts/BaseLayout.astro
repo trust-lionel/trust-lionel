@@ -327,6 +327,93 @@ const formattedDate = articleDate
       }
     }
   </style>
+
+  <!-- Person JSON-LD structured data — site-wide -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Lionel Mosley",
+    "url": "https://trust-lionel.com",
+    "image": "https://trust-lionel.com/assets/banner.svg",
+    "jobTitle": "IT Consultant & Innovative Thought Leader",
+    "description": "IT Consultant, Innovative Thought Leader, and Subject Matter Expert specializing in cloud infrastructure, cybersecurity, Microsoft 365, and enterprise IT governance. Based in Houston, TX.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Houston",
+      "addressRegion": "TX",
+      "addressCountry": "US"
+    },
+    "worksFor": {
+      "@type": "Organization",
+      "name": "4TH AND BAILEY",
+      "url": "https://github.com/4thandbailey"
+    },
+    "sameAs": [
+      "https://trust-lionel.com",
+      "https://linkedin.com/in/lionelmosley",
+      "https://github.com/trust-lionel",
+      "https://youtube.com/@LMosley002",
+      "https://x.com/lionelmosley",
+      "https://www.facebook.com/yourinfotechconsultant",
+      "https://reddit.com/u/trust-lionel",
+      "https://devops.houstonalert.com",
+      "https://www.threads.com/@lionelmosley",
+      "https://about.me/lionelmosley"
+    ],
+    "knowsAbout": [
+      "Cloud Infrastructure",
+      "Cybersecurity",
+      "Microsoft 365",
+      "Azure",
+      "CISA SCuBA",
+      "NIST SP 800-53",
+      "MITRE ATT&CK",
+      "CIS Benchmarks",
+      "Enterprise IT Governance",
+      "IT Consulting"
+    ],
+    "hasCredential": {
+      "@type": "EducationalOccupationalCredential",
+      "name": "Microsoft Cloud Solution Provider (CSP)",
+      "credentialCategory": "Professional Certification"
+    },
+    "author": [
+      {
+        "@type": "TechArticle",
+        "name": "How We Built Houston Alert — A Real-Time City Warning System",
+        "url": "https://devops.houstonalert.com",
+        "datePublished": "2026-04-15",
+        "publisher": {
+          "@type": "Organization",
+          "name": "4th and Bailey LLC"
+        }
+      }
+    ],
+    "maintainer": [
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Infrastructure Placement Framework",
+        "url": "https://github.com/4thandBailey/infrastructure-placement-framework",
+        "codeRepository": "https://github.com/4thandBailey/infrastructure-placement-framework",
+        "license": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Houston Alert",
+        "url": "https://houstonalert.com",
+        "applicationCategory": "PublicSafetyApplication",
+        "operatingSystem": "Web, PWA"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Shopify ↔ Sage BusinessWorks Middleware Agent",
+        "url": "https://github.com/4thandBailey/shopify-bw-agent",
+        "codeRepository": "https://github.com/4thandBailey/shopify-bw-agent"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <!-- Skip-to-content link for keyboard users (WCAG 2.4.1) -->

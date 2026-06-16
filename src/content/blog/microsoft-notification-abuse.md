@@ -5,7 +5,7 @@ date: 2026-05-22
 author: Lionel Mosley
 tags: [Cybersecurity, MITRE ATT&CK, NIST SP 800-53, CISA SCuBA, Microsoft]
 og_image: "/og/microsoft-notification-abuse.png"
-featured: true
+featured: false
 image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=80&auto=format&fit=crop"
 image_alt: "Server infrastructure — abstract blue digital network"
 ---
