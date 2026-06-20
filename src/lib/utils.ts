@@ -24,7 +24,7 @@ export const formatDate = (date: Date, format: DateFormat = 'default'): string =
     case 'dot':
       const dotDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
       const dotParts = dotDate.split(' ')
-      return dotParts[0] + ', ' + dotParts[1] + ' ' + dotParts[2]
+      return dotParts[0] + ' ' + dotParts[1].replace(',', '') + ', ' + dotParts[2]
 
     case 'short':
       // Mar 3, 2020 格式
@@ -50,6 +50,6 @@ export const formatDate = (date: Date, format: DateFormat = 'default'): string =
       // March 3, 2020 格式（默认）
       const d = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
       const parts = d.split(' ')
-      return parts[0] + ', ' + parts[1] + ' ' + parts[2]
+      return parts[0] + ' ' + parts[1].replace(',', '') + ', ' + parts[2]
   }
 }
