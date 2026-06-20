@@ -10,7 +10,7 @@
 # ── BUILD SETTINGS ───────────────────────────────────────────
 [build]
   # pnpm is the package manager Litos uses by default
-  command         = "pnpm run build"
+  command         = "pnpm run build && pnpm pagefind --site dist"
   publish         = "dist"
 
   [build.environment]
@@ -63,7 +63,7 @@
     # Tighten further once your image hosting is finalized.
     Content-Security-Policy = """
       default-src 'self';
-      script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://umami-production-f3f3.up.railway.app https://events.vercount.one;
+      script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://www.googletagmanager.com https://umami-production-f3f3.up.railway.app https://events.vercount.one;
       style-src 'self' 'unsafe-inline';
       img-src 'self' data: https://images.unsplash.com https://avatars.githubusercontent.com https://www.google.com https://github.githubassets.com;
       connect-src 'self' https://umami-production-f3f3.up.railway.app https://api.github.com https://github-contributions-api.jogruber.de;
