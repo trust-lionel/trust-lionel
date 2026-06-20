@@ -40,7 +40,7 @@ const { title, description, image, disableViewTransition, blogPosting }: Props =
     <!-- Umami Analytics — cookieless, GDPR-compliant, self-hosted on Railway -->
     <script is:inline defer src="https://umami-production-f3f3.up.railway.app/script.js" data-website-id="b8e2a312-e7f4-4595-95ee-38b47fc9be54"></script>
     <!-- Person + WebSite JSON-LD Structured Data -->
-    <script is:inline type="application/ld+json">{JSON.stringify({
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Lionel Mosley",
@@ -148,8 +148,8 @@ const { title, description, image, disableViewTransition, blogPosting }: Props =
           "description": "Self-service Microsoft 365 licensing storefront powered by 4TH AND BAILEY."
         }
       ]
-    })}</script>
-    <script is:inline type="application/ld+json">{JSON.stringify({
+    })} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "Lionel Mosley | ahr-ki-tekt",
@@ -157,10 +157,10 @@ const { title, description, image, disableViewTransition, blogPosting }: Props =
       "description": "Carefully selected frameworks, insights, and solutions from Lionel Mosley — IT Consultant & Innovative Thought Leader based in Houston, TX.",
       "author": { "@type": "Person", "name": "Lionel Mosley", "url": "https://trust-lionel.com" },
       "inLanguage": "en-US"
-    })}</script>
+    })} />
     <!-- BlogPosting JSON-LD — injected on post pages only -->
     {blogPosting && (
-      <script is:inline type="application/ld+json">{JSON.stringify({
+      <script is:inline type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": blogPosting.headline,
@@ -171,7 +171,7 @@ const { title, description, image, disableViewTransition, blogPosting }: Props =
         "url": blogPosting.url,
         "image": blogPosting.image,
         "keywords": blogPosting.keywords
-      })}</script>
+    })} />
     )}
   </head>
   <body class="flex flex-col">

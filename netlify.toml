@@ -64,9 +64,9 @@
     Content-Security-Policy = """
       default-src 'self';
       script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://www.googletagmanager.com https://umami-production-f3f3.up.railway.app https://events.vercount.one;
-      style-src 'self' 'unsafe-inline';
+      style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
       img-src 'self' data: https://images.unsplash.com https://avatars.githubusercontent.com https://www.google.com https://github.githubassets.com;
-      connect-src 'self' https://umami-production-f3f3.up.railway.app https://api.github.com https://github-contributions-api.jogruber.de;
+      connect-src 'self' https://umami-production-f3f3.up.railway.app https://api.github.com https://github-contributions-api.jogruber.de https://www.google-analytics.com https://www.google.com;
       font-src 'self';
       frame-src 'none';
       object-src 'none';
