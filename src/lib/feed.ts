@@ -16,7 +16,7 @@ interface RSSConfig {
   posts: CollectionEntry<'posts'>[]
 }
 
-// 站点配置
+// Site configuration
 const config: RSSConfig = {
   siteUrl: SITE.website,
   title: SITE.title,
@@ -26,53 +26,53 @@ const config: RSSConfig = {
   posts: await getAllPosts(),
 }
 
-// XML转义函数
+// XML escape function
 export function escapeXml(text: string): string {
   return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;')
 }
 
-// 去除 ANSI 颜色序列与非法 XML 控制字符
+// Strip ANSI color sequences and invalid XML control characters
 const ANSI_REGEX = /\u001B\[[0-?]*[ -/]*[@-~]/g
 export function stripAnsi(text: string): string {
   return text.replace(ANSI_REGEX, '')
 }
 export function removeInvalidXmlChars(text: string): string {
-  // 允许的 C0 控制符只有 \t \n \r，其他需要去掉
+  // Only allow \t \n \r from C0 control characters; strip all others
   return text.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '')
 }
 
-// 获取所有图片资源 - 修正类型
+// Get all image assets - corrected types
 const imageModules = import.meta.glob<{ default: ImageMetadata }>('/src/content/posts/**/assets/*.{jpeg,jpg,png,gif,webp,svg}', {
   eager: true,
 })
 
-// 清理HTML内容，回归markdown本质
+// Clean HTML content back to markdown essentials
 function cleanHtmlForRSS(htmlContent: string): string {
   let cleaned = htmlContent
 
-  // 1. 去掉标题中的锚点链接（包含h1-h6字样的）
+  // 1. Remove anchor links from headings (h1-h6)
   cleaned = cleaned.replace(/<(h[1-6])([^>]*)>(.*?)<a[^>]*href="#[^"]*"[^>]*>[^<]*<\/a><\/\1>/gi, '<$1$2>$3</$1>')
 
-  // 2. 处理增强语法的链接，转换为普通链接（去掉图标）
-  // :link[文本]{id=url} -> <a href="url">文本</a>
+  // 2. Convert enhanced syntax links to plain links (strip icons)
+  // :link[text]{id=url} -> <a href="url">text</a>
   cleaned = cleaned.replace(/:link\[([^\]]+)\]\{id=([^}]+)\}/g, '<a href="$2">$1</a>')
 
-  // 3. 去掉所有icon.horse的图标
+  // 3. Remove all icon.horse icons
   cleaned = cleaned.replace(/<img[^>]*src="[^"]*icon\.horse[^"]*"[^>]*>/gi, '')
 
-  // 4. 清理链接中多余的图标和空白
+  // 4. Clean up extra icons and whitespace from links
   cleaned = cleaned.replace(/<a([^>]*)>\s*<img[^>]*>\s*([^<]+)\s*<\/a>/gi, '<a$1>$2</a>')
 
-  // 5. 处理figure中的双图片，只保留img-light或第一张
+  // 5. Handle dual images in figures — keep img-light or first image
   cleaned = cleaned.replace(/<figure[^>]*>([\s\S]*?)<\/figure>/gi, (match, content) => {
-    // 查找所有图片
+    // Find all images
     const imgMatches = content.match(/<img[^>]*>/g)
     if (imgMatches && imgMatches.length > 1) {
-      // 优先选择img-light，否则选择第一张
+      // Prefer img-light; fall back to first image
       const lightImg = imgMatches.find((img: string) => img.includes('img-light'))
       const selectedImg = lightImg || imgMatches[0]
 
-      // 提取figcaption
+      // Extract figcaption
       const figcaptionMatch = content.match(/<figcaption[^>]*>([\s\S]*?)<\/figcaption>/)
       const figcaption = figcaptionMatch ? figcaptionMatch[0] : ''
 
@@ -84,7 +84,7 @@ function cleanHtmlForRSS(htmlContent: string): string {
   return cleaned
 }
 
-// 处理图片路径，将相对路径转换为 Astro 优化后的路径
+// Process image paths — convert relative paths to Astro-optimized paths
 async function processImagePaths(htmlContent: string, siteUrl: string, postId: string): Promise<string> {
   const imgRegex = /<img([^>]+)src=['"]([^'"]+)['"]([^>]*)>/gi
   let processedContent = htmlContent
@@ -94,19 +94,19 @@ async function processImagePaths(htmlContent: string, siteUrl: string, postId: s
   for (const match of matches) {
     const [fullMatch, beforeSrc, src, afterSrc] = match
 
-    // 跳过已经是绝对路径的图片
+    // Skip images that are already absolute paths
     if (src.startsWith('http') || src.startsWith('//') || src.startsWith('/_astro/')) {
       continue
     }
 
-    // 处理相对路径图片
+    // Handle relative path images
     if (src.startsWith('assets/')) {
       const imagePath = `/src/content/posts/${postId}/${src}`
       const imageModule = imageModules[imagePath]
 
       if (imageModule && imageModule.default) {
         try {
-          // 使用 imageModule.default 获取 ImageMetadata
+          // Use imageModule.default to get ImageMetadata
           const optimizedImage = await getImage({ src: imageModule.default })
           const absoluteUrl = new URL(optimizedImage.src, siteUrl).toString()
 
@@ -114,7 +114,7 @@ async function processImagePaths(htmlContent: string, siteUrl: string, postId: s
           processedContent = processedContent.replace(fullMatch, newImgTag)
         } catch (error) {
           console.warn(`Failed to process image: ${imagePath}`, error)
-          // 回退到基本的绝对路径
+          // Fall back to basic absolute path
           const fallbackUrl = `${siteUrl}/src/content/posts/${postId}/${src}`
           const newImgTag = `<img${beforeSrc}src="${fallbackUrl}"${afterSrc}>`
           processedContent = processedContent.replace(fullMatch, newImgTag)
@@ -126,7 +126,7 @@ async function processImagePaths(htmlContent: string, siteUrl: string, postId: s
   return processedContent
 }
 
-// 添加封面图到文章开头
+// Add cover image to the top of the post
 async function addCoverImage(post: CollectionEntry<'posts'>, siteUrl: string): Promise<string> {
   if (!post.data.cover) {
     return ''
@@ -146,18 +146,18 @@ async function addCoverImage(post: CollectionEntry<'posts'>, siteUrl: string): P
   }
 }
 
-// 共享的文章处理逻辑
+// Shared post processing logic
 async function processPostsForFeed() {
   const { posts, siteUrl } = config
 
-  // 创建与项目相同配置的 markdown 处理器
+  // Create a markdown processor matching the project config
   const processor = await createMarkdownProcessor({
     remarkPlugins,
     rehypePlugins,
-    syntaxHighlight: false, // 与 astro.config.ts 保持一致
+    syntaxHighlight: false, // Match astro.config.ts setting
   })
 
-  // 处理所有文章
+  // Process all posts
   const processedPosts = await Promise.all(
     posts.map(async (post) => {
       if (!post.body) {
@@ -165,29 +165,29 @@ async function processPostsForFeed() {
       }
 
       try {
-        // 使用 Astro 的 markdown 处理器
+        // Use Astro markdown processor
         const result = await processor.render(post.body)
 
-        // 净化 HTML 内容
+        // Sanitize HTML content
         const rawHtml = removeInvalidXmlChars(stripAnsi(result.code))
         const sanitizedContent = sanitizeHtml(rawHtml, {
           allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'figure', 'figcaption']),
           allowedAttributes: {
             ...sanitizeHtml.defaults.allowedAttributes,
-            a: ['href', 'target', 'rel'], // 允许链接属性
-            img: ['src', 'alt', 'width', 'height', 'class', 'style'], // 允许图片属性
+            a: ['href', 'target', 'rel'], // Allow link attributes
+            img: ['src', 'alt', 'width', 'height', 'class', 'style'], // Allow image attributes
             figure: ['class'],
             figcaption: ['class'],
           },
         })
 
-        // 清理HTML，回归markdown本质
+        // Clean HTML back to markdown essentials
         const cleanedContent = cleanHtmlForRSS(sanitizedContent)
 
-        // 处理图片路径
+        // Process image paths
         const processedContent = await processImagePaths(cleanedContent, siteUrl, post.id)
 
-        // 添加封面图
+        // Add cover image
         const coverImage = await addCoverImage(post, siteUrl)
 
         const htmlContent = coverImage + '\n' + processedContent

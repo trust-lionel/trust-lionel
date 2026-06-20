@@ -216,7 +216,7 @@ const PhotoGalleryModal: React.FC<Props> = ({ photos, title, description, isOpen
                         ? 'bg-muted text-muted-foreground cursor-not-allowed'
                         : 'bg-background hover:bg-accent text-foreground hover:text-accent-foreground'
                     }`}
-                    aria-label="上一张"
+                    aria-label="Previous photo"
                   >
                     <div className="w-5 h-5 icon-[mdi--chevron-left]"></div>
                   </button>
@@ -228,7 +228,7 @@ const PhotoGalleryModal: React.FC<Props> = ({ photos, title, description, isOpen
                         ? 'bg-muted text-muted-foreground cursor-not-allowed'
                         : 'bg-background hover:bg-accent text-foreground hover:text-accent-foreground'
                     }`}
-                    aria-label="下一张"
+                    aria-label="Next photo"
                   >
                     <div className="w-5 h-5 icon-[mdi--chevron-right]"></div>
                   </button>

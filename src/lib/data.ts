@@ -1,6 +1,6 @@
 import { getCollection, type CollectionEntry } from 'astro:content'
 
-// 文章按时间排序
+// Sort posts by date
 export function postsSort(posts: CollectionEntry<'posts'>[]) {
   return posts.slice().sort((a, b) => {
     const dateA = a.data.updatedDate ?? a.data.pubDate
@@ -9,26 +9,26 @@ export function postsSort(posts: CollectionEntry<'posts'>[]) {
   })
 }
 
-// 获取所有非草稿文章，按时间排序
+// Get all non-draft posts sorted by date
 export async function getAllPosts(): Promise<CollectionEntry<'posts'>[]> {
   const allPosts = await getCollection('posts')
   return postsSort(allPosts.filter((post) => !post.data.draft))
 }
 
-// 获取所有置顶文章
+// Get all pinned posts
 export async function getPinnedPosts(): Promise<CollectionEntry<'posts'>[]> {
   const allPosts = await getCollection('posts')
   const pinnedPosts = allPosts.filter((post) => post.data.pinned)
   return postsSort(pinnedPosts)
 }
 
-// 获取最新的固定数量的文章
+// Get the latest N posts
 export async function getNumPosts(size: number): Promise<CollectionEntry<'posts'>[]> {
   const allPosts = await getCollection('posts')
   return postsSort(allPosts.filter((post) => !post.data.draft)).slice(0, size)
 }
 
-// 获取标签
+// Get tags
 export async function getAllTags(): Promise<Record<string, number>> {
   const allPosts = await getAllPosts()
   const tags = allPosts.flatMap((post) => post.data.tags || [])
@@ -41,7 +41,7 @@ export async function getAllTags(): Promise<Record<string, number>> {
   )
 }
 
-// 获取project
+// Get projects
 export async function getAllProjects(): Promise<CollectionEntry<'projects'>[]> {
   const allProjects = await getCollection('projects')
   return allProjects.filter((project) => !project.data.draft)
