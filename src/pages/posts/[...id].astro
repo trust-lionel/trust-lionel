@@ -12,6 +12,7 @@ import { getAllPosts } from '~/lib/data'
 import SectionDivider from '~/components/base/SectionDivider.astro'
 import Comment from '~/components/posts/base/Comment.astro'
 import License from '~/components/posts/base/License.astro'
+import SocialShare from '~/components/posts/SocialShare.astro'
 
 export async function getStaticPaths() {
   const sortedPosts = await getAllPosts()
@@ -31,24 +32,37 @@ const { data: frontmatter } = post
 const { Content, headings, remarkPluginFrontmatter } = await render(post)
 
 const filterHeadings = headings.filter((heading: any) => heading.slug !== 'footnote-label')
-
 const hasValidHeadings = filterHeadings.length > 1
-type LayoutKey = 'metaOnly' | 'coverSplit' | 'coverTop'
 
+type LayoutKey = 'metaOnly' | 'coverSplit' | 'coverTop'
 const layoutMap: Record<LayoutKey, any> = {
   metaOnly: MetaOnly,
   coverSplit: CoverSplit,
   coverTop: CoverTop,
 }
-
 const layoutKey: LayoutKey = (frontmatter.postType as LayoutKey) || (POSTS_CONFIG.postType as LayoutKey)
 const PostLayout = layoutMap[layoutKey]
+
+const canonicalUrl = `${SITE.website}posts/${post.id}`
+const ogImage = frontmatter.ogImage
+  ? (typeof frontmatter.ogImage === 'string' ? frontmatter.ogImage : `${SITE.website}${frontmatter.ogImage.src}`)
+  : SITE.ogImage
+
+const blogPosting = {
+  headline: frontmatter.title,
+  description: frontmatter.description || frontmatter.title,
+  datePublished: frontmatter.pubDate.toISOString().split('T')[0],
+  url: canonicalUrl,
+  image: ogImage,
+  keywords: frontmatter.tags || [],
+}
 ---
 
 <Layout
   title={frontmatter.title}
   description={frontmatter.description || frontmatter.title}
-  image={frontmatter.ogImage ? (typeof frontmatter.ogImage === "string" ? frontmatter.ogImage : `${SITE.website}${frontmatter.ogImage.src}`) : SITE.ogImage}
+  image={ogImage}
+  {blogPosting}
 >
   <div class="relative flex flex-col justify-between h-fit z-[1]">
     <TocMobile {post} {posts} headings={filterHeadings} />
@@ -63,6 +77,9 @@ const PostLayout = layoutMap[layoutKey]
         )
       }
     </PostLayout>
+    <div class="px-6 sm:px-8">
+      <SocialShare url={canonicalUrl} title={frontmatter.title} />
+    </div>
     {
       posts.length > 1 && (
         <div class="px-6 sm:px-8 pb-6 sm:pb-8">

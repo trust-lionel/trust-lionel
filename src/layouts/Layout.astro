@@ -13,9 +13,17 @@ type Props = {
   description: string
   image?: string
   disableViewTransition?: boolean
+  blogPosting?: {
+    headline: string
+    description: string
+    datePublished: string
+    url: string
+    image: string
+    keywords: string[]
+  }
 }
 
-const { title, description, image, disableViewTransition }: Props = Astro.props
+const { title, description, image, disableViewTransition, blogPosting }: Props = Astro.props
 ---
 
 <!doctype html>
@@ -31,15 +39,15 @@ const { title, description, image, disableViewTransition }: Props = Astro.props
     <!-- End Google Tag Manager -->
     <!-- Umami Analytics — cookieless, GDPR-compliant, self-hosted on Railway -->
     <script is:inline defer src="https://umami-production-f3f3.up.railway.app/script.js" data-website-id="b8e2a312-e7f4-4595-95ee-38b47fc9be54"></script>
-    <!-- Person JSON-LD Structured Data -->
+    <!-- Person + WebSite JSON-LD Structured Data -->
     <script is:inline type="application/ld+json">{JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Lionel Mosley",
       "url": "https://trust-lionel.com",
-      "image": "https://trust-lionel.com/assets/banner.svg",
+      "image": "https://trust-lionel.com/og-image.png",
       "jobTitle": "IT Consultant & Innovative Thought Leader",
-      "description": "IT Consultant, Innovative Thought Leader, and Subject Matter Expert specializing in cloud infrastructure, cybersecurity, Microsoft 365, and enterprise IT governance. Based in Houston, TX.",
+      "description": "IT Consultant, Cloud Engineer, Innovative Thought Leader, and Subject Matter Expert specializing in cloud infrastructure, cybersecurity, Microsoft 365, and enterprise IT governance. Based in Houston, TX — serving organizations nationwide through 4TH AND BAILEY.",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Houston",
@@ -49,7 +57,7 @@ const { title, description, image, disableViewTransition }: Props = Astro.props
       "worksFor": {
         "@type": "Organization",
         "name": "4TH AND BAILEY",
-        "url": "https://github.com/4thandbailey"
+        "url": "https://4thandbailey.com"
       },
       "sameAs": [
         "https://trust-lionel.com",
@@ -58,36 +66,113 @@ const { title, description, image, disableViewTransition }: Props = Astro.props
         "https://youtube.com/@LMosley002",
         "https://x.com/lionelmosley",
         "https://www.facebook.com/yourinfotechconsultant",
-        "https://reddit.com/u/trust-lionel",
-        "https://devops.houstonalert.com",
         "https://www.threads.com/@lionelmosley",
+        "https://bsky.app/profile/lionelmosley",
+        "https://instagram.com/lionelmosley",
+        "https://reddit.com/u/trust-lionel",
+        "https://open.spotify.com/user/lmosley002-spotify",
         "https://about.me/lionelmosley",
-        "https://bsky.app/profile/lionelmosley"
+        "https://blog.lionelmosley.com",
+        "https://devops.houstonalert.com",
+        "https://wordcards.co"
       ],
       "knowsAbout": [
-        "Cloud Infrastructure","Cybersecurity","Microsoft 365","Azure",
-        "CISA SCuBA","NIST SP 800-53","MITRE ATT&CK","CIS Benchmarks",
-        "Enterprise IT Governance","IT Consulting","Business Continuity",
-        "AI Governance","Microsoft Cloud Solution Provider"
+        "Cloud Infrastructure","Cloud Engineering","Cybersecurity","Microsoft 365",
+        "Microsoft Azure","Amazon AWS","Google Workspace","Cloud Migration",
+        "Cloud Repatriation","CISA SCuBA","NIST SP 800-53","MITRE ATT&CK",
+        "CIS Benchmarks","HIPAA Compliance","CMMC","PCI-DSS",
+        "Enterprise IT Governance","IT Consulting","Incident Response",
+        "AI Governance","Business Continuity"
       ],
-      "hasCredential": {
-        "@type": "EducationalOccupationalCredential",
-        "name": "Microsoft Cloud Solution Provider (CSP)",
-        "credentialCategory": "Professional Certification"
-      },
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Microsoft Cloud Solution Provider (CSP)",
+          "credentialCategory": "Professional Certification",
+          "recognizedBy": { "@type": "Organization", "name": "Microsoft", "url": "https://www.microsoft.com" }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Google Partner",
+          "credentialCategory": "Professional Certification",
+          "recognizedBy": { "@type": "Organization", "name": "Google", "url": "https://www.google.com" }
+        }
+      ],
       "author": [
-        {"@type":"TechArticle","name":"How We Built Houston Alert — A Real-Time City Warning System","url":"https://devops.houstonalert.com","datePublished":"2026-04-15"},
-        {"@type":"TechArticle","name":"Why We Moved a Regional Broadcasting Company Off Amazon EC2 — and Why Microsoft Azure Won","url":"https://trust-lionel.com/posts/cloud-migration","datePublished":"2026-06-16"},
-        {"@type":"TechArticle","name":"When Microsoft's Own Email Becomes the Weapon","url":"https://trust-lionel.com/posts/microsoft-notification-abuse","datePublished":"2026-05-22"},
-        {"@type":"TechArticle","name":"Three Questions Every CEO and Board Should Be Able to Answer","url":"https://trust-lionel.com/posts/three-questions","datePublished":"2026-05-17"}
+        {
+          "@type": "TechArticle",
+          "name": "How We Built Houston Alert — A Real-Time City Warning System",
+          "url": "https://devops.houstonalert.com",
+          "datePublished": "2026-04-15",
+          "publisher": { "@type": "Organization", "name": "4th and Bailey LLC", "url": "https://4thandbailey.com" }
+        }
       ],
       "maintainer": [
-        {"@type":"SoftwareSourceCode","name":"Infrastructure Placement Framework","url":"https://framework.4thandbailey.com","codeRepository":"https://github.com/4thandBailey/infrastructure-placement-framework","license":"https://creativecommons.org/licenses/by/4.0/"},
-        {"@type":"SoftwareApplication","name":"Houston Alert","url":"https://houstonalert.com","applicationCategory":"PublicSafetyApplication","operatingSystem":"Web, PWA"},
-        {"@type":"SoftwareSourceCode","name":"Shopify \u2194 Sage BusinessWorks Middleware Agent","url":"https://github.com/4thandBailey/shopify-bw-agent","codeRepository":"https://github.com/4thandBailey/shopify-bw-agent"},
-        {"@type":"SoftwareApplication","name":"MacSysTools","url":"https://github.com/trust-lionel/macsystools","applicationCategory":"DeveloperApplication","operatingSystem":"macOS"}
+        {
+          "@type": "SoftwareSourceCode",
+          "name": "Infrastructure Placement Framework",
+          "url": "https://framework.4thandbailey.com",
+          "codeRepository": "https://github.com/4thandBailey/infrastructure-placement-framework",
+          "license": "https://creativecommons.org/licenses/by/4.0/"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "Houston Alert",
+          "url": "https://houstonalert.com",
+          "applicationCategory": "PublicSafetyApplication",
+          "operatingSystem": "Web, PWA"
+        },
+        {
+          "@type": "SoftwareSourceCode",
+          "name": "Shopify \u2194 Sage BusinessWorks Middleware Agent",
+          "url": "https://github.com/4thandBailey/shopify-bw-agent",
+          "codeRepository": "https://github.com/4thandBailey/shopify-bw-agent"
+        },
+        {
+          "@type": "SoftwareSourceCode",
+          "name": "Microsoft 365 PowerShell Tools",
+          "url": "https://github.com/4thandBailey/tools",
+          "codeRepository": "https://github.com/4thandBailey/tools"
+        },
+        {
+          "@type": "WebApplication",
+          "name": "W.O.R.D. — Written Or Received Daily",
+          "url": "https://wordcards.co",
+          "applicationCategory": "LifestyleApplication",
+          "description": "A motivational postcard web application — draw or send a good word to someone who needs it."
+        },
+        {
+          "@type": "WebSite",
+          "name": "M365CloudPro",
+          "url": "https://m365cloudpro.com",
+          "description": "Self-service Microsoft 365 licensing storefront powered by 4TH AND BAILEY."
+        }
       ]
     })}</script>
+    <script is:inline type="application/ld+json">{JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Lionel Mosley | ahr-ki-tekt",
+      "url": "https://trust-lionel.com",
+      "description": "Carefully selected frameworks, insights, and solutions from Lionel Mosley — IT Consultant & Innovative Thought Leader based in Houston, TX.",
+      "author": { "@type": "Person", "name": "Lionel Mosley", "url": "https://trust-lionel.com" },
+      "inLanguage": "en-US"
+    })}</script>
+    <!-- BlogPosting JSON-LD — injected on post pages only -->
+    {blogPosting && (
+      <script is:inline type="application/ld+json">{JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": blogPosting.headline,
+        "description": blogPosting.description,
+        "author": { "@type": "Person", "name": "Lionel Mosley", "url": "https://trust-lionel.com" },
+        "publisher": { "@type": "Organization", "name": "Lionel Mosley | ahr-ki-tekt", "url": "https://trust-lionel.com" },
+        "datePublished": blogPosting.datePublished,
+        "url": blogPosting.url,
+        "image": blogPosting.image,
+        "keywords": blogPosting.keywords
+      })}</script>
+    )}
   </head>
   <body class="flex flex-col">
     <!-- Google Tag Manager (noscript) -->
