@@ -16,7 +16,7 @@
   [build.environment]
     # Pin Node.js to a version compatible with Astro v6
     # Astro v6 requires Node 18.17.1 or higher
-    NODE_VERSION  = "20"
+    NODE_VERSION  = "22"
     # Tell Netlify to use pnpm instead of npm
     NPM_FLAGS     = "--version"  # suppresses npm fallback warning
 
