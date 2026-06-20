@@ -1,0 +1,142 @@
+---
+/**
+ * SocialShare.astro
+ * Place at: src/components/posts/SocialShare.astro
+ *
+ * Usage in src/pages/posts/[...id].astro:
+ *
+ *   import SocialShare from '~/components/posts/SocialShare.astro'
+ *   <SocialShare url={Astro.url.href} title={post.data.title} />
+ *
+ * Props:
+ *   url   — the full canonical URL of the current page (use Astro.url.href)
+ *   title — the post title, used in pre-populated share text
+ *
+ * Platforms included, matched to your buyer persona audience:
+ *   LinkedIn  — primary for CIOs, IT Directors, InfoSec Officers
+ *   X         — thought leadership amplification
+ *   Facebook  — Owner/CEO/Operator persona
+ *   Reddit    — community reach (u/trust-lionel)
+ *
+ * The og:image, og:title, and og:description meta tags on each post
+ * page handle the image preview automatically when a URL is shared —
+ * these share buttons simply open the platform's sharing dialog
+ * with the URL and title pre-populated.
+ */
+
+interface Props {
+  url: string
+  title: string
+}
+
+const { url, title } = Astro.props
+
+const encodedUrl   = encodeURIComponent(url)
+const encodedTitle = encodeURIComponent(title)
+
+const shareLinks = [
+  {
+    name: 'LinkedIn',
+    href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+    // LinkedIn pulls og:title, og:description, og:image automatically
+    ariaLabel: `Share on LinkedIn: ${title}`,
+    icon: 'icon-[ri--linkedin-fill]',
+  },
+  {
+    name: 'X',
+    href: `https://x.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
+    ariaLabel: `Share on X: ${title}`,
+    icon: 'icon-[ri--twitter-x-fill]',
+  },
+  {
+    name: 'Facebook',
+    href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+    ariaLabel: `Share on Facebook: ${title}`,
+    icon: 'icon-[ri--facebook-fill]',
+  },
+  {
+    name: 'Reddit',
+    href: `https://reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`,
+    ariaLabel: `Share on Reddit: ${title}`,
+    icon: 'icon-[ri--reddit-fill]',
+  },
+]
+---
+
+<div class="social-share" aria-label="Share this post">
+  <span class="social-share-label">Share</span>
+  <div class="social-share-links">
+    {shareLinks.map((link) => (
+      <a
+        href={link.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={link.ariaLabel}
+        class="social-share-btn"
+      >
+        <span class={link.icon} aria-hidden="true"></span>
+        <span class="social-share-name">{link.name}</span>
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .social-share {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 0;
+    border-top: 1px solid hsl(var(--border) / 0.5);
+    border-bottom: 1px solid hsl(var(--border) / 0.5);
+    margin: 2rem 0;
+  }
+
+  .social-share-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: hsl(var(--muted-foreground));
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+  }
+
+  .social-share-links {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .social-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: hsl(var(--muted-foreground));
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.25rem;
+    text-decoration: none;
+    transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
+    white-space: nowrap;
+  }
+
+  .social-share-btn:hover {
+    color: hsl(var(--foreground));
+    border-color: hsl(var(--foreground) / 0.4);
+    background: hsl(var(--accent));
+  }
+
+  .social-share-btn span[class^="icon-"] {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    .social-share {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

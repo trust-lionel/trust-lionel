@@ -1,0 +1,32 @@
+---
+import { FOOTER_LINKS, SOCIAL_LINKS } from '~/config'
+import SectionDivider from '~/components/base/SectionDivider.astro'
+import FooterLink from '~/components/base/FooterLink.astro'
+import SocialLink from '~/components/base/SocialLink.astro'
+---
+
+<SectionDivider className="border-t-border dark:border-t-border/50" />
+<footer>
+  <div class="py-4 flex-none border-x border-border/50 global-layout-width mx-auto">
+    <div class="pb-8">
+      <div
+        class="flex flex-wrap gap-x-3 sm:gap-x-6 gap-y-1 text-sm font-medium text-muted-foreground pb-4 px-6 sm:px-8 border-b border-border/50"
+      >
+        {FOOTER_LINKS.map((link) => <FooterLink href={link.url}>{link.name}</FooterLink>)}
+      </div>
+      <div class="text-sm text-muted-foreground px-6 sm:px-8 py-4">
+        <div class="items-center flex flex-wrap gap-4 font-medium">
+          <div>©2026 Built with ❤️ in Houston, TX by <a href="https://trust-lionel.com" class="hover:underline tracking-widest font-medium">L I O N E L &nbsp; M O S L E Y</a></div>
+          <div class="grow"></div>
+          <div class="flex gap-4 items-center">
+            {
+              SOCIAL_LINKS.map((item) => (
+                <SocialLink href={item.url} icon={item.icon} aria-label={`Link of ${item.name}`} />
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

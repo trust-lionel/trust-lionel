@@ -1,0 +1,107 @@
+---
+import '~/styles/global.css'
+import '~/styles/markdown.css'
+import '~/styles/lqip.css'
+import '~/styles/github-card.css'
+import { SITE } from '~/config'
+import Head from '~/components/base/Head.astro'
+import Header from './Header.astro'
+import Footer from './Footer.astro'
+
+type Props = {
+  title: string
+  description: string
+  image?: string
+  disableViewTransition?: boolean
+}
+
+const { title, description, image, disableViewTransition }: Props = Astro.props
+---
+
+<!doctype html>
+<html lang={SITE.lang} transition:name="root" transition:animate={SITE.transition && !disableViewTransition ? 'fade' : 'none'}>
+  <head>
+    <Head title={`${title} | ${SITE.title}`} {description} {image} />
+    <!-- Google Tag Manager -->
+    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-543DS8T7');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Umami Analytics — cookieless, GDPR-compliant, self-hosted on Railway -->
+    <script is:inline defer src="https://umami-production-f3f3.up.railway.app/script.js" data-website-id="b8e2a312-e7f4-4595-95ee-38b47fc9be54"></script>
+    <!-- Person JSON-LD Structured Data -->
+    <script is:inline type="application/ld+json">{JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Lionel Mosley",
+      "url": "https://trust-lionel.com",
+      "image": "https://trust-lionel.com/assets/banner.svg",
+      "jobTitle": "IT Consultant & Innovative Thought Leader",
+      "description": "IT Consultant, Innovative Thought Leader, and Subject Matter Expert specializing in cloud infrastructure, cybersecurity, Microsoft 365, and enterprise IT governance. Based in Houston, TX.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Houston",
+        "addressRegion": "TX",
+        "addressCountry": "US"
+      },
+      "worksFor": {
+        "@type": "Organization",
+        "name": "4TH AND BAILEY",
+        "url": "https://github.com/4thandbailey"
+      },
+      "sameAs": [
+        "https://trust-lionel.com",
+        "https://linkedin.com/in/lionelmosley",
+        "https://github.com/trust-lionel",
+        "https://youtube.com/@LMosley002",
+        "https://x.com/lionelmosley",
+        "https://www.facebook.com/yourinfotechconsultant",
+        "https://reddit.com/u/trust-lionel",
+        "https://devops.houstonalert.com",
+        "https://www.threads.com/@lionelmosley",
+        "https://about.me/lionelmosley"
+      ],
+      "knowsAbout": [
+        "Cloud Infrastructure","Cybersecurity","Microsoft 365","Azure",
+        "CISA SCuBA","NIST SP 800-53","MITRE ATT&CK","CIS Benchmarks",
+        "Enterprise IT Governance","IT Consulting","Business Continuity",
+        "AI Governance","Microsoft Cloud Solution Provider"
+      ],
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "name": "Microsoft Cloud Solution Provider (CSP)",
+        "credentialCategory": "Professional Certification"
+      },
+      "author": [
+        {"@type":"TechArticle","name":"How We Built Houston Alert — A Real-Time City Warning System","url":"https://devops.houstonalert.com","datePublished":"2026-04-15"},
+        {"@type":"TechArticle","name":"Why We Moved a Regional Broadcasting Company Off Amazon EC2 — and Why Microsoft Azure Won","url":"https://trust-lionel.com/posts/cloud-migration","datePublished":"2026-06-16"},
+        {"@type":"TechArticle","name":"When Microsoft's Own Email Becomes the Weapon","url":"https://trust-lionel.com/posts/microsoft-notification-abuse","datePublished":"2026-05-22"},
+        {"@type":"TechArticle","name":"Three Questions Every CEO and Board Should Be Able to Answer","url":"https://trust-lionel.com/posts/three-questions","datePublished":"2026-05-17"}
+      ],
+      "maintainer": [
+        {"@type":"SoftwareSourceCode","name":"Infrastructure Placement Framework","url":"https://framework.4thandbailey.com","codeRepository":"https://github.com/4thandBailey/infrastructure-placement-framework","license":"https://creativecommons.org/licenses/by/4.0/"},
+        {"@type":"SoftwareApplication","name":"Houston Alert","url":"https://houstonalert.com","applicationCategory":"PublicSafetyApplication","operatingSystem":"Web, PWA"},
+        {"@type":"SoftwareSourceCode","name":"Shopify \u2194 Sage BusinessWorks Middleware Agent","url":"https://github.com/4thandBailey/shopify-bw-agent","codeRepository":"https://github.com/4thandBailey/shopify-bw-agent"},
+        {"@type":"SoftwareApplication","name":"MacSysTools","url":"https://github.com/trust-lionel/macsystools","applicationCategory":"DeveloperApplication","operatingSystem":"macOS"}
+      ]
+    })}</script>
+  </head>
+  <body class="flex flex-col">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-543DS8T7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <Header />
+    <div class="grow flex">
+      <main class="relative border-x border-border/50 global-layout-width mx-auto grow min-w-0">
+        <slot />
+      </main>
+    </div>
+    <Footer />
+    <div
+      class="safari-hidden pointer-events-none bg-white dark:bg-black fixed z-50 bottom-0 left-0 h-28 [mask-image:linear-gradient(transparent,#000000)] w-full"
+    >
+    </div>
+  </body>
+</html>

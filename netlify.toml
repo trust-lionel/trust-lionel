@@ -1,0 +1,136 @@
+# =============================================================
+# netlify.toml — trust-lionel.com
+# Lionel Mosley | ahr-ki-tekt Design Journal
+# Litos theme / Astro static site deployment on Netlify
+# =============================================================
+# Replaces the existing Jekyll-era netlify.toml entirely.
+# Drop this file at the root of your Litos project directory.
+# =============================================================
+
+# ── BUILD SETTINGS ───────────────────────────────────────────
+[build]
+  # pnpm is the package manager Litos uses by default
+  command         = "pnpm run build"
+  publish         = "dist"
+
+  [build.environment]
+    # Pin Node.js to a version compatible with Astro v6
+    # Astro v6 requires Node 18.17.1 or higher
+    NODE_VERSION  = "20"
+    # Tell Netlify to use pnpm instead of npm
+    NPM_FLAGS     = "--version"  # suppresses npm fallback warning
+
+# ── PNPM SUPPORT ─────────────────────────────────────────────
+# Netlify detects pnpm from the lockfile (pnpm-lock.yaml)
+# and installs it automatically. No additional config needed.
+
+# ── REDIRECTS ────────────────────────────────────────────────
+# Force HTTPS — redirect all HTTP traffic to HTTPS
+[[redirects]]
+  from   = "http://trust-lionel.com/*"
+  to     = "https://trust-lionel.com/:splat"
+  status = 301
+  force  = true
+
+# Redirect www to apex domain
+[[redirects]]
+  from   = "https://www.trust-lionel.com/*"
+  to     = "https://trust-lionel.com/:splat"
+  status = 301
+  force  = true
+
+# ── HEADERS ──────────────────────────────────────────────────
+# Security headers applied to all pages
+[[headers]]
+  for = "/*"
+
+  [headers.values]
+    # Prevent clickjacking
+    X-Frame-Options = "SAMEORIGIN"
+
+    # Prevent MIME type sniffing
+    X-Content-Type-Options = "nosniff"
+
+    # Control referrer information sent to third parties
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # Permissions policy — disable unused browser features
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+    # Content Security Policy
+    # Allows: self, Unsplash images (for post covers), Google Tag Manager,
+    # Umami Analytics (Railway), GitHub avatar CDN, and Google Fonts if added.
+    # Tighten further once your image hosting is finalized.
+    Content-Security-Policy = """
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://umami-production-f3f3.up.railway.app https://events.vercount.one;
+      style-src 'self' 'unsafe-inline';
+      img-src 'self' data: https://images.unsplash.com https://avatars.githubusercontent.com https://www.google.com https://github.githubassets.com;
+      connect-src 'self' https://umami-production-f3f3.up.railway.app https://api.github.com;
+      font-src 'self';
+      frame-src 'none';
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+    """
+
+    # HSTS — tell browsers to always use HTTPS for this domain
+    # max-age is 1 year (31536000 seconds)
+    # Remove includeSubDomains if you have subdomains on HTTP
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+# Cache static assets aggressively — Astro hashes filenames on build
+[[headers]]
+  for = "/_astro/*"
+
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache fonts
+[[headers]]
+  for = "/fonts/*"
+
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Do not cache HTML pages — always serve fresh
+[[headers]]
+  for = "/*.html"
+
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Do not cache the sitemap or robots.txt
+[[headers]]
+  for = "/sitemap*.xml"
+
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/robots.txt"
+
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# ── ENVIRONMENT VARIABLES ────────────────────────────────────
+# Do NOT store secrets in this file.
+# Set the following in Netlify UI → Site Settings → Environment Variables:
+#
+#   PUBLIC_GITHUB_CLIENT_ID      — Gitalk OAuth App Client ID
+#   PUBLIC_GITHUB_CLIENT_SECRET  — Gitalk OAuth App Client Secret
+#
+# These are only needed if you enable the Gitalk comment system.
+# COMMENT_CONFIG.enabled is currently set to false in src/config.ts.
+
+# ── NOTES ────────────────────────────────────────────────────
+# 1. Astro generates the sitemap at /sitemap-index.xml automatically
+#    when SITE.website = 'https://trust-lionel.com/' in src/config.ts.
+#
+# 2. The Content-Security-Policy above includes Unsplash as an img-src
+#    because your current post covers are Unsplash CDN URLs.
+#    Once you migrate images to local /public/ storage, remove
+#    https://images.unsplash.com from img-src and tighten the policy.
+#
+# 3. vercount.one is included in script-src for the Litos view counter.
+#    Remove it from script-src if you disable that feature.

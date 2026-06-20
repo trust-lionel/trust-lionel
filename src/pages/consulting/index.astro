@@ -1,0 +1,147 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import PageTitle from '~/components/base/PageTitle.astro'
+import SectionDivider from '~/components/base/SectionDivider.astro'
+
+const title = 'Consulting'
+const description = 'Full-service IT consulting from Lionel Mosley and 4TH AND BAILEY — cloud services, cybersecurity, infrastructure governance, and advisory retainers.'
+const introduce = 'From cloud migration to enterprise security governance — 4TH AND BAILEY designs, builds, and operates the technology infrastructure that organizations depend on.'
+---
+
+<Layout {title} {description}>
+  <div class="relative z-[1] py-8 pb-10 px-6 sm:px-8">
+    <PageTitle {title} {introduce} />
+
+    <div class="mt-12 flex flex-col gap-8">
+
+      <div class="border border-border/50 rounded-sm p-6">
+        <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Cloud Services</div>
+        <h2 class="text-lg font-semibold text-foreground mb-3">Cloud Architecture & Migration</h2>
+        <p class="text-sm text-muted-foreground leading-relaxed">
+          Cloud architecture, migration, and operations across on-premises, AWS, Google Workspace,
+          Microsoft Azure, and Microsoft 365 — hybrid and multi-cloud environments included. IaaS,
+          PaaS, and SaaS strategy built around cost optimization, performance, and vendor portability
+          so your organization is never locked into a platform that stops serving you.
+        </p>
+        <div class="mt-4">
+          <a href="https://m365cloudpro.com/tco/" target="_blank" rel="noopener noreferrer"
+            class="text-sm text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">
+            Run the Microsoft 365 TCO Calculator →
+          </a>
+        </div>
+      </div>
+
+      <div class="border border-border/50 rounded-sm p-6">
+        <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Cybersecurity</div>
+        <h2 class="text-lg font-semibold text-foreground mb-3">Security Posture & Governance</h2>
+        <p class="text-sm text-muted-foreground leading-relaxed">
+          Security posture assessment, hardening, and governance aligned to CISA SCuBA, NIST SP 800-53,
+          MITRE ATT&CK, and CIS Benchmarks. Microsoft 365 Defender configuration, Exchange Online
+          hardening, and incident response readiness for organizations that cannot afford to find out
+          they were unprepared after the fact.
+        </p>
+      </div>
+
+      <div class="border border-border/50 rounded-sm p-6">
+        <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Infrastructure</div>
+        <h2 class="text-lg font-semibold text-foreground mb-3">Enterprise Infrastructure Design</h2>
+        <p class="text-sm text-muted-foreground leading-relaxed">
+          Enterprise infrastructure design and governance using the
+          <a href="https://framework.4thandbailey.com" target="_blank" rel="noopener noreferrer"
+            class="text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">
+            Infrastructure Placement Framework
+          </a>
+          — the open-source enterprise IT framework built by 4TH AND BAILEY. Network architecture,
+          server infrastructure, and hybrid cloud integration aligned to the frameworks that hold up
+          under financial, regulatory, and operational scrutiny.
+        </p>
+      </div>
+
+      <div class="border border-border/50 rounded-sm p-6">
+        <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">IT Consulting</div>
+        <h2 class="text-lg font-semibold text-foreground mb-3">Advisory & Fractional CTO</h2>
+        <p class="text-sm text-muted-foreground leading-relaxed">
+          Advisory and fractional CTO services for organizations navigating technology decisions,
+          vendor selection, compliance requirements, and digital transformation. Structured engagements
+          from one-time assessments to ongoing advisory retainers — serving SMBs to large enterprises
+          nationwide.
+        </p>
+      </div>
+
+    </div>
+
+    <SectionDivider />
+
+    <div class="py-8">
+      <h2 class="text-2xl sm:text-3xl tracking-tight mb-1">Thought Leadership</h2>
+      <p class="text-muted-foreground text-sm mb-8">
+        Published frameworks, analysis, and recognition from Lionel Mosley and 4TH AND BAILEY.
+      </p>
+
+      <div class="flex flex-col gap-6">
+
+        <div class="border-b border-border/50 pb-6">
+          <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Published Work</div>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Original analysis and frameworks published at trust-lionel.com — covering CISA SCuBA
+            implementation, Microsoft 365 security, AI governance, and business continuity. Written
+            for CISOs, IT directors, and compliance officers making decisions that determine whether
+            their organizations survive the next disruption.
+          </p>
+        </div>
+
+        <div class="border-b border-border/50 pb-6">
+          <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Open Source</div>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Creator and maintainer of the
+            <a href="https://framework.4thandbailey.com" target="_blank" rel="noopener noreferrer"
+              class="text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">
+              Infrastructure Placement Framework
+            </a>
+            — a vendor-neutral, NIST-aligned enterprise IT governance framework available under
+            Creative Commons Attribution 4.0. Built for organizations that have outgrown commodity IT.
+          </p>
+        </div>
+
+        <div class="border-b border-border/50 pb-6">
+          <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Microsoft CSP</div>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Recognized Microsoft Cloud Solution Provider serving organizations across the United States
+            with Microsoft 365, Azure, and enterprise security deployments aligned to federal security
+            baselines.
+          </p>
+        </div>
+
+        <div class="pb-6">
+          <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">DevOps Case Study</div>
+          <p class="text-sm text-muted-foreground leading-relaxed mb-3">
+            A documented real-world infrastructure build — from architecture decisions to deployment —
+            published as a reference for practitioners building production-grade systems.
+          </p>
+          <a href="https://devops.houstonalert.com" target="_blank" rel="noopener noreferrer"
+            class="text-sm text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">
+            How We Built Houston Alert — A Real-Time City Warning System →
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <SectionDivider />
+
+    <div class="py-8 flex flex-col gap-4">
+      <h2 class="text-2xl sm:text-3xl tracking-tight">Let's architect something great</h2>
+      <p class="text-sm text-muted-foreground leading-relaxed max-w-xl">
+        Join organizations nationwide already working with Lionel Mosley and 4TH AND BAILEY
+        on cloud services, cybersecurity, and infrastructure governance.
+      </p>
+      <div>
+        <a href="https://4nb.cloud/lmosley" target="_blank" rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 text-sm font-medium text-foreground border border-border px-5 py-2.5 rounded-sm hover:bg-accent transition-colors">
+          Schedule an Advisory Consultation →
+        </a>
+      </div>
+    </div>
+
+  </div>
+</Layout>

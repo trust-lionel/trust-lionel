@@ -1,0 +1,111 @@
+---
+import { SITE, SKILLSSHOWCASE_CONFIG, SOCIAL_LINKS } from '~/config.ts'
+import { GITHUB_CONFIG } from '~/config.ts'
+import Layout from '~/layouts/Layout.astro'
+import SectionDivider from '~/components/base/SectionDivider.astro'
+import GithubContributions from '~/components/base/GithubContributions.tsx'
+import SocialLink from '~/components/base/SocialLink.astro'
+import SkillsShowcase from '~/components/base/SkillsShowcase.astro'
+
+const { ENABLED, GITHUB_USERNAME, TOOLTIP_ENABLED } = GITHUB_CONFIG
+const { SKILLS_ENABLED, SKILLS_DATA } = SKILLSSHOWCASE_CONFIG
+
+const featuredPosts = [
+  {
+    title: 'Why We Moved a Regional Broadcasting Company Off Amazon EC2 — and Why Microsoft Azure Won',
+    url: '/posts/cloud-migration',
+    date: 'June 16, 2026',
+  },
+  {
+    title: "When Microsoft's Own Email Becomes the Weapon",
+    url: '/posts/microsoft-notification-abuse',
+    date: 'May 22, 2026',
+  },
+  {
+    title: 'Three Questions Every CEO and Board Should Be Able to Answer',
+    url: '/posts/three-questions',
+    date: 'May 17, 2026',
+  },
+]
+---
+
+<Layout title="Readme" description={SITE.description}>
+  <div class="relative z-[1]">
+    <div class="py-8 pb-10 px-6 sm:px-8">
+      <h1 class="flex flex-col gap-2">
+        <span class="text-4xl sm:text-5xl tracking-tight" style="color: #0088cc;">LIONEL MOSLEY</span>
+        <span class="text-muted-foreground font-light text-xl sm:text-2xl block tracking-wide text-balance">
+          ahr-ki-tekt — IT Consultant & Innovative Thought Leader
+        </span>
+      </h1>
+      <div class="pro text-muted-foreground text-pretty">
+        <p>
+          IT Consultant, Innovative Thought Leader, and Subject Matter Expert based in Houston, TX —
+          serving organizations nationwide through <a href="https://github.com/4thandbailey" target="_blank" rel="noopener noreferrer">4TH AND BAILEY</a>.
+          Specializing in cloud infrastructure, cybersecurity, Microsoft 365, and enterprise IT governance
+          aligned to CISA SCuBA, NIST SP 800-53, MITRE ATT&amp;CK, and CIS Benchmarks.
+        </p>
+        <p>
+          The ahr-ki-tekt Design Journal is where that work gets documented — frameworks, insights, and
+          analysis published on the open web for the organizations and practitioners who need it most.
+          <a href="/consulting">Schedule a consultation →</a>
+        </p>
+      </div>
+      <div class="mt-6 flex gap-6">
+        {
+          SOCIAL_LINKS.map((item) => {
+            return <SocialLink href={item.url} icon={item.icon} aria-label={`Link of ${item.name}`} count={item.count} label="followers" />
+          })
+        }
+      </div>
+    </div>
+    {
+      ENABLED && (
+        <>
+          <SectionDivider />
+          <div class="py-8 pb-10 px-6 max-md:px-6">
+            <div class="px-2 max-md:px-0">
+              <h2 class="text-2xl sm:text-3xl">Spotlight</h2>
+              <p class="text-muted-foreground mb-6 mt-1">GitHub contributions in the past year:</p>
+            </div>
+            <GithubContributions username={GITHUB_USERNAME} tooltipEnabled={TOOLTIP_ENABLED} client:load transition:animate="none" />
+          </div>
+        </>
+      )
+    }
+    {
+      SKILLS_ENABLED && SKILLS_DATA.length > 0 && (
+        <>
+          <SectionDivider />
+          <div class="py-8 pb-10 px-6 max-md:px-6">
+            <div class="px-2 max-md:px-0">
+              <h2 class="text-2xl sm:text-3xl tracking-tight">Skills</h2>
+              <p class="text-muted-foreground mb-6 mt-1">It's not just skills, but also tools:</p>
+            </div>
+            <SkillsShowcase skillsData={SKILLS_DATA} />
+          </div>
+        </>
+      )
+    }
+    <SectionDivider />
+    <div class="py-8 pb-10 px-6 sm:px-8">
+      <h2 class="text-2xl sm:text-3xl tracking-tight">Posts</h2>
+      <p class="text-muted-foreground mb-6 mt-1">Selected posts, worth a look.</p>
+      <div class="flex flex-col">
+        {featuredPosts.map((post, index) => (
+          <div class={`group relative block py-6 ${index < featuredPosts.length - 1 ? 'border-b border-border/60' : ''}`}>
+            <article class="relative z-1 flex flex-col gap-2 transform transition-transform duration-300 group-hover:translate-x-4">
+              <a href={post.url} class="block">
+                <div class="text-base font-semibold text-foreground leading-tight group-hover:text-primary transition-colors">
+                  {post.title}
+                </div>
+              </a>
+              <div class="text-xs text-muted-foreground">{post.date}</div>
+            </article>
+            <div class="absolute left-0 top-0 h-full w-0.5 sm:w-1 scale-y-0 bg-accent/80 transition-transform duration-300 group-hover:scale-y-100"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</Layout>
