@@ -142,7 +142,8 @@ export default function GithubContributions({ username, tooltipEnabled }: Props)
           <div key={weekIndex} className="grid grid-rows-7 gap-1">
             {week.map((contribution, dayIndex) => {
               const { date, count } = contribution
-              const formattedDate = new Date(date).toLocaleDateString('en-US', {
+              const [year, month, day] = date.split('-').map(Number)
+              const formattedDate = new Date(year, month - 1, day).toLocaleDateString('en-US', {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'long',
