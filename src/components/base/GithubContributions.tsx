@@ -112,10 +112,10 @@ export default function GithubContributions({ username, tooltipEnabled }: Props)
 
   const fetchData = useCallback(() => {
     fetchContributions(username)
-      .then(setData)
-      .then(scrollToRight)
-      .then(() => {
+      .then((data) => {
+        setData(data)
         setErrorVisible(false)
+        scrollToRight()
       })
       .catch(() => {
         setData(generateErrorContributions())
