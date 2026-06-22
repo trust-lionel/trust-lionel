@@ -1,6 +1,6 @@
 ---
 title: "Vibe Coding — How I Built My Personal Brand in One Night"
-description: "From zero GitHub presence to a fully live personal brand at trust-lionel.com — DNS configured, Jekyll powered, GA4 tracked, all while lo-fi played in the background."
+description: "From zero GitHub presence to a fully live personal brand at trust-lionel.com — DNS configured, Astro.build powered, GA4 tracked, all while lo-fi played in the background."
 pubDate: 2026-05-16
 author: "Lionel Mosley"
 tags: ["Personal Brand", "GitHub Pages", "SEO", "Open Web"]
