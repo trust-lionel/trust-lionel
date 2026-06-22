@@ -79,7 +79,7 @@ Starting from a GitHub account with no public repositories, here is what exists 
 
 ## The Takeaway
 
-I came into tonight with a domain and a vision. I left with a fully realized personal brand on the open web — built on GitHub, powered by Jekyll, scored by lo-fi, and finished before sunrise.
+I came into tonight with a domain and a vision. I left with a fully realized personal brand on the open web — built on GitHub, powered by Astro.build, scored by lo-fi, and finished before sunrise.
 
 The work was always there. It just needed the right architecture to live in.
 
