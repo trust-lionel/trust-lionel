@@ -66,6 +66,10 @@ export const FOOTER_LINKS: Link[] = [
     url: '/tags',
   },
   {
+    name: 'Events',
+    url: '/events',
+  },
+  {
     name: 'Consulting',
     url: '/consulting',
   },
