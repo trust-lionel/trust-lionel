@@ -31,7 +31,11 @@ export async function getNumPosts(size: number): Promise<CollectionEntry<'posts'
 // Get tags
 export async function getAllTags(): Promise<Record<string, number>> {
   const allPosts = await getAllPosts()
-  const tags = allPosts.flatMap((post) => post.data.tags || [])
+  const allEvents = await getCollection('events')
+  const tags = [
+    ...allPosts.flatMap((post) => post.data.tags || []),
+    ...allEvents.flatMap((event) => event.data.tags || []),
+  ]
   return tags.reduce(
     (acc, tag) => {
       acc[tag] = (acc[tag] || 0) + 1

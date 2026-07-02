@@ -62,16 +62,16 @@ export const FOOTER_LINKS: Link[] = [
     url: '/projects',
   },
   {
-    name: 'Tags',
-    url: '/tags',
+    name: 'Consulting',
+    url: '/consulting',
   },
   {
     name: 'Events',
     url: '/events',
   },
   {
-    name: 'Consulting',
-    url: '/consulting',
+    name: 'Tags',
+    url: '/tags',
   },
 ]
 
