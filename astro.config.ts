@@ -27,7 +27,7 @@ export default defineConfig({
   },
   markdown: {
     syntaxHighlight: false,
-    ...unified({
+    processor: unified({
       remarkPlugins,
       rehypePlugins,
     }),
