@@ -96,7 +96,9 @@ If one of your locations lost internet connectivity right now — not because of
 
 The answers to those questions define the gap between where your organization is and where it needs to be.
 
-A managed network infrastructure engagement starts with visibility. If we can see the environment, we can manage it. If we can manage it, we can protect it. [Schedule a consultation →](https://4nb.cloud/lmosley)
+A managed network infrastructure engagement starts with visibility. If we can see the environment, we can manage it. If we can manage it, we can protect it.
+
+[Schedule a consultation →](https://4nb.cloud/lmosley)
 
 ---
 
