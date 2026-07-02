@@ -1,0 +1,140 @@
+$ astro check && astro build
+[astro] `markdown.remarkPlugins`, `markdown.rehypePlugins`, and `markdown.remarkRehype` are deprecated. Pass them to `unified({...})` from `@astrojs/markdown-remark` directly instead.
+13:55:46 [vite] Re-optimizing dependencies because lockfile has changed
+13:55:48 [content] Syncing content
+13:55:48 [content] Astro config changed
+13:55:48 [content] Astro version changed
+13:55:48 [content] Clearing content store
+13:55:50 [content] Synced content
+13:55:50 [types] Generated 3.85s
+13:55:50 [check] Getting diagnostics for Astro files in /Users/lmosley/Documents/GitHub/trust-lionel...
+[96msrc/content.config.ts[0m:[93m70[0m:[93m38[0m - [93mwarning[0m[90m ts(6385): [0m'(params?: string | { abort?: boolean | undefined; pattern?: RegExp | undefined; hostname?: RegExp | undefined; protocol?: RegExp | undefined; normalize?: boolean | undefined; error?: string | ... 1 more ... | undefined; message?: string | undefined; } | undefined): ZodString' is deprecated.
+
+[7m70[0m     eventRegistrationUrl: z.string().url(),
+[7m  [0m [93m                                     ~~~[0m
+[96msrc/content.config.ts[0m:[93m69[0m:[93m30[0m - [93mwarning[0m[90m ts(6385): [0m'(params?: string | { abort?: boolean | undefined; pattern?: RegExp | undefined; hostname?: RegExp | undefined; protocol?: RegExp | undefined; normalize?: boolean | undefined; error?: string | ... 1 more ... | undefined; message?: string | undefined; } | undefined): ZodString' is deprecated.
+
+[7m69[0m     eventHostUrl: z.string().url(),
+[7m  [0m [93m                             ~~~[0m
+[96msrc/content.config.ts[0m:[93m21[0m:[93m45[0m - [93mwarning[0m[90m ts(6385): [0m'(params?: string | { abort?: boolean | undefined; pattern?: RegExp | undefined; hostname?: RegExp | undefined; protocol?: RegExp | undefined; normalize?: boolean | undefined; error?: string | ... 1 more ... | undefined; message?: string | undefined; } | undefined): ZodString' is deprecated.
+
+[7m21[0m         cover: z.union([image(), z.string().url()]).optional(),
+[7m  [0m [93m                                            ~~~[0m
+
+Result (75 files): 
+- 0 errors
+- 0 warnings
+- 3 hints
+
+[astro] `markdown.remarkPlugins`, `markdown.rehypePlugins`, and `markdown.remarkRehype` are deprecated. Pass them to `unified({...})` from `@astrojs/markdown-remark` directly instead.
+13:56:05 [content] Syncing content
+13:56:05 [content] Synced content
+13:56:05 [types] Generated 750ms
+13:56:05 [build] output: "static"
+13:56:05 [build] mode: "static"
+13:56:05 [build] directory: /Users/lmosley/Documents/GitHub/trust-lionel/dist/
+13:56:05 [build] Collecting build info...
+13:56:05 [build] ✓ Completed in 930ms.
+13:56:05 [build] Building static entrypoints...
+13:56:07 [vite] ✓ built in 1.57s
+13:56:07 [vite] ✓ built in 684ms
+13:56:07 [build] Rearranging server assets...
+
+ generating static routes 
+13:56:08   ├─ /404.html (+89ms) 
+13:56:08   ├─ /atom.xml (+341ms) 
+13:56:09   ├─ /consulting/index.html (+7ms) 
+13:56:09   ├─ /events/index.html (+8ms) 
+13:56:09   ├─ /events/cmet-workshop-july-2026/index.html (+5ms) 
+13:56:09   ├─ /posts/cloud-migration/index.html图像文件不存在: /Users/lmosley/Documents/GitHub/trust-lionel/https:/images.unsplash.com/photo-1757436382135-5cb8e5cbcda5?w=1400&q=80&auto=format&fit=crop
+ (+9ms) 
+13:56:09   ├─ /posts/microsoft-notification-abuse/index.html图像文件不存在: /Users/lmosley/Documents/GitHub/trust-lionel/https:/images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=80&auto=format&fit=crop
+ (+9ms) 
+13:56:09   ├─ /posts/three-questions/index.html图像文件不存在: /Users/lmosley/Documents/GitHub/trust-lionel/https:/images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=75&auto=format&fit=crop
+ (+7ms) 
+13:56:09   ├─ /posts/vibe-coding/index.html图像文件不存在: /Users/lmosley/Documents/GitHub/trust-lionel/https:/images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=75&auto=format&fit=crop
+ (+5ms) 
+13:56:09   ├─ /posts/macsystools/index.html图像文件不存在: /Users/lmosley/Documents/GitHub/trust-lionel/https:/images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=75&auto=format&fit=crop
+ (+6ms) 
+13:56:09   ├─ /posts/index.html (+5ms) 
+13:56:09   ├─ /projects/index.html (+28ms) 
+13:56:09   ├─ /rss.xml (+168ms) 
+13:56:09   ├─ /tags/Cloud Migration/index.html (+4ms) 
+13:56:09   ├─ /tags/Microsoft Azure/index.html (+3ms) 
+13:56:09   ├─ /tags/Amazon AWS/index.html (+4ms) 
+13:56:09   ├─ /tags/Microsoft 365/index.html (+4ms) 
+13:56:09   ├─ /tags/Business Continuity/index.html (+4ms) 
+13:56:09   ├─ /tags/Cybersecurity/index.html (+5ms) 
+13:56:09   ├─ /tags/MITRE ATT&CK/index.html (+4ms) 
+13:56:09   ├─ /tags/NIST SP 800-53/index.html (+4ms) 
+13:56:09   ├─ /tags/CISA SCuBA/index.html (+5ms) 
+13:56:09   ├─ /tags/Cyber Resilience/index.html (+3ms) 
+13:56:09   ├─ /tags/AI Governance/index.html (+4ms) 
+13:56:09   ├─ /tags/BCDR/index.html (+3ms) 
+13:56:09   ├─ /tags/NIST/index.html (+4ms) 
+13:56:09   ├─ /tags/Personal Brand/index.html (+3ms) 
+13:56:09   ├─ /tags/GitHub Pages/index.html (+3ms) 
+13:56:09   ├─ /tags/SEO/index.html (+3ms) 
+13:56:09   ├─ /tags/Open Web/index.html (+3ms) 
+13:56:09   ├─ /tags/macOS/index.html (+3ms) 
+13:56:09   ├─ /tags/SwiftUI/index.html (+3ms) 
+13:56:09   ├─ /tags/Developer Tools/index.html (+5ms) 
+13:56:09   ├─ /tags/Open Source/index.html (+4ms) 
+13:56:09   ├─ /tags/Website Strategy/index.html (+3ms) 
+13:56:09   ├─ /tags/Entrepreneurship/index.html (+3ms) 
+13:56:09   ├─ /tags/Digital Transformation/index.html (+3ms) 
+13:56:09   ├─ /tags/Small Business/index.html (+4ms) 
+13:56:09   ├─ /tags/index.html (+8ms) 
+13:56:09   ├─ /index.html (+170ms) 
+13:56:09 ✓ Completed in 1.59s.
+
+ generating optimized images 
+13:56:09   ▶ /_astro/photo-1757436382135-5cb8e5cbcda5_Z1xxG5.webp (reused cache entry) (+3ms) (1/15)
+13:56:09   ▶ /_astro/photo-1451187580459-43490279c0fa_1p3ddn.webp (reused cache entry) (+4ms) (2/15)
+13:56:09   ▶ /_astro/photo-1517694712202-14dd9538aa97_Z1wm3ib.webp (reused cache entry) (+4ms) (3/15)
+13:56:09   ▶ /_astro/photo-1558494949-ef010cbdcc31_yfmAP.webp (reused cache entry) (+7ms) (4/15)
+13:56:09   ▶ /_astro/photo-1611532736597-de2d4265fba3_1LAUr5.webp (reused cache entry) (+7ms) (5/15)
+13:56:09   ▶ /_astro/houston-alert.CWj7O53n_gGsDr.webp (reused cache entry) (+7ms) (6/15)
+13:56:09   ▶ /_astro/infrastructure-placement-framework.Bncr8XZf_1Ufabj.webp (reused cache entry) (+8ms) (7/15)
+13:56:09   ▶ /_astro/shopify-bw-agent.pZMvMml5_2f7Eze.webp (reused cache entry) (+6ms) (8/15)
+13:56:09   ▶ /_astro/macsystools.DwlHB55o_ZUsDdC.webp (reused cache entry) (+7ms) (9/15)
+13:56:09   ▶ /_astro/infrastructure-placement-framework.Bncr8XZf_Z1TdOJQ.webp (reused cache entry) (+3ms) (10/15)
+13:56:09   ▶ /_astro/houston-alert.CWj7O53n_1rHSKh.webp (reused cache entry) (+8ms) (11/15)
+13:56:09   ▶ /_astro/shopify-bw-agent.pZMvMml5_Ntx9F.webp (reused cache entry) (+6ms) (12/15)
+13:56:09   ▶ /_astro/macsystools.DwlHB55o_5rsT3.webp (reused cache entry) (+6ms) (13/15)
+13:56:09   ▶ /_astro/favicon.CK7OZb4Y_9x5v8.svg (before: 81kB, after: 81kB) (+19ms) (14/15)
+13:56:09   ▶ /_astro/favicon.CK7OZb4Y_Z1F4Jij.svg (before: 81kB, after: 81kB) (+2ms) (15/15)
+13:56:09 ✓ Completed in 22ms.
+
+13:56:09 [build] ✓ Completed in 3.94s.
+13:56:09 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+[32mastro-robots-txt:[0m `robots.txt` is created.
+
+13:56:09 [build] 38 page(s) built in 4.92s
+13:56:09 [build] Complete!
+$ pagefind --site dist
+
+Running Pagefind v1.5.0 (Extended)
+Running from: "/Users/lmosley/Documents/GitHub/trust-lionel"
+Source:       "dist"
+Output:       "dist/pagefind"
+
+[Walking source directory]
+Found 38 files matching **/*.{html}
+
+[Parsing files]
+Found a data-pagefind-body element on the site.
+↳ Ignoring pages without this tag.
+
+[Reading languages]
+Discovered 1 language: en
+
+[Building search indexes]
+Total: 
+  Indexed 1 language
+  Indexed 5 pages
+  Indexed 1412 words
+  Indexed 0 filters
+  Indexed 0 sorts
+
+Finished in 0.057 seconds
