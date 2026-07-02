@@ -55,11 +55,14 @@ const projects = defineCollection({
 
 
 const events = defineCollection({
-  type: 'content',
+  loader: glob({
+    pattern: '**/*.{md,mdx}',
+    base: './src/content/events',
+  }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    eventDate: z.date(),
+    eventDate: z.coerce.date(),
     eventTime: z.string(),
     eventFormat: z.enum(['Virtual', 'In-Person', 'Hybrid']),
     eventHost: z.string(),
