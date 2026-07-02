@@ -11,7 +11,7 @@ import { SITE } from './src/config'
 
 export default defineConfig({
   image: {
-    domains: ['images.unsplash.com'],
+    domains: ['images.unsplash.com', 'plus.unsplash.com'],
   },
   site: SITE.website,
   base: SITE.base,
