@@ -6,7 +6,7 @@ eventTime: "5:00 PM CST / 6:00 PM EST"
 eventFormat: "Virtual"
 eventHost: "CMET Nation"
 eventHostUrl: "https://tcmet.org/"
-eventRegistrationUrl: "https://www.eventbrite.ca/o/cmet-66138701643"
+eventRegistrationUrl: "https://api.marketinginnovationsautomation.com/payment-link/6a288a7771a0aa761e463e6d"
 eventStatus: "upcoming"
 tags: ["SEO", "Personal Brand", "AI Governance", "Open Web", "Website Strategy", "Entrepreneurship", "Digital Transformation", "Small Business"]
 featured: true
