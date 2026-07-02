@@ -53,4 +53,22 @@ const projects = defineCollection({
     }),
 })
 
-export const collections = { posts, projects }
+
+const events = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    eventDate: z.date(),
+    eventTime: z.string(),
+    eventFormat: z.enum(['Virtual', 'In-Person', 'Hybrid']),
+    eventHost: z.string(),
+    eventHostUrl: z.string().url(),
+    eventRegistrationUrl: z.string().url(),
+    eventStatus: z.enum(['upcoming', 'past']),
+    tags: z.array(z.string()).optional(),
+    featured: z.boolean().optional(),
+  }),
+})
+
+export const collections = { posts, projects, events }

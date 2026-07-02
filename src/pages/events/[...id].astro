@@ -1,0 +1,168 @@
+---
+import { SITE } from '~/config.ts'
+import Layout from '~/layouts/Layout.astro'
+import SectionDivider from '~/components/base/SectionDivider.astro'
+import { getCollection, render } from 'astro:content'
+
+export async function getStaticPaths() {
+  const events = await getCollection('events')
+  return events.map((event) => ({
+    params: { id: event.id },
+    props: { event },
+  }))
+}
+
+const { event } = Astro.props
+const { data: frontmatter } = event
+const { Content } = await render(event)
+
+const canonicalUrl = `${SITE.website}events/${event.id}`
+
+function formatEventDate(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+}
+
+const eventSchema = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "startDate": frontmatter.eventDate.toISOString().split('T')[0],
+  "eventStatus": frontmatter.eventStatus === 'upcoming'
+    ? "https://schema.org/EventScheduled"
+    : "https://schema.org/EventCompleted",
+  "eventAttendanceMode": frontmatter.eventFormat === 'Virtual'
+    ? "https://schema.org/OnlineEventAttendanceMode"
+    : frontmatter.eventFormat === 'In-Person'
+    ? "https://schema.org/OfflineEventAttendanceMode"
+    : "https://schema.org/MixedEventAttendanceMode",
+  "location": frontmatter.eventFormat === 'Virtual' ? {
+    "@type": "VirtualLocation",
+    "url": frontmatter.eventRegistrationUrl,
+  } : {
+    "@type": "Place",
+    "name": frontmatter.eventHost,
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": frontmatter.eventHost,
+    "url": frontmatter.eventHostUrl,
+  },
+  "performer": {
+    "@type": "Person",
+    "name": "Lionel Mosley",
+    "url": "https://trust-lionel.com",
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": frontmatter.eventRegistrationUrl,
+    "availability": "https://schema.org/InStock",
+  },
+  "url": canonicalUrl,
+}
+---
+
+<Layout
+  title={frontmatter.title}
+  description={frontmatter.description}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(eventSchema)} />
+
+  <div class="relative z-[1]">
+    <!-- Back link -->
+    <div class="px-6 sm:px-8 pt-6">
+      <a href="/events" class="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors">
+        <span class="icon-[material-symbols--arrow-back] size-4"></span>
+        Back to Events
+      </a>
+    </div>
+
+    <!-- Event header -->
+    <div class="py-8 pb-6 px-6 sm:px-8">
+      <div class="flex items-center gap-2 mb-4">
+        {frontmatter.eventStatus === 'upcoming' ? (
+          <span class="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-primary/10 text-primary">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            Upcoming
+          </span>
+        ) : (
+          <span class="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-muted text-muted-foreground">
+            Past Event
+          </span>
+        )}
+        <span class="text-xs text-muted-foreground">{frontmatter.eventFormat}</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight leading-tight mb-4">
+        {frontmatter.title}
+      </h1>
+
+      <p class="text-muted-foreground text-lg font-light leading-relaxed mb-6">
+        {frontmatter.description}
+      </p>
+
+      <!-- Event meta -->
+      <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 p-4 rounded-lg border border-border/60 bg-accent/20 text-sm text-muted-foreground mb-6">
+        <div class="flex items-center gap-2">
+          <span class="icon-[material-symbols--calendar-month] size-4 text-primary"></span>
+          <span>{formatEventDate(frontmatter.eventDate)}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="icon-[material-symbols--schedule] size-4 text-primary"></span>
+          <span>{frontmatter.eventTime}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="icon-[material-symbols--location-on] size-4 text-primary"></span>
+          <a href={frontmatter.eventHostUrl} target="_blank" rel="noopener noreferrer" class="hover:text-foreground transition-colors">
+            {frontmatter.eventHost}
+          </a>
+        </div>
+      </div>
+
+      <!-- Registration CTA -->
+      {frontmatter.eventStatus === 'upcoming' && (
+        <a
+          href={frontmatter.eventRegistrationUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors"
+        >
+          Reserve Your Seat
+          <span class="icon-[material-symbols--open-in-new] size-4"></span>
+        </a>
+      )}
+    </div>
+
+    <SectionDivider />
+
+    <!-- Event content -->
+    <div class="py-8 pb-10 px-6 sm:px-8">
+      <div class="markdown prose prose-neutral dark:prose-invert max-w-none">
+        <Content />
+      </div>
+    </div>
+
+    {frontmatter.tags && frontmatter.tags.length > 0 && (
+      <>
+        <SectionDivider />
+        <div class="py-6 px-6 sm:px-8">
+          <div class="flex flex-wrap gap-2">
+            {frontmatter.tags.map((tag: string) => (
+              <a
+                href={`/tags/${tag}`}
+                class="text-xs px-3 py-1.5 rounded-full border border-border/60 text-muted-foreground hover:text-foreground hover:border-border transition-colors"
+              >
+                #{tag}
+              </a>
+            ))}
+          </div>
+        </div>
+      </>
+    )}
+  </div>
+</Layout>

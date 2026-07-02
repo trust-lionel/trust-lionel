@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>trust-lionel.com — Platform Runbook | Lionel Mosley | ahr-ki-tekt</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue:        #0C447C;
+    --blue-mid:    #185FA5;
+    --blue-light:  #E6F1FB;
+    --blue-border: #B5D4F4;
+    --green:       #0F6E56;
+    --green-light: #E1F5EE;
+    --green-dark:  #085041;
+    --amber:       #BA7517;
+    --amber-light: #FAEEDA;
+    --amber-dark:  #633806;
+    --gray-bg:     #F2F1ED;
+    --gray-border: #E0DFD8;
+    --text-primary:   #1a1a1a;
+    --text-secondary: #5c5c5c;
+    --text-muted:     #8a8a8a;
+    --white: #ffffff;
+  }
+
+  html { font-size: 16px; }
+  body {
+    font-family: 'DM Sans', 'Segoe UI', Arial, sans-serif;
+    background: var(--gray-bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    padding: 40px 20px 80px;
+  }
+
+  .page { max-width: 960px; margin: 0 auto; }
+
+  /* ── COVER ── */
+  .cover {
+    background: var(--blue);
+    color: #fff;
+    border-radius: 16px;
+    padding: 40px 48px 36px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.05);
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 200px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.04);
+  }
+  .cover-eyebrow {
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    opacity: .6;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .cover h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .cover-sub {
+    font-size: 14px;
+    opacity: .65;
+    margin-bottom: 28px;
+  }
+  .cover-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    border-top: 1px solid rgba(255,255,255,.15);
+    padding-top: 20px;
+  }
+  .cover-meta-item { font-size: 13px; opacity: .8; }
+  .cover-meta-item strong {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    opacity: .55;
+    font-weight: 500;
+    margin-bottom: 3px;
+  }
+
+  /* ── TOC ── */
+  .toc-card {
+    background: var(--white);
+    border: 1px solid var(--gray-border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+  }
+  .toc-card h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    font-weight: 600;
+    color: var(--blue);
+    margin-bottom: 14px;
+  }
+  .toc-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 32px;
+    list-style: none;
+  }
+  .toc-list li a {
+    font-size: 13px;
+    color: var(--blue-mid);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+  }
+  .toc-list li a:hover { color: var(--blue); }
+  .toc-num {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--blue-light);
+    color: var(--blue);
+    font-size: 10px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 36px 0 14px;
+  }
+  .section-num {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--blue);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-title { font-size: 17px; font-weight: 600; color: var(--text-primary); }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--gray-border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+  }
+  .card-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: var(--blue);
+  }
+  .card-label.amber { color: var(--amber); }
+  .card-label.green { color: var(--green); }
+
+  /* ── TALKING POINTS ── */
+  .talking-point {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--gray-bg);
+    align-items: flex-start;
+  }
+  .talking-point:last-child { border-bottom: none; padding-bottom: 0; }
+  .tp-icon {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    background: var(--blue-light);
+    color: var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 13px;
+    margin-top: 1px;
+    font-weight: 700;
+  }
+  .tp-icon.amber { background: var(--amber-light); color: var(--amber); }
+  .tp-icon.green { background: var(--green-light); color: var(--green); }
+  .tp-text { font-size: 14px; color: var(--text-primary); line-height: 1.6; }
+  .tp-text strong { font-weight: 600; display: block; margin-bottom: 3px; font-size: 14px; }
+  .tp-sub { font-size: 12.5px; color: var(--text-secondary); margin-top: 5px; line-height: 1.55; }
+
+  /* ── TABLES ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 0;
+  }
+  .data-table th {
+    background: var(--blue);
+    color: #fff;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    padding: 9px 14px;
+    text-align: left;
+  }
+  .data-table th:first-child { border-radius: 6px 0 0 0; }
+  .data-table th:last-child { border-radius: 0 6px 0 0; }
+  .data-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--gray-bg);
+    color: var(--text-primary);
+    vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:nth-child(even) td { background: #FAFAF8; }
+  .data-table code {
+    background: var(--blue-light);
+    color: var(--blue);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+  }
+
+  /* ── CODE BLOCKS ── */
+  .code-block {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12.5px;
+    line-height: 1.7;
+    overflow-x: auto;
+    margin: 10px 0 4px;
+    white-space: pre;
+  }
+  .code-block .comment { color: #64748b; }
+  .code-block .key { color: #93c5fd; }
+  .code-block .val { color: #86efac; }
+  .code-block .str { color: #fcd34d; }
+
+  /* ── INLINE CODE ── */
+  code {
+    background: var(--blue-light);
+    color: var(--blue);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+  }
+  .code-block code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  /* ── CTA / INFO BOX ── */
+  .info-box {
+    background: var(--blue-light);
+    border: 1px solid var(--blue-border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+  }
+  .info-box h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+  .info-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(21,94,164,.15);
+    font-size: 13.5px;
+    color: var(--blue-mid);
+    line-height: 1.5;
+  }
+  .info-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .info-icon { flex-shrink: 0; margin-top: 1px; }
+
+  /* ── CHANGELOG TABLE ── */
+  .changelog-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .changelog-table th {
+    background: var(--blue);
+    color: #fff;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    font-weight: 600;
+    padding: 9px 14px;
+    text-align: left;
+  }
+  .changelog-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--gray-bg);
+    vertical-align: top;
+    color: var(--text-primary);
+  }
+  .changelog-table tr:last-child td { border-bottom: none; }
+  .version-badge {
+    background: var(--blue-light);
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 99px;
+    display: inline-block;
+  }
+
+  /* ── BADGES ── */
+  .badge {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 99px;
+    font-weight: 600;
+    display: inline-block;
+  }
+  .badge.planned { background: var(--amber-light); color: var(--amber-dark); }
+  .badge.live { background: var(--green-light); color: var(--green-dark); }
+
+  /* ── DIRECTORY TREE ── */
+  .tree {
+    background: #1a1a2e;
+    color: #cbd5e1;
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.75;
+    overflow-x: auto;
+    white-space: pre;
+    margin: 10px 0 4px;
+  }
+  .tree .dir { color: #93c5fd; }
+  .tree .file { color: #e2e8f0; }
+  .tree .comment { color: #64748b; }
+
+  /* ── SUBSECTION LABEL ── */
+  .sub-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--blue);
+    margin: 18px 0 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--blue-border);
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-border);
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: #fff; padding: 20px; }
+    .card, .toc-card, .info-box { break-inside: avoid; }
+  }
+
+  @media (max-width: 640px) {
+    .toc-list { grid-template-columns: 1fr; }
+    .cover { padding: 28px 24px 24px; }
+    .cover h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-eyebrow">Platform Documentation</div>
+    <h1>trust-lionel.com — Platform Runbook</h1>
+    <div class="cover-sub">Lionel Mosley | ahr-ki-tekt &nbsp;&bull;&nbsp; Living Runbook / Handoff Document</div>
+    <div class="cover-meta">
+      <div class="cover-meta-item"><strong>Version</strong>1.1</div>
+      <div class="cover-meta-item"><strong>Last Updated</strong>June 22, 2026</div>
+      <div class="cover-meta-item"><strong>Owner</strong>Lionel Mosley</div>
+      <div class="cover-meta-item"><strong>Site</strong>trust-lionel.com</div>
+      <div class="cover-meta-item"><strong>Company</strong>4TH AND BAILEY</div>
+    </div>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc-card">
+    <h2>Table of Contents</h2>
+    <ul class="toc-list">
+      <li><a href="#changelog"><span class="toc-num">1</span>Changelog</a></li>
+      <li><a href="#platform-overview"><span class="toc-num">2</span>Platform Overview</a></li>
+      <li><a href="#architecture"><span class="toc-num">3</span>Application Architecture</a></li>
+      <li><a href="#structure"><span class="toc-num">4</span>Repository Structure</a></li>
+      <li><a href="#nomenclature"><span class="toc-num">5</span>Naming Conventions &amp; Nomenclature</a></li>
+      <li><a href="#configuration"><span class="toc-num">6</span>Configuration</a></li>
+      <li><a href="#design"><span class="toc-num">7</span>Design System</a></li>
+      <li><a href="#uxui"><span class="toc-num">8</span>UX / UI Decisions</a></li>
+      <li><a href="#layout"><span class="toc-num">9</span>Layout and Structure</a></li>
+      <li><a href="#integrations"><span class="toc-num">10</span>Integrations</a></li>
+      <li><a href="#security"><span class="toc-num">11</span>Security</a></li>
+      <li><a href="#content"><span class="toc-num">12</span>Content Management</a></li>
+      <li><a href="#build"><span class="toc-num">13</span>Build and Deployment</a></li>
+      <li><a href="#schema"><span class="toc-num">14</span>Schema (Structured Data)</a></li>
+      <li><a href="#decisions"><span class="toc-num">15</span>Decision Log</a></li>
+      <li><a href="#future"><span class="toc-num">16</span>Future Enhancements</a></li>
+      <li><a href="#handoff"><span class="toc-num">17</span>Handoff Notes for New Collaborators</a></li>
+    </ul>
+  </div>
+
+  <!-- SECTION 1: CHANGELOG -->
+  <div class="section-header" id="changelog">
+    <div class="section-num">1</div>
+    <div class="section-title">Changelog</div>
+  </div>
+  <div class="card">
+    <table class="changelog-table">
+      <thead><tr><th>Version</th><th>Date</th><th>Author</th><th>Summary</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="version-badge">1.0</span></td>
+          <td>June 22, 2026</td>
+          <td>Lionel Mosley</td>
+          <td>Initial Runbook created. Full migration from Jekyll / GitHub Pages to Litos / Astro v6 on Netlify completed June 20–22, 2026.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 2: PLATFORM OVERVIEW -->
+  <div class="section-header" id="platform-overview">
+    <div class="section-num">2</div>
+    <div class="section-title">Platform Overview</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Brand Identity</div>
+    <table class="data-table">
+      <thead><tr><th>Element</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Full Brand Name</td><td>Lionel Mosley | ahr-ki-tekt</td></tr>
+        <tr><td>Tagline</td><td>IT Consultant &amp; Innovative Thought Leader</td></tr>
+        <tr><td>Location</td><td>Houston, TX</td></tr>
+        <tr><td>Company</td><td>4TH AND BAILEY</td></tr>
+        <tr><td>Domain</td><td>trust-lionel.com</td></tr>
+        <tr><td>Primary Color</td><td><code>#0088cc</code></td></tr>
+        <tr><td>Publication Name</td><td>The ahr-ki-tekt Design Journal</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-label">Buyer Personas</div>
+    <div class="talking-point">
+      <div class="tp-icon">1</div>
+      <div class="tp-text"><strong>CIO</strong>Chief Information Officer</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">2</div>
+      <div class="tp-text"><strong>Finance / Procurement</strong>Budget holders evaluating technology spend</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">3</div>
+      <div class="tp-text"><strong>InfoSec Officer</strong>Security leaders evaluating compliance posture</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">4</div>
+      <div class="tp-text"><strong>IT Director</strong>Technical managers overseeing infrastructure</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">5</div>
+      <div class="tp-text"><strong>Owner / CEO / Operator</strong>Business leaders making technology decisions</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-label">Site Purpose</div>
+    <div class="talking-point">
+      <div class="tp-icon">✦</div>
+      <div class="tp-text">Publish thought leadership on cloud infrastructure, cybersecurity, Microsoft 365, and enterprise IT governance</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">✦</div>
+      <div class="tp-text">Generate consulting leads via the Consulting page and scheduling integration</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">✦</div>
+      <div class="tp-text">Demonstrate methodology through the Infrastructure Placement Framework and case studies</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">✦</div>
+      <div class="tp-text">Build topical authority for search engine visibility across CISA SCuBA, NIST SP 800-53, MITRE ATT&amp;CK, CIS Benchmarks, Microsoft Azure, and cloud migration queries</div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: ARCHITECTURE -->
+  <div class="section-header" id="architecture">
+    <div class="section-num">3</div>
+    <div class="section-title">Application Architecture</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Technology Stack</div>
+    <table class="data-table">
+      <thead><tr><th>Layer</th><th>Technology</th><th>Version</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Framework</td><td>Astro</td><td>6.1.4</td><td>Static site generator</td></tr>
+        <tr><td>Theme</td><td>Litos</td><td>Custom fork</td><td>Originally by Dnzzk2</td></tr>
+        <tr><td>UI Components</td><td>React</td><td>19.x</td><td>Used for interactive components only</td></tr>
+        <tr><td>Styling</td><td>Tailwind CSS</td><td>4.x</td><td>Utility-first CSS</td></tr>
+        <tr><td>Package Manager</td><td>pnpm</td><td>Latest</td><td>Required — do not use npm or yarn</td></tr>
+        <tr><td>Node.js</td><td>Node.js</td><td>22.x</td><td>Minimum required by Astro v6</td></tr>
+        <tr><td>Build Tool</td><td>Vite</td><td>5.x</td><td>Bundled with Astro</td></tr>
+        <tr><td>Search</td><td>Pagefind</td><td>1.5.0</td><td>Static search, WASM-powered</td></tr>
+        <tr><td>Hosting</td><td>Netlify</td><td>—</td><td>Auto-deploys from GitHub main branch</td></tr>
+        <tr><td>Repository</td><td>GitHub</td><td>—</td><td>github.com/trust-lionel/trust-lionel</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-label">Build Pipeline</div>
+    <div class="code-block">Source (GitHub main) → Netlify Build Trigger
+  → pnpm install
+  → astro check          <span class="comment"># TypeScript validation</span>
+  → astro build          <span class="comment"># Static site generation to dist/</span>
+  → pagefind --site dist <span class="comment"># Search index generation</span>
+  → Deploy to Netlify CDN</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Rendering Model</div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text">The site is fully static (SSG — Static Site Generation). No server-side rendering. All pages are pre-built at deploy time and served from Netlify's CDN. Interactive components (GitHub heatmap, search, skills marquee) hydrate client-side using Astro's <code>client:load</code> directive.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: REPOSITORY STRUCTURE -->
+  <div class="section-header" id="structure">
+    <div class="section-num">4</div>
+    <div class="section-title">Repository Structure</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Directory Tree</div>
+    <div class="tree"><span class="dir">trust-lionel/</span>
+├── .nojekyll                    <span class="comment"># Disables GitHub Pages Jekyll processing</span>
+├── astro.config.ts              <span class="comment"># Astro configuration</span>
+├── netlify.toml                 <span class="comment"># Netlify build and security configuration</span>
+├── package.json                 <span class="comment"># Dependencies and build scripts</span>
+├── pnpm-lock.yaml               <span class="comment"># Lockfile — do not delete</span>
+├── tsconfig.json                <span class="comment"># TypeScript configuration</span>
+├── ec.config.mjs                <span class="comment"># Expressive Code (syntax highlighting)</span>
+├── <span class="dir">public/</span>                      <span class="comment"># Static assets (copied as-is to dist/)</span>
+│   ├── favicon.svg              <span class="comment"># Memoji favicon (primary)</span>
+│   ├── favicon.png              <span class="comment"># Memoji favicon (fallback)</span>
+│   ├── apple-touch-icon.png     <span class="comment"># Memoji favicon (iOS)</span>
+│   ├── og-image.png             <span class="comment"># Social sharing image</span>
+│   ├── robots.txt               <span class="comment"># Search engine crawl instructions</span>
+│   ├── <span class="dir">fonts/</span>                   <span class="comment"># Self-hosted fonts</span>
+│   │   ├── Roboto-VariableFont.woff2
+│   │   ├── GeistVF.woff2
+│   │   └── GeistMono.woff2
+│   ├── <span class="dir">projects/</span>               <span class="comment"># Project card icons</span>
+│   └── <span class="dir">js/</span>
+│       └── theme.js             <span class="comment"># Theme initialization script</span>
+├── <span class="dir">src/</span>
+│   ├── config.ts                <span class="comment"># PRIMARY — edit here for content changes</span>
+│   ├── content.config.ts        <span class="comment"># Content collection schemas</span>
+│   ├── types.ts                 <span class="comment"># TypeScript type definitions</span>
+│   ├── <span class="dir">content/</span>
+│   │   ├── <span class="dir">posts/</span>              <span class="comment"># Blog post markdown files (.md)</span>
+│   │   └── <span class="dir">projects/</span>           <span class="comment"># Project MDX files</span>
+│   ├── <span class="dir">layouts/</span>
+│   │   ├── Layout.astro         <span class="comment"># Root layout (head, schema, GTM, Umami)</span>
+│   │   ├── Header.astro         <span class="comment"># Site header</span>
+│   │   └── Footer.astro         <span class="comment"># Site footer</span>
+│   ├── <span class="dir">pages/</span>
+│   │   ├── index.astro          <span class="comment"># Homepage (featured posts hardcoded here)</span>
+│   │   ├── consulting/index.astro
+│   │   ├── posts/[...id].astro  <span class="comment"># Individual post page</span>
+│   │   ├── posts/[...page].astro
+│   │   ├── projects/index.astro
+│   │   └── tags/
+│   ├── <span class="dir">components/</span>
+│   │   ├── <span class="dir">base/</span>               <span class="comment"># Core reusable components</span>
+│   │   ├── <span class="dir">posts/</span>              <span class="comment"># Post-specific components</span>
+│   │   └── <span class="dir">theme/</span>
+│   ├── <span class="dir">lib/</span>
+│   │   ├── data.ts              <span class="comment"># Posts, projects, tags data utilities</span>
+│   │   ├── utils.ts             <span class="comment"># formatDate(), cn()</span>
+│   │   ├── feed.ts              <span class="comment"># RSS and Atom feed generation</span>
+│   │   └── github.ts            <span class="comment"># GitHub contributions caching (1-hour)</span>
+│   └── <span class="dir">styles/</span>
+│       ├── global.css
+│       ├── markdown.css
+│       └── github-card.css
+└── <span class="dir">plugins/</span>
+    ├── remark-reading-time.ts
+    ├── remark-lqip.js
+    └── remark-github-card.ts</div>
+  </div>
+
+  <!-- SECTION 5: NAMING CONVENTIONS -->
+  <div class="section-header" id="nomenclature">
+    <div class="section-num">5</div>
+    <div class="section-title">Naming Conventions &amp; Nomenclature</div>
+  </div>
+  <div class="card">
+    <div class="card-label">File Naming</div>
+    <table class="data-table">
+      <thead><tr><th>Asset Type</th><th>Convention</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>Blog posts</td><td>kebab-case <code>.md</code></td><td><code>cloud-migration.md</code></td></tr>
+        <tr><td>Project directories</td><td>kebab-case</td><td><code>houston-alert/</code></td></tr>
+        <tr><td>Astro components</td><td>PascalCase <code>.astro</code></td><td><code>SocialShare.astro</code></td></tr>
+        <tr><td>React components</td><td>PascalCase <code>.tsx</code></td><td><code>GithubContributions.tsx</code></td></tr>
+        <tr><td>Utility files</td><td>camelCase <code>.ts</code></td><td><code>utils.ts</code></td></tr>
+        <tr><td>CSS files</td><td>kebab-case <code>.css</code></td><td><code>global.css</code></td></tr>
+        <tr><td>Public assets</td><td>kebab-case</td><td><code>og-image.png</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-label">URL Structure</div>
+    <table class="data-table">
+      <thead><tr><th>Page</th><th>URL</th></tr></thead>
+      <tbody>
+        <tr><td>Homepage</td><td><code>trust-lionel.com/</code></td></tr>
+        <tr><td>Posts index</td><td><code>trust-lionel.com/posts/</code></td></tr>
+        <tr><td>Individual post</td><td><code>trust-lionel.com/posts/{slug}/</code></td></tr>
+        <tr><td>Projects</td><td><code>trust-lionel.com/projects/</code></td></tr>
+        <tr><td>Consulting</td><td><code>trust-lionel.com/consulting/</code></td></tr>
+        <tr><td>Tags index</td><td><code>trust-lionel.com/tags/</code></td></tr>
+        <tr><td>Tag page</td><td><code>trust-lionel.com/tags/{tag-name}/</code></td></tr>
+        <tr><td>RSS feed</td><td><code>trust-lionel.com/rss.xml</code></td></tr>
+        <tr><td>Atom feed</td><td><code>trust-lionel.com/atom.xml</code></td></tr>
+        <tr><td>Sitemap</td><td><code>trust-lionel.com/sitemap-index.xml</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-label">Brand Terminology</div>
+    <table class="data-table">
+      <thead><tr><th>Term</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code>ahr-ki-tekt</code></td><td>Phonetic spelling of "architect" — used in tagline and series names</td></tr>
+        <tr><td>The ahr-ki-tekt Design Journal</td><td>Official name for the publication / blog</td></tr>
+        <tr><td>4TH AND BAILEY</td><td>Always all-caps, no period</td></tr>
+        <tr><td>LIONEL MOSLEY</td><td>All-caps in display headings</td></tr>
+        <tr><td>trust-lionel</td><td>Repository and domain slug — always lowercase, hyphenated</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-label">Post Frontmatter Schema</div>
+    <div class="code-block"><span class="comment">---</span>
+<span class="key">title</span>: <span class="str">"Post Title"</span>
+<span class="key">description</span>: <span class="str">"One to two sentence SEO description."</span>
+<span class="key">pubDate</span>: <span class="val">YYYY-MM-DD</span>
+<span class="key">tags</span>: [<span class="str">"Tag One"</span>, <span class="str">"Tag Two"</span>]
+<span class="key">recommend</span>: <span class="val">true</span>           <span class="comment"># Shows in recommended posts</span>
+<span class="key">pinned</span>: <span class="val">true</span>              <span class="comment"># Pins to top of post lists (use sparingly)</span>
+<span class="key">postType</span>: <span class="str">"coverTop"</span>      <span class="comment"># Layout: coverTop | coverSplit | metaOnly</span>
+<span class="key">cover</span>: <span class="str">"https://images.unsplash.com/photo-{ID}?w=1400&q=80&auto=format&fit=crop"</span>
+<span class="comment">---</span></div>
+  </div>
+
+  <!-- SECTION 6: CONFIGURATION -->
+  <div class="section-header" id="configuration">
+    <div class="section-num">6</div>
+    <div class="section-title">Configuration</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Site Settings — src/config.ts (SITE)</div>
+    <div class="code-block"><span class="key">title</span>:       <span class="str">'Lionel Mosley | ahr-ki-tekt'</span>
+<span class="key">author</span>:      <span class="str">'Lionel Mosley'</span>
+<span class="key">description</span>: <span class="str">'Carefully selected frameworks, insights, and solutions...'</span>
+<span class="key">website</span>:     <span class="str">'https://trust-lionel.com/'</span>
+<span class="key">base</span>:        <span class="str">'/'</span>
+<span class="key">ogImage</span>:     <span class="str">'/og-image.png'</span>
+<span class="key">lang</span>:        <span class="str">'en'</span>
+<span class="key">transition</span>:  <span class="val">true</span>
+<span class="key">themeAnimation</span>: <span class="val">true</span></div>
+  </div>
+  <div class="card">
+    <div class="card-label">Social Links</div>
+    <table class="data-table">
+      <thead><tr><th>Platform</th><th>URL</th><th>Icon</th><th>Brand Color</th></tr></thead>
+      <tbody>
+        <tr><td>GitHub</td><td>github.com/trust-lionel</td><td><code>ri--github-fill</code></td><td><code>#181717</code> / <code>#ffffff</code></td></tr>
+        <tr><td>LinkedIn</td><td>linkedin.com/in/lionelmosley</td><td><code>ri--linkedin-fill</code></td><td><code>#0A66C2</code></td></tr>
+        <tr><td>Reddit</td><td>reddit.com/user/trust-lionel/</td><td><code>ri--reddit-fill</code></td><td><code>#FF4500</code></td></tr>
+        <tr><td>Spotify</td><td>open.spotify.com/user/lmosley002-spotify</td><td><code>ri--spotify-fill</code></td><td><code>#1DB954</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-label">GitHub Spotlight Configuration</div>
+    <div class="code-block"><span class="key">ENABLED</span>:          <span class="val">true</span>
+<span class="key">GITHUB_USERNAME</span>:  <span class="str">'trust-lionel'</span>
+<span class="key">TOOLTIP_ENABLED</span>:  <span class="val">true</span></div>
+  </div>
+  <div class="card">
+    <div class="card-label">Analytics Configuration</div>
+    <div class="code-block"><span class="comment"># Umami</span>
+<span class="key">ENABLED</span>:    <span class="val">true</span>
+<span class="key">WEBSITE_ID</span>: <span class="str">'b8e2a312-e7f4-4595-95ee-38b47fc9be54'</span>
+<span class="key">SRC</span>:        <span class="str">'https://umami-production-f3f3.up.railway.app/script.js'</span></div>
+  </div>
+  <div class="card">
+    <div class="card-label">astro.config.ts — Key Settings</div>
+    <div class="code-block"><span class="key">site</span>: <span class="str">'https://trust-lionel.com'</span>
+<span class="key">image</span>:
+  <span class="key">domains</span>: [<span class="str">'images.unsplash.com'</span>]  <span class="comment"># Allows Unsplash cover images</span>
+<span class="key">markdown</span>:
+  <span class="key">syntaxHighlight</span>: <span class="val">false</span>            <span class="comment"># Handled by Expressive Code</span>
+<span class="key">integrations</span>: [expressiveCode(), mdx(), react(), sitemap(), robotsTxt()]</div>
+  </div>
+  <div class="card">
+    <div class="card-label">netlify.toml — Build Configuration</div>
+    <div class="code-block"><span class="key">command</span>: <span class="str">"pnpm run build &amp;&amp; pnpm pagefind --site dist"</span>
+<span class="key">publish</span>: <span class="str">"dist"</span>
+<span class="key">NODE_VERSION</span>: <span class="str">"22"</span></div>
+  </div>
+
+  <!-- SECTION 7: DESIGN SYSTEM -->
+  <div class="section-header" id="design">
+    <div class="section-num">7</div>
+    <div class="section-title">Design System</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Color Palette</div>
+    <table class="data-table">
+      <thead><tr><th>Role</th><th>Light Mode</th><th>Dark Mode</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Primary brand</td><td><code>#0088cc</code></td><td><code>#0088cc</code></td><td>LIONEL MOSLEY heading, accents</td></tr>
+        <tr><td>RSS icon</td><td><code>#f26522</code></td><td><code>#f26522</code></td><td>Fixed — not theme-aware</td></tr>
+        <tr><td>GitHub social</td><td><code>#181717</code></td><td><code>#ffffff</code></td><td>Inverts in dark mode</td></tr>
+        <tr><td>LinkedIn</td><td><code>#0A66C2</code></td><td><code>#0A66C2</code></td><td>Fixed brand color</td></tr>
+        <tr><td>Reddit</td><td><code>#FF4500</code></td><td><code>#FF4500</code></td><td>Fixed brand color</td></tr>
+        <tr><td>Spotify</td><td><code>#1DB954</code></td><td><code>#1DB954</code></td><td>Fixed brand color</td></tr>
+        <tr><td>Heatmap level 0</td><td><code>#ebedf0</code></td><td><code>#161b22</code></td><td>No contributions</td></tr>
+        <tr><td>Heatmap level 1</td><td><code>#9be9a8</code></td><td><code>#0e4429</code></td><td>1–4 contributions</td></tr>
+        <tr><td>Heatmap level 2</td><td><code>#40c463</code></td><td><code>#006d32</code></td><td>5–9 contributions</td></tr>
+        <tr><td>Heatmap level 3</td><td><code>#30a14e</code></td><td><code>#26a641</code></td><td>10–19 contributions</td></tr>
+        <tr><td>Heatmap level 4</td><td><code>#216e39</code></td><td><code>#39d353</code></td><td>20+ contributions</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-label">Typography</div>
+    <table class="data-table">
+      <thead><tr><th>Role</th><th>Font</th><th>Format</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Headings</td><td>Roboto</td><td>Variable woff2</td><td><code>/fonts/Roboto-VariableFont.woff2</code></td></tr>
+        <tr><td>Body</td><td>Geist</td><td>Variable woff2</td><td><code>/fonts/GeistVF.woff2</code></td></tr>
+        <tr><td>Monospace</td><td>Geist Mono</td><td>woff2</td><td><code>/fonts/GeistMono.woff2</code></td></tr>
+      </tbody>
+    </table>
+    <div class="tp-sub" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--gray-bg)">Note: The CSS variable is named <code>--font-lexend</code> for historical reasons — Lexend was the original Litos heading font. It now loads Roboto.</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Theme Mode &amp; Favicon</div>
+    <div class="talking-point">
+      <div class="tp-icon">☾</div>
+      <div class="tp-text"><strong>System preference only</strong>No manual theme toggle. The site respects <code>prefers-color-scheme</code> automatically. The ThemeToggle component has been removed from both Header and Footer. Dark mode is applied via <code>darkMode: 'class'</code> in Tailwind, set by <code>public/js/theme.js</code> on page load.</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">◈</div>
+      <div class="tp-text"><strong>Favicon</strong>Memoji (Lionel at MacBook) — <code>/public/favicon.svg</code> (primary), <code>/public/favicon.png</code> (fallback), <code>/public/apple-touch-icon.png</code> (iOS)</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">◈</div>
+      <div class="tp-text"><strong>Social share image</strong>Trippy split portrait (1280×640) — <code>/public/og-image.png</code></div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">◈</div>
+      <div class="tp-text"><strong>Date format</strong>All dates display as <code>Month DD, YYYY</code> — for example, June 22, 2026. Implemented in <code>src/lib/utils.ts</code>. Heatmap dates are parsed as local time (not UTC) to avoid a one-day offset for CST users.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 8: UX/UI -->
+  <div class="section-header" id="uxui">
+    <div class="section-num">8</div>
+    <div class="section-title">UX / UI Decisions</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Homepage Structure</div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text"><strong>Hardcoded featured posts</strong>The homepage (<code>src/pages/index.astro</code>) uses a hardcoded array of three featured posts rather than dynamically pulling pinned posts. This gives full editorial control. To update, edit the <code>featuredPosts</code> array in <code>index.astro</code>. Always sort newest first.</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text"><strong>Current featured posts</strong>
+        <div class="tp-sub">1. Why We Moved a Regional Broadcasting Company Off Amazon EC2 — and Why Microsoft Azure Won<br>2. When Microsoft's Own Email Becomes the Weapon<br>3. Three Questions Every CEO and Board Should Be Able to Answer</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-label">Header Icons</div>
+    <table class="data-table">
+      <thead><tr><th>Icon</th><th>Action</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Search</td><td>Opens Pagefind search panel</td><td>Ctrl+K shortcut supported</td></tr>
+        <tr><td>Calendar</td><td>Opens scheduling link</td><td><code>https://4nb.cloud/lmosley</code></td></tr>
+        <tr><td>RSS</td><td>Opens Atom feed</td><td><code>#f26522</code> orange, fixed color</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-label">Post Layout &amp; Social Share</div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text"><strong>Post type</strong>All five current posts use <code>postType: "coverTop"</code> — Unsplash cover image at the top, followed by metadata (date, reading time, word count, tags), then content. The <code>CoverTop.astro</code> layout handles rendering.</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text"><strong>SocialShare component</strong>Rendered on every individual post page, positioned below post content and above Post Navigation. Provides share buttons for LinkedIn, X (Twitter), Facebook, and Reddit.</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text"><strong>Navigation</strong>The site uses Astro's View Transitions for smooth page navigation. The header persists across navigations via <code>transition:persist</code>.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 9: LAYOUT -->
+  <div class="section-header" id="layout">
+    <div class="section-num">9</div>
+    <div class="section-title">Layout and Structure</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Page Anatomy — Every Page</div>
+    <div class="code-block">&lt;html&gt;
+  &lt;head&gt;
+    Head.astro          <span class="comment"># SEO, fonts, preloads, canonical</span>
+    GTM script          <span class="comment"># Google Tag Manager</span>
+    Umami script        <span class="comment"># Analytics</span>
+    Person JSON-LD      <span class="comment"># Schema.org — every page</span>
+    WebSite JSON-LD     <span class="comment"># Schema.org — every page</span>
+    BlogPosting JSON-LD <span class="comment"># Schema.org — post pages only</span>
+  &lt;/head&gt;
+  &lt;body&gt;
+    HeaderGradient.astro  <span class="comment"># Decorative gradient</span>
+    Header.astro          <span class="comment"># Logo, nav, search, calendar, RSS</span>
+    SectionDivider
+    &lt;main&gt;
+      [Page content via &lt;slot /&gt;]
+    &lt;/main&gt;
+    Footer.astro          <span class="comment"># Nav links, copyright, social icons</span>
+    Safari bottom overlay fix
+  &lt;/body&gt;
+&lt;/html&gt;</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Post Page Anatomy</div>
+    <div class="code-block">TocMobile              <span class="comment"># Mobile table of contents</span>
+CoverTop layout:
+  - Cover image        <span class="comment"># Unsplash CDN URL</span>
+  - Title
+  - Metadata           <span class="comment"># Date, reading time, word count</span>
+  - Tags
+  - Content            <span class="comment"># Markdown body</span>
+  - License            <span class="comment"># If applicable</span>
+SocialShare            <span class="comment"># LinkedIn, X, Facebook, Reddit</span>
+PostNavigation         <span class="comment"># Previous / next post</span>
+PostFeatures           <span class="comment"># Desktop TOC, back to top, progress ring</span>
+SectionDivider
+Comment                <span class="comment"># Disabled</span></div>
+  </div>
+  <div class="card">
+    <div class="card-label">Skills Showcase — Three Rows</div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text"><strong>Row 1 (left scroll)</strong>Cloud &amp; Microsoft — Azure, M365, AWS, Google Workspace, PowerShell, Windows Server, Linux</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text"><strong>Row 2 (right scroll)</strong>Security Frameworks — CISA SCuBA, NIST SP 800-53, MITRE ATT&amp;CK, CIS Benchmarks, Microsoft Defender, Exchange Online</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text"><strong>Row 3 (left scroll)</strong>Infrastructure — Git, GitHub, Ubuntu, Debian, Node.js, Vercel, VS Code</div>
+    </div>
+  </div>
+
+  <!-- SECTION 10: INTEGRATIONS -->
+  <div class="section-header" id="integrations">
+    <div class="section-num">10</div>
+    <div class="section-title">Integrations</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Google Tag Manager</div>
+    <table class="data-table">
+      <thead><tr><th>Field</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Container ID</td><td><code>GTM-543DS8T7</code></td></tr>
+        <tr><td>Container Name</td><td>trust-lionel.com</td></tr>
+        <tr><td>Implementation</td><td><code>is:inline</code> script in <code>Layout.astro</code> head + noscript iframe in body</td></tr>
+        <tr><td>GA4 Tag</td><td><code>G-YNZSY2L2XL</code> (injected by GTM — not hardcoded in source)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-label">Umami Analytics</div>
+    <table class="data-table">
+      <thead><tr><th>Field</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Instance URL</td><td><code>https://umami-production-f3f3.up.railway.app</code></td></tr>
+        <tr><td>Website ID</td><td><code>b8e2a312-e7f4-4595-95ee-38b47fc9be54</code></td></tr>
+        <tr><td>Mode</td><td>Cookieless, GDPR-compliant</td></tr>
+        <tr><td>Hosting</td><td>Self-hosted on Railway</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-label">GitHub Contributions API</div>
+    <table class="data-table">
+      <thead><tr><th>Field</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>API endpoint</td><td><code>https://github-contributions-api.jogruber.de/v4/{username}?y=last</code></td></tr>
+        <tr><td>Username</td><td><code>trust-lionel</code></td></tr>
+        <tr><td>Cache duration</td><td>1 hour (localStorage)</td></tr>
+        <tr><td>Component</td><td><code>src/components/base/GithubContributions.tsx</code></td></tr>
+      </tbody>
+    </table>
+    <div class="tp-sub" style="margin-top:10px">Known behavior: The API returns UTC dates. The component parses dates as local time to avoid a one-day display offset for CST users.</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Pagefind Search</div>
+    <table class="data-table">
+      <thead><tr><th>Field</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Version</td><td>1.5.0 (Extended)</td></tr>
+        <tr><td>Index location</td><td><code>dist/pagefind/</code></td></tr>
+        <tr><td>Pages indexed</td><td>5 (post pages only — uses <code>data-pagefind-body</code>)</td></tr>
+        <tr><td>Words indexed</td><td>1,410</td></tr>
+        <tr><td>CSP requirement</td><td><code>'wasm-unsafe-eval'</code> in <code>script-src</code> (required for WASM)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-label">Scheduling &amp; Feeds</div>
+    <table class="data-table">
+      <thead><tr><th>Integration</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Scheduling provider</td><td>4nb.cloud — <code>https://4nb.cloud/lmosley</code></td></tr>
+        <tr><td>RSS feed</td><td><code>trust-lionel.com/rss.xml</code> — RSS 2.0</td></tr>
+        <tr><td>Atom feed</td><td><code>trust-lionel.com/atom.xml</code> — Atom 1.0</td></tr>
+        <tr><td>Netlify branch</td><td>main (auto-deploy on push, ~2–3 min build time)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 11: SECURITY -->
+  <div class="section-header" id="security">
+    <div class="section-num">11</div>
+    <div class="section-title">Security</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Content Security Policy</div>
+    <div class="code-block"><span class="comment"># Full CSP — defined in netlify.toml, applied to all routes (/*)</span>
+
+<span class="key">default-src</span>   'self'
+<span class="key">script-src</span>    'self' 'unsafe-inline' 'wasm-unsafe-eval' data:
+              https://www.googletagmanager.com
+              https://umami-production-f3f3.up.railway.app
+              https://events.vercount.one
+<span class="key">style-src</span>     'self' 'unsafe-inline' https://cdn.jsdelivr.net
+<span class="key">img-src</span>       'self' data:
+              https://images.unsplash.com
+              https://avatars.githubusercontent.com
+              https://www.google.com
+              https://github.githubassets.com
+              https://www.googletagmanager.com
+<span class="key">connect-src</span>   'self'
+              https://umami-production-f3f3.up.railway.app
+              https://api.github.com
+              https://github-contributions-api.jogruber.de
+              https://www.google-analytics.com
+              https://www.google.com
+<span class="key">font-src</span>      'self' https://cdn.jsdelivr.net data:
+<span class="key">frame-src</span>     'none'
+<span class="key">object-src</span>    'none'
+<span class="key">base-uri</span>      'self'
+<span class="key">form-action</span>   'self'</div>
+  </div>
+  <div class="card">
+    <div class="card-label">CSP Directive Notes</div>
+    <table class="data-table">
+      <thead><tr><th>Directive</th><th>Reason for Non-Self Sources</th></tr></thead>
+      <tbody>
+        <tr><td><code>'unsafe-inline'</code> in script-src</td><td>Required for Astro view transitions and inline scripts</td></tr>
+        <tr><td><code>'wasm-unsafe-eval'</code> in script-src</td><td>Required for Pagefind WASM search engine</td></tr>
+        <tr><td><code>data:</code> in script-src</td><td>Required for Astro view transitions router</td></tr>
+        <tr><td><code>data:</code> in font-src</td><td>Required for Astro view transitions inline fonts</td></tr>
+        <tr><td><code>cdn.jsdelivr.net</code> in style-src</td><td>KaTeX math formula stylesheet</td></tr>
+        <tr><td><code>cdn.jsdelivr.net</code> in font-src</td><td>KaTeX math formula fonts</td></tr>
+        <tr><td><code>www.googletagmanager.com</code> in img-src</td><td>GTM 1×1 pixel tracking images</td></tr>
+        <tr><td><code>events.vercount.one</code> in script-src</td><td>Vercount page view counter (Litos default, currently unused)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-label">Additional Security Headers</div>
+    <div class="code-block"><span class="key">Permissions-Policy</span>:             camera=(), microphone=(), geolocation=()
+<span class="key">Referrer-Policy</span>:                strict-origin-when-cross-origin
+<span class="key">Strict-Transport-Security</span>:      max-age=31536000; includeSubDomains; preload
+<span class="key">X-Content-Type-Options</span>:         nosniff
+<span class="key">X-Frame-Options</span>:                SAMEORIGIN</div>
+  </div>
+  <div class="card">
+    <div class="card-label">HTTPS Enforcement &amp; Cache Control</div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text"><strong>301 redirects</strong>All HTTP traffic and <code>www.</code> traffic is permanently redirected to <code>https://trust-lionel.com</code>.</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text"><strong>Immutable assets</strong><code>/_astro/*</code> and <code>/fonts/*</code> are cached for 1 year (<code>max-age=31536000, immutable</code>). HTML pages, sitemap, and robots.txt are never cached (<code>max-age=0, must-revalidate</code>).</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text"><strong>GitHub Pages</strong>Disabled on the repository. The <code>.nojekyll</code> file prevents accidental Jekyll processing if GitHub Pages were inadvertently re-enabled. The site deploys exclusively via Netlify.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 12: CONTENT MANAGEMENT -->
+  <div class="section-header" id="content">
+    <div class="section-num">12</div>
+    <div class="section-title">Content Management</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Adding a New Blog Post</div>
+    <div class="talking-point">
+      <div class="tp-icon">1</div>
+      <div class="tp-text">Create a new <code>.md</code> file in <code>src/content/posts/</code></div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">2</div>
+      <div class="tp-text">Use the frontmatter template from Section 5 (Post Frontmatter Schema)</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">3</div>
+      <div class="tp-text">Find an Unsplash image and use the URL format: <code>https://images.unsplash.com/photo-{ID}?w=1400&q=80&auto=format&fit=crop</code></div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">4</div>
+      <div class="tp-text">If the post should appear on the homepage, update the <code>featuredPosts</code> array in <code>src/pages/index.astro</code></div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">5</div>
+      <div class="tp-text">Run <code>pnpm build</code> to confirm no errors, then commit and push to <code>main</code></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-label">Adding a New Project</div>
+    <div class="talking-point">
+      <div class="tp-icon">1</div>
+      <div class="tp-text">Create a new directory in <code>src/content/projects/{project-slug}/</code> with an <code>index.mdx</code> file</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">2</div>
+      <div class="tp-text">Add a project icon PNG to <code>public/projects/{project-slug}.png</code></div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">3</div>
+      <div class="tp-text">The project will automatically appear on the Projects page — no additional configuration required</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-label amber">Tags</div>
+    <div class="talking-point">
+      <div class="tp-icon amber">!</div>
+      <div class="tp-text"><strong>Tags are case-sensitive in URL generation</strong>Tags are defined in post frontmatter and automatically generate tag index pages at <code>/tags/{tag-name}/</code>. Use consistent casing across all posts. A tag spelled differently will generate a separate tag page.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 13: BUILD AND DEPLOYMENT -->
+  <div class="section-header" id="build">
+    <div class="section-num">13</div>
+    <div class="section-title">Build and Deployment</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Local Development</div>
+    <div class="code-block"><span class="comment"># Install dependencies</span>
+pnpm install
+
+<span class="comment"># Start dev server — available at http://localhost:4321</span>
+pnpm dev
+
+<span class="comment"># Note: Pagefind search does not work in dev mode</span>
+<span class="comment"># Run a full build to test search locally</span>
+pnpm build
+pnpm preview</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Production Build</div>
+    <div class="code-block">pnpm build
+<span class="comment"># Runs: astro check → astro build → pagefind --site dist</span>
+<span class="comment"># Expected output: 0 errors, [build] Complete!</span>
+<span class="comment"># Only expected warning: z.string().url() deprecation (harmless)</span></div>
+  </div>
+  <div class="card">
+    <div class="card-label">Git Workflow</div>
+    <div class="code-block"><span class="comment"># Standard workflow — use this for all changes</span>
+git add .
+git commit -m "Brief description of change"
+git push origin main
+<span class="comment"># Netlify auto-builds and deploys in ~2–3 minutes</span></div>
+    <div class="talking-point" style="margin-top:12px">
+      <div class="tp-icon amber">!</div>
+      <div class="tp-text"><strong>Do not use git push --force without a specific reason.</strong>Force pushing overwrites any commits made directly on GitHub — including favicon updates, README edits, and other files managed via the GitHub web interface.</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-label">Known Build Warnings</div>
+    <table class="data-table">
+      <thead><tr><th>Warning</th><th>Source</th><th>Impact</th></tr></thead>
+      <tbody>
+        <tr><td><code>ts(6385): z.string().url() deprecated</code></td><td><code>src/content.config.ts:21</code></td><td>None — Zod deprecation, harmless</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- SECTION 14: SCHEMA -->
+  <div class="section-header" id="schema">
+    <div class="section-num">14</div>
+    <div class="section-title">Schema (Structured Data)</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Overview &amp; Validation Status</div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text"><strong>Implementation method</strong>All structured data is implemented as JSON-LD, injected via Astro's <code>set:html</code> directive in <code>src/layouts/Layout.astro</code>. Validated at Google's Rich Results Test — <strong>0 errors, 0 warnings</strong> on all schema types as of June 22, 2026.</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text"><strong>Validation URLs</strong>
+        <div class="tp-sub">Homepage: <code>search.google.com/test/rich-results?url=https://trust-lionel.com</code><br>Post pages: <code>search.google.com/test/rich-results?url=https://trust-lionel.com/posts/cloud-migration</code></div>
+      </div>
+    </div>
+    <table class="data-table" style="margin-top:12px">
+      <thead><tr><th>Schema Type</th><th>Pages</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Person</td><td>All pages</td><td><span class="badge live">0 errors · 0 warnings</span></td></tr>
+        <tr><td>WebSite</td><td>All pages</td><td><span class="badge live">0 errors · 0 warnings</span></td></tr>
+        <tr><td>BlogPosting</td><td>Post pages only</td><td><span class="badge live">0 errors · 0 warnings</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-label amber">Schema Injection Method — Critical Implementation Detail</div>
+    <div class="talking-point">
+      <div class="tp-icon amber">!</div>
+      <div class="tp-text"><strong>Use <code>set:html</code> — not inline interpolation</strong>The schema must be injected using Astro's <code>set:html</code> directive. Using <code>{JSON.stringify({...})}</code> inside an <code>is:inline</code> script tag renders the literal string as text rather than evaluating it — Google receives unparsable structured data.</div>
+    </div>
+    <div class="code-block"><span class="comment">&lt;!-- CORRECT — evaluates JSON.stringify() at build time --&gt;</span>
+&lt;script is:inline type="application/ld+json" set:html={JSON.stringify({...})} /&gt;
+
+<span class="comment">&lt;!-- INCORRECT — renders literal text "{JSON.stringify({...})}" --&gt;</span>
+&lt;script is:inline type="application/ld+json"&gt;{JSON.stringify({...})}&lt;/script&gt;</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Block 1 — Person Schema (Every Page)</div>
+    <div class="tp-sub" style="margin-bottom:10px">Removed properties: <code>maintainer</code> (Google flagged SoftwareApplication/SoftwareSourceCode as invalid in Person context) and <code>author</code> (not a recognized Person property in schema.org).</div>
+    <div class="code-block">{
+  <span class="key">"@context"</span>: <span class="str">"https://schema.org"</span>,
+  <span class="key">"@type"</span>: <span class="str">"Person"</span>,
+  <span class="key">"name"</span>: <span class="str">"Lionel Mosley"</span>,
+  <span class="key">"url"</span>: <span class="str">"https://trust-lionel.com"</span>,
+  <span class="key">"image"</span>: <span class="str">"https://trust-lionel.com/og-image.png"</span>,
+  <span class="key">"jobTitle"</span>: <span class="str">"IT Consultant &amp; Innovative Thought Leader"</span>,
+  <span class="key">"description"</span>: <span class="str">"IT Consultant, Cloud Engineer, Innovative Thought Leader..."</span>,
+  <span class="key">"address"</span>: {
+    <span class="key">"@type"</span>: <span class="str">"PostalAddress"</span>,
+    <span class="key">"addressLocality"</span>: <span class="str">"Houston"</span>,
+    <span class="key">"addressRegion"</span>: <span class="str">"TX"</span>,
+    <span class="key">"addressCountry"</span>: <span class="str">"US"</span>
+  },
+  <span class="key">"worksFor"</span>: {
+    <span class="key">"@type"</span>: <span class="str">"Organization"</span>,
+    <span class="key">"name"</span>: <span class="str">"4TH AND BAILEY"</span>,
+    <span class="key">"url"</span>: <span class="str">"https://4thandbailey.com"</span>
+  },
+  <span class="key">"sameAs"</span>: [
+    <span class="str">"https://trust-lionel.com"</span>,
+    <span class="str">"https://www.lionelmosley.com"</span>,
+    <span class="str">"https://linkedin.com/in/lionelmosley"</span>,
+    <span class="str">"https://github.com/trust-lionel"</span>,
+    <span class="str">"https://youtube.com/@LMosley002"</span>,
+    <span class="str">"https://x.com/lionelmosley"</span>,
+    <span class="str">"https://www.facebook.com/yourinfotechconsultant"</span>,
+    <span class="str">"https://www.threads.com/@lionelmosley"</span>,
+    <span class="str">"https://bsky.app/profile/lionelmosley"</span>,
+    <span class="str">"https://instagram.com/lionelmosley"</span>,
+    <span class="str">"https://reddit.com/u/trust-lionel"</span>,
+    <span class="str">"https://open.spotify.com/user/lmosley002-spotify"</span>,
+    <span class="str">"https://about.me/lionelmosley"</span>,
+    <span class="str">"https://blog.lionelmosley.com"</span>,
+    <span class="str">"https://devops.houstonalert.com"</span>,
+    <span class="str">"https://wordcards.co"</span>
+  ],
+  <span class="key">"knowsAbout"</span>: [
+    <span class="str">"Cloud Infrastructure"</span>, <span class="str">"Cloud Engineering"</span>, <span class="str">"Cybersecurity"</span>,
+    <span class="str">"Microsoft 365"</span>, <span class="str">"Microsoft Azure"</span>, <span class="str">"Amazon AWS"</span>,
+    <span class="str">"Google Workspace"</span>, <span class="str">"Cloud Migration"</span>, <span class="str">"Cloud Repatriation"</span>,
+    <span class="str">"CISA SCuBA"</span>, <span class="str">"NIST SP 800-53"</span>, <span class="str">"MITRE ATT&amp;CK"</span>,
+    <span class="str">"CIS Benchmarks"</span>, <span class="str">"HIPAA Compliance"</span>, <span class="str">"CMMC"</span>,
+    <span class="str">"PCI-DSS"</span>, <span class="str">"Enterprise IT Governance"</span>, <span class="str">"IT Consulting"</span>,
+    <span class="str">"Incident Response"</span>, <span class="str">"AI Governance"</span>, <span class="str">"Business Continuity"</span>
+  ],
+  <span class="key">"hasCredential"</span>: [
+    {
+      <span class="key">"@type"</span>: <span class="str">"EducationalOccupationalCredential"</span>,
+      <span class="key">"name"</span>: <span class="str">"Microsoft Cloud Solution Provider (CSP)"</span>,
+      <span class="key">"credentialCategory"</span>: <span class="str">"Professional Certification"</span>,
+      <span class="key">"recognizedBy"</span>: { <span class="key">"@type"</span>: <span class="str">"Organization"</span>, <span class="key">"name"</span>: <span class="str">"Microsoft"</span>, <span class="key">"url"</span>: <span class="str">"https://www.microsoft.com"</span> }
+    },
+    {
+      <span class="key">"@type"</span>: <span class="str">"EducationalOccupationalCredential"</span>,
+      <span class="key">"name"</span>: <span class="str">"Google Partner"</span>,
+      <span class="key">"credentialCategory"</span>: <span class="str">"Professional Certification"</span>,
+      <span class="key">"recognizedBy"</span>: { <span class="key">"@type"</span>: <span class="str">"Organization"</span>, <span class="key">"name"</span>: <span class="str">"Google"</span>, <span class="key">"url"</span>: <span class="str">"https://www.google.com"</span> }
+    }
+  ]
+}</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Block 2 — WebSite Schema (Every Page)</div>
+    <div class="code-block">{
+  <span class="key">"@context"</span>: <span class="str">"https://schema.org"</span>,
+  <span class="key">"@type"</span>: <span class="str">"WebSite"</span>,
+  <span class="key">"name"</span>: <span class="str">"Lionel Mosley | ahr-ki-tekt"</span>,
+  <span class="key">"url"</span>: <span class="str">"https://trust-lionel.com"</span>,
+  <span class="key">"description"</span>: <span class="str">"Carefully selected frameworks, insights, and solutions from Lionel Mosley — IT Consultant &amp; Innovative Thought Leader based in Houston, TX."</span>,
+  <span class="key">"author"</span>: {
+    <span class="key">"@type"</span>: <span class="str">"Person"</span>,
+    <span class="key">"name"</span>: <span class="str">"Lionel Mosley"</span>,
+    <span class="key">"url"</span>: <span class="str">"https://trust-lionel.com"</span>
+  },
+  <span class="key">"inLanguage"</span>: <span class="str">"en-US"</span>
+}</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Block 3 — BlogPosting Schema (Post Pages Only)</div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text"><strong>Dynamic injection</strong>Values are derived from each post's frontmatter at build time. The <code>blogPosting</code> prop is passed from <code>src/pages/posts/[...id].astro</code> to <code>Layout.astro</code> and only renders on post pages.</div>
+    </div>
+    <div class="code-block"><span class="comment">// In src/pages/posts/[...id].astro</span>
+const blogPosting = {
+  <span class="key">headline</span>:      frontmatter.title,
+  <span class="key">description</span>:   frontmatter.description || frontmatter.title,
+  <span class="key">datePublished</span>: frontmatter.pubDate.toISOString().split(<span class="str">'T'</span>)[0],
+  <span class="key">url</span>:           canonicalUrl,
+  <span class="key">image</span>:         ogImage,
+  <span class="key">keywords</span>:      frontmatter.tags || [],
+}
+
+<span class="comment">// Rendered JSON-LD output</span>
+{
+  <span class="key">"@context"</span>: <span class="str">"https://schema.org"</span>,
+  <span class="key">"@type"</span>: <span class="str">"BlogPosting"</span>,
+  <span class="key">"headline"</span>:      <span class="str">"[frontmatter.title]"</span>,
+  <span class="key">"description"</span>:   <span class="str">"[frontmatter.description]"</span>,
+  <span class="key">"author"</span>:        { <span class="key">"@type"</span>: <span class="str">"Person"</span>, <span class="key">"name"</span>: <span class="str">"Lionel Mosley"</span>, <span class="key">"url"</span>: <span class="str">"https://trust-lionel.com"</span> },
+  <span class="key">"publisher"</span>:     { <span class="key">"@type"</span>: <span class="str">"Organization"</span>, <span class="key">"name"</span>: <span class="str">"Lionel Mosley | ahr-ki-tekt"</span>, <span class="key">"url"</span>: <span class="str">"https://trust-lionel.com"</span> },
+  <span class="key">"datePublished"</span>: <span class="str">"[YYYY-MM-DD]"</span>,
+  <span class="key">"url"</span>:           <span class="str">"https://trust-lionel.com/posts/{slug}"</span>,
+  <span class="key">"image"</span>:         <span class="str">"[Unsplash cover URL or /og-image.png fallback]"</span>,
+  <span class="key">"keywords"</span>:      <span class="str">["Tag One", "Tag Two"]</span>
+}</div>
+    <table class="data-table" style="margin-top:12px">
+      <thead><tr><th>Post Slug</th><th>datePublished</th><th>Validation Status</th></tr></thead>
+      <tbody>
+        <tr><td><code>cloud-migration</code></td><td>2026-06-16</td><td><span class="badge live">0 errors · 0 warnings</span></td></tr>
+        <tr><td><code>microsoft-notification-abuse</code></td><td>2026-05-22</td><td><span class="badge live">0 errors · 0 warnings</span></td></tr>
+        <tr><td><code>three-questions</code></td><td>2026-05-17</td><td><span class="badge live">0 errors · 0 warnings</span></td></tr>
+        <tr><td><code>vibe-coding</code></td><td>2026-05-16</td><td><span class="badge live">0 errors · 0 warnings</span></td></tr>
+        <tr><td><code>macsystools</code></td><td>2026-03-05</td><td><span class="badge live">0 errors · 0 warnings</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-label">www.lionelmosley.com — Current Configuration</div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text"><strong>CDN-level redirect via BunnyCDN</strong><code>www.lionelmosley.com</code> is not a separate deployment. All traffic arriving at this domain is transparently redirected to <code>https://trust-lionel.com</code>. <code>trust-lionel.com</code> remains the canonical URL and primary <code>"url"</code> in the Person schema.</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text"><strong>sameAs treatment</strong><code>https://www.lionelmosley.com</code> is included in the Person schema <code>sameAs</code> array. This signals to Google that both domains represent the same entity (Lionel Mosley) and consolidates authority under the canonical domain.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label amber">www.lionelmosley.com — Future Enhancement: Decoupling to Standalone Site</div>
+    <div class="talking-point">
+      <div class="tp-icon amber">1</div>
+      <div class="tp-text"><strong>Determine the canonical domain</strong>Decide whether <code>trust-lionel.com</code> or <code>lionelmosley.com</code> becomes the primary canonical domain. The Person schema <code>"url"</code> field should point to whichever domain receives the most inbound links and organic traffic.</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon amber">2</div>
+      <div class="tp-text"><strong>Update <code>trust-lionel.com</code> Person schema</strong><code>www.lionelmosley.com</code> remains in the <code>sameAs</code> array but the relationship becomes peer-to-peer rather than redirect-to-canonical.</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon amber">3</div>
+      <div class="tp-text"><strong>Add schema to <code>lionelmosley.com</code></strong>The standalone site will need its own Person schema with <code>"url": "https://www.lionelmosley.com"</code> and a WebSite schema. Both should include the full <code>sameAs</code> array cross-referencing <code>trust-lionel.com</code>.</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon amber">4</div>
+      <div class="tp-text"><strong>Reconfigure BunnyCDN</strong>Remove or reconfigure the redirect rules. Route traffic to the new origin rather than redirecting to <code>trust-lionel.com</code>.</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon amber">5</div>
+      <div class="tp-text"><strong>Add canonical link tags</strong>Each page on <code>lionelmosley.com</code> will need a <code>&lt;link rel="canonical"&gt;</code> tag pointing to its own URL — not to <code>trust-lionel.com</code>.</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon amber">6</div>
+      <div class="tp-text"><strong>Submit to Google Search Console</strong>Submit the <code>lionelmosley.com</code> sitemap to Google Search Console as a separate property and monitor indexing.</div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon amber">7</div>
+      <div class="tp-text"><strong>Validate schema on both domains</strong>After decoupling, validate both <code>https://trust-lionel.com</code> and <code>https://www.lionelmosley.com</code> at <code>search.google.com/test/rich-results</code>. Both should show 0 errors, 0 warnings.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 15: DECISION LOG -->
+  <div class="section-header" id="decisions">
+    <div class="section-num">15</div>
+    <div class="section-title">Decision Log</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Architecture Decisions</div>
+    <table class="data-table">
+      <thead><tr><th>Decision</th><th>Choice Made</th><th>Alternative</th><th>Reason</th></tr></thead>
+      <tbody>
+        <tr><td>Framework</td><td>Astro v6</td><td>Next.js, Gatsby</td><td>Static-first, zero JS by default, content-focused</td></tr>
+        <tr><td>Theme</td><td>Litos (custom fork)</td><td>Build from scratch</td><td>Strong feature set, good design baseline, faster to deploy</td></tr>
+        <tr><td>Hosting</td><td>Netlify</td><td>Vercel</td><td>Security headers and redirect configuration more straightforward</td></tr>
+        <tr><td>Package manager</td><td>pnpm</td><td>npm, yarn</td><td>Required by Litos; faster installs, strict dependency resolution</td></tr>
+        <tr><td>Node version</td><td>22</td><td>20</td><td>Astro v6 minimum requirement</td></tr>
+        <tr><td>Rendering</td><td>Static (SSG)</td><td>SSR</td><td>No dynamic data requirements; static is faster and simpler</td></tr>
+        <tr><td>Search</td><td>Pagefind</td><td>Algolia, Meilisearch</td><td>Zero cost, static, no external dependency, WASM-powered</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-label">Design Decisions</div>
+    <table class="data-table">
+      <thead><tr><th>Decision</th><th>Choice Made</th><th>Alternative</th><th>Reason</th></tr></thead>
+      <tbody>
+        <tr><td>Theme mode</td><td>System preference only</td><td>Manual toggle</td><td>Removes UI complexity; respects user OS preference</td></tr>
+        <tr><td>Heading font</td><td>Roboto</td><td>Lato, Inter, Lexend</td><td>Clean, widely recognized, good variable font support</td></tr>
+        <tr><td>Body font</td><td>Geist (Litos default)</td><td>Inter</td><td>Designed for code-adjacent content; fits technical brand</td></tr>
+        <tr><td>Favicon</td><td>Memoji (Lionel at MacBook)</td><td>LM monogram</td><td>More personal and human; stronger brand recognition</td></tr>
+        <tr><td>Social sharing image</td><td>Trippy split portrait</td><td>Text-based card</td><td>Visually distinctive; matches brand personality</td></tr>
+        <tr><td>H1 color</td><td><code>#0088cc</code></td><td>Default foreground</td><td>Brand differentiation; stands out without being aggressive</td></tr>
+        <tr><td>Link colors</td><td>Default Litos theme</td><td>Custom <code>#0000EE</code></td><td>Custom blue was harsh in dark mode; theme defaults work in both modes</td></tr>
+        <tr><td>Post card style</td><td>Minimal</td><td>Compact, ImageShow</td><td>Cleaner reading experience; dates without monospace font</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-label">Content Decisions</div>
+    <table class="data-table">
+      <thead><tr><th>Decision</th><th>Choice Made</th><th>Reason</th></tr></thead>
+      <tbody>
+        <tr><td>Homepage posts</td><td>Hardcoded array of 3</td><td>Full editorial control; not dependent on frontmatter flags</td></tr>
+        <tr><td>Post sorting</td><td>Newest first</td><td>Standard blog convention</td></tr>
+        <tr><td>Date format</td><td>Month DD, YYYY</td><td>Readable and unambiguous; matches American English convention</td></tr>
+        <tr><td>Cover images</td><td>Unsplash CDN URLs</td><td>No storage cost; high quality; free for commercial use</td></tr>
+        <tr><td>Post layout</td><td>coverTop for all posts</td><td>Consistent visual experience across all content</td></tr>
+        <tr><td>Tags</td><td>Sentence case</td><td>Matches how tags appear in prose</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-label">SEO Decisions</div>
+    <table class="data-table">
+      <thead><tr><th>Decision</th><th>Choice Made</th><th>Reason</th></tr></thead>
+      <tbody>
+        <tr><td>Schema injection</td><td><code>set:html={JSON.stringify(...)}</code></td><td><code>is:inline</code> with <code>{JSON.stringify()}</code> renders as literal text; <code>set:html</code> evaluates at build time</td></tr>
+        <tr><td>BlogPosting schema</td><td>Dynamic via Layout prop</td><td>Avoids hardcoding per-post; automatically uses frontmatter values</td></tr>
+        <tr><td>Person schema location</td><td><code>Layout.astro</code></td><td>Appears on every page; maximizes entity authority signals</td></tr>
+        <tr><td><code>maintainer</code> in Person</td><td>Removed</td><td>Google flagged SoftwareApplication and SoftwareSourceCode as invalid in Person context</td></tr>
+        <tr><td><code>author</code> in Person</td><td>Removed</td><td>Not a recognized property for Person type in schema.org</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-label">Security Decisions</div>
+    <table class="data-table">
+      <thead><tr><th>Decision</th><th>Choice Made</th><th>Reason</th></tr></thead>
+      <tbody>
+        <tr><td>CSP enforcement</td><td>HTTP headers via netlify.toml</td><td>More reliable than meta tags; cannot be overridden by page content</td></tr>
+        <tr><td><code>'unsafe-inline'</code> in script-src</td><td>Included</td><td>Required for Astro view transitions; acceptable given no user input is processed</td></tr>
+        <tr><td>HTTPS enforcement</td><td>301 redirect from HTTP and www</td><td>All traffic canonicalized to <code>https://trust-lionel.com</code></td></tr>
+        <tr><td>GitHub Pages</td><td>Disabled</td><td>Site deploys via Netlify; Jekyll processing was causing build errors</td></tr>
+        <tr><td>.nojekyll</td><td>Added</td><td>Prevents accidental Jekyll processing if GitHub Pages is re-enabled</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 16: FUTURE ENHANCEMENTS -->
+  <div class="section-header" id="future">
+    <div class="section-num">16</div>
+    <div class="section-title">Future Enhancements</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Technical Roadmap</div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text">
+        <strong>Astro 7.0 Upgrade <span class="badge planned">Planned</span></strong>
+        Released June 22, 2026. Key benefits: 15–61% faster builds, Rust-powered <code>.astro</code> compiler, Rust-powered Markdown pipeline (Sätteri), Vite 8. Approach: create a branch (<code>git checkout -b astro-7-upgrade</code>), run <code>pnpm dlx @astrojs/upgrade</code>, fix markup errors, confirm clean build, merge to main.
+        <div class="tp-sub">Risk: The new Rust compiler does not silently rewrite invalid HTML — unclosed tags will error rather than being auto-corrected.</div>
+      </div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text">
+        <strong>About Page <span class="badge planned">Planned</span></strong>
+        URL: <code>/about</code>. Content: full bio, credentials (Microsoft CSP, Google Partner), Houston address, 4TH AND BAILEY relationship, professional timeline. SEO value: dedicated authority page for the Person schema.
+      </div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text">
+        <strong>Netlify Branch Deploys <span class="badge planned">Planned</span></strong>
+        Enable in Netlify → Site Settings → Build &amp; Deploy → Branch deploys. Allows preview of changes before merging to main.
+      </div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">→</div>
+      <div class="tp-text">
+        <strong>Jekyll URL Redirects <span class="badge planned">Planned</span></strong>
+        Add <code>[[redirects]]</code> entries in <code>netlify.toml</code> mapping old Jekyll URLs to new Astro URLs to preserve backlinks.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-label">Platform Ideas</div>
+    <div class="talking-point">
+      <div class="tp-icon">1</div>
+      <div class="tp-text">
+        <strong>The ahr-ki-tekt Decision Engine</strong>
+        AI-powered tool where a visitor answers 6–8 questions about their organization and receives a custom infrastructure recommendation report citing the Infrastructure Placement Framework.
+        <div class="tp-sub">Technical approach: Anthropic API via artifact, client-side React component, optional email gate before results delivery</div>
+      </div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">2</div>
+      <div class="tp-text">
+        <strong>Live Security Posture Scorecard</strong>
+        Self-assessment tool where IT leaders answer questions about their Microsoft 365 and Azure environment and receive a scored, color-coded posture report with explicit callouts to CISA SCuBA and NIST controls.
+        <div class="tp-sub">Technical approach: Anthropic API, scoring engine, PDF export of results</div>
+      </div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">3</div>
+      <div class="tp-text">
+        <strong>The Boardroom Briefing Series</strong>
+        Recurring, formatted series of one-page print-ready PDFs designed to be handed to board members. Format: "The ahr-ki-tekt Boardroom Brief, Issue 04."
+        <div class="tp-sub">Content foundation: "Three Questions Every CEO and Board Should Be Able to Answer" is Issue 01</div>
+      </div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">4</div>
+      <div class="tp-text">
+        <strong>Houston Alert → National Civic Infrastructure Kit</strong>
+        Open-source the Houston Alert architecture as a replicable template for any municipality or regional nonprofit. Package as "The ahr-ki-tekt Civic Infrastructure Kit."
+        <div class="tp-sub">Distribution: GovTech publications, civic tech communities</div>
+      </div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">5</div>
+      <div class="tp-text">
+        <strong>The CISO Reading Room</strong>
+        Curated, annotated resource library organized by framework (NIST, CISA SCuBA, MITRE ATT&amp;CK, CIS). Each resource includes Lionel's commentary on why it matters and how it connects to real deployment decisions.
+      </div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">6</div>
+      <div class="tp-text">
+        <strong>Client Architecture Showcase (Anonymized)</strong>
+        Visually rich "Before &amp; After Architecture" section where anonymized client environments are diagrammed.
+        <div class="tp-sub">Content foundation: Regional broadcasting company cloud migration case study (cloud-migration.md)</div>
+      </div>
+    </div>
+    <div class="talking-point">
+      <div class="tp-icon">7</div>
+      <div class="tp-text">
+        <strong>The ahr-ki-tekt Certification Path</strong>
+        A self-guided learning path leading to a verifiable "ahr-ki-tekt Infrastructure Foundations" badge issued via Credly or similar platform.
+        <div class="tp-sub">Community value: Creates a reason for junior IT professionals to orbit the brand for years</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-label">Lead Magnet Resources — Planned</div>
+    <table class="data-table">
+      <thead><tr><th>Resource</th><th>Target Persona</th><th>Format</th></tr></thead>
+      <tbody>
+        <tr><td>TCO Worksheet</td><td>Finance / Procurement</td><td>Downloadable PDF / Excel</td></tr>
+        <tr><td>Phishing Playbook</td><td>InfoSec Officer</td><td>Downloadable PDF</td></tr>
+        <tr><td>Uptime Checklist</td><td>IT Director</td><td>Downloadable PDF</td></tr>
+        <tr><td>CEO Risk Document</td><td>Owner / CEO / Operator</td><td>Downloadable PDF</td></tr>
+      </tbody>
+    </table>
+    <div class="tp-sub" style="margin-top:10px">Each resource should live at a <code>/resources/</code> URL with its own page for SEO indexing.</div>
+  </div>
+
+  <!-- SECTION 17: HANDOFF NOTES -->
+  <div class="section-header" id="handoff">
+    <div class="section-num">17</div>
+    <div class="section-title">Handoff Notes for New Collaborators</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Getting Started</div>
+    <div class="code-block"><span class="comment"># 1. Clone the repository</span>
+git clone https://github.com/trust-lionel/trust-lionel.git
+
+<span class="comment"># 2. Install dependencies — must use pnpm, not npm or yarn</span>
+pnpm install
+
+<span class="comment"># 3. Start dev server</span>
+pnpm dev
+<span class="comment"># Site runs at http://localhost:4321</span></div>
+  </div>
+  <div class="card">
+    <div class="card-label">Critical Files to Understand First</div>
+    <table class="data-table">
+      <thead><tr><th>File</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td><code>src/config.ts</code></td><td>All site-wide settings — start here for any content or feature changes</td></tr>
+        <tr><td><code>src/layouts/Layout.astro</code></td><td>Root layout — contains all schema, analytics, and head configuration</td></tr>
+        <tr><td><code>netlify.toml</code></td><td>Build config and all security headers — changes here affect production security</td></tr>
+        <tr><td><code>src/pages/index.astro</code></td><td>Homepage — featured posts are hardcoded here</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-label">Things That Are Different from Default Litos</div>
+    <table class="data-table">
+      <thead><tr><th>Item</th><th>What Changed</th></tr></thead>
+      <tbody>
+        <tr><td>Theme toggle</td><td>Removed — system preference only</td></tr>
+        <tr><td>Photos page</td><td>Removed — replaced by Consulting page</td></tr>
+        <tr><td>Heading font</td><td>Roboto instead of Lexend</td></tr>
+        <tr><td>Date format</td><td><code>Month DD, YYYY</code> instead of dot notation</td></tr>
+        <tr><td>Post card dates</td><td>Roboto instead of monospace</td></tr>
+        <tr><td>Social icons</td><td>Brand colors instead of default theme colors</td></tr>
+        <tr><td>Favicon</td><td>Memoji instead of LM monogram</td></tr>
+        <tr><td>Footer</td><td>Custom copyright with social icons instead of Litos GitHub link</td></tr>
+        <tr><td>Chinese comments</td><td>All translated to American English</td></tr>
+        <tr><td>ShangguSansSC-VF</td><td>Removed — 100+ unused Chinese font files deleted</td></tr>
+        <tr><td>Schema</td><td>Comprehensive Person + WebSite + BlogPosting JSON-LD</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-label">Analytics Access</div>
+    <table class="data-table">
+      <thead><tr><th>Tool</th><th>Access</th></tr></thead>
+      <tbody>
+        <tr><td>GTM</td><td>tagmanager.google.com — Container ID: <code>GTM-543DS8T7</code></td></tr>
+        <tr><td>GA4</td><td>Tag <code>G-YNZSY2L2XL</code> — managed inside the GTM container</td></tr>
+        <tr><td>Umami</td><td><code>umami-production-f3f3.up.railway.app</code> — Website ID: <code>b8e2a312-e7f4-4595-95ee-38b47fc9be54</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="info-box">
+    <h3>Rich Results Validation — After Any Schema Changes</h3>
+    <div class="info-row"><span class="info-icon">→</span><span>Validate at <strong>search.google.com/test/rich-results</strong></span></div>
+    <div class="info-row"><span class="info-icon">→</span><span>Test <code>https://trust-lionel.com</code> — Person + WebSite schema. Expected: 0 errors, 0 warnings.</span></div>
+    <div class="info-row"><span class="info-icon">→</span><span>Test <code>https://trust-lionel.com/posts/cloud-migration</code> — BlogPosting schema. Expected: 0 errors, 0 warnings.</span></div>
+  </div>
+
+  <div class="footer">
+    Prepared by Lionel Mosley &nbsp;&bull;&nbsp; 4TH AND BAILEY | Information Technology Consulting &nbsp;&bull;&nbsp; June 22, 2026 &nbsp;&bull;&nbsp; trust-lionel.com &nbsp;&bull;&nbsp; Runbook v1.1
+  </div>
+
+</div>
+</body>
+</html>
