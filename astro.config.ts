@@ -5,6 +5,7 @@ import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import robotsTxt from 'astro-robots-txt'
 import expressiveCode from 'astro-expressive-code'
+import { unified } from '@astrojs/markdown-remark'
 import { remarkPlugins, rehypePlugins } from './plugins'
 import { SITE } from './src/config'
 
@@ -26,8 +27,10 @@ export default defineConfig({
   },
   markdown: {
     syntaxHighlight: false,
-    remarkPlugins,
-    rehypePlugins,
+    ...unified({
+      remarkPlugins,
+      rehypePlugins,
+    }),
   },
   integrations: [expressiveCode(), mdx(), react(), sitemap(), robotsTxt()],
 })

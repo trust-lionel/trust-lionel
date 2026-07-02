@@ -31,7 +31,7 @@ export const remarkPlugins = [
         },
       },
       link: {
-        // faviconSourceUrl: 'https://icon.horse/icon/{domain}',// 1000/month 国内建议使用
+        // faviconSourceUrl: 'https://icon.horse/icon/{domain}' // 1000 requests/month limit
         faviconSourceUrl: 'https://www.google.com/s2/favicons?domain={domain}&sz=128', // recommended ✨
         imgProps: () => {
           const props: ReturnType<PropertiesFromTextDirective> = {
@@ -45,7 +45,7 @@ export const remarkPlugins = [
       },
       video: {
         platforms: {
-          // 禁止自动播放，避免干扰
+          // Disable autoplay to avoid interrupting the user
           bilibili: 'https://player.bilibili.com/player.html?bvid={id}&autoplay=0',
         },
       },
