@@ -3,8 +3,19 @@
 # Lionel Mosley | ahr-ki-tekt Design Journal
 # Litos theme / Astro static site deployment on Netlify
 # =============================================================
-# Replaces the existing Jekyll-era netlify.toml entirely.
-# Drop this file at the root of your Litos project directory.
+# Version history:
+#   v1.0  Initial Astro/Netlify configuration
+#   v1.1  Added security headers and CSP
+#   v1.2  Added HSTS and cache control rules
+#   v1.3  Added www-to-apex and HTTP-to-HTTPS redirects
+#   v1.4  Added Jekyll/SquareSpace /blog/ → /posts/ redirects
+#         (July 3, 2026)
+#   v1.5  Added Google Search Console HTTP header verification
+#         and sitemap cache rules (July 3, 2026)
+#   v1.6  Removed GSC HTTP header verification — existing DNS
+#         verification is active and sufficient. Added
+#         plus.unsplash.com to CSP img-src for Unsplash+
+#         cover images (July 3, 2026)
 # =============================================================
 
 # ── BUILD SETTINGS ───────────────────────────────────────────
@@ -14,8 +25,7 @@
   publish         = "dist"
 
   [build.environment]
-    # Pin Node.js to a version compatible with Astro v6
-    # Astro v6 requires Node 18.17.1 or higher
+    # Node.js 22 — required by Astro v7
     NODE_VERSION  = "22"
     # Tell Netlify to use pnpm instead of npm
     NPM_FLAGS     = "--version"  # suppresses npm fallback warning
@@ -25,6 +35,7 @@
 # and installs it automatically. No additional config needed.
 
 # ── REDIRECTS ────────────────────────────────────────────────
+
 # Force HTTPS — redirect all HTTP traffic to HTTPS
 [[redirects]]
   from   = "http://trust-lionel.com/*"
@@ -33,39 +44,198 @@
   force  = true
 
 # Redirect www to apex domain
+# force = true ensures this fires even when BunnyCDN is in front
 [[redirects]]
   from   = "https://www.trust-lionel.com/*"
   to     = "https://trust-lionel.com/:splat"
   status = 301
   force  = true
 
+# ── JEKYLL & SQUARESPACE → ASTRO REDIRECTS ───────────────────
+# Both the old Jekyll site and the old SquareSpace site used
+# the /blog/ URL path. The new Astro site uses /posts/.
+# These 301 redirects preserve Google's indexed URLs and
+# transfer accumulated ranking signals to the new structure.
+# Confirmed SquareSpace blog URL slug: /blog (July 3, 2026)
+#
+# IMPORTANT: Specific rules must appear before the catch-all.
+# Netlify evaluates redirects top-to-bottom and stops at the
+# first match. The /blog/* catch-all is last intentionally.
+
+# ── Posts that exist on the new site ─────────────────────────
+
+[[redirects]]
+  from   = "/blog/cloud-migration"
+  to     = "/posts/cloud-migration/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/cloud-migration/"
+  to     = "/posts/cloud-migration/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/cloud-migration.html"
+  to     = "/posts/cloud-migration/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/microsoft-notification-abuse"
+  to     = "/posts/microsoft-notification-abuse/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/microsoft-notification-abuse/"
+  to     = "/posts/microsoft-notification-abuse/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/microsoft-notification-abuse.html"
+  to     = "/posts/microsoft-notification-abuse/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/three-questions"
+  to     = "/posts/three-questions/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/three-questions/"
+  to     = "/posts/three-questions/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/three-questions.html"
+  to     = "/posts/three-questions/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/vibe-coding"
+  to     = "/posts/vibe-coding/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/vibe-coding/"
+  to     = "/posts/vibe-coding/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/vibe-coding.html"
+  to     = "/posts/vibe-coding/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/macsystools"
+  to     = "/posts/macsystools/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/macsystools/"
+  to     = "/posts/macsystools/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/macsystools.html"
+  to     = "/posts/macsystools/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/connectivity-uptime"
+  to     = "/posts/connectivity-uptime/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/connectivity-uptime/"
+  to     = "/posts/connectivity-uptime/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/connectivity-uptime.html"
+  to     = "/posts/connectivity-uptime/"
+  status = 301
+
+# ── Legacy content with no equivalent on the new site ────────
+# Redirects to /posts/ — the closest thematic equivalent
+
+[[redirects]]
+  from   = "/blog/8-albums-to-get-to-know-me"
+  to     = "/posts/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/8-albums-to-get-to-know-me/"
+  to     = "/posts/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/8-albums-to-get-to-know-me.html"
+  to     = "/posts/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/i-used-gpt-to-fetch-40918-remote-jobs"
+  to     = "/posts/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/i-used-gpt-to-fetch-40918-remote-jobs/"
+  to     = "/posts/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/i-used-gpt-to-fetch-40918-remote-jobs.html"
+  to     = "/posts/"
+  status = 301
+
+# ── Legacy tag pages ─────────────────────────────────────────
+# Covers SquareSpace tag URLs including music content:
+#   /blog/tag/ScarFace - The Fix
+#   /blog/tag/Bob Marley - Exodus
+#   /blog/tag/Sade - Love Deluxe
+#   /blog/tag/Bone Hard Zaggin' Featuring Big Mello - Wegonefunkwichamind
+[[redirects]]
+  from   = "/blog/tag/*"
+  to     = "/posts/"
+  status = 301
+
+# ── Catch-all for any remaining /blog/ paths ─────────────────
+# Handles any Jekyll or SquareSpace URLs not explicitly listed
+# above. Must remain last in the redirects block.
+[[redirects]]
+  from   = "/blog/*"
+  to     = "/posts/"
+  status = 301
+
 # ── HEADERS ──────────────────────────────────────────────────
-# Security headers applied to all pages
+# Security and cache headers applied to all pages
 [[headers]]
   for = "/*"
 
   [headers.values]
-    # Prevent clickjacking
+    # ── Clickjacking protection ───────────────────────────────
     X-Frame-Options = "SAMEORIGIN"
 
-    # Prevent MIME type sniffing
+    # ── MIME type sniffing protection ─────────────────────────
     X-Content-Type-Options = "nosniff"
 
-    # Control referrer information sent to third parties
+    # ── Referrer policy ──────────────────────────────────────
     Referrer-Policy = "strict-origin-when-cross-origin"
 
-    # Permissions policy — disable unused browser features
+    # ── Permissions policy ───────────────────────────────────
+    # Disables unused browser features
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
-    # Content Security Policy
-    # Allows: self, Unsplash images (for post covers), Google Tag Manager,
-    # Umami Analytics (Railway), GitHub avatar CDN, and Google Fonts if added.
-    # Tighten further once your image hosting is finalized.
+    # ── Content Security Policy ───────────────────────────────
+    # Allows: self, Unsplash images (post covers on images.unsplash.com
+    # and plus.unsplash.com), Google Tag Manager (GTM-543DS8T7),
+    # Umami Analytics (Railway), GitHub avatar CDN,
+    # vercount.one (Litos view counter).
+    # Tighten img-src once post covers are migrated to /public/.
     Content-Security-Policy = """
       default-src 'self';
       script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://www.googletagmanager.com https://umami-production-f3f3.up.railway.app https://events.vercount.one;
       style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
-      img-src 'self' data: https://images.unsplash.com https://avatars.githubusercontent.com https://www.google.com https://github.githubassets.com https://www.googletagmanager.com;
+      img-src 'self' data: https://images.unsplash.com https://plus.unsplash.com https://avatars.githubusercontent.com https://www.google.com https://github.githubassets.com https://www.googletagmanager.com;
       connect-src 'self' https://umami-production-f3f3.up.railway.app https://api.github.com https://github-contributions-api.jogruber.de https://www.google-analytics.com https://www.google.com;
       font-src 'self' https://cdn.jsdelivr.net;
       frame-src 'none';
@@ -74,39 +244,46 @@
       form-action 'self';
     """
 
-    # HSTS — tell browsers to always use HTTPS for this domain
-    # max-age is 1 year (31536000 seconds)
-    # Remove includeSubDomains if you have subdomains on HTTP
+    # ── HTTP Strict Transport Security (HSTS) ────────────────
+    # Instructs browsers to always use HTTPS for this domain.
+    # max-age: 1 year (31,536,000 seconds)
+    # preload: eligible for browser HSTS preload lists
+    # includeSubDomains: covers www.trust-lionel.com
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
 
-# Cache static assets aggressively — Astro hashes filenames on build
+# ── Static asset caching ─────────────────────────────────────
+# Astro hashes filenames on build — safe to cache indefinitely
 [[headers]]
   for = "/_astro/*"
 
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Cache fonts
+# ── Font caching ─────────────────────────────────────────────
 [[headers]]
   for = "/fonts/*"
 
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Do not cache HTML pages — always serve fresh
+# ── HTML pages — always serve fresh ──────────────────────────
 [[headers]]
   for = "/*.html"
 
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Do not cache the sitemap or robots.txt
+# ── Sitemap — always serve fresh ─────────────────────────────
+# Ensures GSC and search engine crawlers always receive the
+# current sitemap. Sitemap is at /sitemap-index.xml (auto-
+# generated by Astro) with pages listed in /sitemap-0.xml.
 [[headers]]
   for = "/sitemap*.xml"
 
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
+# ── robots.txt — always serve fresh ──────────────────────────
 [[headers]]
   for = "/robots.txt"
 
@@ -115,22 +292,62 @@
 
 # ── ENVIRONMENT VARIABLES ────────────────────────────────────
 # Do NOT store secrets in this file.
-# Set the following in Netlify UI → Site Settings → Environment Variables:
+# Set the following in Netlify UI →
+# Site Configuration → Environment Variables:
 #
 #   PUBLIC_GITHUB_CLIENT_ID      — Gitalk OAuth App Client ID
 #   PUBLIC_GITHUB_CLIENT_SECRET  — Gitalk OAuth App Client Secret
 #
-# These are only needed if you enable the Gitalk comment system.
-# COMMENT_CONFIG.enabled is currently set to false in src/config.ts.
+# These are only needed if the Gitalk comment system is enabled.
+# COMMENT_CONFIG.enabled is currently set to false in
+# src/config.ts — no action required unless comments are enabled.
 
-# ── NOTES ────────────────────────────────────────────────────
-# 1. Astro generates the sitemap at /sitemap-index.xml automatically
-#    when SITE.website = 'https://trust-lionel.com/' in src/config.ts.
+# ── DEPLOYMENT NOTES ─────────────────────────────────────────
+# 1. Sitemap
+#    Astro generates /sitemap-index.xml automatically when
+#    SITE.website = 'https://trust-lionel.com/' in src/config.ts.
+#    Current sitemap confirmed at:
+#    https://trust-lionel.com/sitemap-0.xml (July 3, 2026)
+#    Canonical URL format uses trailing slashes on all pages.
 #
-# 2. The Content-Security-Policy above includes Unsplash as an img-src
-#    because your current post covers are Unsplash CDN URLs.
-#    Once you migrate images to local /public/ storage, remove
-#    https://images.unsplash.com from img-src and tighten the policy.
+# 2. GSC Domain property
+#    trust-lionel.com is verified as a Domain property in GSC,
+#    covering all subdomains (www, m.) and both http/https.
+#    Use the Domain property — not the URL prefix property
+#    https://trust-lionel.com/ — for all GSC analysis.
+#    Existing DNS TXT verification is active and sufficient.
+#    No HTTP header verification required.
 #
-# 3. vercount.one is included in script-src for the Litos view counter.
-#    Remove it from script-src if you disable that feature.
+# 3. Post-deployment GSC actions
+#    After deploying this file, request indexing in GSC for
+#    these URLs in priority order (URL Inspection tool):
+#      1. https://trust-lionel.com/posts/macsystools/
+#      2. https://trust-lionel.com/posts/three-questions/
+#      3. https://trust-lionel.com/posts/vibe-coding/
+#      4. https://trust-lionel.com/posts/microsoft-notification-abuse/
+#      5. https://trust-lionel.com/posts/cloud-migration/
+#      6. https://trust-lionel.com/posts/connectivity-uptime/
+#
+# 4. Image hosting
+#    Current post cover images are served from Unsplash CDN
+#    (images.unsplash.com and plus.unsplash.com).
+#    Once covers are migrated to /public/ (local hosting),
+#    remove both Unsplash domains from img-src in the
+#    Content-Security-Policy above and tighten the policy.
+#
+# 5. vercount.one
+#    Included in script-src for the Litos view counter.
+#    Remove from script-src if the view counter is disabled.
+#
+# 6. BunnyCDN
+#    trust-lionel.com pull zone has Force SSL enabled on both
+#    trust-lionel.com and www.trust-lionel.com hostnames.
+#    The lionelmosley.com pull zone requires a BunnyCDN Edge
+#    Rule to redirect to trust-lionel.com once SSL is resolved
+#    at the GoDaddy DNS level.
+#
+# 7. Redirect history
+#    SquareSpace blog URL slug confirmed as /blog (July 3, 2026)
+#    Jekyll site also used /blog/ paths.
+#    Both are covered by the redirect rules above.
+#    The /blog/* catch-all handles any unlisted legacy slugs.
