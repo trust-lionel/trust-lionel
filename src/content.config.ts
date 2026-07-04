@@ -26,6 +26,7 @@ const posts = defineCollection({
         pinned: z.boolean().default(false),
         draft: z.boolean().default(false),
         license: z.string().optional(),
+        spotifyPlaylistId: z.string().optional(),
       })
       .transform((data) => ({
         ...data,
@@ -52,7 +53,6 @@ const projects = defineCollection({
       draft: z.boolean().default(false),
     }),
 })
-
 
 const events = defineCollection({
   loader: glob({

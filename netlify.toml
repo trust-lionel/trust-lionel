@@ -16,6 +16,10 @@
 #         verification is active and sufficient. Added
 #         plus.unsplash.com to CSP img-src for Unsplash+
 #         cover images (July 3, 2026)
+#   v1.7  Added Spotify embed support to CSP — frame-src,
+#         connect-src, and img-src updated to allow
+#         open.spotify.com and i.scdn.co (album art CDN)
+#         (July 3, 2026)
 # =============================================================
 
 # ── BUILD SETTINGS ───────────────────────────────────────────
@@ -226,19 +230,20 @@
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
     # ── Content Security Policy ───────────────────────────────
-    # Allows: self, Unsplash images (post covers on images.unsplash.com
-    # and plus.unsplash.com), Google Tag Manager (GTM-543DS8T7),
+    # Allows: self, Unsplash images (images.unsplash.com and
+    # plus.unsplash.com), Google Tag Manager (GTM-543DS8T7),
     # Umami Analytics (Railway), GitHub avatar CDN,
-    # vercount.one (Litos view counter).
+    # vercount.one (Litos view counter), Spotify embed player
+    # (open.spotify.com), Spotify album art CDN (i.scdn.co).
     # Tighten img-src once post covers are migrated to /public/.
     Content-Security-Policy = """
       default-src 'self';
       script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://www.googletagmanager.com https://umami-production-f3f3.up.railway.app https://events.vercount.one;
       style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
-      img-src 'self' data: https://images.unsplash.com https://plus.unsplash.com https://avatars.githubusercontent.com https://www.google.com https://github.githubassets.com https://www.googletagmanager.com;
-      connect-src 'self' https://umami-production-f3f3.up.railway.app https://api.github.com https://github-contributions-api.jogruber.de https://www.google-analytics.com https://www.google.com;
+      img-src 'self' data: https://images.unsplash.com https://plus.unsplash.com https://avatars.githubusercontent.com https://www.google.com https://github.githubassets.com https://www.googletagmanager.com https://i.scdn.co;
+      connect-src 'self' https://umami-production-f3f3.up.railway.app https://api.github.com https://github-contributions-api.jogruber.de https://www.google-analytics.com https://www.google.com https://open.spotify.com;
       font-src 'self' https://cdn.jsdelivr.net;
-      frame-src 'none';
+      frame-src https://open.spotify.com;
       object-src 'none';
       base-uri 'self';
       form-action 'self';
@@ -351,3 +356,15 @@
 #    Jekyll site also used /blog/ paths.
 #    Both are covered by the redirect rules above.
 #    The /blog/* catch-all handles any unlisted legacy slugs.
+#
+# 8. Spotify embeds
+#    Spotify playlist embeds are supported via the SpotifyEmbed
+#    component at src/components/posts/SpotifyEmbed.astro.
+#    To add a playlist to a post, add spotifyPlaylistId to the
+#    post frontmatter:
+#      spotifyPlaylistId: "37i9dQZF1EIgxoKbMD2OOc"
+#    The playlist ID is the alphanumeric string from the
+#    Spotify share link:
+#      https://open.spotify.com/playlist/{spotifyPlaylistId}
+#    CSP has been updated to allow open.spotify.com (frame-src,
+#    connect-src) and i.scdn.co (img-src for album art).
