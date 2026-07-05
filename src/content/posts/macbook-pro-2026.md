@@ -12,7 +12,7 @@ cover: https://images.unsplash.com/photo-1648784450009-bcd90126de7d?w=1400&q=80&
 featured: false
 ---
 
-*Background music always plays when I am writing something that needs room to breathe. Right now it is Khruangbin's NPR Tiny Desk Concert — three songs, eleven minutes and fourteen seconds. If I am in the home office, it plays through the Sonos Play:1. If I am somewhere else in the house, it routes to the Sony STR-DE685 receiver. The location changes. The music does not stop.*
+*Background music always plays when I am writing something that needs room to breathe. Right now it is Khruangbin's NPR Tiny Desk Concert — three songs, eleven minutes and fourteen seconds. If I am in the home office, it plays through the Sonos Play&#58;1. If I am somewhere else in the house, it routes to the Sony STR-DE685 receiver. The location changes. The music does not stop.*
 
 ---
 
@@ -62,7 +62,7 @@ The [**Microsoft Surface Arc Mouse**](https://www.bestbuy.com/site/microsoft-sur
 
 **Audio**
 
-[**Spotify**](https://open.spotify.com/user/lmosley002-spotify) streams to a [**Sonos Play:1**](https://support.sonos.com/en-us/products/play-1) via Spotify Connect when I am working in the home office. The Play:1 is compact, the sound is clear, and it has been running reliably for years. Sonos no longer sells it, but the support page is still active and so is the speaker.
+[**Spotify**](https://open.spotify.com/user/lmosley002-spotify) streams to a [**Sonos Play&#58;1**](https://support.sonos.com/en-us/products/play-1) via Spotify Connect when I am working in the home office. The Play&#58;1 is compact, the sound is clear, and it has been running reliably for years. Sonos no longer sells it, but the support page is still active and so is the speaker.
 
 Music is always playing. The output device changes based on where I am working. The music does not stop.
 
