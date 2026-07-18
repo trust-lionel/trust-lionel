@@ -8,7 +8,7 @@ tags:
   - Personal Brand
   - Open Web
 spotifyPlaylistId: "3rnUYn8aknUR7FBrFgMq8r"
-cover: https://images.unsplash.com/photo-1648784450009-bcd90126de7d?w=1400&q=80&auto=format&fit=crop
+cover: https://images.unsplash.com/photo-1758780690553-8bc703fabca6?w=1400&q=80&auto=format&fit=crop
 featured: false
 ---
 
