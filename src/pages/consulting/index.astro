@@ -4,8 +4,8 @@ import PageTitle from '~/components/base/PageTitle.astro'
 import SectionDivider from '~/components/base/SectionDivider.astro'
 
 const title = 'Consulting'
-const description = 'Full-service IT consulting from Lionel Mosley and 4TH AND BAILEY — cloud services, cybersecurity, infrastructure governance, and advisory retainers.'
-const introduce = 'From cloud migration to enterprise security governance — 4TH AND BAILEY designs, builds, and operates the technology infrastructure that organizations depend on.'
+const description = 'Senior Consultant, IT Strategy Growth & Transformation — Lionel Mosley and 4TH AND BAILEY deliver complete design, implementation, and technology operations across cloud transformation, cybersecurity, infrastructure modernization, and enterprise IT governance.'
+const introduce = 'Complete design, implementation, and technology operations — delivered by Lionel Mosley, Senior Consultant, IT Strategy Growth & Transformation, through 4TH AND BAILEY. Built to improve efficiency, drive performance, and ultimately increase revenue for the organizations we serve.'
 ---
 
 <Layout {title} {description}>
@@ -15,51 +15,68 @@ const introduce = 'From cloud migration to enterprise security governance — 4T
     <div class="mt-12 flex flex-col gap-8">
 
       <div class="border border-border/50 rounded-sm p-6">
-        <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Cloud Services</div>
-        <h2 class="text-lg font-semibold text-foreground mb-3">Cloud Architecture & Migration</h2>
+        <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">IT Strategy & Transformation</div>
+        <h2 class="text-lg font-semibold text-foreground mb-3">End-to-End IT Transformation</h2>
         <p class="text-sm text-muted-foreground leading-relaxed">
-          Cloud architecture, migration, and operations across on-premises, AWS, Google Workspace,
-          Microsoft Azure, and Microsoft 365 — hybrid and multi-cloud environments included. IaaS,
-          PaaS, and SaaS strategy built around cost optimization, performance, and vendor portability
-          so your organization is never locked into a platform that stops serving you.
+          Organizations across every industry face the same challenge — technology that was built
+          for yesterday cannot carry the weight of tomorrow. We lead large-scale transformation
+          projects from strategy through execution, managing project timelines, risk mitigation,
+          cost control, and stakeholder alignment across business and operational teams at every
+          level of the organization. The result is not just a modernized technology environment —
+          it is an organization positioned to grow, compete, and sustain performance under pressure.
         </p>
         <div class="mt-4">
-          <a href="https://m365cloudpro.com/tco/" target="_blank" rel="noopener noreferrer"
-            class="text-sm text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">
+          <a href="/posts/cloud-migration" class="text-sm text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">
+            Case Study: Why We Moved a Regional Broadcasting Company Off Amazon EC2 — and Why Microsoft Azure Won →
+          </a>
+        </div>
+      </div>
+
+      <div class="border border-border/50 rounded-sm p-6">
+        <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Cloud Transformation</div>
+        <h2 class="text-lg font-semibold text-foreground mb-3">Cloud Architecture, Migration & Modernization</h2>
+        <p class="text-sm text-muted-foreground leading-relaxed">
+          Data center and application migrations require more than a lift-and-shift. We design and
+          deliver cloud architecture across on-premises, AWS, Google Workspace, Microsoft Azure, and
+          Microsoft 365 — hybrid and multi-cloud environments included. Every engagement is built
+          around cost optimization, operational continuity, and vendor portability, so your
+          organization is never locked into a platform that stops serving you. CI/CD pipeline
+          improvement and technology platform modernization are available for organizations ready
+          to accelerate delivery and reduce operational overhead.
+        </p>
+        <div class="mt-4">
+          <a href="https://m365cloudpro.com/tco/" target="_blank" rel="noopener noreferrer" class="text-sm text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">
             Run the Microsoft 365 TCO Calculator →
           </a>
         </div>
       </div>
 
       <div class="border border-border/50 rounded-sm p-6">
-        <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Cybersecurity</div>
-        <h2 class="text-lg font-semibold text-foreground mb-3">Security Posture & Governance</h2>
+        <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Technology Resiliency</div>
+        <h2 class="text-lg font-semibold text-foreground mb-3">Security Posture, Governance & AI Integration</h2>
         <p class="text-sm text-muted-foreground leading-relaxed">
-          Security posture assessment, hardening, and governance aligned to CISA SCuBA, NIST SP 800-53,
+          Security is not a product. It is a posture — built through consistent governance, validated
+          configurations, and a clear understanding of how attackers move through an environment.
+          We assess, harden, and govern security environments aligned to CISA SCuBA, NIST SP 800-53,
           MITRE ATT&CK, and CIS Benchmarks. Microsoft 365 Defender configuration, Exchange Online
-          hardening, and incident response readiness for organizations that cannot afford to find out
-          they were unprepared after the fact.
+          hardening, and incident response readiness are included for organizations that cannot
+          afford to find out they were unprepared after the fact. AI integration follows the
+          governance guidelines documented in the <a href="https://framework.4thandbailey.com" target="_blank" rel="noopener noreferrer" class="text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">Infrastructure Placement Framework — Module 05</a>,
+          ensuring responsible deployment aligned to enterprise controls.
         </p>
       </div>
 
       <div class="border border-border/50 rounded-sm p-6">
-        <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Infrastructure</div>
-        <h2 class="text-lg font-semibold text-foreground mb-3">Enterprise Infrastructure Design</h2>
+        <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Operational Excellence</div>
+        <h2 class="text-lg font-semibold text-foreground mb-3">Infrastructure Design, Analytics & Business Intelligence</h2>
         <p class="text-sm text-muted-foreground leading-relaxed">
-          Enterprise infrastructure design and governance using the <a href="https://framework.4thandbailey.com" target="_blank" rel="noopener noreferrer" class="text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">Infrastructure Placement Framework</a> — the open-source enterprise IT framework built by 4TH AND BAILEY. Network architecture,
-          server infrastructure, and hybrid cloud integration aligned to the frameworks that hold up
-          under financial, regulatory, and operational scrutiny.
-        </p>
-      </div>
-
-      <div class="border border-border/50 rounded-sm p-6">
-        <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">IT Consulting</div>
-        <h2 class="text-lg font-semibold text-foreground mb-3">Advisory & Fractional CTO</h2>
-        <p class="text-sm text-muted-foreground leading-relaxed">
-          Advisory and fractional CTO services for organizations navigating technology decisions,
-          vendor selection, compliance requirements, and digital transformation. Structured engagements
-          from one-time assessments to ongoing advisory retainers — serving SMBs to large enterprises
-          nationwide.
+          Infrastructure decisions made without a framework are decisions made by default. We design
+          and optimize enterprise infrastructure using the <a href="https://framework.4thandbailey.com" target="_blank" rel="noopener noreferrer" class="text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">Infrastructure Placement Framework</a> —
+          a vendor-neutral, NIST-aligned enterprise IT governance framework built by 4TH AND BAILEY.
+          Network architecture, server infrastructure, and hybrid cloud integration are evaluated
+          against financial, regulatory, and operational criteria at scale. Business intelligence
+          and analytics delivery — including Power BI reporting — gives leadership the visibility
+          to make decisions with confidence rather than assumption.
         </p>
       </div>
 
@@ -68,12 +85,24 @@ const introduce = 'From cloud migration to enterprise security governance — 4T
     <SectionDivider />
 
     <div class="py-8">
-      <h2 class="text-2xl sm:text-3xl tracking-tight mb-1">Thought Leadership</h2>
+      <h2 class="text-2xl sm:text-3xl tracking-tight mb-1">Why Organizations Choose 4TH AND BAILEY</h2>
       <p class="text-muted-foreground text-sm mb-8">
-        Published frameworks, analysis, and recognition from Lionel Mosley and 4TH AND BAILEY.
+        Experience, frameworks, and recognition that speak for themselves.
       </p>
 
       <div class="flex flex-col gap-6">
+
+        <div class="border-b border-border/50 pb-6">
+          <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Proven Track Record</div>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            We bring demonstrated experience across large-scale IT transformation, infrastructure
+            modernization, and cloud migration projects. Strong analytical, documentation, and
+            project management capabilities — including risk mitigation, scheduling, and cost
+            control — ensure complex programs are delivered within scope and on time. Our ability
+            to manage multiple concurrent engagements across geographically distributed teams
+            means your project does not compete for attention.
+          </p>
+        </div>
 
         <div class="border-b border-border/50 pb-6">
           <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Published Work</div>
@@ -88,8 +117,9 @@ const introduce = 'From cloud migration to enterprise security governance — 4T
         <div class="border-b border-border/50 pb-6">
           <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Open Source</div>
           <p class="text-sm text-muted-foreground leading-relaxed">
-            Creator and maintainer of the <a href="https://framework.4thandbailey.com" target="_blank" rel="noopener noreferrer" class="text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">Infrastructure Placement Framework</a> — a vendor-neutral, NIST-aligned enterprise IT governance framework available under
-            Creative Commons Attribution 4.0. Built for organizations that have outgrown commodity IT.
+            Creator and maintainer of the <a href="https://framework.4thandbailey.com" target="_blank" rel="noopener noreferrer" class="text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">Infrastructure Placement Framework</a> — a vendor-neutral,
+            NIST-aligned enterprise IT governance framework available under Creative Commons
+            Attribution 4.0. Built for organizations that have outgrown commodity IT.
           </p>
         </div>
 
@@ -120,15 +150,20 @@ const introduce = 'From cloud migration to enterprise security governance — 4T
     <SectionDivider />
 
     <div class="py-8 flex flex-col gap-4">
-      <h2 class="text-2xl sm:text-3xl tracking-tight">Let's architect something great</h2>
+      <h2 class="text-2xl sm:text-3xl tracking-tight">Your transformation starts with a conversation</h2>
       <p class="text-sm text-muted-foreground leading-relaxed max-w-xl">
-        Join organizations nationwide already working with Lionel Mosley and 4TH AND BAILEY
-        on cloud services, cybersecurity, and infrastructure governance.
+        The organizations we work with do not just solve the problem in front of them — they build
+        the infrastructure, governance, and posture to handle the problems they have not seen yet.
+        If that is the standard your organization is ready to meet, let's talk.
       </p>
-      <div>
+      <div class="flex flex-col sm:flex-row gap-4">
         <a href="https://4nb.cloud/lmosley" target="_blank" rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 text-sm font-medium text-foreground border border-border px-5 py-2.5 rounded-sm hover:bg-accent transition-colors">
+          class="inline-flex items-center gap-2 text-sm font-medium text-white px-5 py-2.5 rounded-sm transition-colors" style="background-color: #0088cc;">
           Schedule an Advisory Consultation →
+        </a>
+        <a href="/posts/cloud-migration"
+          class="inline-flex items-center gap-2 text-sm font-medium text-foreground border border-border px-5 py-2.5 rounded-sm hover:bg-accent transition-colors">
+          Read a Real-World Case Study →
         </a>
       </div>
     </div>
