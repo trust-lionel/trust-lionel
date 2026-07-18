@@ -210,6 +210,21 @@
   to     = "/posts/"
   status = 301
 
+
+# ── CMET Event redirect ───────────────────────────────────────
+# Event rescheduled from July 30 to September 23, 2026.
+# File renamed from cmet-workshop-july-2026.md to
+# cmet-workshop-september-2026.md — old URL redirects to new.
+[[redirects]]
+  from   = "/events/cmet-workshop-july-2026/"
+  to     = "/events/cmet-workshop-september-2026/"
+  status = 301
+
+[[redirects]]
+  from   = "/events/cmet-workshop-july-2026"
+  to     = "/events/cmet-workshop-september-2026/"
+  status = 301
+
 # ── HEADERS ──────────────────────────────────────────────────
 # Security and cache headers applied to all pages
 [[headers]]

@@ -1,7 +1,7 @@
 ---
 title: "Your Website Should Be Making You Money"
-description: "A live, interactive workshop for Black, Brown, and women entrepreneurs on building a revenue-generating website — led by Lionel Mosley, IT Consultant and Innovative Thought Leader."
-eventDate: 2026-07-30
+description: "A live, interactive workshop for entrepreneurs on building a revenue-generating website — led by Lionel Mosley, IT Consultant and Innovative Thought Leader."
+eventDate: 2026-09-23
 eventTime: "5:00 PM CST / 6:00 PM EST"
 eventFormat: "Virtual"
 eventHost: "CMET Nation"
@@ -14,7 +14,7 @@ featured: true
 
 Most small business websites look like a business card. The ones that grow revenue work like a sales team.
 
-For Black, Brown, and women entrepreneurs, the difference between those two outcomes is not budget — it is strategy. A website built with the right foundation does not just represent your business. It attracts customers, establishes credibility, and generates revenue around the clock — even when you are not working.
+The difference between those two outcomes is not budget — it is strategy. A website built with the right foundation does not just represent your business. It attracts customers, establishes credibility, and generates revenue around the clock — even when you are not working.
 
 CMET Nation is launching with a workshop designed to show you exactly how to build that website.
 

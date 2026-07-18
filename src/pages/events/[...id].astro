@@ -126,15 +126,26 @@ const eventSchema = {
 
       <!-- Registration CTA -->
       {frontmatter.eventStatus === 'upcoming' && (
-        <a
-          href={frontmatter.eventRegistrationUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-colors" style="background-color: #0088cc; color: #ffffff;"
-        >
-          Reserve Your Seat
-          <span class="icon-[material-symbols--open-in-new] size-4"></span>
-        </a>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a
+            href="https://cmetnation.org/login"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-colors border border-border hover:bg-accent"
+          >
+            Join CMET Nation
+            <span class="icon-[material-symbols--open-in-new] size-4"></span>
+          </a>
+          <a
+            href={frontmatter.eventRegistrationUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-colors" style="background-color: #0088cc; color: #ffffff;"
+          >
+            Reserve Your Seat
+            <span class="icon-[material-symbols--open-in-new] size-4"></span>
+          </a>
+        </div>
       )}
     </div>
 
