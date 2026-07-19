@@ -17,38 +17,7 @@
             e-commerce ERP synchronization, ODBC BWGACCESS
 -->
 
-<table>
-<tr>
-<td width="340" valign="top">
-<img src="assets/ascii_preview.svg" width="320" alt="Lionel Mosley" />
-</td>
-<td valign="top">
-
-```text
-trust-lionel ------------------------------------------------
-. OS: ......................... iOS 27, macOS Tahoe, Windows 11 Pro
-. Uptime: ..................... 46 years, 6 months, 18 days
-. Host: ....................... 4TH AND BAILEY, LLC
-. Kernel: ..................... Senior Consultant, IT Strategy Growth & Transformation
-. IDE: ........................ Xcode
-.
-. Languages.Programming: ...... JavaScript, PowerShell, Python, Rust, TypeScript
-. Languages.Computer: ......... Astro, CSS, HTML, MDX, SQL, XSLT
-. Languages.Real: ............. English
-.
-. Hobbies.Software: ........... Cloud Computing, Cybersecurity, Web Design
-. Hobbies.Other: .............. Cratedigger, Entrepreneur, F1 Enthusiast, Tech Enthusiast
-
-- Contact -----------------------------------------------------
-. Email.Work: ................. inquiries@trust-lionel.com
-. LinkedIn: ................... LionelMosley
-. Spotify: .................... lmosley002-spotify
-. Website: .................... trust-lionel.com
-```
-
-</td>
-</tr>
-</table>
+<img src="assets/lionel_card.svg" alt="Lionel Mosley" />
 
 ## GitHub Stats
 
