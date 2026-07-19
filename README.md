@@ -17,7 +17,7 @@
             e-commerce ERP synchronization, ODBC BWGACCESS
 -->
 
-<img src="assets/lionel_card.svg" alt="Lionel Mosley" />
+<img src="assets/ascii_preview.svg" alt="Lionel Mosley" />
 
 ## GitHub Stats
 
