@@ -14,7 +14,7 @@ tags:
   - Field Notes
 cover: https://plus.unsplash.com/premium_photo-1768374180121-f86dc6a506e3?w=1400&q=80&auto=format&fit=crop
 featured: false
-spotifyPlaylistId: "37i9dQZF1DWZqLpSeOxFlD"
+spotifyPlaylistId: "6HLnsyzO91CQ5nvYL9mIUl"
 ---
 
 *Field Notes — InfoSec Officer Series*
