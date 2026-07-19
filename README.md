@@ -17,15 +17,39 @@
             e-commerce ERP synchronization, ODBC BWGACCESS
 -->
 
-<img src="assets/ascii_preview.svg" alt="Lionel Mosley" />
+<table>
+<tr>
+<td width="340" valign="top">
+<img src="assets/ascii_preview.svg" width="320" alt="Lionel Mosley" />
+</td>
+<td valign="top">
 
-## GitHub Stats
+```text
+trust-lionel --------------------------------------------------------
+. OS: ......................... iOS 27, macOS Tahoe, Windows 11 Pro
+. Uptime: ..................... 46 years, 6 months, 18 days
+. Host: ....................... 4TH AND BAILEY, LLC
+. Kernel: ..................... Senior Consultant, IT Strategy Growth & Transformation
+. IDE: ........................ Xcode
+.
+. Languages.Programming: ...... JavaScript, PowerShell, Python, Rust, TypeScript
+. Languages.Computer: ......... Astro, CSS, HTML, MDX, SQL, XSLT
+. Languages.Real: ............. English
+.
+. Hobbies.Software: ........... Cloud Computing, Cybersecurity, Web Design
+. Hobbies.Other: .............. Cratedigger, Entrepreneur, F1 Enthusiast, Tech Enthusiast
 
-<p align="left">
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=trust-lionel&show_icons=true&theme=default&hide_border=true" alt="GitHub Stats" />
-  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=trust-lionel&layout=compact&theme=default&hide_border=true" alt="Top Languages" />
-</p>
+- Contact -------------------------------------------------------------
+. Email.Work: ................. inquiries@trust-lionel.com
+. LinkedIn: ................... LionelMosley
+. Spotify: .................... lmosley002-spotify
+. Website: .................... trust-lionel.com
+```
 
-<p align="left">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=trust-lionel&theme=default&hide_border=true" alt="GitHub Streak" />
-</p>
+**- GitHub Stats -**
+
+<img height="150" src="https://github-readme-stats.vercel.app/api?username=trust-lionel&show_icons=true&theme=default&hide_border=true" alt="GitHub Stats" />
+
+</td>
+</tr>
+</table>
