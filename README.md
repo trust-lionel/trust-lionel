@@ -46,9 +46,12 @@ trust-lionel --------------------------------------------------------
 . Website: .................... trust-lionel.com
 
 - GitHub Stats ----------------------------------------------------------
+. Repos: .... 1 {Contributed: 1} | Stars: ........... 0
+. Commits: ................. 22 | Followers: ....... 1
+. Lines of Code on GitHub:. pending (requires authenticated API — see update_stats.py)
 ```
 
-<img height="150" src="https://github-readme-stats.vercel.app/api?username=trust-lionel&show_icons=true&theme=default&hide_border=true" alt="GitHub Stats" />
+
 
 </td>
 </tr>
