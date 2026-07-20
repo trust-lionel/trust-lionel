@@ -306,16 +306,31 @@ def svg_overwrite(filename, age_data, commit_data, star_data, repo_data, contrib
     tree = etree.parse(filename)
     root = tree.getroot()
 
-    justify_format(root, 'uptime_data',   age_data,       26)
-    justify_format(root, 'commit_data',   commit_data,    10)
+    # Dot lengths are pre-computed to right-justify values at column 74
+    justify_format(root, 'uptime_data',   age_data,       dot_len('uptime_data',   age_data))
+    justify_format(root, 'commit_data',   commit_data,    4)
     justify_format(root, 'star_data',     star_data,      10)
-    justify_format(root, 'repo_data',     repo_data,      6)
+    justify_format(root, 'repo_data',     repo_data,      4)
     justify_format(root, 'follower_data', follower_data,  10)
-    justify_format(root, 'loc_data',      loc_data[2],    12)
+    justify_format(root, 'loc_data',      loc_data[2],    10)
     justify_format(root, 'loc_add',       loc_data[0])
     justify_format(root, 'loc_del',       loc_data[1])
 
     tree.write(filename, encoding='utf-8', xml_declaration=True)
+
+
+def dot_len(field_id, value):
+    """
+    Calculate the number of dots needed to right-justify a dynamic value
+    at column 74. The prefix lengths match the SVG label text exactly.
+    """
+    prefixes = {
+        'uptime_data': len('. Uptime: '),
+    }
+    prefix_len = prefixes.get(field_id, 10)
+    val_str = '{:,}'.format(value) if isinstance(value, int) else str(value)
+    dots = 74 - prefix_len - len(val_str) - 2  # 2 for surrounding spaces
+    return max(3, dots)
 
 
 def justify_format(root, element_id, new_text, length=0):
