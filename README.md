@@ -44,9 +44,9 @@ trust-lionel --------------------------------------------------------
 . LinkedIn: ................... LionelMosley
 . Spotify: .................... lmosley002-spotify
 . Website: .................... trust-lionel.com
-```
 
-**- GitHub Stats -**
+- GitHub Stats ----------------------------------------------------------
+```
 
 <img height="150" src="https://github-readme-stats.vercel.app/api?username=trust-lionel&show_icons=true&theme=default&hide_border=true" alt="GitHub Stats" />
 
