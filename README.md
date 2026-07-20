@@ -17,42 +17,34 @@
             e-commerce ERP synchronization, ODBC BWGACCESS
 -->
 
-<table>
-<tr>
-<td width="340" valign="top">
 <img src="assets/ascii_preview.svg" width="320" alt="Lionel Mosley" />
-</td>
-<td valign="top">
 
-```text
-trust-lionel --------------------------------------------------------
-. OS: ......................... iOS 27, macOS Tahoe, Windows 11 Pro
-. Uptime: ..................... 46 years, 6 months, 18 days
-. Host: ....................... 4TH AND BAILEY, LLC
-. Kernel: ..................... Senior Consultant, IT Strategy Growth & Transformation
-. IDE: ........................ Xcode
-.
-. Languages.Programming: ...... JavaScript, PowerShell, Python, Rust, TypeScript
-. Languages.Computer: ......... Astro, CSS, HTML, MDX, SQL, XSLT
-. Languages.Real: ............. English
-.
-. Hobbies.Software: ........... Cloud Computing, Cybersecurity, Web Design
-. Hobbies.Other: .............. Cratedigger, Entrepreneur, F1 Enthusiast, Tech Enthusiast
+**trust-lionel**
 
-- Contact -------------------------------------------------------------
-. Email.Work: ................. inquiries@trust-lionel.com
-. LinkedIn: ................... LionelMosley
-. Spotify: .................... lmosley002-spotify
-. Website: .................... trust-lionel.com
+![OS](https://img.shields.io/badge/OS-iOS_27%2C_macOS_Tahoe%2C_Windows_11_Pro-0a3069?style=flat-square&labelColor=953800)
+![Uptime](https://img.shields.io/badge/Uptime-46_years%2C_6_months%2C_18_days-0a3069?style=flat-square&labelColor=953800)
+![Host](https://img.shields.io/badge/Host-4TH_AND_BAILEY%2C_LLC-0a3069?style=flat-square&labelColor=953800)
+![Kernel](https://img.shields.io/badge/Kernel-Senior_Consultant%2C_IT_Strategy_Growth_%26_Transformation-0a3069?style=flat-square&labelColor=953800)
+![IDE](https://img.shields.io/badge/IDE-Xcode-0a3069?style=flat-square&labelColor=953800)
 
-- GitHub Stats ----------------------------------------------------------
-. Repos: .... 1 {Contributed: 1} | Stars: ........... 0
-. Commits: ................. 22 | Followers: ....... 1
-. Lines of Code on GitHub:. pending (requires authenticated API — see update_stats.py)
-```
+![Languages.Programming](https://img.shields.io/badge/Languages.Programming-JavaScript%2C_PowerShell%2C_Python%2C_Rust%2C_TypeScript-0a3069?style=flat-square&labelColor=953800)
+![Languages.Computer](https://img.shields.io/badge/Languages.Computer-Astro%2C_CSS%2C_HTML%2C_MDX%2C_SQL%2C_XSLT-0a3069?style=flat-square&labelColor=953800)
+![Languages.Real](https://img.shields.io/badge/Languages.Real-English-0a3069?style=flat-square&labelColor=953800)
 
+![Hobbies.Software](https://img.shields.io/badge/Hobbies.Software-Cloud_Computing%2C_Cybersecurity%2C_Web_Design-0a3069?style=flat-square&labelColor=953800)
+![Hobbies.Other](https://img.shields.io/badge/Hobbies.Other-Cratedigger%2C_Entrepreneur%2C_F1_Enthusiast%2C_Tech_Enthusiast-0a3069?style=flat-square&labelColor=953800)
 
+**Contact**
 
-</td>
-</tr>
-</table>
+![Email.Work](https://img.shields.io/badge/Email.Work-inquiries%40trust--lionel.com-0a3069?style=flat-square&labelColor=953800)
+![LinkedIn](https://img.shields.io/badge/LinkedIn-LionelMosley-0a3069?style=flat-square&labelColor=953800)
+![Spotify](https://img.shields.io/badge/Spotify-lmosley002--spotify-0a3069?style=flat-square&labelColor=953800)
+![Website](https://img.shields.io/badge/Website-trust--lionel.com-0a3069?style=flat-square&labelColor=953800)
+
+**GitHub Stats**
+
+![Repos](https://img.shields.io/badge/Repos-1_%28Contributed%3A_1%29-0a3069?style=flat-square&labelColor=953800)
+![Stars](https://img.shields.io/badge/Stars-0-0a3069?style=flat-square&labelColor=953800)
+![Commits](https://img.shields.io/badge/Commits-22-0a3069?style=flat-square&labelColor=953800)
+![Followers](https://img.shields.io/badge/Followers-1-0a3069?style=flat-square&labelColor=953800)
+![Lines of Code](https://img.shields.io/badge/Lines_of_Code-pending-0a3069?style=flat-square&labelColor=953800)
