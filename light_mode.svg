@@ -1,101 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="900" height="480">
-  <rect width="900" height="480" fill="#f6f8fa" rx="6"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  <rect width="1280" height="640" fill="#f6f8fa" rx="8"/>
 
-  <!-- ASCII Art: 6.93px × 100 chars × 0.601 = 416px — stays inside x=10..447 -->
+  <!-- ASCII Art: 10.08px × 100 chars × 0.601 = 606px wide -->
   <text
-    x="10" y="16"
+    x="14" y="20"
     font-family="'Courier New', Courier, monospace"
-    font-size="6.93"
+    font-size="10.08"
     fill="#24292f"
     xml:space="preserve"
     letter-spacing="0"
   >
-        <tspan x="10" dy="0">....................................................................................................</tspan>
-        <tspan x="10" dy="1.22em">.....................................:--------::....................................................</tspan>
-        <tspan x="10" dy="1.22em">.................................::-=====-==---::::.................................................</tspan>
-        <tspan x="10" dy="1.22em">..............................::-===+===+===----::::................................................</tspan>
-        <tspan x="10" dy="1.22em">............................:-=+++++*++++++=--::::::................................................</tspan>
-        <tspan x="10" dy="1.22em">...........................:-===++*+++++++==--:::::::...............................................</tspan>
-        <tspan x="10" dy="1.22em">..........................:-=++++****+++++===----::::...............................................</tspan>
-        <tspan x="10" dy="1.22em">........................:-=++++********++======---::::..............................................</tspan>
-        <tspan x="10" dy="1.22em">........................===+***********++====--------:.&#160;&#160;...........................................</tspan>
-        <tspan x="10" dy="1.22em">.......................-++++******#***++++=======--------===+-......................................</tspan>
-        <tspan x="10" dy="1.22em">.......................-=++************+++++=+=======+*##%####+.....................................</tspan>
-        <tspan x="10" dy="1.22em">......................:=++***#######****++++++++++++#%***#%%%@%+....................................</tspan>
-        <tspan x="10" dy="1.22em">......................:*########%#######*****++++*#%%*+##%%%%@@#:...................................</tspan>
-        <tspan x="10" dy="1.22em">.......................+*####%%%%%%%#####*******#%%#+++***#%####:...................................</tspan>
-        <tspan x="10" dy="1.22em">.......................-*####%%%%%%%%########**#%#*+++++*#**%##+...:::--::..........................</tspan>
-        <tspan x="10" dy="1.22em">.......................:*###%%%%%@@%%%%%%#####%%#**+++++++**%%*:...:+####*=.........................</tspan>
-        <tspan x="10" dy="1.22em">........................-*###%%@@@@@@%%%%%%#%%%###****+++++++:.......=*#%%%:........................</tspan>
-        <tspan x="10" dy="1.22em">.........................:+##%%%%%%%%%%%%#+*@@%%##******++++=:::::.:-==+*@@.&#160;.......................</tspan>
-        <tspan x="10" dy="1.22em">...........................*####%%%@@@@@@++@@@%%###*********++=====+++==+%#.........................</tspan>
-        <tspan x="10" dy="1.22em">..........................=*=*%%%@@@@@@@@%%@@@%%#####*##******++****++++*%=&#160;....:...................</tspan>
-        <tspan x="10" dy="1.22em">.........................:++**%@%%%#%%@@@@@@@@@%%%#########****####*****#*:&#160;........................</tspan>
-        <tspan x="10" dy="1.22em">...........................:-=***#@%%@@@@@@@@@@%%%%###########%%%%#****#*=.&#160;..::::..........:::..::.</tspan>
-        <tspan x="10" dy="1.22em">...............................:=++#@@@@@@@@%%%%%%%%########%%%%@%%####%=:=*#*=-....................</tspan>
-        <tspan x="10" dy="1.22em">...................................-%%%%%%@@%%%%%%%%%%%##%%%%%@@@@%%%##*=:#*=-:..::.................</tspan>
-        <tspan x="10" dy="1.22em">...................................:##%%%%%@@%%%%@@%%%%%%%%%%@@@@@%*-::---=-::...:::................</tspan>
-        <tspan x="10" dy="1.22em">....................................-**++@@@@@@@@@@@@%%%%@@%@@%%*+-..:====-:::::::..................</tspan>
-        <tspan x="10" dy="1.22em">.........................................+%%@@@%%@@%%%@@%%*+=-:....:=++=-::::::.............::::....</tspan>
-        <tspan x="10" dy="1.22em">.........................................--=*%%%%##%%%#*=-::...::-====--::...........:::::::::::....</tspan>
-        <tspan x="10" dy="1.22em">........................................:---==+++++#%#+--::..:=+*+=---:::......::::-----::::.......:</tspan>
-        <tspan x="10" dy="1.22em">........................................=======+=++++*+-::..-**+==---:::..::---==---::::::..........</tspan>
-        <tspan x="10" dy="1.22em">.......................................:=-===++++====--:...=+===----:::--===---::::.............::..</tspan>
-        <tspan x="10" dy="1.22em">.......................................:====++++++=---:...-===-------==--::..................:::::..</tspan>
-        <tspan x="10" dy="1.22em">.......................................:++=======++-::-:.:=++=----==--::..:...................:::...</tspan>
-        <tspan x="10" dy="1.22em">........................................-=--=----==+-..::-+==--===--:::::::...................:::...</tspan>
-        <tspan x="10" dy="1.22em">.........................................---------==+=..:==--=--:::::::::::....................:....</tspan>
-        <tspan x="10" dy="1.22em">.........................................-----------=++-.-=---::::::::.:............................</tspan>
-        <tspan x="10" dy="1.22em">........................................:------------=++:*-.::---------::::::--==========--::::::..:</tspan>
-        <tspan x="10" dy="1.22em">........................................-=--------======-**-:...::::-----=--::...:::--==+++==--==-.-</tspan>
-        <tspan x="10" dy="1.22em">........................................------=-------=:-=++=-:....:::::::::------:....::-=++=-+#*:=</tspan>
-        <tspan x="10" dy="1.22em">........................................-=-------------:-:-====-::..::::::::::::---=-----:--=+=-+#**</tspan>
-        <tspan x="10" dy="1.22em">........................................:====-----------+=----===-::::::::::::::::::-----==+++++=+*%</tspan>
-        <tspan x="10" dy="1.22em">........................................-+======------=:++=-----===-:::::::::::::-::::-===---====+*%</tspan>
-        <tspan x="10" dy="1.22em">........................................=++========--==-++---::--===--::::::::::::--:::::-=+=====+*%</tspan>
-        <tspan x="10" dy="1.22em">......................................:-=+*==----======-+-::::::----=--::::::::::::---==-::--===+++%</tspan>
-        <tspan x="10" dy="1.22em">.....................................:-=++*+====----===-=-----------====-:::::::::::::--===---::-=+#</tspan>
-        <tspan x="10" dy="1.22em">.....................................-==+*#+=======--==-===================---:::::::::::::::::--=+*</tspan>
-        <tspan x="10" dy="1.22em">....................................--===+#*----------===:--=---========+=====---------::::::::::-=+</tspan>
-        <tspan x="10" dy="1.22em">...................................----==+#+-----------=+-::------===========+====---------------==+</tspan>
-        <tspan x="10" dy="1.22em">..................................:----==+##-:-====---------..:------==========++====-------------=+</tspan>
-        <tspan x="10" dy="1.22em">.................................:----==+*##=-::-:------::--=-.:------=====-======================++</tspan>
+        <tspan x="14" dy="0">....................................................................................................</tspan>
+        <tspan x="14" dy="1.22em">.....................................:--------::....................................................</tspan>
+        <tspan x="14" dy="1.22em">.................................::-=====-==---::::.................................................</tspan>
+        <tspan x="14" dy="1.22em">..............................::-===+===+===----::::................................................</tspan>
+        <tspan x="14" dy="1.22em">............................:-=+++++*++++++=--::::::................................................</tspan>
+        <tspan x="14" dy="1.22em">...........................:-===++*+++++++==--:::::::...............................................</tspan>
+        <tspan x="14" dy="1.22em">..........................:-=++++****+++++===----::::...............................................</tspan>
+        <tspan x="14" dy="1.22em">........................:-=++++********++======---::::..............................................</tspan>
+        <tspan x="14" dy="1.22em">........................===+***********++====--------:.&#160;&#160;...........................................</tspan>
+        <tspan x="14" dy="1.22em">.......................-++++******#***++++=======--------===+-......................................</tspan>
+        <tspan x="14" dy="1.22em">.......................-=++************+++++=+=======+*##%####+.....................................</tspan>
+        <tspan x="14" dy="1.22em">......................:=++***#######****++++++++++++#%***#%%%@%+....................................</tspan>
+        <tspan x="14" dy="1.22em">......................:*########%#######*****++++*#%%*+##%%%%@@#:...................................</tspan>
+        <tspan x="14" dy="1.22em">.......................+*####%%%%%%%#####*******#%%#+++***#%####:...................................</tspan>
+        <tspan x="14" dy="1.22em">.......................-*####%%%%%%%%########**#%#*+++++*#**%##+...:::--::..........................</tspan>
+        <tspan x="14" dy="1.22em">.......................:*###%%%%%@@%%%%%%#####%%#**+++++++**%%*:...:+####*=.........................</tspan>
+        <tspan x="14" dy="1.22em">........................-*###%%@@@@@@%%%%%%#%%%###****+++++++:.......=*#%%%:........................</tspan>
+        <tspan x="14" dy="1.22em">.........................:+##%%%%%%%%%%%%#+*@@%%##******++++=:::::.:-==+*@@.&#160;.......................</tspan>
+        <tspan x="14" dy="1.22em">...........................*####%%%@@@@@@++@@@%%###*********++=====+++==+%#.........................</tspan>
+        <tspan x="14" dy="1.22em">..........................=*=*%%%@@@@@@@@%%@@@%%#####*##******++****++++*%=&#160;....:...................</tspan>
+        <tspan x="14" dy="1.22em">.........................:++**%@%%%#%%@@@@@@@@@%%%#########****####*****#*:&#160;........................</tspan>
+        <tspan x="14" dy="1.22em">...........................:-=***#@%%@@@@@@@@@@%%%%###########%%%%#****#*=.&#160;..::::..........:::..::.</tspan>
+        <tspan x="14" dy="1.22em">...............................:=++#@@@@@@@@%%%%%%%%########%%%%@%%####%=:=*#*=-....................</tspan>
+        <tspan x="14" dy="1.22em">...................................-%%%%%%@@%%%%%%%%%%%##%%%%%@@@@%%%##*=:#*=-:..::.................</tspan>
+        <tspan x="14" dy="1.22em">...................................:##%%%%%@@%%%%@@%%%%%%%%%%@@@@@%*-::---=-::...:::................</tspan>
+        <tspan x="14" dy="1.22em">....................................-**++@@@@@@@@@@@@%%%%@@%@@%%*+-..:====-:::::::..................</tspan>
+        <tspan x="14" dy="1.22em">.........................................+%%@@@%%@@%%%@@%%*+=-:....:=++=-::::::.............::::....</tspan>
+        <tspan x="14" dy="1.22em">.........................................--=*%%%%##%%%#*=-::...::-====--::...........:::::::::::....</tspan>
+        <tspan x="14" dy="1.22em">........................................:---==+++++#%#+--::..:=+*+=---:::......::::-----::::.......:</tspan>
+        <tspan x="14" dy="1.22em">........................................=======+=++++*+-::..-**+==---:::..::---==---::::::..........</tspan>
+        <tspan x="14" dy="1.22em">.......................................:=-===++++====--:...=+===----:::--===---::::.............::..</tspan>
+        <tspan x="14" dy="1.22em">.......................................:====++++++=---:...-===-------==--::..................:::::..</tspan>
+        <tspan x="14" dy="1.22em">.......................................:++=======++-::-:.:=++=----==--::..:...................:::...</tspan>
+        <tspan x="14" dy="1.22em">........................................-=--=----==+-..::-+==--===--:::::::...................:::...</tspan>
+        <tspan x="14" dy="1.22em">.........................................---------==+=..:==--=--:::::::::::....................:....</tspan>
+        <tspan x="14" dy="1.22em">.........................................-----------=++-.-=---::::::::.:............................</tspan>
+        <tspan x="14" dy="1.22em">........................................:------------=++:*-.::---------::::::--==========--::::::..:</tspan>
+        <tspan x="14" dy="1.22em">........................................-=--------======-**-:...::::-----=--::...:::--==+++==--==-.-</tspan>
+        <tspan x="14" dy="1.22em">........................................------=-------=:-=++=-:....:::::::::------:....::-=++=-+#*:=</tspan>
+        <tspan x="14" dy="1.22em">........................................-=-------------:-:-====-::..::::::::::::---=-----:--=+=-+#**</tspan>
+        <tspan x="14" dy="1.22em">........................................:====-----------+=----===-::::::::::::::::::-----==+++++=+*%</tspan>
+        <tspan x="14" dy="1.22em">........................................-+======------=:++=-----===-:::::::::::::-::::-===---====+*%</tspan>
+        <tspan x="14" dy="1.22em">........................................=++========--==-++---::--===--::::::::::::--:::::-=+=====+*%</tspan>
+        <tspan x="14" dy="1.22em">......................................:-=+*==----======-+-::::::----=--::::::::::::---==-::--===+++%</tspan>
+        <tspan x="14" dy="1.22em">.....................................:-=++*+====----===-=-----------====-:::::::::::::--===---::-=+#</tspan>
+        <tspan x="14" dy="1.22em">.....................................-==+*#+=======--==-===================---:::::::::::::::::--=+*</tspan>
+        <tspan x="14" dy="1.22em">....................................--===+#*----------===:--=---========+=====---------::::::::::-=+</tspan>
+        <tspan x="14" dy="1.22em">...................................----==+#+-----------=+-::------===========+====---------------==+</tspan>
+        <tspan x="14" dy="1.22em">..................................:----==+##-:-====---------..:------==========++====-------------=+</tspan>
+        <tspan x="14" dy="1.22em">.................................:----==+*##=-::-:------::--=-.:------=====-======================++</tspan>
   </text>
 
   <!-- Divider -->
-  <line x1="447" y1="8" x2="447" y2="472" stroke="#d0d7de" stroke-width="0.6"/>
+  <line x1="628" y1="10" x2="628" y2="630" stroke="#d0d7de" stroke-width="0.8"/>
 
   <!-- Info Panel -->
-
-  <text x="458" y="22" font-family="monospace" font-size="11.5" font-weight="bold" fill="#1a1a2e">trust-lionel</text>
-  <line x1="458" y1="29" x2="890" y2="29" stroke="#d0d7de" stroke-width="0.6"/>
-  <text x="458" y="44.0" font-family="monospace" font-size="7.8" fill="#0550ae" font-weight="bold">- System Info </text>
-  <line x1="527" y1="41.5" x2="890" y2="41.5" stroke="#d0d7de" stroke-width="0.5"/>
-  <text x="458" y="63.0" font-family="monospace" font-size="7.8"><tspan fill="#0550ae">. OS: </tspan><tspan id="os_data_dots" fill="#8c959f">................................ </tspan><tspan id="os_data" fill="#1a1a2e">iOS 27, macOS Tahoe, Windows 11 Pro</tspan></text>
-  <text x="458" y="78.0" font-family="monospace" font-size="7.8"><tspan fill="#0550ae">. Uptime: </tspan><tspan id="uptime_data_dots" fill="#8c959f">................................... </tspan><tspan id="uptime_data" fill="#1a1a2e">XX years, XX months, XX days</tspan></text>
-  <text x="458" y="93.0" font-family="monospace" font-size="7.8"><tspan fill="#0550ae">. Host: </tspan><tspan id="host_data_dots" fill="#8c959f">.............................................. </tspan><tspan id="host_data" fill="#1a1a2e">4TH AND BAILEY, LLC</tspan></text>
-  <text x="458" y="108.0" font-family="monospace" font-size="7.8"><tspan fill="#0550ae">. Kernel: </tspan><tspan id="kernel_data_dots" fill="#8c959f">................................. </tspan><tspan id="kernel_data" fill="#1a1a2e">Senior Consultant, IT Strategy</tspan></text>
-  <text x="458" y="123.0" font-family="monospace" font-size="7.8"><tspan fill="#0550ae">. IDE: </tspan><tspan id="ide_data_dots" fill="#8c959f">............................................................. </tspan><tspan id="ide_data" fill="#1a1a2e">Xcode</tspan></text>
-  <text x="458" y="144.0" font-family="monospace" font-size="7.8" fill="#0550ae" font-weight="bold">- Languages </text>
-  <line x1="517" y1="141.5" x2="890" y2="141.5" stroke="#d0d7de" stroke-width="0.5"/>
-  <text x="458" y="163.0" font-family="monospace" font-size="7.8"><tspan fill="#0550ae">. Lang.Programming: </tspan><tspan id="lang_prog_data_dots" fill="#8c959f">..... </tspan><tspan id="lang_prog_data" fill="#1a1a2e">JavaScript, PowerShell, Python, Rust, TypeScript</tspan></text>
-  <text x="458" y="178.0" font-family="monospace" font-size="7.8"><tspan fill="#0550ae">. Lang.Computer: </tspan><tspan id="lang_comp_data_dots" fill="#8c959f">............... </tspan><tspan id="lang_comp_data" fill="#1a1a2e">Astro, CSS, HTML, MDX, SQL, SwiftUI, XSLT</tspan></text>
-  <text x="458" y="193.0" font-family="monospace" font-size="7.8"><tspan fill="#0550ae">. Lang.Real: </tspan><tspan id="lang_real_data_dots" fill="#8c959f">..................................................... </tspan><tspan id="lang_real_data" fill="#1a1a2e">English</tspan></text>
-  <text x="458" y="214.0" font-family="monospace" font-size="7.8" fill="#0550ae" font-weight="bold">- Hobbies </text>
-  <line x1="508" y1="211.5" x2="890" y2="211.5" stroke="#d0d7de" stroke-width="0.5"/>
-  <text x="458" y="233.0" font-family="monospace" font-size="7.8"><tspan fill="#0550ae">. Hobbies.Software: </tspan><tspan id="hobby_soft_data_dots" fill="#8c959f">........... </tspan><tspan id="hobby_soft_data" fill="#1a1a2e">Cloud Computing, Cybersecurity, Web Design</tspan></text>
-  <text x="458" y="248.0" font-family="monospace" font-size="7.8"><tspan fill="#0550ae">. Hobbies.Interest: </tspan><tspan id="hobby_int_data_dots" fill="#8c959f">............. </tspan><tspan id="hobby_int_data" fill="#1a1a2e">Cratedigger, Entrepreneur, F1 Enthusiast</tspan></text>
-  <text x="458" y="269.0" font-family="monospace" font-size="7.8" fill="#0550ae" font-weight="bold">- Contact </text>
-  <line x1="508" y1="266.5" x2="890" y2="266.5" stroke="#d0d7de" stroke-width="0.5"/>
-  <text x="458" y="288.0" font-family="monospace" font-size="7.8"><tspan fill="#0550ae">. Email: </tspan><tspan id="email_data_dots" fill="#8c959f">...................................... </tspan><tspan id="email_data" fill="#1a1a2e">inquiries@trust-lionel.com</tspan></text>
-  <text x="458" y="303.0" font-family="monospace" font-size="7.8"><tspan fill="#0550ae">. LinkedIn: </tspan><tspan id="linkedin_data_dots" fill="#8c959f">................................................. </tspan><tspan id="linkedin_data" fill="#1a1a2e">LionelMosley</tspan></text>
-  <text x="458" y="318.0" font-family="monospace" font-size="7.8"><tspan fill="#0550ae">. Spotify: </tspan><tspan id="spotify_data_dots" fill="#8c959f">............................................ </tspan><tspan id="spotify_data" fill="#1a1a2e">lmosley002-spotify</tspan></text>
-  <text x="458" y="333.0" font-family="monospace" font-size="7.8"><tspan fill="#0550ae">. Site: </tspan><tspan id="site_data_dots" fill="#8c959f">................................................. </tspan><tspan id="site_data" fill="#1a1a2e">trust-lionel.com</tspan></text>
-  <text x="458" y="354.0" font-family="monospace" font-size="7.8" fill="#0550ae" font-weight="bold">- GitHub Stats </text>
-  <line x1="532" y1="351.5" x2="890" y2="351.5" stroke="#d0d7de" stroke-width="0.5"/>
-  <text x="458" y="373.0" font-family="monospace" font-size="7.8"><tspan fill="#0550ae">. Repos: </tspan><tspan id="repo_data_dots" fill="#8c959f">.... </tspan><tspan id="repo_data" fill="#1a1a2e">0</tspan><tspan fill="#0550ae"> | Stars: </tspan><tspan id="star_data_dots" fill="#8c959f">.......... </tspan><tspan id="star_data" fill="#1a1a2e">0</tspan></text>
-  <text x="458" y="388.0" font-family="monospace" font-size="7.8"><tspan fill="#0550ae">. Commits: </tspan><tspan id="commit_data_dots" fill="#8c959f">.... </tspan><tspan id="commit_data" fill="#1a1a2e">0</tspan><tspan fill="#0550ae"> | Followers: </tspan><tspan id="follower_data_dots" fill="#8c959f">.......... </tspan><tspan id="follower_data" fill="#1a1a2e">0</tspan></text>
-  <text x="458" y="403.0" font-family="monospace" font-size="7.8"><tspan fill="#0550ae">. Lines of Code: </tspan><tspan id="loc_data_dots" fill="#8c959f">.......... </tspan><tspan id="loc_data" fill="#1a1a2e">0</tspan></text>
-  <text x="458" y="418.0" font-family="monospace" font-size="7.8"><tspan fill="#0550ae">. </tspan><tspan fill="#8c959f">( </tspan><tspan id="loc_add" fill="#1a7f37">0++</tspan><tspan fill="#8c959f">,  </tspan><tspan id="loc_del" fill="#cf222e">0--</tspan><tspan fill="#8c959f"> )</tspan></text>
+  <text x="642" y="32" font-family="monospace" font-size="16" font-weight="bold" fill="#1a1a2e">trust-lionel</text>
+  <line x1="642" y1="40" x2="1266" y2="40" stroke="#d0d7de" stroke-width="0.8"/>
+  <text x="642" y="62.0" font-family="monospace" font-size="11.0" fill="#0550ae" font-weight="bold">- System Info </text>
+  <line x1="727" y1="58.5" x2="1266" y2="58.5" stroke="#d0d7de" stroke-width="0.7"/>
+  <text x="642" y="89.0" font-family="monospace" font-size="11.0"><tspan fill="#0550ae">. OS: </tspan><tspan id="os_data_dots" fill="#8c959f">................................ </tspan><tspan id="os_data" fill="#1a1a2e">iOS 27, macOS Tahoe, Windows 11 Pro</tspan></text>
+  <text x="642" y="110.5" font-family="monospace" font-size="11.0"><tspan fill="#0550ae">. Uptime: </tspan><tspan id="uptime_data_dots" fill="#8c959f">................................... </tspan><tspan id="uptime_data" fill="#1a1a2e">XX years, XX months, XX days</tspan></text>
+  <text x="642" y="132.0" font-family="monospace" font-size="11.0"><tspan fill="#0550ae">. Host: </tspan><tspan id="host_data_dots" fill="#8c959f">.............................................. </tspan><tspan id="host_data" fill="#1a1a2e">4TH AND BAILEY, LLC</tspan></text>
+  <text x="642" y="153.5" font-family="monospace" font-size="11.0"><tspan fill="#0550ae">. Kernel: </tspan><tspan id="kernel_data_dots" fill="#8c959f">................................. </tspan><tspan id="kernel_data" fill="#1a1a2e">Senior Consultant, IT Strategy</tspan></text>
+  <text x="642" y="175.0" font-family="monospace" font-size="11.0"><tspan fill="#0550ae">. IDE: </tspan><tspan id="ide_data_dots" fill="#8c959f">............................................................. </tspan><tspan id="ide_data" fill="#1a1a2e">Xcode</tspan></text>
+  <text x="642" y="204.5" font-family="monospace" font-size="11.0" fill="#0550ae" font-weight="bold">- Languages </text>
+  <line x1="715" y1="201.0" x2="1266" y2="201.0" stroke="#d0d7de" stroke-width="0.7"/>
+  <text x="642" y="231.5" font-family="monospace" font-size="11.0"><tspan fill="#0550ae">. Lang.Programming: </tspan><tspan id="lang_prog_data_dots" fill="#8c959f">..... </tspan><tspan id="lang_prog_data" fill="#1a1a2e">JavaScript, PowerShell, Python, Rust, TypeScript</tspan></text>
+  <text x="642" y="253.0" font-family="monospace" font-size="11.0"><tspan fill="#0550ae">. Lang.Computer: </tspan><tspan id="lang_comp_data_dots" fill="#8c959f">............... </tspan><tspan id="lang_comp_data" fill="#1a1a2e">Astro, CSS, HTML, MDX, SQL, SwiftUI, XSLT</tspan></text>
+  <text x="642" y="274.5" font-family="monospace" font-size="11.0"><tspan fill="#0550ae">. Lang.Real: </tspan><tspan id="lang_real_data_dots" fill="#8c959f">..................................................... </tspan><tspan id="lang_real_data" fill="#1a1a2e">English</tspan></text>
+  <text x="642" y="304.0" font-family="monospace" font-size="11.0" fill="#0550ae" font-weight="bold">- Hobbies </text>
+  <line x1="702" y1="300.5" x2="1266" y2="300.5" stroke="#d0d7de" stroke-width="0.7"/>
+  <text x="642" y="331.0" font-family="monospace" font-size="11.0"><tspan fill="#0550ae">. Hobbies.Software: </tspan><tspan id="hobby_soft_data_dots" fill="#8c959f">........... </tspan><tspan id="hobby_soft_data" fill="#1a1a2e">Cloud Computing, Cybersecurity, Web Design</tspan></text>
+  <text x="642" y="352.5" font-family="monospace" font-size="11.0"><tspan fill="#0550ae">. Hobbies.Interest: </tspan><tspan id="hobby_int_data_dots" fill="#8c959f">............. </tspan><tspan id="hobby_int_data" fill="#1a1a2e">Cratedigger, Entrepreneur, F1 Enthusiast</tspan></text>
+  <text x="642" y="382.0" font-family="monospace" font-size="11.0" fill="#0550ae" font-weight="bold">- Contact </text>
+  <line x1="702" y1="378.5" x2="1266" y2="378.5" stroke="#d0d7de" stroke-width="0.7"/>
+  <text x="642" y="409.0" font-family="monospace" font-size="11.0"><tspan fill="#0550ae">. Email: </tspan><tspan id="email_data_dots" fill="#8c959f">...................................... </tspan><tspan id="email_data" fill="#1a1a2e">inquiries@trust-lionel.com</tspan></text>
+  <text x="642" y="430.5" font-family="monospace" font-size="11.0"><tspan fill="#0550ae">. LinkedIn: </tspan><tspan id="linkedin_data_dots" fill="#8c959f">................................................. </tspan><tspan id="linkedin_data" fill="#1a1a2e">LionelMosley</tspan></text>
+  <text x="642" y="452.0" font-family="monospace" font-size="11.0"><tspan fill="#0550ae">. Spotify: </tspan><tspan id="spotify_data_dots" fill="#8c959f">............................................ </tspan><tspan id="spotify_data" fill="#1a1a2e">lmosley002-spotify</tspan></text>
+  <text x="642" y="473.5" font-family="monospace" font-size="11.0"><tspan fill="#0550ae">. Site: </tspan><tspan id="site_data_dots" fill="#8c959f">................................................. </tspan><tspan id="site_data" fill="#1a1a2e">trust-lionel.com</tspan></text>
+  <text x="642" y="503.0" font-family="monospace" font-size="11.0" fill="#0550ae" font-weight="bold">- GitHub Stats </text>
+  <line x1="733" y1="499.5" x2="1266" y2="499.5" stroke="#d0d7de" stroke-width="0.7"/>
+  <text x="642" y="530.0" font-family="monospace" font-size="11.0"><tspan fill="#0550ae">. Repos: </tspan><tspan id="repo_data_dots" fill="#8c959f">.... </tspan><tspan id="repo_data" fill="#1a1a2e">0</tspan><tspan fill="#0550ae"> | Stars: </tspan><tspan id="star_data_dots" fill="#8c959f">.......... </tspan><tspan id="star_data" fill="#1a1a2e">0</tspan></text>
+  <text x="642" y="551.5" font-family="monospace" font-size="11.0"><tspan fill="#0550ae">. Commits: </tspan><tspan id="commit_data_dots" fill="#8c959f">.... </tspan><tspan id="commit_data" fill="#1a1a2e">0</tspan><tspan fill="#0550ae"> | Followers: </tspan><tspan id="follower_data_dots" fill="#8c959f">.......... </tspan><tspan id="follower_data" fill="#1a1a2e">0</tspan></text>
+  <text x="642" y="573.0" font-family="monospace" font-size="11.0"><tspan fill="#0550ae">. Lines of Code: </tspan><tspan id="loc_data_dots" fill="#8c959f">.......... </tspan><tspan id="loc_data" fill="#1a1a2e">0</tspan></text>
+  <text x="642" y="594.5" font-family="monospace" font-size="11.0"><tspan fill="#0550ae">. </tspan><tspan fill="#8c959f">( </tspan><tspan id="loc_add" fill="#1a7f37">0++</tspan><tspan fill="#8c959f">,  </tspan><tspan id="loc_del" fill="#cf222e">0--</tspan><tspan fill="#8c959f"> )</tspan></text>
 </svg>
