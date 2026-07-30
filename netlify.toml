@@ -202,6 +202,25 @@
   to     = "/posts/"
   status = 301
 
+
+# ── Additional legacy URL fixes — July 29, 2026 ──────────────────────────────
+# /home was indexed by Google from the old Jekyll/SquareSpace site
+[[redirects]]
+  from   = "/home"
+  to     = "/"
+  status = 301
+
+# Music tag pages from SquareSpace with + characters in URL
+[[redirects]]
+  from   = "/blog/tag/Maze+Featuring+Frankie+Beverly+-+Live+In+New+Orleans"
+  to     = "/posts/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog/tag/Outkast+-+Southernplayalisticadillacmuzik"
+  to     = "/posts/"
+  status = 301
+
 # ── Catch-all for any remaining /blog/ paths ─────────────────
 # Handles any Jekyll or SquareSpace URLs not explicitly listed
 # above. Must remain last in the redirects block.
