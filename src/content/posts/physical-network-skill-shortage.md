@@ -72,7 +72,7 @@ The business impact of physical network troubleshooting failures extends well be
 
 SMBs have lower tolerance for downtime than enterprise organizations because there is less operational redundancy. A network outage may simultaneously disable order processing, internal communication, and access to business-critical data. Recovery time — during which employees reconnect, resynchronize data, and reconstruct lost work — extends the effective disruption window significantly beyond the outage itself.
 
-The subtler consequence is the erosion of confidence in IT leadership. When network instability is chronic and unresolved, employees develop workarounds: personal hotspots, unsanctioned cloud storage, informal communication channels. Each workaround introduces shadow IT risk that compounds the organization's security and compliance exposure. The organization that cannot resolve a physical layer fault in a reasonable timeframe is not just losing productivity during the outage — it is accumulating security and governance debt between outages. The real-world consequences of connectivity failures in a multi-location environment — and what proactive monitoring actually prevents — are documented in [When the Internet Goes Dark: A Real-World Look at Connectivity, Continuity, and Proactive Network Management](/posts/connectivity-uptime/). The sectors where those consequences are most acute share a common characteristic: operations that cannot afford to stop.
+The subtler consequence is the erosion of confidence in IT leadership. When network instability is chronic and unresolved, employees develop workarounds: personal hotspots, unsanctioned cloud storage, informal communication channels. Each workaround introduces shadow IT risk that compounds the organization's security and compliance exposure. The organization that cannot resolve a physical layer fault in a reasonable timeframe is not just losing productivity during the outage — it is accumulating security and governance debt between outages. The real-world consequences of connectivity failures in a multi-location environment — and what proactive monitoring actually prevents — are documented in [**When the Internet Goes Dark: A Real-World Look at Connectivity, Continuity, and Proactive Network Management**](/posts/connectivity-uptime/). The sectors where those consequences are most acute share a common characteristic: operations that cannot afford to stop.
 
 ---
 
@@ -100,9 +100,13 @@ Procurement policy matters here too. Standardizing on managed network infrastruc
 
 For organizations that cannot support a dedicated network engineer, managed network services with structured knowledge transfer — not purely transactional break-fix support — provide the physical layer governance that internal generalist staff cannot maintain alone. 4TH AND BAILEY works with organizations across Houston and nationwide to build the managed network foundation that makes this governance sustainable at any organizational size.
 
-The Infrastructure Placement Framework's self-assessment at [framework.4thandbailey.com](https://framework.4thandbailey.com) covers physical layer governance, change control, and hybrid estate documentation as part of Module 03 — Hybrid Estate Optimization. If your organization wants to evaluate its current posture against these standards before an outage forces the conversation, [schedule a guided assessment →](https://4nb.cloud/lmosley)
+The Infrastructure Placement Framework's self-assessment at [**framework.4thandbailey.com**](https://framework.4thandbailey.com) covers physical layer governance, change control, and hybrid estate documentation as part of Module 03 — Hybrid Estate Optimization.
 
-If you are ready to go deeper — a structured review of your network infrastructure governance, documentation posture, and change control process — the [Infrastructure Governance Briefing](https://calendly.com/4thandbailey/infrastructure-governance-briefing) is the right starting point. It is a focused engagement designed for IT Directors and CIOs who want a practitioner's assessment of where their organization stands before the next outage makes that question urgent.
+[**→ Schedule a Guided Assessment**](https://4nb.cloud/lmosley)
+
+If you are ready to go deeper — a structured review of your network infrastructure governance, documentation posture, and change control process — the Infrastructure Governance Briefing is the right starting point. It is a focused engagement designed for IT Directors and CIOs who want a practitioner's assessment of where their organization stands before the next outage makes that question urgent.
+
+[**→ Book the Infrastructure Governance Briefing**](https://calendly.com/4thandbailey/infrastructure-governance-briefing)
 
 ---
 
