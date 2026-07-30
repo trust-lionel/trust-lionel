@@ -18,7 +18,7 @@ postType: "coverTop"
 
 ---
 
-On the evening of July 28, 2026, American Airlines grounded every departure at every airport it operates. According to reporting from multiple outlets, the FAA's Air Traffic Control System Command Center issued a nationwide ground stop at approximately 6:30 p.m. ET after a connectivity failure froze dispatch, weight-and-balance, and crew scheduling systems across all hubs. The core outage lasted roughly 48 minutes. The cascading delays, missed connections, and scrambled crew positions rippled through the night. This was not weather. It was not a third-party cyberattack. It was a connectivity failure in the airline's own operational technology — and according to industry analysts, it was the third time in under two years that the same underlying architecture gap produced the same result.
+On the evening of July 28, 2026, American Airlines grounded every departure at every airport it operates. According to reporting from multiple outlets, the FAA's Air Traffic Control System Command Center issued a nationwide ground stop at approximately 6&#58;30 p.m. ET after a connectivity failure froze dispatch, weight-and-balance, and crew scheduling systems across all hubs. The core outage lasted roughly 48 minutes. The cascading delays, missed connections, and scrambled crew positions rippled through the night. This was not weather. It was not a third-party cyberattack. It was a connectivity failure in the airline's own operational technology — and according to industry analysts, it was the third time in under two years that the same underlying architecture gap produced the same result.
 
 American Airlines is not an SMB. But the failure mode is identical to what I observe regularly in small-to-medium-sized business environments — and the consequences, scaled to organizational size, are proportionally just as severe. A connectivity failure that grounds 40 aircraft at Dallas/Fort Worth during peak departure hours is the enterprise equivalent of an SMB losing access to its point-of-sale system, ERP platform, and cloud-hosted productivity applications simultaneously. The physics of the failure do not change with the size of the organization. What changes is who is available to diagnose and resolve it — and how quickly. I have seen that difference play out firsthand.
 
@@ -109,11 +109,3 @@ If you are ready to go deeper — a structured review of your network infrastruc
 *This post references ongoing dissertation research by Mason Ned, doctoral candidate at Colorado Technical University, on physical network troubleshooting skill shortages and their relationship to LAN and WLAN reliability in SMB environments. The research represents a timely and necessary effort to quantify a workforce gap that practitioners have observed for years but that remains underrepresented in industry data.*
 
 ---
-
-**Metadata (do not publish)**
-Target Persona: IT Director (primary), CIO and Owner/CEO/Operator (secondary)
-Primary Framework Module: Module 03 — Hybrid Estate Optimization; Module 04 — Cyber Resilience
-Target Sectors: Energy/Oil and Gas, Healthcare, Logistics and Distribution, Financial Services, Legal
-Suggested Tags: Network Management, IT Infrastructure, Managed Services, Business Continuity, Field Notes
-New Tags Introduced: None — all tags exist in the canonical registry
-Recommended Lead Magnet: Uptime Checklist (IT Director persona) / CEO Risk Document (Owner/CEO/Operator persona)
