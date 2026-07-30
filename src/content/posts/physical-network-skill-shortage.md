@@ -8,6 +8,7 @@ tags:
   - Managed Services
   - Business Continuity
   - Field Notes
+  - Small Business
 cover: https://images.unsplash.com/photo-1591210556895-91cacc8c5565?w=1400&q=80&auto=format&fit=crop
 spotifyPlaylistId: "1NeQ7YA60zxndytLR7aMXg"
 featured: false
