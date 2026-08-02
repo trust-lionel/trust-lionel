@@ -10,3 +10,7 @@ Allow: /
 # SITE.website in src/config.ts must equal https://trust-lionel.com/
 # for Astro to generate correct sitemap URLs
 Sitemap: https://trust-lionel.com/sitemap-index.xml
+
+# llms.txt — structured site index for AI agents and language model crawlers
+# https://llmstxt.org
+LLMs: https://trust-lionel.com/llms.txt
