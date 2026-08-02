@@ -1,0 +1,74 @@
+# Lionel Mosley
+
+> Lionel Mosley is a Senior Consultant, IT Strategy Growth & Transformation based in Houston, TX, serving organizations nationwide through 4TH AND BAILEY — an enterprise IT consulting firm specializing in cloud infrastructure, cybersecurity, Microsoft 365, and IT governance.
+
+Lionel is a Microsoft Cloud Solution Provider and Google Partner with 27 years of experience in network infrastructure, cloud architecture, and enterprise IT governance. He is the creator and maintainer of the Infrastructure Placement Framework — a vendor-neutral, NIST-aligned, open-source enterprise IT governance framework covering eight modules: Workload Placement, Cloud Repatriation Readiness, Hybrid Estate Optimization, Cyber Resilience and Business Continuity, AI Governance and NIST Alignment, End-User Device and BYOD Strategy, Collaboration Platform Strategy, and Business Continuity and Disaster Recovery.
+
+This site — trust-lionel.com — is the home of the ahr-ki-tekt Design Journal, where Lionel publishes frameworks, field notes, and analysis for IT professionals and business leaders making technology decisions that determine whether their organizations survive the next disruption.
+
+## Links
+
+- [Website](https://trust-lionel.com)
+- [Consulting](https://trust-lionel.com/consulting)
+- [Posts](https://trust-lionel.com/posts)
+- [Projects](https://trust-lionel.com/projects)
+- [Events](https://trust-lionel.com/events)
+- [Email](mailto:inquiries@trust-lionel.com)
+- [LinkedIn](https://linkedin.com/in/lionelmosley)
+- [GitHub](https://github.com/trust-lionel)
+- [GitLab](https://gitlab.com/trust-lionel)
+- [X](https://x.com/lionelmosley)
+- [Bluesky](https://bsky.app/profile/lionelmosley)
+- [Threads](https://www.threads.com/@lionelmosley)
+- [Instagram](https://instagram.com/lionelmosley)
+- [YouTube](https://youtube.com/@LMosley002)
+- [Spotify](https://open.spotify.com/user/lmosley002-spotify)
+- [Substack](https://substack.com/@lionelmosley)
+
+## Posts
+
+Field notes, analysis, and practitioner frameworks published in the ahr-ki-tekt Design Journal. Written for CIOs, IT Directors, InfoSec Officers, and business leaders.
+
+- [What This Week's American Airlines Outage Has in Common With Your Server Room](https://trust-lionel.com/posts/physical-network-skill-shortage/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/physical-network-skill-shortage.md): Field Notes — IT Director Series. Physical network troubleshooting skill shortages in SMBs, offshore infrastructure risk, and the workforce gap driving extended outages.
+- [What Attackers Do After They Get Past Your MFA](https://trust-lionel.com/posts/what-attackers-do-after-mfa/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/what-attackers-do-after-mfa.md): Field Notes — InfoSec Officer Series. AiTM phishing, post-breach persistence mechanisms, mailbox governance, OAuth token abuse, and incident response sequencing.
+- [I Am Still Running a 2020 MacBook Pro in 2026 — Here Is Why](https://trust-lionel.com/posts/macbook-pro-2026/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/macbook-pro-2026.md): Hardware patience, Apple Intelligence, the end of the Intel Mac era, and the tools behind trust-lionel.com.
+- [When the Internet Goes Dark](https://trust-lionel.com/posts/connectivity-uptime/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/connectivity-uptime.md): Real-world look at connectivity failures, business continuity, and proactive network management.
+- [Why We Moved a Regional Broadcasting Company Off Amazon EC2 — and Why Microsoft Azure Won](https://trust-lionel.com/posts/cloud-migration/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/cloud-migration.md): Cloud migration case study — architecture decisions, vendor selection, and operational outcomes.
+- [When Microsoft's Own Email Becomes the Weapon](https://trust-lionel.com/posts/microsoft-notification-abuse/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/microsoft-notification-abuse.md): Microsoft notification abuse as a phishing vector — how attackers weaponize legitimate platform emails.
+- [Three Questions Every CEO and Board Should Be Able to Answer](https://trust-lionel.com/posts/three-questions/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/three-questions.md): Technology risk, business continuity, and the questions that expose organizational vulnerability.
+- [Vibe Coding — How I Built My Personal Brand in One Night](https://trust-lionel.com/posts/vibe-coding/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/vibe-coding.md): Building trust-lionel.com — the platform, the stack, and the reasoning behind owning your digital presence.
+- [MacSysTools](https://trust-lionel.com/posts/macsystools/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/macsystools.md): macOS system tools built with SwiftUI.
+
+## Events
+
+- [Your Website Should Be Making You Money](https://trust-lionel.com/events/cmet-workshop-september-2026/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/events/cmet-workshop-september-2026.md): Live virtual workshop for entrepreneurs on building a revenue-generating website. September 23, 2026. Hosted by CMET Nation.
+
+## Projects
+
+- [Infrastructure Placement Framework](https://framework.4thandbailey.com): Vendor-neutral, NIST-aligned, open-source enterprise IT governance framework. Eight modules covering workload placement, cloud repatriation, hybrid estate optimization, cyber resilience, AI governance, end-user device strategy, collaboration platforms, and BCDR.
+- [Microsoft 365 PowerShell Tools](https://github.com/4thandBailey/tools): Free, production-tested Microsoft 365 tools built on Microsoft Graph API v1.0. MFA status reports, inactive user detection, license optimization, mailbox statistics, and group membership audits.
+- [Shopify ↔ Sage BusinessWorks Middleware Agent](https://github.com/4thandBailey/shopify-bw-agent): Middleware connecting Shopify and Sage BusinessWorks for real-time business operations.
+- [Houston Alert](https://devops.houstonalert.com): Real-time city warning system — documented infrastructure build from architecture through deployment.
+
+## Consulting
+
+Senior Consultant, IT Strategy Growth & Transformation. Complete design, implementation, and technology operations for organizations navigating IT transformation, cloud migration, cybersecurity governance, and infrastructure modernization.
+
+- [Consulting Page](https://trust-lionel.com/consulting)
+- [Schedule an Advisory Consultation](https://4nb.cloud/lmosley)
+- [Microsoft Marketplace Partner Profile](https://marketplace.microsoft.com/en-us/marketplace/partner-dir/22479281-ab81-4d69-ab39-e39bb2dde0a7/overview)
+
+Service areas: IT Strategy & Transformation, Cloud Architecture & Migration, Security Posture & Governance, Infrastructure Design & Analytics, Business Intelligence (Power BI), CI/CD Pipeline Improvement, Microsoft 365 and Azure Deployments.
+
+Frameworks: CISA SCuBA, NIST SP 800-53, MITRE ATT&CK, CIS Benchmarks.
+
+Sectors served: Energy and Oil & Gas, Healthcare, Legal, Financial Services, Logistics and Distribution, Non-Profit and Faith-Based, Property Management, Education.
+
+## External
+
+- [4TH AND BAILEY](https://4thandbailey.com): Enterprise IT Consulting
+- [Infrastructure Placement Framework](https://framework.4thandbailey.com): Open-source IT governance framework
+- [4TH AND BAILEY GitHub](https://github.com/4thandBailey): Published tools and open-source projects
+- [4thxBailey GitHub](https://github.com/4thxBailey): Legacy GitHub organization
+- [trust-lionel GitHub](https://github.com/trust-lionel): Platform repository (public)
+- [About Lionel Mosley](https://about.lionelmosley.com): Extended profile
