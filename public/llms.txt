@@ -37,6 +37,7 @@ Field notes, analysis, and practitioner frameworks published in the ahr-ki-tekt 
 - [When Microsoft's Own Email Becomes the Weapon](https://trust-lionel.com/posts/microsoft-notification-abuse/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/microsoft-notification-abuse.md): Microsoft notification abuse as a phishing vector — how attackers weaponize legitimate platform emails.
 - [Three Questions Every CEO and Board Should Be Able to Answer](https://trust-lionel.com/posts/three-questions/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/three-questions.md): Technology risk, business continuity, and the questions that expose organizational vulnerability.
 - [Vibe Coding — How I Built My Personal Brand in One Night](https://trust-lionel.com/posts/vibe-coding/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/vibe-coding.md): Building trust-lionel.com — the platform, the stack, and the reasoning behind owning your digital presence.
+
 ## Events
 
 - [Your Website Should Be Making You Money](https://trust-lionel.com/events/cmet-workshop-september-2026/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/events/cmet-workshop-september-2026.md): Live virtual workshop for entrepreneurs on building a revenue-generating website. September 23, 2026. Hosted by CMET Nation.
