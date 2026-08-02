@@ -37,8 +37,6 @@ Field notes, analysis, and practitioner frameworks published in the ahr-ki-tekt 
 - [When Microsoft's Own Email Becomes the Weapon](https://trust-lionel.com/posts/microsoft-notification-abuse/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/microsoft-notification-abuse.md): Microsoft notification abuse as a phishing vector — how attackers weaponize legitimate platform emails.
 - [Three Questions Every CEO and Board Should Be Able to Answer](https://trust-lionel.com/posts/three-questions/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/three-questions.md): Technology risk, business continuity, and the questions that expose organizational vulnerability.
 - [Vibe Coding — How I Built My Personal Brand in One Night](https://trust-lionel.com/posts/vibe-coding/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/vibe-coding.md): Building trust-lionel.com — the platform, the stack, and the reasoning behind owning your digital presence.
-- [MacSysTools](https://trust-lionel.com/posts/macsystools/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/macsystools.md): macOS system tools built with SwiftUI.
-
 ## Events
 
 - [Your Website Should Be Making You Money](https://trust-lionel.com/events/cmet-workshop-september-2026/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/events/cmet-workshop-september-2026.md): Live virtual workshop for entrepreneurs on building a revenue-generating website. September 23, 2026. Hosted by CMET Nation.
@@ -49,6 +47,7 @@ Field notes, analysis, and practitioner frameworks published in the ahr-ki-tekt 
 - [Microsoft 365 PowerShell Tools](https://github.com/4thandBailey/tools): Free, production-tested Microsoft 365 tools built on Microsoft Graph API v1.0. MFA status reports, inactive user detection, license optimization, mailbox statistics, and group membership audits.
 - [Shopify ↔ Sage BusinessWorks Middleware Agent](https://github.com/4thandBailey/shopify-bw-agent): Middleware connecting Shopify and Sage BusinessWorks for real-time business operations.
 - [Houston Alert](https://devops.houstonalert.com): Real-time city warning system — documented infrastructure build from architecture through deployment.
+- [MacSysTools](https://trust-lionel.com/posts/macsystools/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/macsystools.md): macOS system diagnostic and management tools built with SwiftUI.
 
 ## Consulting
 
