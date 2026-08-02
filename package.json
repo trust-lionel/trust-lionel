@@ -75,5 +75,6 @@
     "overrides": {
       "neotraverse": "^1.0.1"
     }
-  }
+  },
+  "packageManager": "pnpm@11.1.2"
 }
