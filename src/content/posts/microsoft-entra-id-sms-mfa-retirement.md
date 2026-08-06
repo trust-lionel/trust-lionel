@@ -100,9 +100,3 @@ Phishing-resistant authentication — passkeys, FIDO2 keys, certificate-based au
 If your organization's Microsoft Entra ID authentication posture is not something you have reviewed recently — or if you are uncertain what your current MFA deployment looks like across your tenant — that uncertainty is the finding.
 
 [**→ Book the Infrastructure Governance Briefing**](https://calendly.com/4thandbailey/infrastructure-governance-briefing)
-
----
-
-*This platform is built with ❤️ in Houston, TX.*
-
----
