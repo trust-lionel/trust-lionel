@@ -55,7 +55,7 @@ The window between now and September 1 is the preparation window — not a grace
 
 ## What to Do Before September 1, 2026 — By Role
 
-### If You Are an IT Director or Microsoft 365 Administrator
+## If You Are an IT Director or Microsoft 365 Administrator
 
 Your first action is an audit. Pull authentication method reports from the Microsoft Entra ID admin center and identify every user currently enabled for SMS or voice authentication. The free Microsoft 365 PowerShell tools maintained by 4TH AND BAILEY at [**github.com/4thandBailey/tools**](https://github.com/4thandBailey/tools) include MFA status reporting built on Microsoft Graph API v1.0 — cross-platform, production-tested, and available at no cost. Once you know who is affected, you can scope the transition accurately.
 
@@ -67,13 +67,13 @@ Next, choose your passkey deployment path. Microsoft Entra ID supports two categ
 
 Microsoft Entra ID's built-in registration campaign feature handles the rollout mechanically — prompting users to register a passkey during their next MFA sign-in, at scale, without requiring individual outreach. Enable it before September 1 so the transition happens on your schedule rather than Microsoft's automated rollout pace.
 
-### If You Are a CIO or Technology Leader
+## If You Are a CIO or Technology Leader
 
 The February 1, 2027 hard cutoff is a board-level risk item that belongs in your next technology risk review. Any organization with compliance obligations — HIPAA, PCI DSS, SOC 2, CMMC — that still relies on SMS or voice for Microsoft Entra ID authentication after that date will have a documented control gap. The retirement is published, the timeline is public, and the decision to delay preparation is a decision your auditor will find in the next review cycle.
 
 The passkey transition also surfaces adjacent questions worth addressing before September 1: Which users have standing access to sensitive systems via SMS-verified sessions? Are there shared accounts or service accounts using phone-based MFA that are not tied to an individual user? Is your help desk prepared to support passkey registration for users who encounter difficulty during the transition? These are not hypothetical questions — they are the questions your auditor will ask, and they are easier to answer before enforcement begins than after.
 
-### If You Are an Owner, CEO, or Operator Whose IT Is Managed or Outsourced
+## If You Are an Owner, CEO, or Operator Whose IT Is Managed or Outsourced
 
 If your technology environment is managed by an IT provider or managed services partner, the responsibility for planning this transition sits with them — but the accountability for the outcome sits with your organization. If your IT provider has not raised Microsoft's SMS MFA retirement with you before September 1, ask them directly: what is the plan, what is the timeline, and what will your staff experience when the change rolls out?
 
@@ -106,11 +106,3 @@ If your organization's Microsoft Entra ID authentication posture is not somethin
 *This platform is built with ❤️ in Houston, TX.*
 
 ---
-
-**Metadata (do not publish)**
-Target Persona: IT Director (primary), CIO and Owner/CEO/Operator (secondary)
-Primary Framework Module: Module 04 — Cyber Resilience (light reference)
-Target Sectors: Healthcare, Financial Services, Legal, Education, Non-Profit and Faith-Based
-Suggested Tags: Microsoft 365, Microsoft Entra ID, Cybersecurity, Cyber Resilience, MITRE ATT&CK, Business Continuity, Field Notes, Small Business
-New Tags Introduced: None — all tags exist in the canonical registry
-Recommended Lead Magnet: CEO Risk Document (Owner/CEO/Operator) / Uptime Checklist (IT Director)
