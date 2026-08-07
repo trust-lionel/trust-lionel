@@ -12,6 +12,10 @@ cover: https://plus.unsplash.com/premium_photo-1683134018612-560033455e43?w=1400
 featured: false
 ---
 
+*The ahr-ki-tekt Design Journal — Field Notes, IT Director Series*
+
+---
+
 *Most organizations find out they have a connectivity problem when their employees can't get to work. The organizations we manage find out we have a connectivity problem before their employees ever notice.*
 
 ---

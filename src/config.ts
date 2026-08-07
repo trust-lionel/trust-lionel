@@ -20,7 +20,7 @@ import type {
 export const SITE: Site = {
   title: 'Lionel Mosley | ahr-ki-tekt',
   description:
-    'Carefully selected frameworks, insights, and solutions from Lionel Mosley — IT Consultant & Innovative Thought Leader based in Houston, TX.',
+    'The ahr-ki-tekt Design Journal — frameworks, insights, and analysis from Lionel Mosley, Senior Consultant, IT Strategy Growth & Transformation. Based in Houston, TX, serving organizations nationwide through 4TH AND BAILEY.',
   website: 'https://trust-lionel.com/',
   lang: 'en',
   base: '/',
@@ -239,7 +239,7 @@ export const SKILLSSHOWCASE_CONFIG: SkillsShowcaseConfig = {
 export const POSTS_CONFIG: PostConfig = {
   title: 'Posts',
   description:
-    'Carefully selected frameworks, insights, and solutions from Lionel Mosley — IT Consultant & Innovative Thought Leader.',
+    'The ahr-ki-tekt Design Journal — frameworks, insights, and analysis from Lionel Mosley, Senior Consultant, IT Strategy Growth & Transformation.',
   introduce:
     'Frameworks, insights, and analysis on cloud infrastructure, cybersecurity, Microsoft 365, and enterprise IT governance.',
   author: 'Lionel Mosley',

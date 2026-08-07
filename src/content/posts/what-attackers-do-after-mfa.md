@@ -17,7 +17,7 @@ featured: false
 spotifyPlaylistId: "6HLnsyzO91CQ5nvYL9mIUl"
 ---
 
-*Field Notes — InfoSec Officer Series*
+*The ahr-ki-tekt Design Journal — Field Notes, InfoSec Officer Series*
 
 ---
 

@@ -17,7 +17,7 @@ postType: "coverTop"
 featured: false
 ---
 
-*Field Notes — IT Director Series*
+*The ahr-ki-tekt Design Journal — Field Notes, IT Director Series*
 
 ---
 
