@@ -273,9 +273,9 @@ export const POSTS_CONFIG: PostConfig = {
 export const PROJECTS_CONFIG: ProjectConfig = {
   title: 'Projects',
   description:
-    'Open-source frameworks, tools, and applications built by Lionel Mosley and 4TH AND BAILEY.',
+    'Frameworks, tools, and applications built by Lionel Mosley and 4TH AND BAILEY — free to use, fork, and build on.',
   introduce:
-    'Open-source frameworks, tools, and applications built by Lionel Mosley and 4TH AND BAILEY — free to use, fork, and build on.',
+    'Frameworks, tools, and applications built by Lionel Mosley and 4TH AND BAILEY — free to use, fork, and build on.',
 }
 
 // ── TAGS ─────────────────────────────────────────────────────
