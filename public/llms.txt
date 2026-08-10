@@ -2,13 +2,14 @@
 
 > Lionel Mosley is a Senior Consultant, IT Strategy Growth & Transformation based in Houston, TX, serving organizations nationwide through 4TH AND BAILEY — an enterprise IT consulting firm specializing in cloud infrastructure, cybersecurity, Microsoft 365, and IT governance.
 
-Lionel is a Microsoft Cloud Solution Provider and Google Partner with 27 years of experience in network infrastructure, cloud architecture, and enterprise IT governance. He is the creator and maintainer of the Infrastructure Placement Framework — a vendor-neutral, NIST-aligned, open-source enterprise IT governance framework covering eight modules: Workload Placement, Cloud Repatriation Readiness, Hybrid Estate Optimization, Cyber Resilience and Business Continuity, AI Governance and NIST Alignment, End-User Device and BYOD Strategy, Collaboration Platform Strategy, and Business Continuity and Disaster Recovery.
+Lionel is a Microsoft Cloud Solution Provider and Google Partner with over two decades of experience in network infrastructure, cloud architecture, and enterprise IT governance. He is the creator and maintainer of the Infrastructure Placement Framework — a vendor-neutral, NIST-aligned, open-source enterprise IT governance framework covering eight modules: Workload Placement, Cloud Repatriation Readiness, Hybrid Estate Optimization, Cyber Resilience and Business Continuity, AI Governance and NIST Alignment, End-User Device and BYOD Strategy, Collaboration Platform Strategy, and Business Continuity and Disaster Recovery.
 
 This site — trust-lionel.com — is the home of The ahr-ki-tekt Design Journal, where Lionel publishes frameworks, field notes, and analysis for IT professionals and business leaders making technology decisions that determine whether their organizations survive the next disruption.
 
 ## Links
 
 - [Website](https://trust-lionel.com)
+- [About](https://trust-lionel.com/about)
 - [Consulting](https://trust-lionel.com/consulting)
 - [Posts](https://trust-lionel.com/posts)
 - [Projects](https://trust-lionel.com/projects)

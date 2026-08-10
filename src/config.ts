@@ -54,6 +54,10 @@ export const FOOTER_LINKS: Link[] = [
     url: '/',
   },
   {
+    name: 'About',
+    url: '/about',
+  },
+  {
     name: 'Posts',
     url: '/posts',
   },

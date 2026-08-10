@@ -1,0 +1,146 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import PageTitle from '~/components/base/PageTitle.astro'
+import SectionDivider from '~/components/base/SectionDivider.astro'
+
+const title = 'About'
+const description = 'Senior Consultant in IT Strategy, Growth & Transformation. Founder of 4TH AND BAILEY — enterprise IT consulting serving organizations nationwide from Houston, TX. Microsoft CSP. Google Partner. Over two decades of infrastructure experience.'
+const introduce = 'I am Lionel Mosley — Senior Consultant in IT Strategy, Growth & Transformation, and the founder of 4TH AND BAILEY. For over two decades, I have helped organizations make the technology decisions that determine whether they survive disruption or lead through it.'
+const image = '/og-about.png'
+---
+
+<Layout {title} {description} {image}>
+  <div class="relative z-[1] py-8 pb-10 px-6 sm:px-8">
+
+    <PageTitle {title} {introduce} />
+
+    <div class="mt-12 flex flex-col gap-8">
+
+      <!-- Who I Am -->
+      <div class="border border-border/50 rounded-sm p-6">
+        <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">The Practice</div>
+        <h2 class="text-lg font-semibold text-foreground mb-3">Built on Infrastructure. Grounded in Outcomes.</h2>
+        <p class="text-sm text-muted-foreground leading-relaxed">
+          I founded <a href="https://4thandbailey.com" target="_blank" rel="noopener noreferrer" class="text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">4TH AND BAILEY</a> to serve organizations that have outgrown commodity IT — businesses that need a trusted advisor who can operate at both the infrastructure level and the executive level without losing fidelity at either end. My practice spans network infrastructure, cloud architecture, cybersecurity governance, and enterprise IT strategy across 14+ industry verticals, including healthcare, legal, energy, financial services, logistics, and manufacturing. Every engagement is built around one standard: measurable outcomes that improve financial performance, reduce operational risk, and position the organization for sustainable growth.
+        </p>
+      </div>
+
+      <!-- Credentials -->
+      <div class="border border-border/50 rounded-sm p-6">
+        <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Credentials & Partnerships</div>
+        <h2 class="text-lg font-semibold text-foreground mb-3">Verified. Trusted. Deployed.</h2>
+        <p class="text-sm text-muted-foreground leading-relaxed mb-4">
+          I am a verified <a href="https://marketplace.microsoft.com/en-us/marketplace/partner-dir/22479281-ab81-4d69-ab39-e39bb2dde0a7/overview" target="_blank" rel="noopener noreferrer" class="text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">Microsoft Cloud Solution Provider (CSP)</a> and Google Partner — credentials that reflect a standard of technical competency and client accountability that Microsoft and Google both verify directly. I have provisioned and administered more than 100 Microsoft Cloud tenants, migrated over 25 terabytes of enterprise email data to Microsoft 365 with zero data loss, and maintained 99%+ uptime across distributed infrastructure environments supporting 500+ endpoints.
+        </p>
+        <p class="text-sm text-muted-foreground leading-relaxed">
+          My cybersecurity practice is aligned to the frameworks that govern the most security-conscious organizations in the country — CISA SCuBA, NIST SP 800-53, MITRE ATT&CK, and CIS Benchmarks. My vendor partnerships with AT&T, Zoom, and Comcast Business extend that capability into licensed implementation and support for Microsoft Teams Phone, AT&T Office@Hand, and Zoom Phone — giving clients a single point of accountability across infrastructure and communications.
+        </p>
+      </div>
+
+      <!-- Framework -->
+      <div class="border border-border/50 rounded-sm p-6">
+        <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Open Source</div>
+        <h2 class="text-lg font-semibold text-foreground mb-3">Infrastructure Placement Framework</h2>
+        <p class="text-sm text-muted-foreground leading-relaxed mb-4">
+          I am the creator of the <a href="https://framework.4thandbailey.com" target="_blank" rel="noopener noreferrer" class="text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">Infrastructure Placement Framework</a> — a vendor-neutral, NIST-aligned, open-source enterprise IT governance framework released under Creative Commons Attribution 4.0. The framework addresses eight domains of modern IT decision-making: Workload Placement, Cloud Repatriation Readiness, Hybrid Estate Optimization, Cyber Resilience and Business Continuity, AI Governance and NIST Alignment, End-User Device and BYOD Strategy, Collaboration Platform Strategy, and Business Continuity and Disaster Recovery.
+        </p>
+        <p class="text-sm text-muted-foreground leading-relaxed">
+          It was built for organizations that have outgrown commodity IT decision-making and need a structured, defensible approach to infrastructure governance at scale. It is free to use, fork, and build on.
+        </p>
+        <div class="mt-4">
+          <a href="https://github.com/4thandBailey/infrastructure-placement-framework" target="_blank" rel="noopener noreferrer" class="text-sm text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">
+            View the Infrastructure Placement Framework on GitHub →
+          </a>
+        </div>
+      </div>
+
+      <!-- Published Work -->
+      <div class="border border-border/50 rounded-sm p-6">
+        <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Published Work</div>
+        <h2 class="text-lg font-semibold text-foreground mb-3">The ahr-ki-tekt Design Journal</h2>
+        <p class="text-sm text-muted-foreground leading-relaxed mb-4">
+          I publish original analysis, practitioner frameworks, and governance guidance through the <a href="https://trust-lionel.com" class="text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">ahr-ki-tekt Design Journal</a> — written specifically for CIOs, IT Directors, InfoSec Officers, and executive leaders making technology decisions under real-world constraints. My published work covers Microsoft Entra ID MFA policy changes, post-MFA attack vector analysis, cloud migration architecture, AI integration governance, network infrastructure resilience, and business continuity strategy.
+        </p>
+        <p class="text-sm text-muted-foreground leading-relaxed">
+          I also build in public — developing open-source tools, documenting infrastructure builds from architecture through production deployment, and demonstrating through my own digital presence what it looks like when an IT consultant owns their technology stack end to end.
+        </p>
+        <div class="mt-4">
+          <a href="/posts" class="text-sm text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">
+            Read the published work →
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <SectionDivider />
+
+    <!-- What Working With 4TH AND BAILEY Looks Like -->
+    <div class="py-8">
+      <h2 class="text-2xl sm:text-3xl tracking-tight mb-1">What working with 4TH AND BAILEY looks like</h2>
+      <p class="text-muted-foreground text-sm mb-8">
+        Every engagement is built around the same commitment — technical depth, executive clarity, and outcomes that hold.
+      </p>
+
+      <div class="flex flex-col gap-6">
+
+        <div class="border-b border-border/50 pb-6">
+          <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">How We Engage</div>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Engagements begin with a structured discovery — not a sales call. I take time to understand the organization's current infrastructure posture, risk exposure, and strategic direction before recommending anything. The output is a clear picture of where the gaps are, what they cost, and what a defensible path forward looks like. From there, clients choose the level of involvement that fits their situation — advisory, project-based, or ongoing managed services through 4TH AND BAILEY.
+          </p>
+        </div>
+
+        <div class="border-b border-border/50 pb-6">
+          <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">What You Get</div>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            A consultant who can sit in the boardroom and the server room on the same day — and communicate accurately in both. I translate complex infrastructure decisions into business language without losing technical precision, so executive teams can make informed decisions and implementation teams can execute without ambiguity. Every recommendation is traceable to a framework, a finding, or a documented engagement outcome — not a vendor relationship or a product preference.
+          </p>
+        </div>
+
+        <div class="border-b border-border/50 pb-6">
+          <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Who We Work With</div>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Organizations across healthcare, legal, energy, financial services, logistics, manufacturing, and more — typically at the point where technology has become a constraint on growth rather than an enabler of it. My clients range from owner-operated businesses making their first serious infrastructure investment to mid-market organizations navigating a cloud migration, a compliance mandate, or a security incident they cannot afford to repeat.
+          </p>
+        </div>
+
+        <div class="border-b border-border/50 pb-6">
+          <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Recognition</div>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            4TH AND BAILEY has been recognized as a top IT consultant and managed services provider in Houston by <a href="https://clutch.co" target="_blank" rel="noopener noreferrer" class="text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">Clutch.co</a> and <a href="https://expertise.com" target="_blank" rel="noopener noreferrer" class="text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">Expertise.com</a> — affirming consistent client satisfaction and service excellence across engagements of every scale.
+          </p>
+        </div>
+
+        <div class="pb-6">
+          <div class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-2">Based In</div>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Houston, Texas. Serving organizations nationwide. Available for advisory consultations, speaking engagements, and strategic partnerships.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <SectionDivider />
+
+    <!-- CTA -->
+    <div class="py-8 flex flex-col gap-4">
+      <h2 class="text-2xl sm:text-3xl tracking-tight">Ready to move forward?</h2>
+      <p class="text-sm text-muted-foreground leading-relaxed max-w-xl">
+        The organizations I work with do not just solve the problem in front of them — they build the infrastructure, governance, and posture to handle the problems they have not seen yet. If that is the standard your organization is ready to meet, let's talk.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="https://4nb.cloud/lmosley" target="_blank" rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 text-sm font-medium text-white px-5 py-2.5 rounded-sm transition-colors" style="background-color: #0088cc;">
+          Schedule an Advisory Consultation →
+        </a>
+        <a href="/posts"
+          class="inline-flex items-center gap-2 text-sm font-medium text-foreground border border-border px-5 py-2.5 rounded-sm hover:bg-accent transition-colors">
+          Read the Published Work →
+        </a>
+      </div>
+    </div>
+
+  </div>
+</Layout>
