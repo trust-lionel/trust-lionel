@@ -41,6 +41,15 @@ const softwareApplicationJson = softwareApplication ? JSON.stringify({
   "downloadUrl": softwareApplication.downloadUrl,
   "author": { "@type": "Person", "name": "Lionel Mosley", "url": "https://trust-lionel.com" }
 }) : null
+const softwareSourceCodeJson = softwareApplication ? JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": softwareApplication.name,
+  "codeRepository": softwareApplication.codeRepository,
+  "programmingLanguage": "Swift",
+  "runtimePlatform": softwareApplication.operatingSystem,
+  "author": { "@type": "Person", "name": "Lionel Mosley", "url": "https://trust-lionel.com" }
+}) : null
 ---
 
 <!doctype html>
@@ -147,6 +156,10 @@ const softwareApplicationJson = softwareApplication ? JSON.stringify({
     <!-- SoftwareApplication JSON-LD — injected on software post pages only -->
     {softwareApplicationJson && (
       <script is:inline type="application/ld+json" set:html={softwareApplicationJson} />
+    )}
+    <!-- SoftwareSourceCode JSON-LD — injected on software post pages only -->
+    {softwareSourceCodeJson && (
+      <script is:inline type="application/ld+json" set:html={softwareSourceCodeJson} />
     )}
   </head>
   <body class="flex flex-col">
