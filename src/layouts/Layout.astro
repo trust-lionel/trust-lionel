@@ -21,9 +21,26 @@ type Props = {
     image: string
     keywords: string[]
   }
+  softwareApplication?: {
+    name: string
+    operatingSystem: string
+    applicationCategory: string
+    codeRepository: string
+    downloadUrl: string
+  }
 }
 
-const { title, description, image, disableViewTransition, blogPosting }: Props = Astro.props
+const { title, description, image, disableViewTransition, blogPosting, softwareApplication }: Props = Astro.props
+const softwareApplicationJson = softwareApplication ? JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": softwareApplication.name,
+  "operatingSystem": softwareApplication.operatingSystem,
+  "applicationCategory": softwareApplication.applicationCategory,
+  "codeRepository": softwareApplication.codeRepository,
+  "downloadUrl": softwareApplication.downloadUrl,
+  "author": { "@type": "Person", "name": "Lionel Mosley", "url": "https://trust-lionel.com" }
+}) : null
 ---
 
 <!doctype html>
@@ -125,6 +142,11 @@ const { title, description, image, disableViewTransition, blogPosting }: Props =
         "image": blogPosting.image,
         "keywords": blogPosting.keywords
     })} />
+    )}
+
+    <!-- SoftwareApplication JSON-LD — injected on software post pages only -->
+    {softwareApplicationJson && (
+      <script is:inline type="application/ld+json" set:html={softwareApplicationJson} />
     )}
   </head>
   <body class="flex flex-col">

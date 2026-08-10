@@ -27,6 +27,9 @@ const posts = defineCollection({
         draft: z.boolean().default(false),
         license: z.string().optional(),
         spotifyPlaylistId: z.string().optional(),
+        softwareApplicationName: z.string().optional(),
+        softwareApplicationRepo: z.string().optional(),
+        softwareApplicationOs: z.string().optional(),
       })
       .transform((data) => ({
         ...data,

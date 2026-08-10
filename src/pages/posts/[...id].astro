@@ -57,6 +57,14 @@ const blogPosting = {
   image: ogImage,
   keywords: frontmatter.tags || [],
 }
+
+const softwareApplication = frontmatter.softwareApplicationName ? {
+  name: frontmatter.softwareApplicationName,
+  operatingSystem: frontmatter.softwareApplicationOs ?? '',
+  applicationCategory: 'DeveloperApplication',
+  codeRepository: frontmatter.softwareApplicationRepo ?? '',
+  downloadUrl: frontmatter.softwareApplicationRepo ?? '',
+} : undefined
 ---
 
 <Layout
@@ -64,6 +72,7 @@ const blogPosting = {
   description={frontmatter.description || frontmatter.title}
   image={ogImage}
   {blogPosting}
+  {softwareApplication}
 >
   <div class="relative flex flex-col justify-between h-fit z-[1]">
     <TocMobile {post} {posts} headings={filterHeadings} />

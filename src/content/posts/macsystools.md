@@ -10,6 +10,9 @@ recommend: false
 pinned: false
 draft: false
 postType: "coverTop"
+softwareApplicationName: "MacSysTools"
+softwareApplicationRepo: "https://github.com/trust-lionel/macsystools"
+softwareApplicationOs: "macOS Tahoe (26.x)"
 ---
 
 > *I enjoy working with different computing platforms. When using my MacBook Pro — switching between PowerShell and Terminal — I often forget commands like Flush DNS Cache. Rather than reaching for my notes every time, I opened Xcode and built the solution.*
