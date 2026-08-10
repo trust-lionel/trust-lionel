@@ -191,15 +191,6 @@
   to     = "/posts/"
   status = 301
 
-# ── RSS feed redirect ─────────────────────────────────────────
-# /rss.xml is indexed by GSC from the old Jekyll site.
-# Current feed is at /atom.xml — redirect preserves feed subscribers.
-
-[[redirects]]
-from = "/rss.xml"
-to = "/atom.xml"
-status = 301
-
 # ── Legacy music tag pages with + encoding ───────────────────
 # Explicit entries for + encoded tag URLs not caught by wildcard
 
