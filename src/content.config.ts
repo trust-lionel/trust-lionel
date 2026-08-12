@@ -72,6 +72,7 @@ const events = defineCollection({
     eventHostUrl: z.string().url(),
     eventRegistrationUrl: z.string().url(),
     eventStatus: z.enum(['upcoming', 'past']),
+    eventSameAs: z.string().optional(),
     tags: z.array(z.string()).optional(),
     featured: z.boolean().optional(),
   }),

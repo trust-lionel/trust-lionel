@@ -10,6 +10,7 @@ eventRegistrationUrl: "https://api.marketinginnovationsautomation.com/payment-li
 eventStatus: "upcoming"
 tags: ["SEO", "Personal Brand", "AI Governance", "Open Web", "Website Strategy", "Entrepreneurship", "Digital Transformation", "Small Business"]
 featured: true
+eventSameAs: "https://github.com/cmet-lionel/ai-github-pages-workshop"
 ---
 
 Most small business websites look like a business card. The ones that grow revenue work like a sales team.

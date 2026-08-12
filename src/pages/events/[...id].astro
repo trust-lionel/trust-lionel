@@ -64,6 +64,7 @@ const eventSchema = {
     "availability": "https://schema.org/InStock",
   },
   "url": canonicalUrl,
+  ...(frontmatter.eventSameAs ? { "sameAs": frontmatter.eventSameAs } : {}),
 }
 ---
 
