@@ -26,11 +26,11 @@ featured: true
 
 The entrepreneurs in this room run businesses where trust is the product. Before a client books the appointment, places the catering order, enrolls their child, or calls the midwife — they have to believe in the person behind the business. This workshop was built for exactly that kind of business.
 
-Expected attendees include entrepreneurs in phlebotomy, catering, daycare, event planning, home education, veteran housing, K–8 learning academies, midwifery, notary services, party and event planning, and custom apparel. No technical background required. Every step of the workshop runs on a smartphone or laptop using tools that are free to use tonight and free to keep forever.
+Expected attendees include entrepreneurs in phlebotomy, catering, daycare, event planning, home education, veteran housing, K–8 learning academies, midwifery, notary services, party and event planning, and custom apparel. No technical background required. Every step of the workshop runs on a smartphone or laptop using tools that are free to use, and free to keep forever.
 
 ## What You Will Build
 
-In two hours, you will use Claude — the AI tool at [claude.ai](https://claude.ai) — to write the content for your business website. Then you will publish that website using GitHub Pages, a free platform used by developers at companies like Google, Microsoft, and Amazon. You will leave tonight with a live website at a real URL that you own — not rented from Wix, not dependent on a subscription, not subject to someone else's pricing decision.
+In two hours, you will use Claude — the AI tool at [claude.ai](https://claude.ai) — to write the content for your business website. Then you will publish that website using GitHub Pages, a free platform used by developers at companies like Google, Microsoft, and Amazon. You will leave with a live website at a real URL that you own — not rented from Wix, not dependent on a subscription, not subject to someone else's pricing decision.
 
 > "SCORE will give you a mentor. LinkedIn will rent you an audience. Wix will host your website — until they decide to change their pricing. Tonight you are going to learn what it means to own your platform, own your data, and own your stack."
 
@@ -51,7 +51,7 @@ The Center for Micro-Entrepreneurial Training exists to close the gap between th
 
 ---
 
-**When:** Thursday, September 24, 2026 · 6:00 PM – 8:00 PM EDT
+**When:** Thursday, September 24, 2026 · 6&#58;00 PM – 8&#58;00 PM EDT
 
 **Where:** Lift Orlando · 710 S Tampa Ave Suite 209, Orlando, FL 32805
 
