@@ -51,7 +51,7 @@ The Center for Micro-Entrepreneurial Training exists to close the gap between th
 
 ---
 
-**When:** Thursday, September 24, 2026 · 6&#58;00 PM – 8&#58;00 PM EDT
+**When:** Thursday, September 24, 2026 · 6:00 PM – 8:00 PM EDT
 
 **Where:** Lift Orlando · 710 S Tampa Ave Suite 209, Orlando, FL 32805
 
