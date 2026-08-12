@@ -56,3 +56,5 @@ The Center for Micro-Entrepreneurial Training exists to close the gap between th
 **Where:** Lift Orlando · 710 S Tampa Ave Suite 209, Orlando, FL 32805
 
 **Facilitated by:** Lionel Mosley, Senior Consultant — 4TH AND BAILEY
+
+[**→ Join CMET Nation**](https://cmetnation.org/login)
