@@ -41,13 +41,6 @@ const eventSchema = {
     : frontmatter.eventFormat === 'In-Person'
     ? "https://schema.org/OfflineEventAttendanceMode"
     : "https://schema.org/MixedEventAttendanceMode",
-  "location": frontmatter.eventFormat === 'Virtual' ? {
-    "@type": "VirtualLocation",
-    "url": frontmatter.eventRegistrationUrl,
-  } : {
-    "@type": "Place",
-    "name": frontmatter.eventHost,
-  },
   "organizer": {
     "@type": "Organization",
     "name": frontmatter.eventHost,
@@ -58,13 +51,31 @@ const eventSchema = {
     "name": "Lionel Mosley",
     "url": "https://trust-lionel.com",
   },
-  "offers": {
-    "@type": "Offer",
-    "url": frontmatter.eventRegistrationUrl,
-    "availability": "https://schema.org/InStock",
-  },
   "url": canonicalUrl,
   ...(frontmatter.eventSameAs ? { "sameAs": frontmatter.eventSameAs } : {}),
+  ...(frontmatter.eventEndDate ? { "endDate": frontmatter.eventEndDate } : {}),
+  ...(frontmatter.eventImage ? { "image": frontmatter.eventImage } : {}),
+  "offers": {
+    "@type": "Offer",
+    "url": frontmatter.eventPrimaryButtonUrl || canonicalUrl,
+    "availability": "https://schema.org/InStock",
+    "validFrom": frontmatter.eventDate.toISOString().split('T')[0],
+  },
+  "location": frontmatter.eventFormat === 'Virtual' ? {
+    "@type": "VirtualLocation",
+    "url": frontmatter.eventPrimaryButtonUrl || canonicalUrl,
+  } : {
+    "@type": "Place",
+    "name": frontmatter.eventHost,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "710 S Tampa Ave Suite 209",
+      "addressLocality": "Orlando",
+      "addressRegion": "FL",
+      "postalCode": "32805",
+      "addressCountry": "US"
+    }
+  },
 }
 ---
 

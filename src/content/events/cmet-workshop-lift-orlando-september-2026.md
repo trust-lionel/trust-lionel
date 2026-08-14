@@ -2,6 +2,8 @@
 title: "Your Website Should Be Making You Money"
 description: "A live, interactive workshop for entrepreneurs on building a revenue-generating website — led by Lionel Mosley, IT Consultant and Innovative Thought Leader. Hosted by Lift Orlando in collaboration with The Center for Micro-Entrepreneurial Training (CMET)."
 eventDate: 2026-09-24
+eventEndDate: "2026-09-24T20:00:00-04:00"
+eventImage: "https://trust-lionel.com/images/cmet-logo.png"
 eventTime: "6:00 PM - 8:00 PM EDT"
 eventFormat: "In-Person"
 eventHost: "Lift Orlando"
