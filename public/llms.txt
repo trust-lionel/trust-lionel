@@ -30,6 +30,8 @@ This site — trust-lionel.com — is the home of The ahr-ki-tekt Design Journal
 
 Field notes, analysis, and practitioner frameworks published in the ahr-ki-tekt Design Journal. Written for CIOs, IT Directors, InfoSec Officers, and business leaders.
 
+- [The Week Infrastructure Reminded Everyone It Can Fail](https://trust-lionel.com/posts/infrastructure-week-august-2026/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/infrastructure-week-august-2026.md): Field Notes — Finance/Procurement Series. Four infrastructure failures in 72 hours — vendor insolvency, data center cooling failure, platform cascade, and CDN concentration risk. What Finance and Procurement should be asking before the next vendor renewal cycle. References Infrastructure Placement Framework Modules 1, 2, and 4.
+
 - [Microsoft Entra ID Is Retiring SMS MFA — What Your Organization Needs to Do Before September 1, 2026](https://trust-lionel.com/posts/microsoft-entra-id-sms-mfa-retirement/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/microsoft-entra-id-sms-mfa-retirement.md): Field Notes — IT Director Series. Microsoft Entra ID (formerly Azure Active Directory / Azure AD) is retiring SMS and voice MFA. Complete action plan for IT Directors, CIOs, and business owners managing Microsoft 365 environments before September 1, 2026.
 - [What This Week's American Airlines Outage Has in Common With Your Server Room](https://trust-lionel.com/posts/physical-network-skill-shortage/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/physical-network-skill-shortage.md): Field Notes — IT Director Series. Physical network troubleshooting skill shortages in SMBs, offshore infrastructure risk, and the workforce gap driving extended outages.
 - [What Attackers Do After They Get Past Your MFA](https://trust-lionel.com/posts/what-attackers-do-after-mfa/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/posts/what-attackers-do-after-mfa.md): Field Notes — InfoSec Officer Series. AiTM phishing, post-breach persistence mechanisms, mailbox governance, OAuth token abuse, and incident response sequencing.
@@ -44,6 +46,8 @@ Field notes, analysis, and practitioner frameworks published in the ahr-ki-tekt 
 ## Events
 
 - [Your Website Should Be Making You Money](https://trust-lionel.com/events/cmet-workshop-september-2026/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/events/cmet-workshop-september-2026.md): Live virtual workshop for entrepreneurs on building a revenue-generating website. September 23, 2026. Hosted by CMET Nation.
+
+- [Your Website Should Be Making You Money — Lift Orlando](https://trust-lionel.com/events/cmet-workshop-lift-orlando-september-2026/) — [source](https://github.com/trust-lionel/trust-lionel/blob/main/src/content/events/cmet-workshop-lift-orlando-september-2026.md): Live in-person workshop for entrepreneurs on building a revenue-generating website using AI and GitHub Pages. September 24, 2026, 6:00 PM–8:00 PM EDT. Hosted by Lift Orlando in collaboration with CMET. 710 S Tampa Ave Suite 209, Orlando, FL 32805.
 
 ## Projects
 
