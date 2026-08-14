@@ -58,6 +58,12 @@ const blogPosting = {
   keywords: frontmatter.tags || [],
 }
 
+const citation = frontmatter.citationName ? {
+  name: frontmatter.citationName,
+  url: frontmatter.citationUrl ?? '',
+  creator: frontmatter.citationCreator ?? '',
+} : undefined
+
 const softwareApplication = frontmatter.softwareApplicationName ? {
   name: frontmatter.softwareApplicationName,
   operatingSystem: frontmatter.softwareApplicationOs ?? '',
@@ -73,6 +79,7 @@ const softwareApplication = frontmatter.softwareApplicationName ? {
   image={ogImage}
   {blogPosting}
   {softwareApplication}
+  {citation}
 >
   <div class="relative flex flex-col justify-between h-fit z-[1]">
     <TocMobile {post} {posts} headings={filterHeadings} />

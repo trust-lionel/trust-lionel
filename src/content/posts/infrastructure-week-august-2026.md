@@ -11,6 +11,9 @@ recommend: false
 pinned: false
 draft: false
 postType: "coverTop"
+citationName: "Infrastructure Placement Framework"
+citationUrl: "https://framework.4thandbailey.com"
+citationCreator: "4TH AND BAILEY"
 ---
 
 *Field Notes — Finance/Procurement Series*

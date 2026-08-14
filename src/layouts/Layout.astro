@@ -28,9 +28,14 @@ type Props = {
     codeRepository: string
     downloadUrl: string
   }
+  citation?: {
+    name: string
+    url: string
+    creator: string
+  }
 }
 
-const { title, description, image, disableViewTransition, blogPosting, softwareApplication }: Props = Astro.props
+const { title, description, image, disableViewTransition, blogPosting, softwareApplication, citation }: Props = Astro.props
 const softwareApplicationJson = softwareApplication ? JSON.stringify({
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -48,6 +53,20 @@ const softwareSourceCodeJson = softwareApplication ? JSON.stringify({
   "programmingLanguage": "Swift",
   "runtimePlatform": softwareApplication.operatingSystem,
   "author": { "@type": "Person", "name": "Lionel Mosley", "url": "https://trust-lionel.com" }
+}) : null
+const citationJson = citation ? JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "citation": {
+    "@type": "CreativeWork",
+    "name": citation.name,
+    "url": citation.url,
+    "creator": {
+      "@type": "Organization",
+      "name": citation.creator,
+      "url": "https://4thandbailey.com"
+    }
+  }
 }) : null
 ---
 
@@ -159,6 +178,10 @@ const softwareSourceCodeJson = softwareApplication ? JSON.stringify({
     <!-- SoftwareSourceCode JSON-LD — injected on software post pages only -->
     {softwareSourceCodeJson && (
       <script is:inline type="application/ld+json" set:html={softwareSourceCodeJson} />
+    )}
+    <!-- Citation JSON-LD — injected on post pages that reference the IPF or other CreativeWorks -->
+    {citationJson && (
+      <script is:inline type="application/ld+json" set:html={citationJson} />
     )}
   </head>
   <body class="flex flex-col">

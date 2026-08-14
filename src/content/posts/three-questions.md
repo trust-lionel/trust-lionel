@@ -10,6 +10,9 @@ recommend: true
 pinned: false
 draft: false
 postType: "coverTop"
+citationName: "Infrastructure Placement Framework"
+citationUrl: "https://framework.4thandbailey.com"
+citationCreator: "4TH AND BAILEY"
 ---
 
 > *The conversations that matter most in a boardroom aren't about technology. They're about survival. And the technology questions executives can't answer are the ones that determine whether the business survives.*
