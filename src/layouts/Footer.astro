@@ -14,7 +14,7 @@ import SocialLink from '~/components/base/SocialLink.astro'
       >
         {FOOTER_LINKS.map((link) => <FooterLink href={link.url}>{link.name}</FooterLink>)}
         <div class="grow"></div>
-        <a href="https://www.google.com/preferences/source?q=trust-lionel.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-medium text-white px-4 py-1.5 rounded-full transition-opacity hover:opacity-90" style="background-color: #4285F4;" data-umami-event="follow-on-google">Follow on Google</a>
+        <a href="https://www.google.com/preferences/source?q=trust-lionel.com" target="_blank" rel="noopener noreferrer" class="inline-flex hover:opacity-80 transition-opacity" data-umami-event="follow-on-google" aria-label="Follow trust-lionel.com on Google"><img src="/images/google-preferred-source-dark.png" alt="Follow on Google" height="32" class="block dark:hidden" /><img src="/images/google-preferred-source-light.png" alt="Follow on Google" height="32" class="hidden dark:block" /></a>
       </div>
       <div class="text-sm text-muted-foreground px-6 sm:px-8 py-4">
         <div class="items-center flex flex-wrap gap-4 font-medium">
