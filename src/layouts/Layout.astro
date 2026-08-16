@@ -83,6 +83,8 @@ const citationJson = citation ? JSON.stringify({
     <!-- End Google Tag Manager -->
     <!-- Umami Analytics — cookieless, GDPR-compliant, self-hosted on Railway -->
     <script is:inline defer src="https://umami-production-f3f3.up.railway.app/script.js" data-website-id="b8e2a312-e7f4-4595-95ee-38b47fc9be54"></script>
+    <!-- Umami Session Replay Recorder -->
+    <script is:inline defer src="https://umami-production-f3f3.up.railway.app/recorder.js" data-website-id="b8e2a312-e7f4-4595-95ee-38b47fc9be54" data-sample-rate="0.15" data-mask-level="moderate" data-max-duration="300000"></script>
     <!-- Person + WebSite JSON-LD Structured Data -->
     <script is:inline type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
