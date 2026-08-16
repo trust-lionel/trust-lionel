@@ -285,10 +285,10 @@ status = 301
     # Tighten img-src once post covers are migrated to /public/.
     Content-Security-Policy = """
       default-src 'self';
-      script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://www.googletagmanager.com https://umami-production-f3f3.up.railway.app https://events.vercount.one;
+      script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://www.googletagmanager.com https://events.vercount.one;
       style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
       img-src 'self' data: https://images.unsplash.com https://plus.unsplash.com https://avatars.githubusercontent.com https://www.google.com https://github.githubassets.com https://www.googletagmanager.com https://i.scdn.co;
-      connect-src 'self' https://umami-production-f3f3.up.railway.app https://api.github.com https://github-contributions-api.jogruber.de https://www.google-analytics.com https://www.google.com https://open.spotify.com;
+      connect-src 'self' https://api.github.com https://github-contributions-api.jogruber.de https://www.google-analytics.com https://www.google.com https://open.spotify.com;
       font-src 'self' https://cdn.jsdelivr.net;
       frame-src https://open.spotify.com;
       object-src 'none';
@@ -415,3 +415,22 @@ status = 301
 #      https://open.spotify.com/playlist/{spotifyPlaylistId}
 #    CSP has been updated to allow open.spotify.com (frame-src,
 #    connect-src) and i.scdn.co (img-src for album art).
+
+# ── Umami analytics proxy — bypasses Safari ITP ──────────────
+[[redirects]]
+  from = "/stats/script.js"
+  to = "https://umami-production-f3f3.up.railway.app/script.js"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/stats/recorder.js"
+  to = "https://umami-production-f3f3.up.railway.app/recorder.js"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/stats/api/*"
+  to = "https://umami-production-f3f3.up.railway.app/api/:splat"
+  status = 200
+  force = true
