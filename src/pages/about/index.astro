@@ -7,9 +7,54 @@ const title = 'About'
 const description = 'Senior Consultant in IT Strategy, Growth & Transformation. Founder of 4TH AND BAILEY — enterprise IT consulting serving organizations nationwide from Houston, TX. Microsoft CSP. Google Partner. Over two decades of infrastructure experience.'
 const introduce = 'I am Lionel Mosley — Senior Consultant in IT Strategy, Growth & Transformation, and the founder of 4TH AND BAILEY. For over two decades, I have helped organizations make the technology decisions that determine whether they survive disruption or lead through it.'
 const image = '/og-about.png'
+
+const profilePageJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "dateCreated": "2026-08-10T00:00:00-05:00",
+  "dateModified": "2026-08-10T00:00:00-05:00",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Lionel Mosley",
+    "alternateName": "@lionelmosley",
+    "description": "Senior Consultant in IT Strategy, Growth & Transformation. Founder of 4TH AND BAILEY. Microsoft CSP. Google Partner. Over two decades of infrastructure experience.",
+    "image": "https://trust-lionel.com/og-about.png",
+    "sameAs": [
+      "https://trust-lionel.com",
+      "https://about.lionelmosley.com",
+      "https://linkedin.com/in/lionelmosley",
+      "https://github.com/trust-lionel",
+      "https://youtube.com/@LMosley002",
+      "https://x.com/lionelmosley",
+      "https://bsky.app/profile/lionelmosley",
+      "https://links.lionelmosley.com",
+      "https://luma.com/user/lionelmosley"
+    ],
+    "agentInteractionStatistic": {
+      "@type": "InteractionCounter",
+      "interactionType": "https://schema.org/WriteAction",
+      "userInteractionCount": 11
+    }
+  },
+  "hasPart": [
+    { "@type": "Article", "headline": "The Week Infrastructure Reminded Everyone It Can Fail", "url": "https://trust-lionel.com/posts/infrastructure-week-august-2026/", "datePublished": "2026-08-14" },
+    { "@type": "Article", "headline": "Microsoft Entra ID Is Retiring SMS MFA — What Your Organization Needs to Do Before September 1, 2026", "url": "https://trust-lionel.com/posts/microsoft-entra-id-sms-mfa-retirement/", "datePublished": "2026-08-06" },
+    { "@type": "Article", "headline": "What This Week's American Airlines Outage Has in Common With Your Server Room", "url": "https://trust-lionel.com/posts/physical-network-skill-shortage/", "datePublished": "2026-07-30" },
+    { "@type": "Article", "headline": "What Attackers Do After They Get Past Your MFA", "url": "https://trust-lionel.com/posts/what-attackers-do-after-mfa/", "datePublished": "2026-07-16" },
+    { "@type": "Article", "headline": "Three Questions Every CEO and Board Should Be Able to Answer", "url": "https://trust-lionel.com/posts/three-questions/", "datePublished": "2026-05-17" },
+    { "@type": "Article", "headline": "MacSysTools — Native macOS System Administration App", "url": "https://trust-lionel.com/posts/macsystools/", "datePublished": "2026-03-05" },
+    { "@type": "Article", "headline": "I Used GPT to Fetch 40,918 Remote Jobs", "url": "https://trust-lionel.com/posts/i-used-gpt-to-fetch-40918-remote-jobs/", "datePublished": "2026-04-09" },
+    { "@type": "Article", "headline": "Vibe Coding Is Not Software Engineering", "url": "https://trust-lionel.com/posts/vibe-coding/", "datePublished": "2026-07-02" },
+    { "@type": "Article", "headline": "MacBook Pro 2026 — First Impressions", "url": "https://trust-lionel.com/posts/macbook-pro-2026/", "datePublished": "2026-07-09" },
+    { "@type": "Article", "headline": "Microsoft Notification Abuse — What It Is and How to Stop It", "url": "https://trust-lionel.com/posts/microsoft-notification-abuse/", "datePublished": "2026-07-16" },
+    { "@type": "Article", "headline": "Connectivity and Uptime — The Hidden Infrastructure Risk", "url": "https://trust-lionel.com/posts/connectivity-uptime/", "datePublished": "2026-07-23" }
+  ]
+});
+
 ---
 
 <Layout {title} {description} {image}>
+  <script is:inline type="application/ld+json" set:html={profilePageJson} />
   <div class="relative z-[1] py-8 pb-10 px-6 sm:px-8">
 
     <PageTitle {title} {introduce} />
