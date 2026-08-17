@@ -4,8 +4,8 @@ description: "The architecture, design decisions, and consulting philosophy behi
 pubDate: 2026-08-20
 author: "Lionel Mosley"
 tags: ["AI Integration", "Personal Infrastructure", "DevOps", "Open Source", "IT Strategy"]
-cover: "https://trust-lionel.com/images/about-lionelmosley-com-cover.png"
-ogImage: "https://trust-lionel.com/images/about-lionelmosley-com-cover.png"
+cover: "https://trust-lionel.com/images/about-lionelmosley-com-cover.jpg"
+ogImage: "https://trust-lionel.com/images/about-lionelmosley-com-cover.jpg"
 spotifyPlaylistId: "3o3CNo9dNJuCh4aHqOGnfE"
 recommend: false
 pinned: false
