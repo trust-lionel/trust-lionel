@@ -23,9 +23,42 @@ interface Props {
 const { page } = Astro.props
 
 const { title, description, introduce } = POSTS_CONFIG
+const isFirstPage = page.currentPage === 1
+const blogJson = isFirstPage ? JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "@id": "https://trust-lionel.com/posts/#Blog",
+  "mainEntityOfPage": "https://trust-lionel.com/posts/",
+  "name": "ahr-ki-tekt Design Journal",
+  "description": "Carefully selected frameworks, insights, and solutions from Lionel Mosley — IT Consultant & Innovative Thought Leader based in Houston, TX.",
+  "url": "https://trust-lionel.com/posts/",
+  "inLanguage": "en-US",
+  "publisher": {
+    "@type": "Person",
+    "@id": "https://trust-lionel.com/#Person",
+    "name": "Lionel Mosley",
+    "url": "https://trust-lionel.com",
+    "image": "https://trust-lionel.com/og-image.png"
+  },
+  "blogPost": [
+    { "@type": "BlogPosting", "@id": "https://trust-lionel.com/posts/infrastructure-week-august-2026/#BlogPosting", "headline": "The Week Infrastructure Reminded Everyone It Can Fail", "url": "https://trust-lionel.com/posts/infrastructure-week-august-2026/", "datePublished": "2026-08-14" },
+    { "@type": "BlogPosting", "@id": "https://trust-lionel.com/posts/microsoft-entra-id-sms-mfa-retirement/#BlogPosting", "headline": "Microsoft Entra ID Is Retiring SMS MFA — What Your Organization Needs to Do Before September 1, 2026", "url": "https://trust-lionel.com/posts/microsoft-entra-id-sms-mfa-retirement/", "datePublished": "2026-08-06" },
+    { "@type": "BlogPosting", "@id": "https://trust-lionel.com/posts/physical-network-skill-shortage/#BlogPosting", "headline": "What This Week's American Airlines Outage Has in Common With Your Server Room", "url": "https://trust-lionel.com/posts/physical-network-skill-shortage/", "datePublished": "2026-07-30" },
+    { "@type": "BlogPosting", "@id": "https://trust-lionel.com/posts/what-attackers-do-after-mfa/#BlogPosting", "headline": "What Attackers Do After They Get Past Your MFA", "url": "https://trust-lionel.com/posts/what-attackers-do-after-mfa/", "datePublished": "2026-07-16" },
+    { "@type": "BlogPosting", "@id": "https://trust-lionel.com/posts/connectivity-uptime/#BlogPosting", "headline": "Connectivity and Uptime — The Hidden Infrastructure Risk", "url": "https://trust-lionel.com/posts/connectivity-uptime/", "datePublished": "2026-07-23" },
+    { "@type": "BlogPosting", "@id": "https://trust-lionel.com/posts/microsoft-notification-abuse/#BlogPosting", "headline": "Microsoft Notification Abuse — What It Is and How to Stop It", "url": "https://trust-lionel.com/posts/microsoft-notification-abuse/", "datePublished": "2026-07-16" },
+    { "@type": "BlogPosting", "@id": "https://trust-lionel.com/posts/macbook-pro-2026/#BlogPosting", "headline": "MacBook Pro 2026 — First Impressions", "url": "https://trust-lionel.com/posts/macbook-pro-2026/", "datePublished": "2026-07-09" },
+    { "@type": "BlogPosting", "@id": "https://trust-lionel.com/posts/vibe-coding/#BlogPosting", "headline": "Vibe Coding Is Not Software Engineering", "url": "https://trust-lionel.com/posts/vibe-coding/", "datePublished": "2026-07-02" },
+    { "@type": "BlogPosting", "@id": "https://trust-lionel.com/posts/three-questions/#BlogPosting", "headline": "Three Questions Every CEO and Board Should Be Able to Answer", "url": "https://trust-lionel.com/posts/three-questions/", "datePublished": "2026-05-17" },
+    { "@type": "BlogPosting", "@id": "https://trust-lionel.com/posts/i-used-gpt-to-fetch-40918-remote-jobs/#BlogPosting", "headline": "I Used GPT to Fetch 40,918 Remote Jobs", "url": "https://trust-lionel.com/posts/i-used-gpt-to-fetch-40918-remote-jobs/", "datePublished": "2026-04-09" },
+    { "@type": "BlogPosting", "@id": "https://trust-lionel.com/posts/macsystools/#BlogPosting", "headline": "MacSysTools — Native macOS System Administration App", "url": "https://trust-lionel.com/posts/macsystools/", "datePublished": "2026-03-05" }
+  ]
+}) : null
+
 ---
 
 <Layout {title} {description}>
+  {blogJson && <script is:inline type="application/ld+json" set:html={blogJson} />}
   <div class="relative z-[1] py-8 pb-10 px-6 sm:px-8">
     <PageTitle {title} {introduce} />
     <div class="mt-12 fade-up">

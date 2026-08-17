@@ -50,12 +50,27 @@ const ogImage = frontmatter.ogImage
   : SITE.ogImage
 
 const blogPosting = {
+  "@id": `${canonicalUrl}#BlogPosting`,
+  mainEntityOfPage: canonicalUrl,
   headline: frontmatter.title,
+  name: frontmatter.title,
   description: frontmatter.description || frontmatter.title,
   datePublished: frontmatter.pubDate.toISOString().split('T')[0],
+  dateModified: frontmatter.pubDate.toISOString().split('T')[0],
   url: canonicalUrl,
   image: ogImage,
   keywords: frontmatter.tags || [],
+  isPartOf: {
+    "@type": "Blog",
+    "@id": "https://trust-lionel.com/posts/#Blog",
+    "name": "ahr-ki-tekt Design Journal",
+    "publisher": {
+      "@type": "Person",
+      "@id": "https://trust-lionel.com/#Person",
+      "name": "Lionel Mosley",
+      "url": "https://trust-lionel.com"
+    }
+  }
 }
 
 const citation = frontmatter.citationName ? {
