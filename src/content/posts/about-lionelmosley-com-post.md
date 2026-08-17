@@ -26,9 +26,9 @@ The fundamental problem is that a static page cannot respond to what the visitor
 
 I wanted to build something that could respond to the actual question rather than the assumed one.
 
-That decision led to [about.lionelmosley.com](https://about.lionelmosley.com).
+That decision led to [**about.lionelmosley.com**](https://about.lionelmosley.com).
 
-I started building on August 5, 2026 at 8:17 PM CST. This is the engineering story behind what I built — and why every decision was intentional.
+I started building on August 5, 2026 at 8&#58;17 PM CST. This is the engineering story behind what I built — and why every decision was intentional.
 
 ---
 
@@ -64,7 +64,7 @@ These are not cosmetic details. They are the same principle behind every infrast
 
 The terminal window in the center of the screen is the most technically significant element of the site — and the one that required the most deliberate governance decisions before a line of code was written.
 
-macOS 27 Golden Gate introduces an all-new Siri AI powered by Apple Intelligence. At the time this site was built, that feature had not yet shipped. The terminal at about.lionelmosley.com is a simulation of that design direction — an OpenAI-powered interface built to the aesthetic and interaction model Apple is moving toward, deployed and governed before the platform itself arrives.
+macOS 27 Golden Gate introduces an all-new Siri AI powered by Apple Intelligence. At the time this site was built, that feature had not yet shipped. The terminal at [**about.lionelmosley.com**](https://about.lionelmosley.com) is a simulation of that design direction — an OpenAI-powered interface built to the aesthetic and interaction model Apple is moving toward, deployed and governed before the platform itself arrives.
 
 The terminal answers questions about my work, expertise, and services. It is connected to an OpenAI project configured with a specific system prompt and content sourced from my GitHub repository. The prompt bar reflects the zsh shell environment that macOS users recognize immediately.
 
@@ -76,7 +76,7 @@ Those boundaries are not technical constraints imposed by the platform. They are
 
 Deploying an AI interface publicly without a clear scope boundary is not AI integration. It is an unmanaged liability.
 
-Every organization I advise on AI deployment is asking the same questions: where do we deploy it, what scope do we give it, how do we prevent it from doing things we did not intend, and how do we make sure it represents us accurately. The terminal at about.lionelmosley.com is a live, interactive answer to all four of those questions — deployed publicly, at scale, with governance decisions made before the first line of code was written.
+Every organization I advise on AI deployment is asking the same questions: where do we deploy it, what scope do we give it, how do we prevent it from doing things we did not intend, and how do we make sure it represents us accurately. The terminal at [**about.lionelmosley.com**](https://about.lionelmosley.com) is a live, interactive answer to all four of those questions — deployed publicly, at scale, with governance decisions made before the first line of code was written.
 
 A prospect can evaluate my approach to AI governance by interacting with a system I built and deployed under that approach. That is not a portfolio claim. It is a demonstration.
 
@@ -88,11 +88,11 @@ A prospect can evaluate my approach to AI governance by interacting with a syste
 
 The five dock icons are not navigation elements dressed up to look like macOS icons. Each one is a deliberate connection between a familiar interface element and a specific destination — chosen because the icon's meaning in the macOS context matches the destination's function in the consulting context.
 
-**Xcode** connects to [trust-lionel.com](https://trust-lionel.com) — the ahr-ki-tekt Design Journal. Xcode is a development environment. The journal is where the work gets built in public — frameworks, case studies, technical analysis. The connection is intentional.
+**Xcode** connects to [**trust-lionel.com**](https://trust-lionel.com) — the ahr-ki-tekt Design Journal. Xcode is a development environment. The journal is where the work gets built in public — frameworks, case studies, technical analysis. The connection is intentional.
 
 **Mail** opens the visitor's default email client with my address pre-populated. One click from anywhere on the site to a composed email. Zero friction between interest and contact.
 
-**GitHub** opens [github.com/trust-lionel](https://github.com/trust-lionel) in a new tab. The work is public and verifiable. The icon signals that immediately.
+**GitHub** opens [**github.com/trust-lionel**](https://github.com/trust-lionel) in a new tab. The work is public and verifiable. The icon signals that immediately.
 
 **Calendar** shows today's actual date — pulled live from the visitor's device — and opens my scheduling page directly. Not a contact form. Not a general inquiry page. A booking link. The message is clear: engagement begins with a scheduled conversation.
 
@@ -132,13 +132,13 @@ The site is the argument. The argument has to hold.
 
 ## 07 — Try It
 
-Visit [about.lionelmosley.com](https://about.lionelmosley.com).
+Visit [**about.lionelmosley.com**](https://about.lionelmosley.com).
 
 Ask the terminal what cybersecurity frameworks I work with, or how I approach a cloud repatriation decision, or what the [**Infrastructure Placement Framework**](https://framework.4thandbailey.com) covers.
 
 If you are curious enough — and the right prospects always are — you will find what else is there.
 
-Schedule a consultation at [4nb.cloud/lmosley](https://4nb.cloud/lmosley).
+Schedule a consultation at [**4nb.cloud/lmosley**](https://4nb.cloud/lmosley).
 
 No algorithm between us.
 
