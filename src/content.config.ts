@@ -27,6 +27,7 @@ const posts = defineCollection({
         draft: z.boolean().default(false),
         license: z.string().optional(),
         spotifyPlaylistId: z.string().optional(),
+        authorUrl: z.string().optional(),
         citationName: z.string().optional(),
         citationUrl: z.string().optional(),
         citationCreator: z.string().optional(),

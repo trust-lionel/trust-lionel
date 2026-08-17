@@ -20,6 +20,7 @@ type Props = {
     url: string
     image: string
     keywords: string[]
+    authorUrl: string
   }
   softwareApplication?: {
     name: string
@@ -166,7 +167,7 @@ const citationJson = citation ? JSON.stringify({
         "@type": "BlogPosting",
         "headline": blogPosting.headline,
         "description": blogPosting.description,
-        "author": { "@type": "Person", "name": "Lionel Mosley", "url": "https://trust-lionel.com" },
+        "author": { "@type": "Person", "name": "Lionel Mosley", "url": blogPosting.authorUrl },
         "publisher": { "@type": "Organization", "name": "Lionel Mosley | ahr-ki-tekt", "url": "https://trust-lionel.com" },
         "datePublished": blogPosting.datePublished,
         "url": blogPosting.url,
