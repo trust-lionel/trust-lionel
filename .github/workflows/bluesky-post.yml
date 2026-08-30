@@ -23,16 +23,16 @@ jobs:
 
       - name: Install bot dependencies
         run: |
-          mkdir -p scripts
-          cd scripts
-          echo '{"type":"module"}' > package.json
-          npm install node-fetch@3 fast-xml-parser@4 --no-package-lock
+          mkdir -p /tmp/bot
+          echo '{"type":"module","name":"bluesky-bot","version":"1.0.0"}' > /tmp/bot/package.json
+          npm install --prefix /tmp/bot node-fetch@3 fast-xml-parser@4
 
       - name: Run Bluesky post script
         env:
           BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
-        run: cd scripts && node bluesky-post.mjs
+          NODE_PATH: /tmp/bot/node_modules
+        run: node scripts/bluesky-post.mjs
 
       - name: Commit updated cache
         run: |
