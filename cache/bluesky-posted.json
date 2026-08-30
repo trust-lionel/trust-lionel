@@ -1,14 +1,54 @@
-[
-  "https://trust-lionel.com/posts/microsoft-entra-id-sms-mfa-retirement",
-  "https://trust-lionel.com/posts/physical-network-skill-shortage",
-  "https://trust-lionel.com/posts/what-attackers-do-after-mfa",
-  "https://trust-lionel.com/posts/macbook-pro-2026",
-  "https://trust-lionel.com/posts/connectivity-uptime",
-  "https://trust-lionel.com/posts/cloud-migration",
-  "https://trust-lionel.com/posts/microsoft-notification-abuse",
-  "https://trust-lionel.com/posts/three-questions",
-  "https://trust-lionel.com/posts/vibe-coding",
-  "https://trust-lionel.com/posts/macsystools",
-  "https://trust-lionel.com/posts/about-lionelmosley-com-post",
-  "https://trust-lionel.com/posts/infrastructure-week-august-2026"
-]
+{
+  "https://trust-lionel.com/posts/microsoft-entra-id-sms-mfa-retirement": {
+    "postedAt": null,
+    "uri": null
+  },
+  "https://trust-lionel.com/posts/physical-network-skill-shortage": {
+    "postedAt": null,
+    "uri": null
+  },
+  "https://trust-lionel.com/posts/what-attackers-do-after-mfa": {
+    "postedAt": null,
+    "uri": null
+  },
+  "https://trust-lionel.com/posts/macbook-pro-2026": {
+    "postedAt": null,
+    "uri": null
+  },
+  "https://trust-lionel.com/posts/connectivity-uptime": {
+    "postedAt": null,
+    "uri": null
+  },
+  "https://trust-lionel.com/posts/cloud-migration": {
+    "postedAt": null,
+    "uri": null
+  },
+  "https://trust-lionel.com/posts/microsoft-notification-abuse": {
+    "postedAt": null,
+    "uri": null
+  },
+  "https://trust-lionel.com/posts/three-questions": {
+    "postedAt": null,
+    "uri": null
+  },
+  "https://trust-lionel.com/posts/vibe-coding": {
+    "postedAt": null,
+    "uri": null
+  },
+  "https://trust-lionel.com/posts/macsystools": {
+    "postedAt": null,
+    "uri": null
+  },
+  "https://trust-lionel.com/posts/about-lionelmosley-com-post": {
+    "postedAt": "2026-08-30T01:48:00.866Z",
+    "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mubbk42yss25"
+  },
+  "https://trust-lionel.com/posts/infrastructure-week-august-2026": {
+    "postedAt": "2026-08-30T01:48:04.970Z",
+    "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mubbka4ypd2k"
+  },
+  "https://trust-lionel.com/posts/from-policy-fluency-to-nist-alignment": {
+    "postedAt": null,
+    "uri": null
+  }
+}
