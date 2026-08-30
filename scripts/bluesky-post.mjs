@@ -3,15 +3,15 @@ import { XMLParser } from 'fast-xml-parser';
 import fs from 'fs';
 import path from 'path';
 
-// ── Config ──────────────────────────────────────────────────────────────────
+// ── Config ───────────────────────────────────────────────────────────────────
 const FEED_URL        = 'https://trust-lionel.com/atom.xml';
 const BSKY_SERVICE    = 'https://bsky.social';
 const IDENTIFIER      = process.env.BLUESKY_IDENTIFIER;
 const APP_PASSWORD    = process.env.BLUESKY_APP_PASSWORD;
-const CACHE_FILE      = path.resolve('cache/bluesky-posted.json');
+const CACHE_FILE      = path.resolve('../cache/bluesky-posted.json');
 const MAX_POST_LENGTH = 300;
 
-// ── Load cache ───────────────────────────────────────────────────────────────
+// ── Load cache ────────────────────────────────────────────────────────────────
 function loadCache() {
   if (fs.existsSync(CACHE_FILE)) {
     return new Set(JSON.parse(fs.readFileSync(CACHE_FILE, 'utf8')));
@@ -23,7 +23,7 @@ function saveCache(cache) {
   fs.writeFileSync(CACHE_FILE, JSON.stringify([...cache], null, 2));
 }
 
-// ── Fetch & parse Atom feed ──────────────────────────────────────────────────
+// ── Fetch & parse Atom feed ───────────────────────────────────────────────────
 async function fetchFeed() {
   const res = await fetch(FEED_URL);
   const xml = await res.text();
@@ -33,7 +33,7 @@ async function fetchFeed() {
   return Array.isArray(entries) ? entries : [entries];
 }
 
-// ── Bluesky auth ─────────────────────────────────────────────────────────────
+// ── Bluesky auth ──────────────────────────────────────────────────────────────
 async function createSession() {
   const res = await fetch(`${BSKY_SERVICE}/xrpc/com.atproto.server.createSession`, {
     method: 'POST',
@@ -75,7 +75,7 @@ function buildPostText(entry) {
 
 // ── Build facets for hashtags and URL ────────────────────────────────────────
 function buildFacets(text, url) {
-  const facets = [];
+  const facets  = [];
   const encoder = new TextEncoder();
 
   // Hashtag facets
@@ -85,7 +85,7 @@ function buildFacets(text, url) {
     const start = encoder.encode(text.slice(0, match.index)).length;
     const end   = encoder.encode(text.slice(0, match.index + match[0].length)).length;
     facets.push({
-      index: { byteStart: start, byteEnd: end },
+      index   : { byteStart: start, byteEnd: end },
       features: [{ $type: 'app.bsky.richtext.facet#tag', tag: match[1] }],
     });
   }
@@ -96,7 +96,7 @@ function buildFacets(text, url) {
     const start = encoder.encode(text.slice(0, urlIndex)).length;
     const end   = encoder.encode(text.slice(0, urlIndex + url.length)).length;
     facets.push({
-      index: { byteStart: start, byteEnd: end },
+      index   : { byteStart: start, byteEnd: end },
       features: [{ $type: 'app.bsky.richtext.facet#link', uri: url }],
     });
   }
@@ -109,6 +109,7 @@ async function fetchThumb(url, accessJwt) {
   try {
     const res  = await fetch(url);
     const html = await res.text();
+
     const ogImage = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i)?.[1]
                  ?? html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i)?.[1];
     const ogDesc  = html.match(/<meta[^>]+property=["']og:description["'][^>]+content=["']([^"']+)["']/i)?.[1]
@@ -126,10 +127,10 @@ async function fetchThumb(url, accessJwt) {
     const imgType = imgRes.headers.get('content-type') ?? 'image/jpeg';
 
     const uploadRes = await fetch(`${BSKY_SERVICE}/xrpc/com.atproto.repo.uploadBlob`, {
-      method: 'POST',
+      method : 'POST',
       headers: {
         'Authorization': `Bearer ${accessJwt}`,
-        'Content-Type': imgType,
+        'Content-Type' : imgType,
       },
       body: Buffer.from(imgBuf),
     });
@@ -150,22 +151,22 @@ async function createPost(session, entry) {
   const thumb  = await fetchThumb(url, session.accessJwt);
 
   const record = {
-    $type      : 'app.bsky.feed.post',
+    $type    : 'app.bsky.feed.post',
     text,
     facets,
-    createdAt  : new Date().toISOString(),
-    langs      : ['en'],
+    createdAt: new Date().toISOString(),
+    langs    : ['en'],
   };
 
   // Add embed card if OG data was found
   if (thumb) {
     record.embed = {
-      $type    : 'app.bsky.embed.external',
-      external : {
-        uri         : url,
-        title       : thumb.title || title,
-        description : thumb.description,
-        thumb       : thumb.blob,
+      $type   : 'app.bsky.embed.external',
+      external: {
+        uri        : url,
+        title      : thumb.title || title,
+        description: thumb.description,
+        thumb      : thumb.blob,
       },
     };
   }
@@ -190,7 +191,7 @@ async function createPost(session, entry) {
   return result;
 }
 
-// ── Main ─────────────────────────────────────────────────────────────────────
+// ── Main ──────────────────────────────────────────────────────────────────────
 async function main() {
   console.log('ahr-ki-tekt → Bluesky | Starting run...');
 
