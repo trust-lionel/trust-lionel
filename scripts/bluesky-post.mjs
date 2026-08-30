@@ -1,12 +1,6 @@
-import { createRequire } from 'module';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
-// ── Resolve dependencies from NODE_PATH ──────────────────────────────────────
-const require = createRequire(import.meta.url);
-const fetch = (await import('node-fetch')).default;
-const { XMLParser } = await import('fast-xml-parser');
 
 // ── Config ───────────────────────────────────────────────────────────────────
 const FEED_URL        = 'https://trust-lionel.com/atom.xml';
@@ -17,7 +11,7 @@ const __dirname       = path.dirname(fileURLToPath(import.meta.url));
 const CACHE_FILE      = path.resolve(__dirname, '../cache/bluesky-posted.json');
 const MAX_POST_LENGTH = 300;
 
-// ── Load cache ────────────────────────────────────────────────────────────────
+// ── Load / save cache ─────────────────────────────────────────────────────────
 function loadCache() {
   if (fs.existsSync(CACHE_FILE)) {
     return new Set(JSON.parse(fs.readFileSync(CACHE_FILE, 'utf8')));
@@ -29,46 +23,68 @@ function saveCache(cache) {
   fs.writeFileSync(CACHE_FILE, JSON.stringify([...cache], null, 2));
 }
 
-// ── Fetch & parse Atom feed ───────────────────────────────────────────────────
+// ── Minimal Atom XML parser (no dependencies) ─────────────────────────────────
+function parseAtom(xml) {
+  const entries = [];
+  const entryRegex = /<entry>([\s\S]*?)<\/entry>/g;
+  let entryMatch;
+
+  while ((entryMatch = entryRegex.exec(xml)) !== null) {
+    const block = entryMatch[1];
+
+    const title = block.match(/<title[^>]*>([\s\S]*?)<\/title>/)?.[1]
+      ?.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/, '$1')
+      ?.trim() ?? '';
+
+    const url = block.match(/<link[^>]+href=["']([^"']+)["']/)?.[1]
+      ?? block.match(/<id>([\s\S]*?)<\/id>/)?.[1]?.trim()
+      ?? '';
+
+    const summary = block.match(/<summary[^>]*>([\s\S]*?)<\/summary>/)?.[1]
+      ?.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/, '$1')
+      ?.replace(/<[^>]+>/g, '')
+      ?.trim() ?? '';
+
+    const categories = [];
+    const catRegex = /<category[^>]+term=["']([^"']+)["']/g;
+    let catMatch;
+    while ((catMatch = catRegex.exec(block)) !== null) {
+      categories.push(catMatch[1]);
+    }
+
+    if (url) entries.push({ title, url, summary, categories });
+  }
+
+  return entries;
+}
+
+// ── Fetch Atom feed ───────────────────────────────────────────────────────────
 async function fetchFeed() {
   const res = await fetch(FEED_URL);
+  if (!res.ok) throw new Error(`Feed fetch failed: ${res.status}`);
   const xml = await res.text();
-  const parser = new XMLParser({ ignoreAttributes: false });
-  const data = parser.parse(xml);
-  const entries = data?.feed?.entry ?? [];
-  return Array.isArray(entries) ? entries : [entries];
+  return parseAtom(xml);
 }
 
 // ── Bluesky auth ──────────────────────────────────────────────────────────────
 async function createSession() {
   const res = await fetch(`${BSKY_SERVICE}/xrpc/com.atproto.server.createSession`, {
-    method: 'POST',
+    method : 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ identifier: IDENTIFIER, password: APP_PASSWORD }),
+    body   : JSON.stringify({ identifier: IDENTIFIER, password: APP_PASSWORD }),
   });
   if (!res.ok) throw new Error(`Auth failed: ${res.status} ${await res.text()}`);
   return res.json();
 }
 
 // ── Build post text ───────────────────────────────────────────────────────────
-function buildPostText(entry) {
-  const title   = entry?.title?.['#text'] ?? entry?.title ?? '';
-  const summary = entry?.summary?.['#text'] ?? entry?.summary ?? '';
-  const url     = entry?.link?.['@_href'] ?? entry?.id ?? '';
-
-  // Build category hashtags
-  const categories = entry?.category ?? [];
-  const catArray   = Array.isArray(categories) ? categories : [categories];
-  const hashtags   = catArray
-    .map(c => {
-      const term = c?.['@_term'] ?? c ?? '';
-      return '#' + term.replace(/\s+/g, '').replace(/[^a-zA-Z0-9]/g, '');
-    })
+function buildPostText({ title, summary, url, categories }) {
+  const hashtags = categories
+    .map(c => '#' + c.replace(/\s+/g, '').replace(/[^a-zA-Z0-9]/g, ''))
     .filter(Boolean)
     .slice(0, 4)
     .join(' ');
 
-  // Trim summary to fit within post limit
   const prefix    = `New on ahr-ki-tekt:\n\n${title}\n\n`;
   const suffix    = `\n\n${hashtags}\n\n${url}`;
   const available = MAX_POST_LENGTH - prefix.length - suffix.length;
@@ -76,15 +92,14 @@ function buildPostText(entry) {
     ? summary.slice(0, available - 1) + '…'
     : summary;
 
-  return { text: `${prefix}${trimmed}${suffix}`, url, title };
+  return `${prefix}${trimmed}${suffix}`;
 }
 
-// ── Build facets for hashtags and URL ────────────────────────────────────────
+// ── Build facets (hashtags + URL) ─────────────────────────────────────────────
 function buildFacets(text, url) {
   const facets  = [];
   const encoder = new TextEncoder();
 
-  // Hashtag facets
   const hashtagRegex = /#([a-zA-Z0-9]+)/g;
   let match;
   while ((match = hashtagRegex.exec(text)) !== null) {
@@ -96,7 +111,6 @@ function buildFacets(text, url) {
     });
   }
 
-  // URL facet
   const urlIndex = text.indexOf(url);
   if (urlIndex !== -1) {
     const start = encoder.encode(text.slice(0, urlIndex)).length;
@@ -110,7 +124,7 @@ function buildFacets(text, url) {
   return facets;
 }
 
-// ── Fetch Open Graph data for embed card ─────────────────────────────────────
+// ── Fetch OG image and upload blob ───────────────────────────────────────────
 async function fetchThumb(url, accessJwt) {
   try {
     const res  = await fetch(url);
@@ -127,7 +141,6 @@ async function fetchThumb(url, accessJwt) {
 
     if (!ogImage) return null;
 
-    // Upload image blob to Bluesky
     const imgRes  = await fetch(ogImage);
     const imgBuf  = await imgRes.arrayBuffer();
     const imgType = imgRes.headers.get('content-type') ?? 'image/jpeg';
@@ -138,12 +151,11 @@ async function fetchThumb(url, accessJwt) {
         'Authorization': `Bearer ${accessJwt}`,
         'Content-Type' : imgType,
       },
-      body: Buffer.from(imgBuf),
+      body: imgBuf,
     });
 
     if (!uploadRes.ok) return null;
     const { blob } = await uploadRes.json();
-
     return { blob, title: ogTitle, description: ogDesc };
   } catch {
     return null;
@@ -152,9 +164,9 @@ async function fetchThumb(url, accessJwt) {
 
 // ── Create Bluesky post ───────────────────────────────────────────────────────
 async function createPost(session, entry) {
-  const { text, url, title } = buildPostText(entry);
-  const facets = buildFacets(text, url);
-  const thumb  = await fetchThumb(url, session.accessJwt);
+  const text   = buildPostText(entry);
+  const facets = buildFacets(text, entry.url);
+  const thumb  = await fetchThumb(entry.url, session.accessJwt);
 
   const record = {
     $type    : 'app.bsky.feed.post',
@@ -164,13 +176,12 @@ async function createPost(session, entry) {
     langs    : ['en'],
   };
 
-  // Add embed card if OG data was found
   if (thumb) {
     record.embed = {
       $type   : 'app.bsky.embed.external',
       external: {
-        uri        : url,
-        title      : thumb.title || title,
+        uri        : entry.url,
+        title      : thumb.title || entry.title,
         description: thumb.description,
         thumb      : thumb.blob,
       },
@@ -192,7 +203,7 @@ async function createPost(session, entry) {
 
   if (!res.ok) throw new Error(`Post failed: ${res.status} ${await res.text()}`);
   const result = await res.json();
-  console.log(`✓ Posted: ${title}`);
+  console.log(`✓ Posted: ${entry.title}`);
   console.log(`  ${result.uri}`);
   return result;
 }
@@ -205,23 +216,24 @@ async function main() {
   const entries = await fetchFeed();
   const session = await createSession();
 
+  console.log(`Feed entries found: ${entries.length}`);
+  console.log(`Cache entries: ${cache.size}`);
+
   let posted = 0;
 
   for (const entry of entries) {
-    const url = entry?.link?.['@_href'] ?? entry?.id ?? '';
-    if (!url || cache.has(url)) continue;
+    if (!entry.url || cache.has(entry.url)) continue;
 
     try {
       await createPost(session, entry);
-      cache.add(url);
+      cache.add(entry.url);
       posted++;
 
-      // Respect rate limits — wait 2 seconds between posts
       if (posted < entries.length) {
         await new Promise(r => setTimeout(r, 2000));
       }
     } catch (err) {
-      console.error(`✗ Failed to post: ${url}`);
+      console.error(`✗ Failed: ${entry.url}`);
       console.error(err.message);
     }
   }
