@@ -21,7 +21,7 @@ export const SITE: Site = {
   title: 'Lionel Mosley | ahr-ki-tekt',
   description:
     'The ahr-ki-tekt Design Journal — frameworks, insights, and analysis from Lionel Mosley, Senior Consultant, IT Strategy Growth & Transformation. Based in Houston, TX, serving organizations nationwide through 4TH AND BAILEY.',
-  website: 'https://trust-lionel.com/',
+  website: 'https://trust-lionel.com',
   lang: 'en',
   base: '/',
   author: 'Lionel Mosley',
