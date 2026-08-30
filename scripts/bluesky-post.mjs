@@ -86,14 +86,28 @@ function buildPostText({ title, summary, url, categories }) {
     .slice(0, 4)
     .join(' ');
 
-  const prefix    = `New on ahr-ki-tekt Design Journal:\n\n${title}\n\n`;
-  const suffix    = `\n\n${hashtags}\n\n${url}`;
-  const available = MAX_POST_LENGTH - prefix.length - suffix.length;
-  const trimmed   = summary.length > available
-    ? summary.slice(0, available - 1) + '…'
-    : summary;
+  const prefix  = `New on ahr-ki-tekt Design Journal:\n\n${title}\n\n`;
+  const suffix  = `\n\n${hashtags}\n\n${url}`;
 
-  return `${prefix}${trimmed}${suffix}`;
+  // Strategy: full text with summary → no summary → truncate title as last resort
+  const withSummary = (() => {
+    const available = MAX_POST_LENGTH - prefix.length - suffix.length;
+    if (available <= 0) return null;
+    const trimmed = summary.length > available
+      ? summary.slice(0, available - 1) + '…'
+      : summary;
+    return `${prefix}${trimmed}${suffix}`;
+  })();
+
+  const withoutSummary = `${prefix}${suffix}`;
+
+  if (withSummary && withSummary.length <= MAX_POST_LENGTH) return withSummary;
+  if (withoutSummary.length <= MAX_POST_LENGTH) return withoutSummary;
+
+  // Last resort — truncate title
+  const budget  = MAX_POST_LENGTH - suffix.length - 'New on ahr-ki-tekt Design Journal:\n\n'.length - 1;
+  const short   = `New on ahr-ki-tekt Design Journal:\n\n${title.slice(0, budget)}…${suffix}`;
+  return short;
 }
 
 // ── Build facets (hashtags + URL) ─────────────────────────────────────────────
@@ -223,7 +237,8 @@ async function main() {
   let posted = 0;
 
   for (const entry of entries) {
-    if (!entry.url || cache[entry.url]) continue;
+    // Skip if already posted (has a saved URI)
+    if (!entry.url || cache[entry.url]?.uri) continue;
 
     try {
       const uri = await createPost(session, entry);
