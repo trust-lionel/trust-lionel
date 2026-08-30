@@ -1,0 +1,39 @@
+name: Post to Bluesky
+
+on:
+  schedule:
+    - cron: '0 */4 * * *'  # Every 4 hours
+  workflow_dispatch:         # Manual trigger from Actions tab
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write        # Needed to commit the cache file
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install node-fetch@3 fast-xml-parser@4
+
+      - name: Run Bluesky post script
+        env:
+          BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+        run: node scripts/bluesky-post.mjs
+
+      - name: Commit updated cache
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add cache/bluesky-posted.json
+          git diff --staged --quiet || git commit -m "chore: update Bluesky post cache"
+          git push
