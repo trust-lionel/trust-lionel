@@ -1,14 +1,20 @@
-import fetch from 'node-fetch';
-import { XMLParser } from 'fast-xml-parser';
+import { createRequire } from 'module';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+// ── Resolve dependencies from NODE_PATH ──────────────────────────────────────
+const require = createRequire(import.meta.url);
+const fetch = (await import('node-fetch')).default;
+const { XMLParser } = await import('fast-xml-parser');
 
 // ── Config ───────────────────────────────────────────────────────────────────
 const FEED_URL        = 'https://trust-lionel.com/atom.xml';
 const BSKY_SERVICE    = 'https://bsky.social';
 const IDENTIFIER      = process.env.BLUESKY_IDENTIFIER;
 const APP_PASSWORD    = process.env.BLUESKY_APP_PASSWORD;
-const CACHE_FILE      = path.resolve('../cache/bluesky-posted.json');
+const __dirname       = path.dirname(fileURLToPath(import.meta.url));
+const CACHE_FILE      = path.resolve(__dirname, '../cache/bluesky-posted.json');
 const MAX_POST_LENGTH = 300;
 
 // ── Load cache ────────────────────────────────────────────────────────────────
@@ -59,7 +65,7 @@ function buildPostText(entry) {
       return '#' + term.replace(/\s+/g, '').replace(/[^a-zA-Z0-9]/g, '');
     })
     .filter(Boolean)
-    .slice(0, 4)  // Max 4 hashtags
+    .slice(0, 4)
     .join(' ');
 
   // Trim summary to fit within post limit
