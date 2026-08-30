@@ -85,7 +85,7 @@ function buildPostText({ title, summary, url, categories }) {
     .slice(0, 4)
     .join(' ');
 
-  const prefix    = `New on ahr-ki-tekt:\n\n${title}\n\n`;
+  const prefix    = `New on ahr-ki-tekt Design Journal:\n\n${title}\n\n`;
   const suffix    = `\n\n${hashtags}\n\n${url}`;
   const available = MAX_POST_LENGTH - prefix.length - suffix.length;
   const trimmed   = summary.length > available
