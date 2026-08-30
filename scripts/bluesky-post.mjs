@@ -12,15 +12,16 @@ const CACHE_FILE      = path.resolve(__dirname, '../cache/bluesky-posted.json');
 const MAX_POST_LENGTH = 300;
 
 // ── Load / save cache ─────────────────────────────────────────────────────────
+// Cache schema: { [url]: { postedAt: string|null, uri: string|null } }
 function loadCache() {
   if (fs.existsSync(CACHE_FILE)) {
-    return new Set(JSON.parse(fs.readFileSync(CACHE_FILE, 'utf8')));
+    return JSON.parse(fs.readFileSync(CACHE_FILE, 'utf8'));
   }
-  return new Set();
+  return {};
 }
 
 function saveCache(cache) {
-  fs.writeFileSync(CACHE_FILE, JSON.stringify([...cache], null, 2));
+  fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 2));
 }
 
 // ── Minimal Atom XML parser (no dependencies) ─────────────────────────────────
@@ -205,7 +206,7 @@ async function createPost(session, entry) {
   const result = await res.json();
   console.log(`✓ Posted: ${entry.title}`);
   console.log(`  ${result.uri}`);
-  return result;
+  return result.uri;
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
@@ -217,16 +218,19 @@ async function main() {
   const session = await createSession();
 
   console.log(`Feed entries found: ${entries.length}`);
-  console.log(`Cache entries: ${cache.size}`);
+  console.log(`Cache entries: ${Object.keys(cache).length}`);
 
   let posted = 0;
 
   for (const entry of entries) {
-    if (!entry.url || cache.has(entry.url)) continue;
+    if (!entry.url || cache[entry.url]) continue;
 
     try {
-      await createPost(session, entry);
-      cache.add(entry.url);
+      const uri = await createPost(session, entry);
+      cache[entry.url] = {
+        postedAt: new Date().toISOString(),
+        uri,
+      };
       posted++;
 
       if (posted < entries.length) {
