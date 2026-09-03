@@ -164,7 +164,7 @@ const citationJson = citation ? JSON.stringify({
     <!-- LocalBusiness + ITService JSON-LD Structured Data -->
     <script is:inline type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@type": ["LocalBusiness", "ITService", "ProfessionalService"],
+      "@type": ["LocalBusiness", "ProfessionalService"],
       "@id": "https://trust-lionel.com/#LocalBusiness",
       "name": "4TH AND BAILEY",
       "alternateName": ["4th and Bailey", "m365cloudpro"],
@@ -213,21 +213,25 @@ const citationJson = citation ? JSON.stringify({
         { "@type": "State", "name": "Texas" },
         { "@type": "Country", "name": "United States" }
       ],
-      "serviceType": [
-        "Microsoft 365 Licensing",
-        "Microsoft Cloud Solution Provider",
-        "Microsoft Azure Consulting",
-        "Managed IT Services",
-        "Cybersecurity Governance",
-        "Cloud Migration",
-        "Cloud Repatriation",
-        "IT Strategy Consulting",
-        "Incident Response",
-        "AI Governance",
-        "CISA SCuBA Alignment",
-        "NIST SP 800-53 Compliance",
-        "Infrastructure Placement"
-      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "IT Consulting Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Microsoft 365 Licensing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Microsoft Cloud Solution Provider" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Microsoft Azure Consulting" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Managed IT Services" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cybersecurity Governance" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cloud Migration" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cloud Repatriation" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "IT Strategy Consulting" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Incident Response" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Governance" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "CISA SCuBA Alignment" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "NIST SP 800-53 Compliance" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Infrastructure Placement" } }
+        ]
+      },
       "hasCredential": [
         {
           "@type": "EducationalOccupationalCredential",
