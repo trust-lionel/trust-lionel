@@ -161,6 +161,111 @@ const citationJson = citation ? JSON.stringify({
       "author": { "@type": "Person", "name": "Lionel Mosley", "url": "https://trust-lionel.com" },
       "inLanguage": "en-US"
     })} />
+    <!-- LocalBusiness + ITService JSON-LD Structured Data -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": ["LocalBusiness", "ITService", "ProfessionalService"],
+      "@id": "https://trust-lionel.com/#LocalBusiness",
+      "name": "4TH AND BAILEY",
+      "alternateName": ["4th and Bailey", "m365cloudpro"],
+      "description": "Enterprise IT consulting from Houston, TX. Authorized Microsoft Cloud Solution Provider, Google Partner, and creator of the Infrastructure Placement Framework. Cybersecurity governance, cloud migration, and IT strategy — CISA SCuBA and NIST aligned.",
+      "url": "https://4thandbailey.com",
+      "telephone": "+18883055977",
+      "email": "inquiries@4thandbailey.com",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "2500 CityWest Blvd., Suite #150-165",
+        "addressLocality": "Houston",
+        "addressRegion": "TX",
+        "postalCode": "77042",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 29.7355,
+        "longitude": -95.5546
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Houston" },
+        { "@type": "City", "name": "Sugar Land" },
+        { "@type": "City", "name": "Pearland" },
+        { "@type": "City", "name": "The Woodlands" },
+        { "@type": "City", "name": "Katy" },
+        { "@type": "City", "name": "Pasadena" },
+        { "@type": "City", "name": "League City" },
+        { "@type": "City", "name": "Baytown" },
+        { "@type": "City", "name": "Friendswood" },
+        { "@type": "City", "name": "Missouri City" },
+        { "@type": "City", "name": "Stafford" },
+        { "@type": "City", "name": "Conroe" },
+        { "@type": "City", "name": "Humble" },
+        { "@type": "City", "name": "Cypress" },
+        { "@type": "City", "name": "Spring" },
+        { "@type": "City", "name": "Brookshire" },
+        { "@type": "City", "name": "Richmond" },
+        { "@type": "City", "name": "Rosenberg" },
+        { "@type": "AdministrativeArea", "name": "Greater Houston" },
+        { "@type": "AdministrativeArea", "name": "Harris County" },
+        { "@type": "AdministrativeArea", "name": "Fort Bend County" },
+        { "@type": "AdministrativeArea", "name": "Montgomery County" },
+        { "@type": "AdministrativeArea", "name": "Brazoria County" },
+        { "@type": "State", "name": "Texas" },
+        { "@type": "Country", "name": "United States" }
+      ],
+      "serviceType": [
+        "Microsoft 365 Licensing",
+        "Microsoft Cloud Solution Provider",
+        "Microsoft Azure Consulting",
+        "Managed IT Services",
+        "Cybersecurity Governance",
+        "Cloud Migration",
+        "Cloud Repatriation",
+        "IT Strategy Consulting",
+        "Incident Response",
+        "AI Governance",
+        "CISA SCuBA Alignment",
+        "NIST SP 800-53 Compliance",
+        "Infrastructure Placement"
+      ],
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Microsoft Cloud Solution Provider",
+          "credentialCategory": "Professional Certification",
+          "recognizedBy": { "@type": "Organization", "name": "Microsoft", "url": "https://www.microsoft.com" }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Google Partner",
+          "credentialCategory": "Professional Certification",
+          "recognizedBy": { "@type": "Organization", "name": "Google", "url": "https://www.google.com" }
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "10",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Lionel Mosley",
+        "url": "https://trust-lionel.com",
+        "sameAs": "https://linkedin.com/in/lionelmosley"
+      },
+      "sameAs": [
+        "https://4thandbailey.com",
+        "https://m365cloudpro.com",
+        "https://framework.4thandbailey.com",
+        "https://github.com/4thandBailey",
+        "https://www.linkedin.com/company/4thandbailey",
+        "https://clutch.co/profile/4th-bailey",
+        "https://appsource.microsoft.com/en-us/marketplace/partner-dir/22479281-ab81-4d69-ab39-e39bb2dde0a7/overview"
+      ]
+    })} />
+
     <!-- BlogPosting JSON-LD — injected on post pages only -->
     {blogPosting && (
       <script is:inline type="application/ld+json" set:html={JSON.stringify({
