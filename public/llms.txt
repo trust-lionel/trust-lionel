@@ -69,6 +69,20 @@ Senior Consultant, IT Strategy Growth & Transformation. Complete design, impleme
 - [Schedule an Advisory Consultation](https://4nb.cloud/lmosley)
 - [Microsoft Marketplace Partner Profile](https://marketplace.microsoft.com/en-us/marketplace/partner-dir/22479281-ab81-4d69-ab39-e39bb2dde0a7/overview)
 
+## Service Area
+
+4TH AND BAILEY serves organizations in Greater Houston and nationwide. Local service areas include:
+
+Cities: Houston, Sugar Land, Pearland, The Woodlands, Katy, Pasadena, League City, Baytown, Friendswood, Missouri City, Stafford, Conroe, Humble, Cypress, Spring, Brookshire, Richmond, Rosenberg.
+
+Houston neighborhoods: Midtown, Galleria, Energy Corridor, Medical Center, Greenway Plaza, Katy Prairie, Downtown, Third Ward.
+
+Counties: Harris County, Fort Bend County, Montgomery County, Brazoria County.
+
+Statewide: Texas. National service available for all engagements.
+
+Hours: Monday–Friday, 8:30 AM–5:30 PM CST.
+
 Service areas: IT Strategy & Transformation, Cloud Architecture & Migration, Security Posture & Governance, Infrastructure Design & Analytics, Business Intelligence (Power BI), CI/CD Pipeline Improvement, Microsoft 365 and Azure Deployments.
 
 Frameworks: CISA SCuBA, NIST SP 800-53, MITRE ATT&CK, CIS Benchmarks.
