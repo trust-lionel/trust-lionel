@@ -134,7 +134,7 @@ The organizations that understand this tend to make different infrastructure dec
 
 Running that assessment on my own infrastructure made the decision straightforward. The same assessment is available to any organization willing to ask the same questions.
 
-[**→ Book the Infrastructure Governance Briefing**](https://calendly.com/4thandbailey/infrastructure-governance-briefing)
+<a href="https://calendly.com/4thandbailey/infrastructure-governance-briefing" style="display:inline-block;background-color:#0088cc;color:#ffffff;padding:12px 24px;font-weight:600;border-radius:6px;text-decoration:none;">→ Book the Infrastructure Governance Briefing</a>
 
 ---
 
