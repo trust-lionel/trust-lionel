@@ -88,9 +88,9 @@ Exit cost: Moderate. The page can be rebuilt. The data already shared cannot be 
 
 **The repatriated state:**
 
-I built the alternative across three properties: trust-lionel.com as the primary publishing platform, links.lionelmosley.com as the identity and link infrastructure, and about.lionelmosley.com as the interactive portfolio. The total recurring platform cost across all three: $0. No platform subscription. No content license granted to anyone. No behavioral data sold to third-party advertisers.
+I built the alternative across three properties: [**trust-lionel.com**](https://trust-lionel.com) as the primary publishing platform, [**links.lionelmosley.com**](https://links.lionelmosley.com) as the identity and link infrastructure, and [**about.lionelmosley.com**](https://about.lionelmosley.com) as the interactive portfolio. The total recurring platform cost across all three: $0. No platform subscription. No content license granted to anyone. No behavioral data sold to third-party advertisers.
 
-Every article published at trust-lionel.com builds search authority for trust-lionel.com — permanently, compounding with every new publication. Every visitor interaction is recorded by Umami Analytics — self-hosted, privacy-first, zero third-party data sharing. The audience is built through search, through direct traffic, through RSS, and through the quality of the work. A platform policy decision cannot reach it.
+Every article published at [**trust-lionel.com**](https://trust-lionel.com) builds search authority for trust-lionel.com — permanently, compounding with every new publication. Every visitor interaction is recorded by Umami Analytics — self-hosted, privacy-first, zero third-party data sharing. The audience is built through search, through direct traffic, through RSS, and through the quality of the work. A platform policy decision cannot reach it.
 
 The same assessment that identifies this pattern in a client's SaaS portfolio identified it in my own. The exit cost is always higher when the decision is forced rather than deliberate.
 
