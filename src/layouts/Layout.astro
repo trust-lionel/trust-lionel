@@ -287,14 +287,19 @@ const citationJson = citation ? JSON.stringify({
       <script is:inline type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "BlogPosting",
+        "@id": blogPosting.url + "#BlogPosting",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": blogPosting.url },
         "headline": blogPosting.headline,
+        "name": blogPosting.headline,
         "description": blogPosting.description,
         "author": { "@type": "Person", "name": "Lionel Mosley", "url": blogPosting.authorUrl },
         "publisher": { "@type": "Organization", "name": "Lionel Mosley | ahr-ki-tekt", "url": "https://trust-lionel.com" },
         "datePublished": blogPosting.datePublished,
+        "dateModified": blogPosting.dateModified,
         "url": blogPosting.url,
         "image": blogPosting.image,
-        "keywords": blogPosting.keywords
+        "keywords": blogPosting.keywords,
+        "isPartOf": blogPosting.isPartOf
     })} />
     )}
 
