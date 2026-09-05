@@ -58,6 +58,13 @@ const softwareSourceCodeJson = softwareApplication ? JSON.stringify({
 const citationJson = citation ? JSON.stringify({
   "@context": "https://schema.org",
   "@type": "BlogPosting",
+  "headline": citation.headline,
+  "image": citation.image,
+  "author": {
+    "@type": "Organization",
+    "name": citation.creator,
+    "url": "https://4thandbailey.com"
+  },
   "citation": {
     "@type": "CreativeWork",
     "name": citation.name,
