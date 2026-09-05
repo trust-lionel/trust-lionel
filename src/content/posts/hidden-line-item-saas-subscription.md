@@ -136,6 +136,8 @@ Running that assessment on my own infrastructure made the decision straightforwa
 
 <a href="https://calendly.com/4thandbailey/infrastructure-governance-briefing" style="display:inline-block;background-color:#0088cc;color:#ffffff;padding:12px 24px;font-weight:600;border-radius:6px;text-decoration:none;">→ Book the Infrastructure Governance Briefing</a>
 
+or ask the terminal at [about.lionelmosley.com](https://about.lionelmosley.com) what a review covers before you commit to the call.
+
 ---
 
 *Field Notes — Cloud Repatriation · trust-lionel.com · ahr-ki-tekt Design Journal · September 2026*
