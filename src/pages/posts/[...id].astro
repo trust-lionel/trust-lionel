@@ -44,7 +44,7 @@ const layoutMap: Record<LayoutKey, any> = {
 const layoutKey: LayoutKey = (frontmatter.postType as LayoutKey) || (POSTS_CONFIG.postType as LayoutKey)
 const PostLayout = layoutMap[layoutKey]
 
-const canonicalUrl = `${SITE.website}posts/${post.id}`
+const canonicalUrl = `${SITE.website}/posts/${post.id}`
 const ogImage = frontmatter.ogImage
   ? (typeof frontmatter.ogImage === 'string' ? frontmatter.ogImage : `${SITE.website}${frontmatter.ogImage.src}`)
   : SITE.ogImage
