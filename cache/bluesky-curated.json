@@ -38,5 +38,13 @@
     "lastPostedDate": "2026-09-12",
     "lastPostedAt": "2026-09-12T23:32:06.206Z",
     "lastUri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mveahxo42o2q"
+  },
+  "https://ainowinstitute.org/feed": {
+    "postedUrls": [
+      "https://ainowinstitute.org/news/press/life-under-the-algorithm"
+    ],
+    "lastPostedDate": "2026-09-12",
+    "lastPostedAt": "2026-09-12T23:38:33.495Z",
+    "lastUri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mveatjm6wc2v"
   }
 }
