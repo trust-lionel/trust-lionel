@@ -16,6 +16,20 @@ const __dirname    = path.dirname(fileURLToPath(import.meta.url))
 const CACHE_FILE   = path.resolve(__dirname, '../cache/bluesky-curated.json')
 const MAX_LENGTH   = 300
 
+// ── Keyword filter — titles must contain at least one ────────
+const KEYWORDS = [
+  'microsoft', 'nist', 'zero trust', 'ai', 'cve', 'cloud',
+  'identity', 'mfa', 'governance', 'cybersecurity', 'security',
+  'vulnerability', 'ransomware', 'phishing', 'entra', 'azure',
+  'defender', 'compliance', 'framework', 'infrastructure',
+  'breach', 'incident', 'patch', 'update', 'advisory',
+]
+
+function matchesKeyword(title) {
+  const lower = (title ?? '').toLowerCase()
+  return KEYWORDS.some(kw => lower.includes(kw))
+}
+
 // ── Vetted sources — tiered by signal priority ───────────────
 const SOURCES = [
   // Tier 1 — Security-critical, time-sensitive
@@ -26,6 +40,7 @@ const SOURCES = [
     feed       : 'https://msrc.microsoft.com/update-guide/rss',
     hashtags   : '#Microsoft #Cybersecurity #Tech',
     attribution: 2,
+    filterByKeyword: false, // MSRC is always relevant
   },
   {
     tier       : 1,
@@ -34,6 +49,7 @@ const SOURCES = [
     feed       : 'https://nvd.nist.gov/feeds/xml/cve/misc/nvd-rss.xml',
     hashtags   : '#Cybersecurity #Tech #AI',
     attribution: 2,
+    filterByKeyword: false, // NVD CVEs are always relevant
   },
   {
     tier       : 1,
@@ -42,6 +58,7 @@ const SOURCES = [
     feed       : 'https://www.cisa.gov/news.xml',
     hashtags   : '#Cybersecurity #AI #Tech',
     attribution: 2,
+    filterByKeyword: false, // CISA advisories are always relevant
   },
   {
     tier       : 1,
@@ -50,6 +67,7 @@ const SOURCES = [
     feed       : 'https://feeds.feedburner.com/KrebsOnSecurity',
     hashtags   : '#Cybersecurity #Tech #AI',
     attribution: 2,
+    filterByKeyword: false, // Krebs is always relevant
   },
 
   // Tier 2 — Practitioner analysis
@@ -60,6 +78,7 @@ const SOURCES = [
     feed       : 'https://www.darkreading.com/rss.xml',
     hashtags   : '#Cybersecurity #Tech #AI',
     attribution: 1,
+    filterByKeyword: true, // High volume — filter by keyword
   },
   {
     tier       : 2,
@@ -68,6 +87,7 @@ const SOURCES = [
     feed       : 'https://www.nist.gov/news-events/news/rss.xml',
     hashtags   : '#AI #Tech #Cybersecurity',
     attribution: 1,
+    filterByKeyword: false,
   },
   {
     tier       : 2,
@@ -76,6 +96,7 @@ const SOURCES = [
     feed       : 'https://ainowinstitute.org/feed',
     hashtags   : '#AI #AIGovernance #Tech',
     attribution: 1,
+    filterByKeyword: false,
   },
   {
     tier       : 2,
@@ -84,6 +105,7 @@ const SOURCES = [
     feed       : 'https://hai.stanford.edu/news/rss.xml',
     hashtags   : '#AI #AIGovernance #Tech',
     attribution: 1,
+    filterByKeyword: false,
   },
 
   // Tier 3 — Vendor intelligence
@@ -94,6 +116,7 @@ const SOURCES = [
     feed       : 'https://blogs.microsoft.com/feed/',
     hashtags   : '#Microsoft #AI #Tech',
     attribution: 3,
+    filterByKeyword: true,
   },
   {
     tier       : 3,
@@ -102,6 +125,7 @@ const SOURCES = [
     feed       : 'https://azure.microsoft.com/en-us/blog/feed/',
     hashtags   : '#Microsoft #Tech #DevOps',
     attribution: 3,
+    filterByKeyword: true,
   },
   {
     tier       : 3,
@@ -110,6 +134,7 @@ const SOURCES = [
     feed       : 'https://techcommunity.microsoft.com/rss',
     hashtags   : '#Microsoft #Tech #DevOps',
     attribution: 3,
+    filterByKeyword: true,
   },
   {
     tier       : 3,
@@ -118,6 +143,7 @@ const SOURCES = [
     feed       : 'https://aws.amazon.com/blogs/aws/feed/',
     hashtags   : '#Tech #DevOps #AI',
     attribution: 3,
+    filterByKeyword: true,
   },
   {
     tier       : 3,
@@ -126,6 +152,7 @@ const SOURCES = [
     feed       : 'https://cloud.google.com/feeds/gcp-release-notes.xml',
     hashtags   : '#Tech #DevOps #AI',
     attribution: 3,
+    filterByKeyword: true,
   },
 ]
 
@@ -150,9 +177,8 @@ function saveCache(cache) {
 
 // ── Minimal RSS/Atom XML parser ───────────────────────────────
 function parseItems(xml) {
-  const items  = []
+  const items = []
 
-  // Try RSS <item> blocks first
   const itemRegex = /<item>([\s\S]*?)<\/item>/g
   let match
   while ((match = itemRegex.exec(xml)) !== null) {
@@ -164,7 +190,6 @@ function parseItems(xml) {
     if (title && link) items.push({ title, link, description: desc, date })
   }
 
-  // Try Atom <entry> blocks if no RSS items found
   if (items.length === 0) {
     const entryRegex = /<entry>([\s\S]*?)<\/entry>/g
     while ((match = entryRegex.exec(xml)) !== null) {
@@ -217,11 +242,52 @@ async function fetchFeed(source) {
     }
     const xml   = await res.text()
     const items = parseItems(xml)
-    console.log(`  ${source.shortName}: ${items.length} items`)
+    console.log(`  ${source.shortName}: ${items.length} items fetched`)
     return items
   } catch (err) {
     console.log(`  ⚠ ${source.shortName}: ${err.message}`)
     return []
+  }
+}
+
+// ── Fetch OG image and upload blob to Bluesky ────────────────
+async function fetchThumb(url, accessJwt) {
+  try {
+    const res  = await fetch(url, {
+      headers: { 'User-Agent': 'ahr-ki-tekt-bot/1.0' },
+      signal : AbortSignal.timeout(10000),
+    })
+    const html = await res.text()
+
+    const ogImage = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i)?.[1]
+                 ?? html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i)?.[1]
+    const ogTitle = html.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i)?.[1]
+                 ?? html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:title["']/i)?.[1]
+                 ?? ''
+    const ogDesc  = html.match(/<meta[^>]+property=["']og:description["'][^>]+content=["']([^"']+)["']/i)?.[1]
+                 ?? html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:description["']/i)?.[1]
+                 ?? ''
+
+    if (!ogImage) return null
+
+    const imgRes  = await fetch(ogImage, { signal: AbortSignal.timeout(10000) })
+    const imgBuf  = await imgRes.arrayBuffer()
+    const imgType = imgRes.headers.get('content-type') ?? 'image/jpeg'
+
+    const uploadRes = await fetch(`${BSKY_SERVICE}/xrpc/com.atproto.repo.uploadBlob`, {
+      method : 'POST',
+      headers: {
+        'Authorization': `Bearer ${accessJwt}`,
+        'Content-Type' : imgType,
+      },
+      body: imgBuf,
+    })
+
+    if (!uploadRes.ok) return null
+    const { blob } = await uploadRes.json()
+    return { blob, title: ogTitle, description: ogDesc }
+  } catch {
+    return null
   }
 }
 
@@ -230,10 +296,8 @@ function buildPostText(source, item) {
   const attribution = ATTRIBUTION[source.attribution]
   const byline      = `${item.title} — ${source.shortName}`
   const suffix      = `\n\n${source.hashtags}\n\n${item.link}`
-
-  // Calculate available space for description
-  const fixed     = `${attribution}\n\n${byline}\n\n`
-  const available = MAX_LENGTH - fixed.length - suffix.length
+  const fixed       = `${attribution}\n\n${byline}\n\n`
+  const available   = MAX_LENGTH - fixed.length - suffix.length
 
   let desc = ''
   if (item.description && available > 20) {
@@ -243,7 +307,12 @@ function buildPostText(source, item) {
     desc = '\n\n' + desc
   }
 
-  return `${fixed}${desc}${suffix}`.trim()
+  const text = `${fixed}${desc}${suffix}`.trim()
+
+  // Hard safety trim
+  return text.length > MAX_LENGTH
+    ? text.slice(0, MAX_LENGTH - 1) + '…'
+    : text
 }
 
 // ── Build facets ──────────────────────────────────────────────
@@ -287,7 +356,7 @@ async function createSession() {
 }
 
 // ── Post to Bluesky ───────────────────────────────────────────
-async function createPost(session, text, url) {
+async function createPost(session, text, url, thumb) {
   const facets = buildFacets(text, url)
   const record = {
     $type    : 'app.bsky.feed.post',
@@ -295,6 +364,19 @@ async function createPost(session, text, url) {
     facets,
     createdAt: new Date().toISOString(),
     langs    : ['en'],
+  }
+
+  // Add embed card if OG image was found
+  if (thumb) {
+    record.embed = {
+      $type   : 'app.bsky.embed.external',
+      external: {
+        uri        : url,
+        title      : thumb.title,
+        description: thumb.description,
+        thumb      : thumb.blob,
+      },
+    }
   }
 
   const res = await fetch(`${BSKY_SERVICE}/xrpc/com.atproto.repo.createRecord`, {
@@ -321,20 +403,17 @@ async function main() {
   console.log('ahr-ki-tekt Curated → Bluesky | Starting run...')
 
   const cache   = loadCache()
-  const today   = new Date().toISOString().slice(0, 10) // YYYY-MM-DD
+  const today   = new Date().toISOString().slice(0, 10)
   const session = await createSession()
 
-  // Track how many posts this run (max 1 per run — fires twice daily = 2/day)
   const MAX_PER_RUN = 1
   let posted = 0
 
-  // Sort sources by tier
   const sorted = [...SOURCES].sort((a, b) => a.tier - b.tier)
 
   for (const source of sorted) {
     if (posted >= MAX_PER_RUN) break
 
-    // Skip if already posted from this source today
     if (cache[source.feed]?.lastPostedDate === today) {
       console.log(`  ${source.shortName}: already posted today — skipping`)
       continue
@@ -342,34 +421,42 @@ async function main() {
 
     console.log(`Fetching ${source.shortName}...`)
     const items = await fetchFeed(source)
-
     if (items.length === 0) continue
 
-    // Find first unposted item
     const postedUrls = new Set(
-      Object.values(cache)
-        .flatMap(s => s.postedUrls ?? [])
+      Object.values(cache).flatMap(s => s.postedUrls ?? [])
     )
 
-    const candidate = items.find(item => !postedUrls.has(item.link))
-    if (!candidate) {
-      console.log(`  ${source.shortName}: no new items`)
+    // Apply keyword filter for sources that require it
+    const eligible = items.filter(item => {
+      if (postedUrls.has(item.link)) return false
+      if (source.filterByKeyword && !matchesKeyword(item.title)) return false
+      return true
+    })
+
+    if (eligible.length === 0) {
+      console.log(`  ${source.shortName}: no eligible items after filtering`)
       continue
     }
+
+    const candidate = eligible[0]
+    console.log(`  Candidate: "${candidate.title}"`)
 
     try {
       const text = buildPostText(source, candidate)
 
-      // Safety check — never exceed 300 chars
       if (text.length > MAX_LENGTH) {
-        console.log(`  ⚠ ${source.shortName}: post too long (${text.length}) — skipping`)
+        console.log(`  ⚠ Post too long (${text.length} chars) — skipping`)
         continue
       }
 
-      console.log(`  Posting from ${source.shortName} (${text.length} chars)`)
-      const uri = await createPost(session, text, candidate.link)
+      console.log(`  Fetching OG image from ${candidate.link}...`)
+      const thumb = await fetchThumb(candidate.link, session.accessJwt)
+      console.log(`  OG image: ${thumb ? 'found' : 'not found'}`)
+      console.log(`  Post preview (${text.length} chars):\n---\n${text}\n---`)
 
-      // Update cache
+      const uri = await createPost(session, text, candidate.link, thumb)
+
       if (!cache[source.feed]) cache[source.feed] = { postedUrls: [] }
       cache[source.feed].lastPostedDate = today
       cache[source.feed].lastPostedAt   = new Date().toISOString()
@@ -377,7 +464,7 @@ async function main() {
       cache[source.feed].postedUrls     = [
         ...(cache[source.feed].postedUrls ?? []),
         candidate.link,
-      ].slice(-50) // Keep last 50 URLs per source to prevent reposting
+      ].slice(-50)
 
       posted++
       await new Promise(r => setTimeout(r, 2000))

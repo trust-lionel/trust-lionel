@@ -314,7 +314,8 @@ async function main() {
 
       try {
         const { text, url } = buildPostText(event, stage)
-        console.log(`  ↳ Posting ${stage.key} (${text.length} chars)`)
+        console.log(`  ↳ Posting ${stage.key} (${text.length} chars):`)
+        console.log(`---\n${text}\n---`)
         const uri = await createPost(session, text, url)
 
         cache[event.id][stage.key] = {
