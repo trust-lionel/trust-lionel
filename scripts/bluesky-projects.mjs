@@ -161,6 +161,51 @@ function buildFacets(text, url) {
   return facets
 }
 
+// ── Browser-like User-Agent ───────────────────────────────────
+const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
+
+// ── Fetch OG image and upload blob ───────────────────────────
+async function fetchThumb(url, accessJwt) {
+  try {
+    const res = await fetch(url, {
+      headers: {
+        'User-Agent'     : UA,
+        'Accept'         : 'text/html,application/xhtml+xml,*/*',
+        'Accept-Language': 'en-US,en;q=0.9',
+      },
+      signal: AbortSignal.timeout(15000),
+    })
+    if (!res.ok) return null
+    const html = await res.text()
+
+    const ogImage = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i)?.[1]
+                 ?? html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i)?.[1]
+                 ?? html.match(/<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i)?.[1]
+    const ogTitle = html.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i)?.[1] ?? ''
+    const ogDesc  = html.match(/<meta[^>]+property=["']og:description["'][^>]+content=["']([^"']+)["']/i)?.[1] ?? ''
+
+    if (!ogImage) return null
+
+    const imgRes  = await fetch(ogImage, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(15000) })
+    if (!imgRes.ok) return null
+    const imgBuf  = await imgRes.arrayBuffer()
+    const imgType = imgRes.headers.get('content-type') ?? 'image/jpeg'
+    if (!imgType.startsWith('image/')) return null
+    if (imgBuf.byteLength > 976 * 1024) return null
+
+    const uploadRes = await fetch(`${BSKY_SERVICE}/xrpc/com.atproto.repo.uploadBlob`, {
+      method : 'POST',
+      headers: { 'Authorization': `Bearer ${accessJwt}`, 'Content-Type': imgType },
+      body   : imgBuf,
+    })
+    if (!uploadRes.ok) return null
+    const { blob } = await uploadRes.json()
+    return { blob, title: ogTitle, description: ogDesc }
+  } catch {
+    return null
+  }
+}
+
 // ── Bluesky auth ──────────────────────────────────────────────
 async function createSession() {
   const res = await fetch(`${BSKY_SERVICE}/xrpc/com.atproto.server.createSession`, {
@@ -173,7 +218,7 @@ async function createSession() {
 }
 
 // ── Post to Bluesky ───────────────────────────────────────────
-async function createPost(session, text, url) {
+async function createPost(session, text, url, thumb) {
   const facets = buildFacets(text, url)
   const record = {
     $type    : 'app.bsky.feed.post',
@@ -181,6 +226,17 @@ async function createPost(session, text, url) {
     facets,
     createdAt: new Date().toISOString(),
     langs    : ['en'],
+  }
+
+  // Always add embed card — thumb blob is optional
+  record.embed = {
+    $type   : 'app.bsky.embed.external',
+    external: {
+      uri        : url,
+      title      : thumb?.title       ?? '',
+      description: thumb?.description ?? '',
+      ...(thumb?.blob ? { thumb: thumb.blob } : {}),
+    },
   }
 
   const res = await fetch(`${BSKY_SERVICE}/xrpc/com.atproto.repo.createRecord`, {
@@ -228,7 +284,13 @@ async function main() {
 
     try {
       const { text, url } = buildPostText(project)
-      const uri = await createPost(session, text, url)
+
+      // Fetch OG image — try website first, then githubUrl
+      const thumbUrl = project.website ?? project.githubUrl ?? null
+      const thumb    = thumbUrl ? await fetchThumb(thumbUrl, session.accessJwt) : null
+      console.log(`  OG image: ${thumb ? '✓ found' : '✗ not found — posting without image'}`)
+
+      const uri = await createPost(session, text, url, thumb)
 
       cache[project.id] = {
         announced: true,
