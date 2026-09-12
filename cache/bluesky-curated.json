@@ -1,1 +1,10 @@
-{}
+{
+  "https://cloud.google.com/feeds/gcp-release-notes.xml": {
+    "postedUrls": [
+      "https://docs.cloud.google.com/release-notes#September_11_2026"
+    ],
+    "lastPostedDate": "2026-09-12",
+    "lastPostedAt": "2026-09-12T21:55:44.566Z",
+    "lastUri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mve33ohzam2i"
+  }
+}
