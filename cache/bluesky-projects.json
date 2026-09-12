@@ -1,0 +1,26 @@
+{
+  "houston-alert": {
+    "announced": true,
+    "version": null,
+    "postedAt": null,
+    "uri": null
+  },
+  "infrastructure-placement-framework": {
+    "announced": true,
+    "version": "1.0.0",
+    "postedAt": null,
+    "uri": null
+  },
+  "macsystools": {
+    "announced": true,
+    "version": "1.0.0",
+    "postedAt": null,
+    "uri": null
+  },
+  "shopify-bw-agent": {
+    "announced": true,
+    "version": "1.0.1",
+    "postedAt": null,
+    "uri": null
+  }
+}
