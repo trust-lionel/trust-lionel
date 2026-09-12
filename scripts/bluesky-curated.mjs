@@ -294,8 +294,8 @@ function buildPostText(source, item) {
   const attribution = ATTRIBUTION[source.attribution]
   const byline      = `${item.title} — ${source.shortName}`
   const suffix      = `\n\n${source.hashtags}`
-  const fixed       = `${attribution}\n\n${byline}\n\n`
-  const available   = MAX_LENGTH - fixed.length - suffix.length
+  const fixed       = `${attribution}\n\n${byline}`
+  const available   = MAX_LENGTH - fixed.length - suffix.length - 2 // -2 for the \n\n before desc
 
   let desc = ''
   if (item.description && available > 20) {
