@@ -6,5 +6,13 @@
     "lastPostedDate": "2026-09-12",
     "lastPostedAt": "2026-09-12T21:55:44.566Z",
     "lastUri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mve33ohzam2i"
+  },
+  "https://www.cisa.gov/news.xml": {
+    "postedUrls": [
+      "https://www.cisa.gov/news-events/news/cisa-releases-updated-insider-threat-guide-new-insights-mitigate-physical-and-cyber-threats"
+    ],
+    "lastPostedDate": "2026-09-12",
+    "lastPostedAt": "2026-09-12T22:21:39.228Z",
+    "lastUri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mve4jz4kdh2v"
   }
 }
