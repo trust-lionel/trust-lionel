@@ -50,13 +50,38 @@ const projects = await getAllProjects()
                 <a
                   href={project.data.website}
                   target="_blank"
-                  class="inline-flex items-center justify-between font-semibold text-lg/relaxed "
+                  class="inline-flex items-center font-semibold text-lg/relaxed"
                   data-umami-event="project-title-click"
                   data-umami-event-project={project.data.name}
                 >
                   {project.data.name}
                 </a>
-                <p class="pr-0 sm:pr-14 text-muted-foreground mb-3">{project.data.description}</p>
+                {project.data.status && (
+                  <span class={
+                    project.data.status === 'active'
+                      ? 'inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                      : project.data.status === 'in-progress'
+                      ? 'inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400'
+                      : 'inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-muted text-muted-foreground'
+                  }>
+                    {project.data.status}
+                  </span>
+                )}
+                {project.data.version && (
+                  <span class="text-xs text-muted-foreground font-mono ml-1">
+                    v{project.data.version}
+                  </span>
+                )}
+                <p class="pr-0 sm:pr-14 text-muted-foreground mb-2 mt-1">{project.data.description}</p>
+                {project.data.techStack && project.data.techStack.length > 0 && (
+                  <div class="flex flex-wrap gap-1.5 mb-3">
+                    {project.data.techStack.map((tech: string) => (
+                      <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium border border-border text-muted-foreground">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
                 <div class="flex flex-col sm:flex-row gap-4 sm:gap-0 items-start sm:items-center justify-between sm:h-14">
                   <div class="flex gap-4 ">
                     <div class="flex items-center py-1.5 gap-3">
