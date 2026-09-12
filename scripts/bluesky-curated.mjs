@@ -241,7 +241,12 @@ function getFallbackImage(url) {
   if (url.includes('cisa.gov'))            return 'https://www.cisa.gov/profiles/cisad8_gov/themes/custom/cisa/images/CISA_OG_social_share.png'
   if (url.includes('nist.gov'))            return 'https://www.nist.gov/sites/default/files/images/2019/12/06/nist-logo-brand-refresh.png'
   if (url.includes('krebsonsecurity.com')) return 'https://krebsonsecurity.com/wp-content/uploads/2018/09/krebs-default.png'
-  if (url.includes('msrc.microsoft.com')) return 'https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b'
+  if (url.includes('msrc.microsoft.com'))  return 'https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b'
+  if (url.includes('darkreading.com'))     return 'https://www.darkreading.com/resources/img/dark-reading-social.png'
+  if (url.includes('darkreading.com'))     return 'https://www.darkreading.com/resources/img/dark-reading-social.png'
+  if (url.includes('techcommunity.microsoft.com')) return 'https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b'
+  if (url.includes('blogs.microsoft.com')) return 'https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b'
+  if (url.includes('azure.microsoft.com')) return 'https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b'
   return null
 }
 
@@ -284,10 +289,11 @@ async function uploadImageBlob(imageUrl, accessJwt) {
 }
 
 // ── Build post text ───────────────────────────────────────────
+// URL is omitted from post text — the embed card handles the link
 function buildPostText(source, item) {
   const attribution = ATTRIBUTION[source.attribution]
   const byline      = `${item.title} — ${source.shortName}`
-  const suffix      = `\n\n${source.hashtags}\n\n${item.link}`
+  const suffix      = `\n\n${source.hashtags}`
   const fixed       = `${attribution}\n\n${byline}\n\n`
   const available   = MAX_LENGTH - fixed.length - suffix.length
 
@@ -303,8 +309,8 @@ function buildPostText(source, item) {
   return text.length > MAX_LENGTH ? text.slice(0, MAX_LENGTH - 1) + '…' : text
 }
 
-// ── Build facets ──────────────────────────────────────────────
-function buildFacets(text, url) {
+// ── Build facets — hashtags only (URL handled by embed card) ──
+function buildFacets(text) {
   const facets  = []
   const encoder = new TextEncoder()
 
@@ -314,13 +320,6 @@ function buildFacets(text, url) {
     const start = encoder.encode(text.slice(0, match.index)).length
     const end   = encoder.encode(text.slice(0, match.index + match[0].length)).length
     facets.push({ index: { byteStart: start, byteEnd: end }, features: [{ $type: 'app.bsky.richtext.facet#tag', tag: match[1] }] })
-  }
-
-  const urlIndex = text.indexOf(url)
-  if (urlIndex !== -1) {
-    const start = encoder.encode(text.slice(0, urlIndex)).length
-    const end   = encoder.encode(text.slice(0, urlIndex + url.length)).length
-    facets.push({ index: { byteStart: start, byteEnd: end }, features: [{ $type: 'app.bsky.richtext.facet#link', uri: url }] })
   }
 
   return facets
@@ -338,7 +337,7 @@ async function createSession() {
 
 // ── Post to Bluesky ───────────────────────────────────────────
 async function createPost(session, text, url, thumb) {
-  const facets = buildFacets(text, url)
+  const facets = buildFacets(text)
   const record = { $type: 'app.bsky.feed.post', text, facets, createdAt: new Date().toISOString(), langs: ['en'] }
 
   // Always add embed card for clickable link — thumb is optional
