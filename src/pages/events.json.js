@@ -1,11 +1,13 @@
 // ============================================================
 // src/pages/events.json.js
-// JSON endpoint — exposes all events for Bluesky automation
-// https://trust-lionel.com/events.json
+// Static JSON endpoint — pre-rendered at build time
+// Accessible at: https://trust-lionel.com/events.json
 // ============================================================
 
 import { getCollection } from 'astro:content'
 import { SITE } from '~/config'
+
+export const prerender = true
 
 export async function GET() {
   const allEvents = await getCollection('events')
@@ -38,7 +40,6 @@ export async function GET() {
   return new Response(JSON.stringify(events, null, 2), {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
-      'Cache-Control': 'public, max-age=3600',
     },
   })
 }

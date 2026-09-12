@@ -1,11 +1,13 @@
 // ============================================================
 // src/pages/projects.json.js
-// JSON endpoint — exposes all projects for Bluesky automation
-// https://trust-lionel.com/projects.json
+// Static JSON endpoint — pre-rendered at build time
+// Accessible at: https://trust-lionel.com/projects.json
 // ============================================================
 
 import { getCollection } from 'astro:content'
 import { SITE } from '~/config'
+
+export const prerender = true
 
 export async function GET() {
   const allProjects = await getCollection('projects')
@@ -33,7 +35,6 @@ export async function GET() {
   return new Response(JSON.stringify(projects, null, 2), {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
-      'Cache-Control': 'public, max-age=3600',
     },
   })
 }
