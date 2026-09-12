@@ -2,15 +2,17 @@ name: Post to Bluesky
 
 on:
   schedule:
-    - cron: '0 */4 * * *'  # Every 4 hours
-  workflow_dispatch:         # Manual trigger from Actions tab
+    - cron: '0 */4 * * *'   # Every 4 hours — journal, events, projects
+    - cron: '30 17 * * *'   # 11:30 AM CST — curated post
+    - cron: '30 0 * * *'    # 6:30 PM CST — curated post
+  workflow_dispatch:          # Manual trigger from Actions tab
 
 jobs:
   post:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write        # Needed to commit the cache files
+      contents: write         # Needed to commit the cache files
 
     steps:
       - name: Checkout repository
@@ -39,10 +41,16 @@ jobs:
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
         run: node scripts/bluesky-projects.mjs
 
+      - name: Run Bluesky curated script
+        env:
+          BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+        run: node scripts/bluesky-curated.mjs
+
       - name: Commit updated caches
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add cache/bluesky-posted.json cache/bluesky-events.json cache/bluesky-projects.json
+          git add cache/bluesky-posted.json cache/bluesky-events.json cache/bluesky-projects.json cache/bluesky-curated.json
           git diff --staged --quiet || git commit -m "chore: update Bluesky post caches"
           git push
