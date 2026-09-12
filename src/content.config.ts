@@ -58,6 +58,10 @@ const projects = defineCollection({
       star: z.number(),
       fork: z.number(),
       draft: z.boolean().default(false),
+      version: z.string().optional(),
+      status: z.enum(['active', 'in-progress', 'archived']).default('active'),
+      lastUpdated: z.coerce.date().optional(),
+      techStack: z.array(z.string()).optional(),
     }),
 })
 
