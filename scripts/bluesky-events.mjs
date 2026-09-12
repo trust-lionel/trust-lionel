@@ -20,24 +20,24 @@ const MAX_LENGTH      = 300
 
 // ── Lifecycle stages (days before/after eventDate) ───────────
 const STAGES = [
-  { key: 't7',    daysOffset: -7,  label: 'one week away'    },
-  { key: 't2',    daysOffset: -2,  label: 'in 2 days'        },
-  { key: 't1',    daysOffset: -1,  label: 'tomorrow'         },
-  { key: 't0',    daysOffset:  0,  label: 'today'            },
-  { key: 'recap', daysOffset:  1,  label: 'recap'            },
+  { key: 't7',    daysOffset: -7  },
+  { key: 't2',    daysOffset: -2  },
+  { key: 't1',    daysOffset: -1  },
+  { key: 't0',    daysOffset:  0  },
+  { key: 'recap', daysOffset:  1  },
 ]
 
-// ── Hashtag map — techStack/tags → Bluesky hashtags ─────────
+// ── Hashtag map ───────────────────────────────────────────────
 const HASHTAG_MAP = {
-  'Entrepreneurship':      '#Entrepreneurs',
-  'Small Business':        '#Tech',
-  'Website Strategy':      '#AI',
-  'Digital Transformation':'#Tech',
-  'AI Governance':         '#AIGovernance',
-  'Cybersecurity':         '#Cybersecurity',
-  'Microsoft 365':         '#Microsoft',
-  'Cloud Migration':       '#Tech',
-  'Business Continuity':   '#Cybersecurity',
+  'Entrepreneurship':       '#Entrepreneurs',
+  'Small Business':         '#Tech',
+  'Website Strategy':       '#AI',
+  'Digital Transformation': '#Tech',
+  'AI Governance':          '#AIGovernance',
+  'Cybersecurity':          '#Cybersecurity',
+  'Microsoft 365':          '#Microsoft',
+  'Cloud Migration':        '#Tech',
+  'Business Continuity':    '#Cybersecurity',
 }
 
 // ── Minimal YAML frontmatter parser ──────────────────────────
@@ -53,13 +53,11 @@ function parseFrontmatter(content) {
     const key   = line.slice(0, colonIdx).trim()
     let   value = line.slice(colonIdx + 1).trim()
 
-    // Strip surrounding quotes
     if ((value.startsWith('"') && value.endsWith('"')) ||
         (value.startsWith("'") && value.endsWith("'"))) {
       value = value.slice(1, -1)
     }
 
-    // Parse arrays: ["a", "b"]  or  [a, b]
     if (value.startsWith('[') && value.endsWith(']')) {
       value = value
         .slice(1, -1)
@@ -99,7 +97,7 @@ function saveCache(cache) {
   fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 2))
 }
 
-// ── Calculate days between two dates ─────────────────────────
+// ── Calculate days between today and a date string ───────────
 function daysDiff(dateStr) {
   const today  = new Date()
   today.setHours(0, 0, 0, 0)
@@ -119,30 +117,100 @@ function buildHashtags(tags) {
   return [...new Set(mapped)].slice(0, 4).join(' ')
 }
 
-// ── Build post text for each lifecycle stage ─────────────────
+// ── Trim a string to fit available characters ─────────────────
+function trimToFit(str, available) {
+  if (!str) return ''
+  if (str.length <= available) return str
+  return str.slice(0, available - 1) + '…'
+}
+
+// ── Build post text per lifecycle stage ───────────────────────
+//
+// Canonical formats:
+//
+// t7:
+//   One week away:
+//   {title}
+//   {description — trimmed to fit}
+//   {hashtags}
+//   {url}
+//
+// t2:
+//   {title} is in 2 days.
+//   {format}{eventDate} · {eventTime}
+//   Hosted by {eventHost}
+//   {hashtags}
+//   {url}
+//
+// t1:
+//   {title} is tomorrow.
+//   {format}{eventDate} · {eventTime}
+//   Hosted by {eventHost}
+//   {hashtags}
+//   {url}
+//
+// t0:
+//   Today on ahr-ki-tekt:
+//   {title} starts in a few hours.
+//   {format}{eventTime}
+//   Register now — limited seats.
+//   {hashtags}
+//   {url}
+//
+// recap:
+//   Thank you to everyone who joined us for:
+//   {title}
+//   Hosted by {eventHost}
+//   {hashtags}
+//   {url}
+//
+// ─────────────────────────────────────────────────────────────
 function buildPostText(event, stage) {
-  const hashtags  = buildHashtags(event.tags)
-  const url       = event.eventPrimaryButtonUrl
+  const hashtags = buildHashtags(event.tags)
+  const url      = event.eventPrimaryButtonUrl
     ?? event.eventRegistrationUrl
     ?? `${SITE_URL}/events/${event.id}`
-  const format    = event.eventFormat ? `${event.eventFormat} · ` : ''
-  const host      = event.eventHost   ? `Hosted by ${event.eventHost}` : ''
+  const format   = event.eventFormat ? `${event.eventFormat} · ` : ''
+  const host     = event.eventHost   ? `Hosted by ${event.eventHost}` : ''
+  const suffix   = `\n\n${hashtags}\n\n${url}`
 
   let text = ''
 
-  if (stage.key === 'recap') {
-    text = `Thank you to everyone who joined us ${stage.label}:\n\n${event.title}\n\n${host}\n\n${hashtags}\n\n${url}`
-  } else if (stage.key === 't0') {
-    text = `Happening today — ${event.title}\n\n${format}${event.eventTime ?? ''}\n\n${host}\n\nRegister now:\n\n${hashtags}\n\n${url}`
-  } else {
-    text = `${event.title} is ${stage.label}.\n\n${format}${event.eventDate} · ${event.eventTime ?? ''}\n\n${host}\n\n${hashtags}\n\n${url}`
+  switch (stage.key) {
+
+    case 't7': {
+      const fixed     = `One week away:\n\n${event.title}\n\n`
+      const available = MAX_LENGTH - fixed.length - suffix.length
+      const desc      = trimToFit(event.description ?? '', available)
+      text = `${fixed}${desc}${suffix}`
+      break
+    }
+
+    case 't2': {
+      text = `${event.title} is in 2 days.\n\n${format}${event.eventDate} · ${event.eventTime ?? ''}\n\n${host}${suffix}`
+      break
+    }
+
+    case 't1': {
+      text = `${event.title} is tomorrow.\n\n${format}${event.eventDate} · ${event.eventTime ?? ''}\n\n${host}${suffix}`
+      break
+    }
+
+    case 't0': {
+      const fixed     = `Today on ahr-ki-tekt:\n\n${event.title} starts in a few hours.\n\n${format}${event.eventTime ?? ''}\n\nRegister now — limited seats.`
+      text = `${fixed}${suffix}`
+      break
+    }
+
+    case 'recap': {
+      text = `Thank you to everyone who joined us for:\n\n${event.title}\n\n${host}${suffix}`
+      break
+    }
   }
 
-  // Trim to 300 characters if needed
+  // Hard safety trim — should not be needed with proper fixed elements
   if (text.length > MAX_LENGTH) {
-    const suffix = `\n\n${hashtags}\n\n${url}`
-    const available = MAX_LENGTH - suffix.length
-    text = text.slice(0, available - 1) + '…' + suffix
+    text = text.slice(0, MAX_LENGTH - 1) + '…'
   }
 
   return { text, url }
@@ -214,7 +282,7 @@ async function createPost(session, text, url) {
 
   if (!res.ok) throw new Error(`Post failed: ${res.status} ${await res.text()}`)
   const result = await res.json()
-  console.log(`✓ Posted: ${result.uri}`)
+  console.log(`✓ Posted [${result.uri}]`)
   return result.uri
 }
 
@@ -234,13 +302,11 @@ async function main() {
     if (!cache[event.id]) cache[event.id] = {}
 
     const diff = daysDiff(event.eventDate)
-    console.log(`  ${event.id}: ${diff} days`)
+    console.log(`  ${event.id}: ${diff} days from today`)
 
     for (const stage of STAGES) {
-      // Check if this stage should fire today
-      const shouldFire = diff === stage.daysOffset
+      if (diff !== stage.daysOffset) continue
 
-      if (!shouldFire) continue
       if (cache[event.id][stage.key]?.posted) {
         console.log(`  ↳ ${stage.key} already posted — skipping`)
         continue
@@ -248,6 +314,7 @@ async function main() {
 
       try {
         const { text, url } = buildPostText(event, stage)
+        console.log(`  ↳ Posting ${stage.key} (${text.length} chars)`)
         const uri = await createPost(session, text, url)
 
         cache[event.id][stage.key] = {
@@ -257,7 +324,6 @@ async function main() {
         }
         posted++
 
-        // Rate limit between posts
         await new Promise(r => setTimeout(r, 2000))
       } catch (err) {
         console.error(`  ✗ Failed ${stage.key} for ${event.id}: ${err.message}`)
