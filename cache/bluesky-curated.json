@@ -22,5 +22,13 @@
     "lastPostedDate": "2026-09-12",
     "lastPostedAt": "2026-09-12T22:39:44.014Z",
     "lastUri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mve5kdnxb623"
+  },
+  "https://www.darkreading.com/rss.xml": {
+    "postedUrls": [
+      "https://www.darkreading.com/cyberattacks-data-breaches/1m-personalized-fraud-emails-3-days"
+    ],
+    "lastPostedDate": "2026-09-12",
+    "lastPostedAt": "2026-09-12T23:09:38.654Z",
+    "lastUri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mve77t5nru24"
   }
 }
