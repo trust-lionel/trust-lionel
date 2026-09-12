@@ -30,5 +30,13 @@
     "lastPostedDate": "2026-09-12",
     "lastPostedAt": "2026-09-12T23:09:38.654Z",
     "lastUri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mve77t5nru24"
+  },
+  "https://www.nist.gov/news-events/news/rss.xml": {
+    "postedUrls": [
+      "https://www.nist.gov/news-events/news/2026/09/nist-developed-quantum-sensors-improve-nuclear-monitoring"
+    ],
+    "lastPostedDate": "2026-09-12",
+    "lastPostedAt": "2026-09-12T23:32:06.206Z",
+    "lastUri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mveahxo42o2q"
   }
 }
