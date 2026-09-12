@@ -14,5 +14,13 @@
     "lastPostedDate": "2026-09-12",
     "lastPostedAt": "2026-09-12T22:21:39.228Z",
     "lastUri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mve4jz4kdh2v"
+  },
+  "https://feeds.feedburner.com/KrebsOnSecurity": {
+    "postedUrls": [
+      "https://krebsonsecurity.com/2026/09/microsoft-plugs-nearly-1000-security-holes/"
+    ],
+    "lastPostedDate": "2026-09-12",
+    "lastPostedAt": "2026-09-12T22:39:44.014Z",
+    "lastUri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mve5kdnxb623"
   }
 }
