@@ -238,15 +238,18 @@ async function fetchOgFromPage(url) {
 
 // ── Known fallback OG images for sources that block scraping ──
 function getFallbackImage(url) {
-  if (url.includes('cisa.gov'))            return 'https://www.cisa.gov/profiles/cisad8_gov/themes/custom/cisa/images/CISA_OG_social_share.png'
-  if (url.includes('nist.gov'))            return 'https://www.nist.gov/sites/default/files/images/2019/12/06/nist-logo-brand-refresh.png'
-  if (url.includes('krebsonsecurity.com')) return 'https://krebsonsecurity.com/wp-content/uploads/2018/09/krebs-default.png'
-  if (url.includes('msrc.microsoft.com'))  return 'https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b'
-  if (url.includes('darkreading.com'))     return 'https://www.darkreading.com/resources/img/dark-reading-social.png'
-  if (url.includes('darkreading.com'))     return 'https://www.darkreading.com/resources/img/dark-reading-social.png'
+  if (url.includes('cisa.gov'))              return 'https://www.cisa.gov/profiles/cisad8_gov/themes/custom/cisa/images/CISA_OG_social_share.png'
+  if (url.includes('nist.gov'))              return 'https://www.nist.gov/sites/default/files/images/2019/12/06/nist-logo-brand-refresh.png'
+  if (url.includes('krebsonsecurity.com'))   return 'https://krebsonsecurity.com/wp-content/uploads/2018/09/krebs-default.png'
+  if (url.includes('msrc.microsoft.com'))    return 'https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b'
+  if (url.includes('darkreading.com'))       return 'https://www.darkreading.com/resources/img/dark-reading-social.png'
+  if (url.includes('ainowinstitute.org'))    return 'https://ainowinstitute.org/wp-content/uploads/2022/09/AI-Now-OG-Image.png'
+  if (url.includes('hai.stanford.edu'))      return 'https://hai.stanford.edu/sites/default/files/HAI_Social_Share.png'
   if (url.includes('techcommunity.microsoft.com')) return 'https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b'
-  if (url.includes('blogs.microsoft.com')) return 'https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b'
-  if (url.includes('azure.microsoft.com')) return 'https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b'
+  if (url.includes('blogs.microsoft.com'))   return 'https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b'
+  if (url.includes('azure.microsoft.com'))   return 'https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b'
+  if (url.includes('aws.amazon.com'))        return 'https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png'
+  if (url.includes('cloud.google.com'))      return 'https://cloud.google.com/_static/cloud/images/social-icon-google-cloud-1200-630.png'
   return null
 }
 
@@ -336,17 +339,17 @@ async function createSession() {
 }
 
 // ── Post to Bluesky ───────────────────────────────────────────
-async function createPost(session, text, url, thumb) {
+async function createPost(session, text, url, thumb, item) {
   const facets = buildFacets(text)
   const record = { $type: 'app.bsky.feed.post', text, facets, createdAt: new Date().toISOString(), langs: ['en'] }
 
-  // Always add embed card for clickable link — thumb is optional
+  // Always add embed card — use OG data if available, fall back to feed item metadata
   record.embed = {
     $type   : 'app.bsky.embed.external',
     external: {
       uri        : url,
-      title      : thumb?.title       ?? '',
-      description: thumb?.description ?? '',
+      title      : thumb?.title       || item.title       || '',
+      description: thumb?.description || item.description || '',
       ...(thumb?.blob ? { thumb: thumb.blob } : {}),
     },
   }
@@ -413,7 +416,7 @@ async function main() {
       console.log(`  OG image: ${thumb ? '✓ found and uploaded' : '✗ not found — posting without embed'}`)
       console.log(`  Post preview (${text.length} chars):\n---\n${text}\n---`)
 
-      const uri = await createPost(session, text, candidate.link, thumb)
+      const uri = await createPost(session, text, candidate.link, thumb, candidate)
 
       if (!cache[source.feed]) cache[source.feed] = { postedUrls: [] }
       cache[source.feed].lastPostedDate = today
