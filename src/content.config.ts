@@ -34,6 +34,7 @@ const posts = defineCollection({
         softwareApplicationName: z.string().optional(),
         softwareApplicationRepo: z.string().optional(),
         softwareApplicationOs: z.string().optional(),
+        blueskyPost: z.string().optional(),
       })
       .transform((data) => ({
         ...data,
