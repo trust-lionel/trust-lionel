@@ -2,9 +2,7 @@ name: Post to Bluesky
 
 on:
   schedule:
-    - cron: '0 */4 * * *'   # Every 4 hours — journal, events, projects, curated
-    - cron: '30 17 * * *'   # 11:30 AM CST — curated post
-    - cron: '30 0 * * *'    # 6:30 PM CST — curated post
+    - cron: '0 */4 * * *'   # Every 4 hours — journal, events, projects
     - cron: '0 14 * * 1'    # 8:00 AM CST every Monday — engagement report
   workflow_dispatch:          # Manual trigger from Actions tab
 
@@ -41,12 +39,6 @@ jobs:
           BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
         run: node scripts/bluesky-projects.mjs
-
-      - name: Run Bluesky curated script
-        env:
-          BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}
-          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
-        run: node scripts/bluesky-curated.mjs
 
       - name: Run Bluesky engagement monitor
         env:
