@@ -33,9 +33,11 @@ export function escapeXml(text: string): string {
 
 // Strip ANSI color sequences and invalid XML control characters
 const ANSI_REGEX = /\u001B\[[0-?]*[ -/]*[@-~]/g
+
 export function stripAnsi(text: string): string {
   return text.replace(ANSI_REGEX, '')
 }
+
 export function removeInvalidXmlChars(text: string): string {
   // Only allow \t \n \r from C0 control characters; strip all others
   return text.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '')
@@ -54,7 +56,6 @@ function cleanHtmlForRSS(htmlContent: string): string {
   cleaned = cleaned.replace(/<(h[1-6])([^>]*)>(.*?)<a[^>]*href="#[^"]*"[^>]*>[^<]*<\/a><\/\1>/gi, '<$1$2>$3</$1>')
 
   // 2. Convert enhanced syntax links to plain links (strip icons)
-  // :link[text]{id=url} -> <a href="url">text</a>
   cleaned = cleaned.replace(/:link\[([^\]]+)\]\{id=([^}]+)\}/g, '<a href="$2">$1</a>')
 
   // 3. Remove all icon.horse icons
@@ -65,17 +66,12 @@ function cleanHtmlForRSS(htmlContent: string): string {
 
   // 5. Handle dual images in figures — keep img-light or first image
   cleaned = cleaned.replace(/<figure[^>]*>([\s\S]*?)<\/figure>/gi, (match, content) => {
-    // Find all images
     const imgMatches = content.match(/<img[^>]*>/g)
     if (imgMatches && imgMatches.length > 1) {
-      // Prefer img-light; fall back to first image
       const lightImg = imgMatches.find((img: string) => img.includes('img-light'))
       const selectedImg = lightImg || imgMatches[0]
-
-      // Extract figcaption
       const figcaptionMatch = content.match(/<figcaption[^>]*>([\s\S]*?)<\/figcaption>/)
       const figcaption = figcaptionMatch ? figcaptionMatch[0] : ''
-
       return `<figure>${selectedImg}${figcaption}</figure>`
     }
     return match
@@ -88,33 +84,27 @@ function cleanHtmlForRSS(htmlContent: string): string {
 async function processImagePaths(htmlContent: string, siteUrl: string, postId: string): Promise<string> {
   const imgRegex = /<img([^>]+)src=['"]([^'"]+)['"]([^>]*)>/gi
   let processedContent = htmlContent
-
   const matches = Array.from(htmlContent.matchAll(imgRegex))
 
   for (const match of matches) {
     const [fullMatch, beforeSrc, src, afterSrc] = match
 
-    // Skip images that are already absolute paths
     if (src.startsWith('http') || src.startsWith('//') || src.startsWith('/_astro/')) {
       continue
     }
 
-    // Handle relative path images
     if (src.startsWith('assets/')) {
       const imagePath = `/src/content/posts/${postId}/${src}`
       const imageModule = imageModules[imagePath]
 
       if (imageModule && imageModule.default) {
         try {
-          // Use imageModule.default to get ImageMetadata
           const optimizedImage = await getImage({ src: imageModule.default })
           const absoluteUrl = new URL(optimizedImage.src, siteUrl).toString()
-
           const newImgTag = `<img${beforeSrc}src="${absoluteUrl}"${afterSrc}>`
           processedContent = processedContent.replace(fullMatch, newImgTag)
         } catch (error) {
           console.warn(`Failed to process image: ${imagePath}`, error)
-          // Fall back to basic absolute path
           const fallbackUrl = `${siteUrl}/src/content/posts/${postId}/${src}`
           const newImgTag = `<img${beforeSrc}src="${fallbackUrl}"${afterSrc}>`
           processedContent = processedContent.replace(fullMatch, newImgTag)
@@ -150,14 +140,12 @@ async function addCoverImage(post: CollectionEntry<'posts'>, siteUrl: string): P
 async function processPostsForFeed() {
   const { posts, siteUrl } = config
 
-  // Create a markdown processor matching the project config
   const processor = await createMarkdownProcessor({
     remarkPlugins,
     rehypePlugins,
-    syntaxHighlight: false, // Match astro.config.ts setting
+    syntaxHighlight: false,
   })
 
-  // Process all posts
   const processedPosts = await Promise.all(
     posts.map(async (post) => {
       if (!post.body) {
@@ -165,31 +153,22 @@ async function processPostsForFeed() {
       }
 
       try {
-        // Use Astro markdown processor
         const result = await processor.render(post.body)
-
-        // Sanitize HTML content
         const rawHtml = removeInvalidXmlChars(stripAnsi(result.code))
         const sanitizedContent = sanitizeHtml(rawHtml, {
           allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'figure', 'figcaption']),
           allowedAttributes: {
             ...sanitizeHtml.defaults.allowedAttributes,
-            a: ['href', 'target', 'rel'], // Allow link attributes
-            img: ['src', 'alt', 'width', 'height', 'class', 'style'], // Allow image attributes
+            a: ['href', 'target', 'rel'],
+            img: ['src', 'alt', 'width', 'height', 'class', 'style'],
             figure: ['class'],
             figcaption: ['class'],
           },
         })
 
-        // Clean HTML back to markdown essentials
         const cleanedContent = cleanHtmlForRSS(sanitizedContent)
-
-        // Process image paths
         const processedContent = await processImagePaths(cleanedContent, siteUrl, post.id)
-
-        // Add cover image
         const coverImage = await addCoverImage(post, siteUrl)
-
         const htmlContent = coverImage + '\n' + processedContent
 
         return { ...post, htmlContent }
@@ -206,7 +185,6 @@ async function processPostsForFeed() {
 export async function generateRSS20(): Promise<string> {
   const { title, description, siteUrl, author, lang } = config
   const lastBuildDate = new Date().toISOString()
-
   const processedPosts = await processPostsForFeed()
 
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -247,12 +225,12 @@ export async function generateRSS20(): Promise<string> {
 export async function generateAtom10(): Promise<string> {
   const { title, description, siteUrl, author, lang } = config
   const lastBuildDate = new Date().toISOString()
-
   const processedPosts = await processPostsForFeed()
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="/rss/atom-styles.xsl"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:bluesky="https://trust-lionel.com/ns/bluesky">
   <title>${escapeXml(title)}</title>
   <subtitle>${escapeXml(description)}</subtitle>
   <link href="${siteUrl}/atom.xml" rel="self" type="application/atom+xml"/>
@@ -281,6 +259,9 @@ export async function generateAtom10(): Promise<string> {
     <summary type="text">${escapeXml(post.data.description || '')}</summary>
     <content type="html"><![CDATA[${post.htmlContent}]]></content>
     ${post.data.tags ? post.data.tags.map((tag) => `<category term="${escapeXml(tag)}" />`).join('\n    ') : ''}
+    ${post.data.blueskyPost
+      ? `<bluesky:post><![CDATA[${post.data.blueskyPost}]]></bluesky:post>`
+      : ''}
   </entry>`
     )
     .join('')}
