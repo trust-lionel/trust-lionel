@@ -17,6 +17,7 @@ const FEED_URL        = 'https://trust-lionel.com/atom.xml'
 const CACHE_FILE      = path.resolve(__dirname, '../cache/bluesky-posted.json')
 const MAX_POST_LENGTH = 300
 const DRY_RUN         = process.env.DRY_RUN === 'true'
+const DRY_RUN         = process.env.DRY_RUN === 'true'
 const FETCH_TIMEOUT   = 15000
 const MAX_RETRIES     = 3
 const RETRY_DELAY_MS  = 5000
@@ -111,7 +112,13 @@ function parseAtom(xml) {
       categories.push(catMatch[1])
     }
 
-    if (url && isValidHttpUrl(url)) entries.push({ title, url, summary, categories })
+    // ── blueskyPost — practitioner voice field ──────────────
+    const blueskyPostMatch = block.match(
+      /<bluesky:post><!\[CDATA\[([\s\S]*?)\]\]><\/bluesky:post>/
+    )
+    const blueskyPost = blueskyPostMatch ? blueskyPostMatch[1].trim() : null
+
+    if (url && isValidHttpUrl(url)) entries.push({ title, url, summary, blueskyPost, categories })
   }
 
   return entries
@@ -254,7 +261,8 @@ async function fetchThumb(url) {
 
 // ── Create Bluesky post ───────────────────────────────────────
 async function createPost(entry) {
-  const text   = buildPostText(entry)
+  // Use blueskyPost verbatim — practitioner voice, no generation
+  const text   = entry.blueskyPost
   const facets = buildFacets(text, entry.url)
   const thumb  = await fetchThumb(entry.url)
 
@@ -283,6 +291,7 @@ async function createPost(entry) {
     console.log(`---\n${text}\n---`)
     console.log(`  Embed card: ${thumb ? '✓ image found' : '✗ no image'}`)
     console.log(`  URL: ${entry.url}`)
+    console.log(`  Source: blueskyPost frontmatter field`)
     return 'dry-run-uri'
   }
 
@@ -321,7 +330,21 @@ async function main() {
   let posted = 0
 
   for (const entry of entries) {
+    // Skip if already posted
     if (!entry.url || cache[entry.url]?.uri) continue
+
+    // Skip if no blueskyPost field — practitioner voice required
+    if (!entry.blueskyPost) {
+      console.log(`  ↳ No blueskyPost field — skipping: ${entry.url}`)
+      continue
+    }
+
+    // Enforce 300 character limit before attempting to post
+    if (entry.blueskyPost.length > MAX_POST_LENGTH) {
+      console.error(`  ✗ blueskyPost exceeds 300 chars (${entry.blueskyPost.length}) — skipping`)
+      console.error(`    Trim the blueskyPost field in the post frontmatter before this will publish.`)
+      continue
+    }
 
     try {
       const uri = await withRetry(() => createPost(entry), `Post: ${entry.url}`)
