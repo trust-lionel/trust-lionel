@@ -4,14 +4,23 @@ on:
   schedule:
     - cron: '0 */4 * * *'   # Every 4 hours — journal, events, projects
     - cron: '0 14 * * 1'    # 8:00 AM CST every Monday — engagement report
-  workflow_dispatch:          # Manual trigger from Actions tab
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run — log what would post without posting'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
 
 jobs:
   post:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write         # Needed to commit the cache files
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -26,30 +35,35 @@ jobs:
         env:
           BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
         run: node scripts/bluesky-post.mjs
 
       - name: Run Bluesky events script
         env:
           BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
         run: node scripts/bluesky-events.mjs
 
       - name: Run Bluesky projects script
         env:
           BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
         run: node scripts/bluesky-projects.mjs
 
       - name: Run Bluesky engagement monitor
         env:
           BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
         run: node scripts/bluesky-engagement.mjs
 
       - name: Commit updated caches
+        if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add cache/bluesky-posted.json cache/bluesky-events.json cache/bluesky-projects.json cache/bluesky-curated.json cache/engagement.json
+          git add cache/bluesky-posted.json cache/bluesky-events.json cache/bluesky-projects.json cache/engagement.json
           git diff --staged --quiet || git commit -m "chore: update Bluesky post caches"
           git push
