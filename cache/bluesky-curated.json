@@ -18,11 +18,12 @@
   },
   "https://feeds.feedburner.com/KrebsOnSecurity": {
     "postedUrls": [
-      "https://krebsonsecurity.com/2026/09/microsoft-plugs-nearly-1000-security-holes/"
+      "https://krebsonsecurity.com/2026/09/microsoft-plugs-nearly-1000-security-holes/",
+      "https://krebsonsecurity.com/2026/09/fbi-probes-service-selling-153m-drivers-licenses/"
     ],
-    "lastPostedDate": "2026-09-12",
-    "lastPostedAt": "2026-09-12T22:39:44.014Z",
-    "lastUri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mve5kdnxb623"
+    "lastPostedDate": "2026-09-13",
+    "lastPostedAt": "2026-09-13T05:06:19.838Z",
+    "lastUri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mvet5mufqj23"
   },
   "https://www.darkreading.com/rss.xml": {
     "postedUrls": [
