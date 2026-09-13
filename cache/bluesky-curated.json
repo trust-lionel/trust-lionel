@@ -9,11 +9,12 @@
   },
   "https://www.cisa.gov/news.xml": {
     "postedUrls": [
-      "https://www.cisa.gov/news-events/news/cisa-releases-updated-insider-threat-guide-new-insights-mitigate-physical-and-cyber-threats"
+      "https://www.cisa.gov/news-events/news/cisa-releases-updated-insider-threat-guide-new-insights-mitigate-physical-and-cyber-threats",
+      "https://www.cisa.gov/news-events/news/cisa-nsa-and-fbi-warn-china-based-ai-companies-targeting-us-ai-models-industrial-scale-knowledge"
     ],
-    "lastPostedDate": "2026-09-12",
-    "lastPostedAt": "2026-09-12T22:21:39.228Z",
-    "lastUri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mve4jz4kdh2v"
+    "lastPostedDate": "2026-09-13",
+    "lastPostedAt": "2026-09-13T02:01:07.977Z",
+    "lastUri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mveishsznl23"
   },
   "https://feeds.feedburner.com/KrebsOnSecurity": {
     "postedUrls": [
