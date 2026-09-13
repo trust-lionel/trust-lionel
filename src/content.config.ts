@@ -90,6 +90,8 @@ const events = defineCollection({
     eventSecondaryButtonUrl: z.string().optional(),
     tags: z.array(z.string()).optional(),
     featured: z.boolean().optional(),
+    blueskyHookT7: z.string().optional(),
+    blueskyHookT0: z.string().optional(),
   }),
 })
 
