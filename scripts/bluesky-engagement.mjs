@@ -20,6 +20,7 @@ const ENGAGEMENT_FILE = path.resolve(__dirname, '../cache/engagement.json')
 const FETCH_TIMEOUT   = 15000
 const MAX_RETRIES     = 3
 const RETRY_DELAY_MS  = 5000
+const DRY_RUN         = process.env.DRY_RUN === 'true'
 
 // ── Credential validation ─────────────────────────────────────
 if (!IDENTIFIER || !APP_PASSWORD) {
@@ -260,7 +261,8 @@ async function main() {
     }
   }
 
-  saveEngagement(engagement)
+  if (!DRY_RUN) saveEngagement(engagement)
+  else console.log('  DRY RUN — engagement.json not written')
 
   // ── Summary report ────────────────────────────────────────
   console.log('\n══════════════════════════════════════')

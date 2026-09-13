@@ -17,6 +17,7 @@ const EVENTS_DIR    = path.resolve(__dirname, '../src/content/events')
 const CACHE_FILE    = path.resolve(__dirname, '../cache/bluesky-events.json')
 const SITE_URL      = 'https://trust-lionel.com'
 const MAX_LENGTH    = 300
+const DRY_RUN       = process.env.DRY_RUN === 'true'
 const FETCH_TIMEOUT = 15000
 const MAX_RETRIES   = 3
 const RETRY_DELAY_MS = 5000
@@ -331,6 +332,14 @@ async function createPost(text, url, thumb) {
     },
   }
 
+  if (DRY_RUN) {
+    console.log(`  DRY RUN — would post (${text.length} chars):`)
+    console.log(`---\n${text}\n---`)
+    console.log(`  Embed card: ✓ image confirmed`)
+    console.log(`  URL: ${url}`)
+    return 'dry-run-uri'
+  }
+
   const res = await fetch(`${BSKY_SERVICE}/xrpc/com.atproto.repo.createRecord`, {
     method : 'POST',
     headers: {
@@ -402,7 +411,7 @@ async function main() {
         }
 
         // Write cache immediately after each successful post
-        saveCache(cache)
+        if (!DRY_RUN) saveCache(cache)
         posted++
 
         await new Promise(r => setTimeout(r, 2000))

@@ -16,6 +16,8 @@ const __dirname       = path.dirname(fileURLToPath(import.meta.url))
 const FEED_URL        = 'https://trust-lionel.com/atom.xml'
 const CACHE_FILE      = path.resolve(__dirname, '../cache/bluesky-posted.json')
 const MAX_POST_LENGTH = 300
+const DRY_RUN         = process.env.DRY_RUN === 'true'
+const DRY_RUN         = process.env.DRY_RUN === 'true'
 const FETCH_TIMEOUT   = 15000
 const MAX_RETRIES     = 3
 const RETRY_DELAY_MS  = 5000
@@ -275,6 +277,14 @@ async function createPost(entry) {
         thumb      : thumb.blob,
       },
     }
+  }
+
+  if (DRY_RUN) {
+    console.log(`  DRY RUN — would post (${text.length} chars):`)
+    console.log(`---\n${text}\n---`)
+    console.log(`  Embed card: ${thumb ? '✓ image found' : '✗ no image'}`)
+    console.log(`  URL: ${entry.url}`)
+    return 'dry-run-uri'
   }
 
   const res = await fetch(`${BSKY_SERVICE}/xrpc/com.atproto.repo.createRecord`, {
