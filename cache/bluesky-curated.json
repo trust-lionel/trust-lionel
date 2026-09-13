@@ -27,11 +27,12 @@
   },
   "https://www.darkreading.com/rss.xml": {
     "postedUrls": [
-      "https://www.darkreading.com/cyberattacks-data-breaches/1m-personalized-fraud-emails-3-days"
+      "https://www.darkreading.com/cyberattacks-data-breaches/1m-personalized-fraud-emails-3-days",
+      "https://www.darkreading.com/cyber-risk/ai-scamming-humans"
     ],
-    "lastPostedDate": "2026-09-12",
-    "lastPostedAt": "2026-09-12T23:09:38.654Z",
-    "lastUri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mve77t5nru24"
+    "lastPostedDate": "2026-09-13",
+    "lastPostedAt": "2026-09-13T08:37:31.729Z",
+    "lastUri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mvf6xbqp7u26"
   },
   "https://www.nist.gov/news-events/news/rss.xml": {
     "postedUrls": [
