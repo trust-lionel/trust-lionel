@@ -16,6 +16,18 @@ eventSecondaryButtonLabel: "Join CMET Nation"
 eventSecondaryButtonUrl: "https://cmetnation.org/login"
 eventPrimaryButtonLabel: "Reserve Your Seat"
 eventPrimaryButtonUrl: "https://api.marketinginnovationsautomation.com/payment-link/6a288a7771a0aa761e463e6d"
+blueskyHookT7: |
+  Most small business websites are expensive digital brochures — they look nice, but they don't capture leads, integrate modern AI, or drive revenue.
+
+  This workshop fixes that. One week away — September 23 at 5PM CDT with CMET Nation.
+
+  Reserve your virtual seat here 👇
+blueskyHookT0: |
+  Today is the day.
+
+  Your Website Should Be Making You Money — live with CMET Nation at 5PM CDT. Limited seats remaining.
+
+  Reserve your virtual seat now 👇
 ---
 
 Most small business websites look like a business card. The ones that grow revenue work like a sales team.

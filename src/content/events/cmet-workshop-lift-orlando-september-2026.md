@@ -3,19 +3,30 @@ title: "Your Website Should Be Making You Money"
 description: "A live, interactive workshop for entrepreneurs on building a revenue-generating website — led by Lionel Mosley, IT Consultant and Innovative Thought Leader. Hosted by Lift Orlando in collaboration with The Center for Micro-Entrepreneurial Training (CMET)."
 eventDate: 2026-09-24
 eventEndDate: "2026-09-24T20:00:00-04:00"
-eventImage: "https://trust-lionel.com/images/cmet-logo.png"
 eventTime: "6:00 PM - 8:00 PM EDT"
 eventFormat: "In-Person"
 eventHost: "Lift Orlando"
 eventHostUrl: "https://www.liftorlando.org/"
+eventRegistrationUrl: "https://trust-lionel.com/events/cmet-workshop-lift-orlando-september-2026/"
 eventStatus: "upcoming"
-eventSameAs: "https://github.com/cmet-lionel/ai-github-pages-workshop"
-eventSecondaryButtonLabel: "Lift Orlando"
-eventSecondaryButtonUrl: "https://www.liftorlando.org/"
-eventPrimaryButtonLabel: "Learn About CMET"
-eventPrimaryButtonUrl: "https://tcmet.org/"
 tags: ["Entrepreneurship", "Small Business", "Website Strategy", "Digital Transformation"]
 featured: true
+eventPrimaryButtonLabel: "Lift Orlando"
+eventPrimaryButtonUrl: "https://www.liftorlando.org/"
+eventSecondaryButtonLabel: "Learn About CMET"
+eventSecondaryButtonUrl: "https://tcmet.org/"
+blueskyHookT7: |
+  Most small business websites are expensive digital brochures — they look nice, but they don't capture leads, integrate modern AI, or drive revenue.
+
+  This in-person workshop fixes that. One week away — September 24 at 6PM EDT at Lift Orlando.
+
+  Reserve your free seat here 👇
+blueskyHookT0: |
+  Tonight in Orlando.
+
+  Your Website Should Be Making You Money — live at Lift Orlando, 6PM EDT. Walk out with a live website at a real URL that you own permanently.
+
+  Reserve your seat now 👇
 ---
 
 *Hosted by Lift Orlando in collaboration with The Center for Micro-Entrepreneurial Training (CMET)*
@@ -53,7 +64,7 @@ The Center for Micro-Entrepreneurial Training exists to close the gap between th
 
 ---
 
-**When:** Thursday, September 24, 2026 · 6&#58;00 PM – 8&#58;00 PM EDT
+**When:** Thursday, September 24, 2026 · 6:00 PM – 8:00 PM EDT
 
 **Where:** Lift Orlando · 710 S Tampa Ave Suite 209, Orlando, FL 32805
 
