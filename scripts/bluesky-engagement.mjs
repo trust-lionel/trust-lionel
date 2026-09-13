@@ -11,23 +11,45 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 
 // ── Config ───────────────────────────────────────────────────
-const BSKY_SERVICE   = 'https://bsky.social'
-const IDENTIFIER     = process.env.BLUESKY_IDENTIFIER
-const APP_PASSWORD   = process.env.BLUESKY_APP_PASSWORD
-const __dirname      = path.dirname(fileURLToPath(import.meta.url))
-const POSTED_CACHE   = path.resolve(__dirname, '../cache/bluesky-posted.json')
+const BSKY_SERVICE    = 'https://bsky.social'
+const IDENTIFIER      = process.env.BLUESKY_IDENTIFIER
+const APP_PASSWORD    = process.env.BLUESKY_APP_PASSWORD
+const __dirname       = path.dirname(fileURLToPath(import.meta.url))
+const POSTED_CACHE    = path.resolve(__dirname, '../cache/bluesky-posted.json')
 const ENGAGEMENT_FILE = path.resolve(__dirname, '../cache/engagement.json')
+const FETCH_TIMEOUT   = 15000
+const MAX_RETRIES     = 3
+const RETRY_DELAY_MS  = 5000
+
+// ── Credential validation ─────────────────────────────────────
+if (!IDENTIFIER || !APP_PASSWORD) {
+  console.error('✗ Missing BLUESKY_IDENTIFIER or BLUESKY_APP_PASSWORD')
+  process.exit(1)
+}
+
+// ── Session store ─────────────────────────────────────────────
+let SESSION = null
 
 // ── Load posted cache ─────────────────────────────────────────
 function loadPostedCache() {
   if (!fs.existsSync(POSTED_CACHE)) return {}
-  return JSON.parse(fs.readFileSync(POSTED_CACHE, 'utf8'))
+  try {
+    return JSON.parse(fs.readFileSync(POSTED_CACHE, 'utf8'))
+  } catch {
+    console.error('✗ Posted cache file corrupt')
+    return {}
+  }
 }
 
 // ── Load / save engagement data ───────────────────────────────
 function loadEngagement() {
   if (fs.existsSync(ENGAGEMENT_FILE)) {
-    return JSON.parse(fs.readFileSync(ENGAGEMENT_FILE, 'utf8'))
+    try {
+      return JSON.parse(fs.readFileSync(ENGAGEMENT_FILE, 'utf8'))
+    } catch {
+      console.error('✗ Engagement file corrupt — starting fresh')
+      return {}
+    }
   }
   return {}
 }
@@ -36,67 +58,109 @@ function saveEngagement(data) {
   fs.writeFileSync(ENGAGEMENT_FILE, JSON.stringify(data, null, 2))
 }
 
+// ── Retry wrapper ─────────────────────────────────────────────
+async function withRetry(fn, label) {
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      return await fn()
+    } catch (err) {
+      if (attempt === MAX_RETRIES) throw err
+      console.warn(`  ⚠ ${label} — attempt ${attempt} failed: ${err.message}. Retrying...`)
+      await new Promise(r => setTimeout(r, RETRY_DELAY_MS))
+    }
+  }
+}
+
 // ── Bluesky auth ──────────────────────────────────────────────
 async function createSession() {
   const res = await fetch(`${BSKY_SERVICE}/xrpc/com.atproto.server.createSession`, {
     method : 'POST',
     headers: { 'Content-Type': 'application/json' },
     body   : JSON.stringify({ identifier: IDENTIFIER, password: APP_PASSWORD }),
+    signal : AbortSignal.timeout(FETCH_TIMEOUT),
   })
-  if (!res.ok) throw new Error(`Auth failed: ${res.status} ${await res.text()}`)
-  return res.json()
+  if (!res.ok) throw new Error(`Auth failed: ${res.status}`)
+  SESSION = await res.json()
+  return SESSION
+}
+
+// ── Fetch profile to resolve follower count ───────────────────
+async function getFollowerCount(handle) {
+  try {
+    if (!handle) return 0
+    const url = `${BSKY_SERVICE}/xrpc/app.bsky.actor.getProfile?actor=${encodeURIComponent(handle)}`
+    const res = await fetch(url, {
+      headers: { 'Authorization': `Bearer ${SESSION.accessJwt}` },
+      signal : AbortSignal.timeout(FETCH_TIMEOUT),
+    })
+    if (!res.ok) return 0
+    const data = await res.json()
+    return data.followersCount ?? 0
+  } catch {
+    return 0
+  }
 }
 
 // ── Fetch likes for a post URI ────────────────────────────────
-async function getLikes(uri, accessJwt) {
+async function getLikes(uri) {
   try {
     const url = `${BSKY_SERVICE}/xrpc/app.bsky.feed.getLikes?uri=${encodeURIComponent(uri)}&limit=100`
     const res = await fetch(url, {
-      headers: { 'Authorization': `Bearer ${accessJwt}` },
+      headers: { 'Authorization': `Bearer ${SESSION.accessJwt}` },
+      signal : AbortSignal.timeout(FETCH_TIMEOUT),
     })
     if (!res.ok) return { count: 0, accounts: [] }
     const data = await res.json()
-    return {
-      count   : data.likes?.length ?? 0,
-      accounts: (data.likes ?? []).map(l => ({
-        handle     : l.actor?.handle ?? '',
-        displayName: l.actor?.displayName ?? '',
-        followersCount: l.actor?.followersCount ?? 0,
-      })),
+
+    // Resolve follower counts via profile lookup
+    const accounts = []
+    for (const l of (data.likes ?? [])) {
+      const handle        = l.actor?.handle ?? ''
+      const displayName   = l.actor?.displayName ?? ''
+      const followersCount = await getFollowerCount(handle)
+      accounts.push({ handle, displayName, followersCount })
+      await new Promise(r => setTimeout(r, 300)) // Gentle rate limiting
     }
+
+    return { count: accounts.length, accounts }
   } catch {
     return { count: 0, accounts: [] }
   }
 }
 
 // ── Fetch reposts for a post URI ──────────────────────────────
-async function getReposts(uri, accessJwt) {
+async function getReposts(uri) {
   try {
     const url = `${BSKY_SERVICE}/xrpc/app.bsky.feed.getRepostedBy?uri=${encodeURIComponent(uri)}&limit=100`
     const res = await fetch(url, {
-      headers: { 'Authorization': `Bearer ${accessJwt}` },
+      headers: { 'Authorization': `Bearer ${SESSION.accessJwt}` },
+      signal : AbortSignal.timeout(FETCH_TIMEOUT),
     })
     if (!res.ok) return { count: 0, accounts: [] }
     const data = await res.json()
-    return {
-      count   : data.repostedBy?.length ?? 0,
-      accounts: (data.repostedBy ?? []).map(a => ({
-        handle        : a.handle ?? '',
-        displayName   : a.displayName ?? '',
-        followersCount: a.followersCount ?? 0,
-      })),
+
+    const accounts = []
+    for (const a of (data.repostedBy ?? [])) {
+      const handle        = a.handle ?? ''
+      const displayName   = a.displayName ?? ''
+      const followersCount = await getFollowerCount(handle)
+      accounts.push({ handle, displayName, followersCount })
+      await new Promise(r => setTimeout(r, 300))
     }
+
+    return { count: accounts.length, accounts }
   } catch {
     return { count: 0, accounts: [] }
   }
 }
 
-// ── Fetch post thread for reply and quote counts ──────────────
-async function getThreadStats(uri, accessJwt) {
+// ── Fetch post thread for authoritative counts ────────────────
+async function getThreadStats(uri) {
   try {
     const url = `${BSKY_SERVICE}/xrpc/app.bsky.feed.getPostThread?uri=${encodeURIComponent(uri)}&depth=1`
     const res = await fetch(url, {
-      headers: { 'Authorization': `Bearer ${accessJwt}` },
+      headers: { 'Authorization': `Bearer ${SESSION.accessJwt}` },
+      signal : AbortSignal.timeout(FETCH_TIMEOUT),
     })
     if (!res.ok) return { replyCount: 0, quoteCount: 0, likeCount: 0, repostCount: 0 }
     const data = await res.json()
@@ -112,14 +176,17 @@ async function getThreadStats(uri, accessJwt) {
   }
 }
 
-// ── Format engagement summary for console ────────────────────
+// ── Format engagement summary for console ─────────────────────
 function summarize(url, entry) {
-  const e = entry.engagement
+  const e    = entry.engagement
   const slug = url.split('/posts/')[1] ?? url
   console.log(`  ${slug}`)
-  console.log(`    Likes: ${e.likeCount}  Reposts: ${e.repostCount}  Replies: ${e.replyCount}  Quotes: ${e.quoteCount}`)
+  console.log(`    Likes: ${e.likeCount}  Reposts: ${e.repostCount}  Replies: ${e.replyCount}  Quotes: ${e.quoteCount}  Score: ${e.score}`)
   if (e.topLiker) {
     console.log(`    Top liker: @${e.topLiker.handle} (${e.topLiker.followersCount} followers)`)
+  }
+  if (e.topReposter) {
+    console.log(`    Top reposter: @${e.topReposter.handle} (${e.topReposter.followersCount} followers)`)
   }
 }
 
@@ -129,7 +196,7 @@ async function main() {
 
   const posted     = loadPostedCache()
   const engagement = loadEngagement()
-  const session    = await createSession()
+  await withRetry(createSession, 'Auth')
 
   // Filter to posts with a stored URI
   const posts = Object.entries(posted)
@@ -144,31 +211,21 @@ async function main() {
     console.log(`\nChecking: ${post.url}`)
 
     try {
-      // Get authoritative counts from thread endpoint
-      const stats = await getThreadStats(post.uri, session.accessJwt)
+      const stats    = await withRetry(() => getThreadStats(post.uri), 'Thread stats')
+      const likes    = await getLikes(post.uri)
+      const reposts  = await getReposts(post.uri)
 
-      // Get like accounts to identify influential likers
-      const likes = await getLikes(post.uri, session.accessJwt)
-
-      // Get repost accounts
-      const reposts = await getReposts(post.uri, session.accessJwt)
-
-      // Find most influential liker by follower count
+      // Find most influential liker and reposter by follower count
       const topLiker = likes.accounts.length > 0
-        ? likes.accounts.reduce((a, b) =>
-            (b.followersCount ?? 0) > (a.followersCount ?? 0) ? b : a
-          )
+        ? likes.accounts.reduce((a, b) => (b.followersCount > a.followersCount ? b : a))
         : null
 
-      // Find most influential reposter
       const topReposter = reposts.accounts.length > 0
-        ? reposts.accounts.reduce((a, b) =>
-            (b.followersCount ?? 0) > (a.followersCount ?? 0) ? b : a
-          )
+        ? reposts.accounts.reduce((a, b) => (b.followersCount > a.followersCount ? b : a))
         : null
 
-      // Calculate engagement score
-      // Weighted: reposts (3x) > replies (2x) > quotes (2x) > likes (1x)
+      // Weighted engagement score
+      // Reposts (3x) > Replies (2x) > Quotes (2x) > Likes (1x)
       const score = (
         (stats.likeCount   * 1) +
         (stats.repostCount * 3) +
@@ -188,15 +245,14 @@ async function main() {
           score,
           topLiker    : topLiker    ?? null,
           topReposter : topReposter ?? null,
-          likers      : likes.accounts.slice(0, 10),   // Top 10 likers
-          reposters   : reposts.accounts.slice(0, 10), // Top 10 reposters
+          likers      : likes.accounts.slice(0, 10),
+          reposters   : reposts.accounts.slice(0, 10),
         },
       }
 
       summarize(post.url, engagement[post.url])
       updated++
 
-      // Respect rate limits
       await new Promise(r => setTimeout(r, 1000))
 
     } catch (err) {
@@ -206,7 +262,7 @@ async function main() {
 
   saveEngagement(engagement)
 
-  // ── Summary report ──────────────────────────────────────────
+  // ── Summary report ────────────────────────────────────────
   console.log('\n══════════════════════════════════════')
   console.log('ENGAGEMENT SUMMARY')
   console.log('══════════════════════════════════════')
@@ -220,7 +276,7 @@ async function main() {
     const slug = url.split('/posts/')[1] ?? url
     console.log(`\n#${i + 1} ${slug}`)
     console.log(`  Score: ${e.score} | Likes: ${e.likeCount} | Reposts: ${e.repostCount} | Replies: ${e.replyCount} | Quotes: ${e.quoteCount}`)
-    if (e.topLiker) console.log(`  Top liker: @${e.topLiker.handle} (${e.topLiker.followersCount} followers)`)
+    if (e.topLiker)    console.log(`  Top liker: @${e.topLiker.handle} (${e.topLiker.followersCount} followers)`)
     if (e.topReposter) console.log(`  Top reposter: @${e.topReposter.handle} (${e.topReposter.followersCount} followers)`)
   })
 
@@ -228,6 +284,6 @@ async function main() {
 }
 
 main().catch(err => {
-  console.error(err)
+  console.error(err.message)
   process.exit(1)
 })

@@ -16,25 +16,54 @@ const __dirname      = path.dirname(fileURLToPath(import.meta.url))
 const PROJECTS_DIR   = path.resolve(__dirname, '../src/content/projects')
 const CACHE_FILE     = path.resolve(__dirname, '../cache/bluesky-projects.json')
 const MAX_LENGTH     = 300
+const FETCH_TIMEOUT  = 15000
+const MAX_RETRIES    = 3
+const RETRY_DELAY_MS = 5000
+const UA             = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
+
+// ── Credential validation ─────────────────────────────────────
+if (!IDENTIFIER || !APP_PASSWORD) {
+  console.error('✗ Missing BLUESKY_IDENTIFIER or BLUESKY_APP_PASSWORD')
+  process.exit(1)
+}
+
+// ── Session store ─────────────────────────────────────────────
+let SESSION = null
+
+// ── URL validation — prevents SSRF ───────────────────────────
+function isValidHttpUrl(str) {
+  try {
+    const u = new URL(str)
+    if (!['https:', 'http:'].includes(u.protocol)) return false
+    const h = u.hostname
+    if (h === 'localhost') return false
+    if (h === '127.0.0.1') return false
+    if (h.startsWith('169.254')) return false
+    if (h.startsWith('10.'))     return false
+    if (h.startsWith('192.168')) return false
+    if (h.startsWith('172.16'))  return false
+    return true
+  } catch { return false }
+}
 
 // ── Tech stack → Bluesky hashtag map ─────────────────────────
 const TECH_HASHTAG_MAP = {
-  'Swift'         : '#Apple',
-  'SwiftUI'       : '#Apple',
-  'macOS'         : '#macOS',
-  'Xcode'         : '#Apple',
-  'Node.js'       : '#DevOps',
-  'JavaScript'    : '#DevOps',
-  'TypeScript'    : '#DevOps',
-  'Python'        : '#DevOps',
-  'Astro'         : '#DevOps',
-  'Netlify'       : '#DevOps',
-  'Markdown'      : '#OpenSource',
-  'PWA'           : '#Tech',
-  'ArcGIS'        : '#Tech',
-  'Shopify'       : '#SaaS',
+  'Swift'          : '#Apple',
+  'SwiftUI'        : '#Apple',
+  'macOS'          : '#macOS',
+  'Xcode'          : '#Apple',
+  'Node.js'        : '#DevOps',
+  'JavaScript'     : '#DevOps',
+  'TypeScript'     : '#DevOps',
+  'Python'         : '#DevOps',
+  'Astro'          : '#DevOps',
+  'Netlify'        : '#DevOps',
+  'Markdown'       : '#OpenSource',
+  'PWA'            : '#Tech',
+  'ArcGIS'         : '#Tech',
+  'Shopify'        : '#SaaS',
   'Windows Service': '#Tech',
-  'C#'            : '#DevOps',
+  'C#'             : '#DevOps',
 }
 
 // ── Minimal YAML frontmatter parser ──────────────────────────
@@ -73,6 +102,7 @@ function parseFrontmatter(content) {
 function loadProjects() {
   const dirs = fs.readdirSync(PROJECTS_DIR)
     .filter(d => {
+      if (!/^[a-zA-Z0-9_-]+$/.test(d)) return false // Safe directory name check
       const full = path.join(PROJECTS_DIR, d)
       return fs.statSync(full).isDirectory()
     })
@@ -81,9 +111,7 @@ function loadProjects() {
     const mdxPath = path.join(PROJECTS_DIR, dir, 'index.mdx')
     const mdPath  = path.join(PROJECTS_DIR, dir, 'index.md')
     const file    = fs.existsSync(mdxPath) ? mdxPath : mdPath
-
     if (!fs.existsSync(file)) return null
-
     const content = fs.readFileSync(file, 'utf8')
     const data    = parseFrontmatter(content)
     return { id: dir, ...data }
@@ -94,7 +122,12 @@ function loadProjects() {
 // ── Load / save cache ─────────────────────────────────────────
 function loadCache() {
   if (fs.existsSync(CACHE_FILE)) {
-    return JSON.parse(fs.readFileSync(CACHE_FILE, 'utf8'))
+    try {
+      return JSON.parse(fs.readFileSync(CACHE_FILE, 'utf8'))
+    } catch {
+      console.error('✗ Cache file corrupt — starting fresh')
+      return {}
+    }
   }
   return {}
 }
@@ -103,12 +136,23 @@ function saveCache(cache) {
   fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 2))
 }
 
+// ── Retry wrapper ─────────────────────────────────────────────
+async function withRetry(fn, label) {
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      return await fn()
+    } catch (err) {
+      if (attempt === MAX_RETRIES) throw err
+      console.warn(`  ⚠ ${label} — attempt ${attempt} failed: ${err.message}. Retrying...`)
+      await new Promise(r => setTimeout(r, RETRY_DELAY_MS))
+    }
+  }
+}
+
 // ── Build hashtags from techStack ─────────────────────────────
 function buildHashtags(techStack) {
   if (!techStack || !Array.isArray(techStack)) return '#AI #Tech #OpenSource'
-  const mapped = techStack
-    .map(t => TECH_HASHTAG_MAP[t])
-    .filter(Boolean)
+  const mapped = techStack.map(t => TECH_HASHTAG_MAP[t]).filter(Boolean)
   const unique = [...new Set(mapped)]
   if (!unique.includes('#AI')) unique.unshift('#AI')
   return unique.slice(0, 4).join(' ')
@@ -116,12 +160,12 @@ function buildHashtags(techStack) {
 
 // ── Build post text ───────────────────────────────────────────
 function buildPostText(project) {
-  const hashtags  = buildHashtags(project.techStack)
-  const version   = project.version ? ` ${project.version}` : ''
-  const url       = project.website ?? project.githubUrl ?? 'https://trust-lionel.com/projects'
+  const hashtags = buildHashtags(project.techStack)
+  const version  = project.version ? ` ${project.version}` : ''
+  const url      = project.website ?? project.githubUrl ?? 'https://trust-lionel.com/projects'
 
-  const prefix  = `New on ahr-ki-tekt Projects:\n\n${project.name}${version}\n\n`
-  const suffix  = `\n\n${hashtags}\n\n${url}`
+  const prefix    = `New on ahr-ki-tekt Projects:\n\n${project.name}${version}\n\n`
+  const suffix    = `\n\n${hashtags}\n\n${url}`
   const available = MAX_LENGTH - prefix.length - suffix.length
 
   const desc    = project.description ?? ''
@@ -161,19 +205,14 @@ function buildFacets(text, url) {
   return facets
 }
 
-// ── Browser-like User-Agent ───────────────────────────────────
-const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
-
 // ── Fetch OG image and upload blob ───────────────────────────
-async function fetchThumb(url, accessJwt) {
+async function fetchThumb(url) {
   try {
+    if (!isValidHttpUrl(url)) return null
+
     const res = await fetch(url, {
-      headers: {
-        'User-Agent'     : UA,
-        'Accept'         : 'text/html,application/xhtml+xml,*/*',
-        'Accept-Language': 'en-US,en;q=0.9',
-      },
-      signal: AbortSignal.timeout(15000),
+      headers: { 'User-Agent': UA, 'Accept': 'text/html,*/*' },
+      signal : AbortSignal.timeout(FETCH_TIMEOUT),
     })
     if (!res.ok) return null
     const html = await res.text()
@@ -184,20 +223,25 @@ async function fetchThumb(url, accessJwt) {
     const ogTitle = html.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i)?.[1] ?? ''
     const ogDesc  = html.match(/<meta[^>]+property=["']og:description["'][^>]+content=["']([^"']+)["']/i)?.[1] ?? ''
 
-    if (!ogImage) return null
+    if (!ogImage || !isValidHttpUrl(ogImage)) return null
 
-    const imgRes  = await fetch(ogImage, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(15000) })
+    const imgRes  = await fetch(ogImage, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(FETCH_TIMEOUT) })
     if (!imgRes.ok) return null
     const imgBuf  = await imgRes.arrayBuffer()
     const imgType = imgRes.headers.get('content-type') ?? 'image/jpeg'
     if (!imgType.startsWith('image/')) return null
-    if (imgBuf.byteLength > 976 * 1024) return null
+    if (imgBuf.byteLength > 976 * 1024) {
+      console.log(`  ⚠ Image too large — skipping`)
+      return null
+    }
 
     const uploadRes = await fetch(`${BSKY_SERVICE}/xrpc/com.atproto.repo.uploadBlob`, {
       method : 'POST',
-      headers: { 'Authorization': `Bearer ${accessJwt}`, 'Content-Type': imgType },
+      headers: { 'Authorization': `Bearer ${SESSION.accessJwt}`, 'Content-Type': imgType },
       body   : imgBuf,
+      signal : AbortSignal.timeout(FETCH_TIMEOUT),
     })
+
     if (!uploadRes.ok) return null
     const { blob } = await uploadRes.json()
     return { blob, title: ogTitle, description: ogDesc }
@@ -212,13 +256,15 @@ async function createSession() {
     method : 'POST',
     headers: { 'Content-Type': 'application/json' },
     body   : JSON.stringify({ identifier: IDENTIFIER, password: APP_PASSWORD }),
+    signal : AbortSignal.timeout(FETCH_TIMEOUT),
   })
-  if (!res.ok) throw new Error(`Auth failed: ${res.status} ${await res.text()}`)
-  return res.json()
+  if (!res.ok) throw new Error(`Auth failed: ${res.status}`)
+  SESSION = await res.json()
+  return SESSION
 }
 
-// ── Post to Bluesky ───────────────────────────────────────────
-async function createPost(session, text, url, thumb) {
+// ── Create Bluesky post ───────────────────────────────────────
+async function createPost(text, url, thumb) {
   const facets = buildFacets(text, url)
   const record = {
     $type    : 'app.bsky.feed.post',
@@ -228,33 +274,34 @@ async function createPost(session, text, url, thumb) {
     langs    : ['en'],
   }
 
-  // Always add embed card — thumb blob is optional
+  // Image is mandatory — thumb must be non-null before calling this function
   record.embed = {
     $type   : 'app.bsky.embed.external',
     external: {
       uri        : url,
-      title      : thumb?.title       ?? '',
-      description: thumb?.description ?? '',
-      ...(thumb?.blob ? { thumb: thumb.blob } : {}),
+      title      : thumb.title       || '',
+      description: thumb.description || '',
+      thumb      : thumb.blob,
     },
   }
 
   const res = await fetch(`${BSKY_SERVICE}/xrpc/com.atproto.repo.createRecord`, {
     method : 'POST',
     headers: {
-      'Authorization': `Bearer ${session.accessJwt}`,
+      'Authorization': `Bearer ${SESSION.accessJwt}`,
       'Content-Type' : 'application/json',
     },
-    body: JSON.stringify({
-      repo      : session.did,
+    body  : JSON.stringify({
+      repo      : SESSION.did,
       collection: 'app.bsky.feed.post',
       record,
     }),
+    signal: AbortSignal.timeout(FETCH_TIMEOUT),
   })
 
-  if (!res.ok) throw new Error(`Post failed: ${res.status} ${await res.text()}`)
+  if (!res.ok) throw new Error(`Post failed: ${res.status}`)
   const result = await res.json()
-  console.log(`✓ Posted: ${result.uri}`)
+  console.log(`  ✓ Posted: ${result.uri}`)
   return result.uri
 }
 
@@ -264,16 +311,14 @@ async function main() {
 
   const projects = loadProjects()
   const cache    = loadCache()
-  const session  = await createSession()
+  await withRetry(createSession, 'Auth')
 
   console.log(`Projects found: ${projects.length}`)
 
   let posted = 0
 
   for (const project of projects) {
-    // Skip if already announced
     if (cache[project.id]?.announced) {
-      // Check for version update
       const cachedVersion = cache[project.id]?.version
       if (!project.version || project.version === cachedVersion) {
         console.log(`  ${project.id}: already announced — skipping`)
@@ -285,12 +330,24 @@ async function main() {
     try {
       const { text, url } = buildPostText(project)
 
-      // Fetch OG image — try website first, then githubUrl
+      // Fetch OG image — mandatory per specification
       const thumbUrl = project.website ?? project.githubUrl ?? null
-      const thumb    = thumbUrl ? await fetchThumb(thumbUrl, session.accessJwt) : null
-      console.log(`  OG image: ${thumb ? '✓ found' : '✗ not found — posting without image'}`)
+      if (!thumbUrl || !isValidHttpUrl(thumbUrl)) {
+        console.error(`  ✗ No valid URL for OG image fetch — ${project.id} skipped`)
+        continue
+      }
 
-      const uri = await createPost(session, text, url, thumb)
+      console.log(`  Fetching OG image from ${thumbUrl}...`)
+      const thumb = await fetchThumb(thumbUrl)
+
+      if (!thumb) {
+        console.error(`  ✗ No OG image found for ${project.id} — skipping`)
+        console.error(`    Post will not be published without a social sharing image`)
+        continue
+      }
+
+      console.log(`  ✓ OG image found`)
+      const uri = await withRetry(() => createPost(text, url, thumb), `Post ${project.id}`)
 
       cache[project.id] = {
         announced: true,
@@ -298,6 +355,9 @@ async function main() {
         postedAt : new Date().toISOString(),
         uri,
       }
+
+      // Write cache immediately after each successful post
+      saveCache(cache)
       posted++
 
       await new Promise(r => setTimeout(r, 2000))
@@ -311,6 +371,6 @@ async function main() {
 }
 
 main().catch(err => {
-  console.error(err)
+  console.error(err.message)
   process.exit(1)
 })

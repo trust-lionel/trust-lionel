@@ -1,187 +1,261 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+// ============================================================
+// scripts/bluesky-post.mjs
+// Posts new journal entries to Bluesky
+// Reads from https://trust-lionel.com/atom.xml
+// ============================================================
 
-// ── Config ───────────────────────────────────────────────────────────────────
-const FEED_URL        = 'https://trust-lionel.com/atom.xml';
-const BSKY_SERVICE    = 'https://bsky.social';
-const IDENTIFIER      = process.env.BLUESKY_IDENTIFIER;
-const APP_PASSWORD    = process.env.BLUESKY_APP_PASSWORD;
-const __dirname       = path.dirname(fileURLToPath(import.meta.url));
-const CACHE_FILE      = path.resolve(__dirname, '../cache/bluesky-posted.json');
-const MAX_POST_LENGTH = 300;
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
-// ── Load / save cache ─────────────────────────────────────────────────────────
-// Cache schema: { [url]: { postedAt: string|null, uri: string|null } }
+// ── Config ───────────────────────────────────────────────────
+const BSKY_SERVICE    = 'https://bsky.social'
+const IDENTIFIER      = process.env.BLUESKY_IDENTIFIER
+const APP_PASSWORD    = process.env.BLUESKY_APP_PASSWORD
+const __dirname       = path.dirname(fileURLToPath(import.meta.url))
+const FEED_URL        = 'https://trust-lionel.com/atom.xml'
+const CACHE_FILE      = path.resolve(__dirname, '../cache/bluesky-posted.json')
+const MAX_POST_LENGTH = 300
+const FETCH_TIMEOUT   = 15000
+const MAX_RETRIES     = 3
+const RETRY_DELAY_MS  = 5000
+const UA              = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
+
+// ── Credential validation ─────────────────────────────────────
+if (!IDENTIFIER || !APP_PASSWORD) {
+  console.error('✗ Missing BLUESKY_IDENTIFIER or BLUESKY_APP_PASSWORD')
+  process.exit(1)
+}
+
+// ── Session store (module-level — avoids JWT in stack traces) ─
+let SESSION = null
+
+// ── URL validation — prevents SSRF ───────────────────────────
+function isValidHttpUrl(str) {
+  try {
+    const u = new URL(str)
+    if (!['https:', 'http:'].includes(u.protocol)) return false
+    const h = u.hostname
+    if (h === 'localhost') return false
+    if (h === '127.0.0.1') return false
+    if (h.startsWith('169.254')) return false  // AWS metadata
+    if (h.startsWith('10.'))     return false  // RFC1918
+    if (h.startsWith('192.168')) return false  // RFC1918
+    if (h.startsWith('172.16'))  return false  // RFC1918
+    return true
+  } catch { return false }
+}
+
+// ── File name sanitization — prevents path traversal ─────────
+function isSafeFilename(name) {
+  return /^[a-zA-Z0-9_-]+\.(md|mdx|json)$/.test(name)
+}
+
+// ── Load / save cache ─────────────────────────────────────────
 function loadCache() {
   if (fs.existsSync(CACHE_FILE)) {
-    return JSON.parse(fs.readFileSync(CACHE_FILE, 'utf8'));
+    try {
+      return JSON.parse(fs.readFileSync(CACHE_FILE, 'utf8'))
+    } catch {
+      console.error('✗ Cache file corrupt — starting fresh')
+      return {}
+    }
   }
-  return {};
+  return {}
 }
 
 function saveCache(cache) {
-  fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 2));
+  fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 2))
 }
 
-// ── Minimal Atom XML parser (no dependencies) ─────────────────────────────────
+// ── Retry wrapper ─────────────────────────────────────────────
+async function withRetry(fn, label) {
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      return await fn()
+    } catch (err) {
+      if (attempt === MAX_RETRIES) throw err
+      console.warn(`  ⚠ ${label} — attempt ${attempt} failed: ${err.message}. Retrying in ${RETRY_DELAY_MS / 1000}s...`)
+      await new Promise(r => setTimeout(r, RETRY_DELAY_MS))
+    }
+  }
+}
+
+// ── Atom XML parser ───────────────────────────────────────────
 function parseAtom(xml) {
-  const entries = [];
-  const entryRegex = /<entry>([\s\S]*?)<\/entry>/g;
-  let entryMatch;
+  const entries = []
+  const entryRegex = /<entry>([\s\S]*?)<\/entry>/g
+  let entryMatch
 
   while ((entryMatch = entryRegex.exec(xml)) !== null) {
-    const block = entryMatch[1];
+    const block = entryMatch[1]
 
     const title = block.match(/<title[^>]*>([\s\S]*?)<\/title>/)?.[1]
       ?.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/, '$1')
-      ?.trim() ?? '';
+      ?.trim() ?? ''
 
     const url = block.match(/<link[^>]+href=["']([^"']+)["']/)?.[1]
       ?? block.match(/<id>([\s\S]*?)<\/id>/)?.[1]?.trim()
-      ?? '';
+      ?? ''
 
     const summary = block.match(/<summary[^>]*>([\s\S]*?)<\/summary>/)?.[1]
       ?.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/, '$1')
       ?.replace(/<[^>]+>/g, '')
-      ?.trim() ?? '';
+      ?.trim() ?? ''
 
-    const categories = [];
-    const catRegex = /<category[^>]+term=["']([^"']+)["']/g;
-    let catMatch;
+    const categories = []
+    const catRegex = /<category[^>]+term=["']([^"']+)["']/g
+    let catMatch
     while ((catMatch = catRegex.exec(block)) !== null) {
-      categories.push(catMatch[1]);
+      categories.push(catMatch[1])
     }
 
-    if (url) entries.push({ title, url, summary, categories });
+    if (url && isValidHttpUrl(url)) entries.push({ title, url, summary, categories })
   }
 
-  return entries;
+  return entries
 }
 
-// ── Fetch Atom feed ───────────────────────────────────────────────────────────
+// ── Fetch Atom feed ───────────────────────────────────────────
 async function fetchFeed() {
-  const res = await fetch(FEED_URL);
-  if (!res.ok) throw new Error(`Feed fetch failed: ${res.status}`);
-  const xml = await res.text();
-  return parseAtom(xml);
+  const res = await fetch(FEED_URL, {
+    headers: { 'User-Agent': UA },
+    signal : AbortSignal.timeout(FETCH_TIMEOUT),
+  })
+  if (!res.ok) throw new Error(`Feed fetch failed: ${res.status}`)
+  const xml = await res.text()
+  return parseAtom(xml)
 }
 
-// ── Bluesky auth ──────────────────────────────────────────────────────────────
+// ── Bluesky auth ──────────────────────────────────────────────
 async function createSession() {
   const res = await fetch(`${BSKY_SERVICE}/xrpc/com.atproto.server.createSession`, {
     method : 'POST',
     headers: { 'Content-Type': 'application/json' },
     body   : JSON.stringify({ identifier: IDENTIFIER, password: APP_PASSWORD }),
-  });
-  if (!res.ok) throw new Error(`Auth failed: ${res.status} ${await res.text()}`);
-  return res.json();
+    signal : AbortSignal.timeout(FETCH_TIMEOUT),
+  })
+  // Never log response body on auth endpoints
+  if (!res.ok) throw new Error(`Auth failed: ${res.status}`)
+  SESSION = await res.json()
+  return SESSION
 }
 
-// ── Build post text ───────────────────────────────────────────────────────────
+// ── Build post text ───────────────────────────────────────────
 function buildPostText({ title, summary, url, categories }) {
   const hashtags = categories
     .map(c => '#' + c.replace(/\s+/g, '').replace(/[^a-zA-Z0-9]/g, ''))
     .filter(Boolean)
     .slice(0, 4)
-    .join(' ');
+    .join(' ')
 
-  const prefix  = `New on ahr-ki-tekt Design Journal:\n\n${title}\n\n`;
-  const suffix  = `\n\n${hashtags}\n\n${url}`;
-
-  // Strategy: full text with summary → no summary → truncate title as last resort
-  const withSummary = (() => {
-    const available = MAX_POST_LENGTH - prefix.length - suffix.length;
-    if (available <= 0) return null;
+  const prefix       = `New on ahr-ki-tekt Design Journal:\n\n${title}\n\n`
+  const suffix       = `\n\n${hashtags}\n\n${url}`
+  const withSummary  = (() => {
+    const available = MAX_POST_LENGTH - prefix.length - suffix.length
+    if (available <= 0) return null
     const trimmed = summary.length > available
       ? summary.slice(0, available - 1) + '…'
-      : summary;
-    return `${prefix}${trimmed}${suffix}`;
-  })();
+      : summary
+    return `${prefix}${trimmed}${suffix}`
+  })()
 
-  const withoutSummary = `${prefix}${suffix}`;
+  const withoutSummary = `${prefix}${suffix}`
 
-  if (withSummary && withSummary.length <= MAX_POST_LENGTH) return withSummary;
-  if (withoutSummary.length <= MAX_POST_LENGTH) return withoutSummary;
+  if (withSummary && withSummary.length <= MAX_POST_LENGTH) return withSummary
+  if (withoutSummary.length <= MAX_POST_LENGTH) return withoutSummary
 
   // Last resort — truncate title
-  const budget  = MAX_POST_LENGTH - suffix.length - 'New on ahr-ki-tekt Design Journal:\n\n'.length - 1;
-  const short   = `New on ahr-ki-tekt Design Journal:\n\n${title.slice(0, budget)}…${suffix}`;
-  return short;
+  const budget = MAX_POST_LENGTH - suffix.length - 'New on ahr-ki-tekt Design Journal:\n\n'.length - 1
+  return `New on ahr-ki-tekt Design Journal:\n\n${title.slice(0, budget)}…${suffix}`
 }
 
-// ── Build facets (hashtags + URL) ─────────────────────────────────────────────
+// ── Build facets ──────────────────────────────────────────────
 function buildFacets(text, url) {
-  const facets  = [];
-  const encoder = new TextEncoder();
+  const facets  = []
+  const encoder = new TextEncoder()
 
-  const hashtagRegex = /#([a-zA-Z0-9]+)/g;
-  let match;
+  const hashtagRegex = /#([a-zA-Z0-9]+)/g
+  let match
   while ((match = hashtagRegex.exec(text)) !== null) {
-    const start = encoder.encode(text.slice(0, match.index)).length;
-    const end   = encoder.encode(text.slice(0, match.index + match[0].length)).length;
+    const start = encoder.encode(text.slice(0, match.index)).length
+    const end   = encoder.encode(text.slice(0, match.index + match[0].length)).length
     facets.push({
       index   : { byteStart: start, byteEnd: end },
       features: [{ $type: 'app.bsky.richtext.facet#tag', tag: match[1] }],
-    });
+    })
   }
 
-  const urlIndex = text.indexOf(url);
+  const urlIndex = text.indexOf(url)
   if (urlIndex !== -1) {
-    const start = encoder.encode(text.slice(0, urlIndex)).length;
-    const end   = encoder.encode(text.slice(0, urlIndex + url.length)).length;
+    const start = encoder.encode(text.slice(0, urlIndex)).length
+    const end   = encoder.encode(text.slice(0, urlIndex + url.length)).length
     facets.push({
       index   : { byteStart: start, byteEnd: end },
       features: [{ $type: 'app.bsky.richtext.facet#link', uri: url }],
-    });
+    })
   }
 
-  return facets;
+  return facets
 }
 
-// ── Fetch OG image and upload blob ───────────────────────────────────────────
-async function fetchThumb(url, accessJwt) {
+// ── Fetch OG image and upload blob ───────────────────────────
+async function fetchThumb(url) {
   try {
-    const res  = await fetch(url);
-    const html = await res.text();
+    if (!isValidHttpUrl(url)) return null
+
+    const res = await fetch(url, {
+      headers: { 'User-Agent': UA, 'Accept': 'text/html,*/*' },
+      signal : AbortSignal.timeout(FETCH_TIMEOUT),
+    })
+    if (!res.ok) return null
+    const html = await res.text()
 
     const ogImage = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i)?.[1]
-                 ?? html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i)?.[1];
-    const ogDesc  = html.match(/<meta[^>]+property=["']og:description["'][^>]+content=["']([^"']+)["']/i)?.[1]
-                 ?? html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:description["']/i)?.[1]
-                 ?? '';
-    const ogTitle = html.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i)?.[1]
-                 ?? html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:title["']/i)?.[1]
-                 ?? '';
+                 ?? html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i)?.[1]
+                 ?? html.match(/<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i)?.[1]
+    const ogDesc  = html.match(/<meta[^>]+property=["']og:description["'][^>]+content=["']([^"']+)["']/i)?.[1] ?? ''
+    const ogTitle = html.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i)?.[1] ?? ''
 
-    if (!ogImage) return null;
+    if (!ogImage || !isValidHttpUrl(ogImage)) return null
 
-    const imgRes  = await fetch(ogImage);
-    const imgBuf  = await imgRes.arrayBuffer();
-    const imgType = imgRes.headers.get('content-type') ?? 'image/jpeg';
+    const imgRes  = await fetch(ogImage, {
+      headers: { 'User-Agent': UA },
+      signal : AbortSignal.timeout(FETCH_TIMEOUT),
+    })
+    if (!imgRes.ok) return null
+
+    const imgBuf  = await imgRes.arrayBuffer()
+    const imgType = imgRes.headers.get('content-type') ?? 'image/jpeg'
+    if (!imgType.startsWith('image/')) return null
+    if (imgBuf.byteLength > 976 * 1024) {
+      console.log(`  ⚠ Image too large (${Math.round(imgBuf.byteLength / 1024)}KB) — skipping`)
+      return null
+    }
 
     const uploadRes = await fetch(`${BSKY_SERVICE}/xrpc/com.atproto.repo.uploadBlob`, {
       method : 'POST',
       headers: {
-        'Authorization': `Bearer ${accessJwt}`,
+        'Authorization': `Bearer ${SESSION.accessJwt}`,
         'Content-Type' : imgType,
       },
-      body: imgBuf,
-    });
+      body  : imgBuf,
+      signal: AbortSignal.timeout(FETCH_TIMEOUT),
+    })
 
-    if (!uploadRes.ok) return null;
-    const { blob } = await uploadRes.json();
-    return { blob, title: ogTitle, description: ogDesc };
+    if (!uploadRes.ok) return null
+    const { blob } = await uploadRes.json()
+    return { blob, title: ogTitle, description: ogDesc }
   } catch {
-    return null;
+    return null
   }
 }
 
-// ── Create Bluesky post ───────────────────────────────────────────────────────
-async function createPost(session, entry) {
-  const text   = buildPostText(entry);
-  const facets = buildFacets(text, entry.url);
-  const thumb  = await fetchThumb(entry.url, session.accessJwt);
+// ── Create Bluesky post ───────────────────────────────────────
+async function createPost(entry) {
+  const text   = buildPostText(entry)
+  const facets = buildFacets(text, entry.url)
+  const thumb  = await fetchThumb(entry.url)
 
   const record = {
     $type    : 'app.bsky.feed.post',
@@ -189,7 +263,7 @@ async function createPost(session, entry) {
     facets,
     createdAt: new Date().toISOString(),
     langs    : ['en'],
-  };
+  }
 
   if (thumb) {
     record.embed = {
@@ -200,68 +274,72 @@ async function createPost(session, entry) {
         description: thumb.description,
         thumb      : thumb.blob,
       },
-    };
+    }
   }
 
   const res = await fetch(`${BSKY_SERVICE}/xrpc/com.atproto.repo.createRecord`, {
     method : 'POST',
     headers: {
-      'Authorization': `Bearer ${session.accessJwt}`,
+      'Authorization': `Bearer ${SESSION.accessJwt}`,
       'Content-Type' : 'application/json',
     },
-    body: JSON.stringify({
-      repo      : session.did,
+    body  : JSON.stringify({
+      repo      : SESSION.did,
       collection: 'app.bsky.feed.post',
       record,
     }),
-  });
+    signal: AbortSignal.timeout(FETCH_TIMEOUT),
+  })
 
-  if (!res.ok) throw new Error(`Post failed: ${res.status} ${await res.text()}`);
-  const result = await res.json();
-  console.log(`✓ Posted: ${entry.title}`);
-  console.log(`  ${result.uri}`);
-  return result.uri;
+  if (!res.ok) throw new Error(`Post failed: ${res.status}`)
+  const result = await res.json()
+  console.log(`✓ Posted: ${entry.title}`)
+  console.log(`  ${result.uri}`)
+  return result.uri
 }
 
-// ── Main ──────────────────────────────────────────────────────────────────────
+// ── Main ──────────────────────────────────────────────────────
 async function main() {
-  console.log('ahr-ki-tekt → Bluesky | Starting run...');
+  console.log('ahr-ki-tekt → Bluesky | Starting run...')
 
-  const cache   = loadCache();
-  const entries = await fetchFeed();
-  const session = await createSession();
+  const cache   = loadCache()
+  const entries = await withRetry(fetchFeed, 'Feed fetch')
+  await withRetry(createSession, 'Auth')
 
-  console.log(`Feed entries found: ${entries.length}`);
-  console.log(`Cache entries: ${Object.keys(cache).length}`);
+  console.log(`Feed entries found: ${entries.length}`)
+  console.log(`Cache entries: ${Object.keys(cache).length}`)
 
-  let posted = 0;
+  let posted = 0
 
   for (const entry of entries) {
-    // Skip if already posted (has a saved URI)
-    if (!entry.url || cache[entry.url]?.uri) continue;
+    if (!entry.url || cache[entry.url]?.uri) continue
 
     try {
-      const uri = await createPost(session, entry);
+      const uri = await withRetry(() => createPost(entry), `Post: ${entry.url}`)
+
       cache[entry.url] = {
         postedAt: new Date().toISOString(),
         uri,
-      };
-      posted++;
+      }
+
+      // Write cache immediately after each successful post
+      saveCache(cache)
+      posted++
 
       if (posted < entries.length) {
-        await new Promise(r => setTimeout(r, 2000));
+        await new Promise(r => setTimeout(r, 2000))
       }
     } catch (err) {
-      console.error(`✗ Failed: ${entry.url}`);
-      console.error(err.message);
+      console.error(`✗ Failed after ${MAX_RETRIES} attempts: ${entry.url}`)
+      console.error(err.message)
     }
   }
 
-  saveCache(cache);
-  console.log(`Done. ${posted} new post(s) published.`);
+  saveCache(cache)
+  console.log(`Done. ${posted} new post(s) published.`)
 }
 
 main().catch(err => {
-  console.error(err);
-  process.exit(1);
-});
+  console.error(err.message)
+  process.exit(1)
+})
