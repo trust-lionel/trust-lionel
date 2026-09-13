@@ -193,10 +193,16 @@ function buildPostText(event, stage) {
 
   switch (stage.key) {
     case 't7': {
-      const fixed     = `One week away:\n\n${event.title}`
-      const available = MAX_LENGTH - fixed.length - suffix.length - 2
-      const desc      = trimToFit(event.description ?? '', available)
-      text = `${fixed}${desc ? '\n\n' + desc : ''}${suffix}`
+      // Use practitioner hook if present — required per specification
+      if (!event.blueskyHookT7) {
+        console.log(`  ↳ No blueskyHookT7 field — skipping t7 for ${event.id}`)
+        return { text: null, url }
+      }
+      if (event.blueskyHookT7.length > MAX_LENGTH) {
+        console.error(`  ✗ blueskyHookT7 exceeds 300 chars (${event.blueskyHookT7.length}) — skipping`)
+        return { text: null, url }
+      }
+      text = event.blueskyHookT7
       break
     }
     case 't2': {
@@ -208,7 +214,16 @@ function buildPostText(event, stage) {
       break
     }
     case 't0': {
-      text = `Today on ahr-ki-tekt:\n\n${event.title} starts in a few hours.\n\n${format}${event.eventTime ?? ''}\n\nRegister now — limited seats.${suffix}`
+      // Use practitioner hook if present — required per specification
+      if (!event.blueskyHookT0) {
+        console.log(`  ↳ No blueskyHookT0 field — skipping t0 for ${event.id}`)
+        return { text: null, url }
+      }
+      if (event.blueskyHookT0.length > MAX_LENGTH) {
+        console.error(`  ✗ blueskyHookT0 exceeds 300 chars (${event.blueskyHookT0.length}) — skipping`)
+        return { text: null, url }
+      }
+      text = event.blueskyHookT0
       break
     }
     case 'recap': {
@@ -388,6 +403,9 @@ async function main() {
 
       try {
         const { text, url } = buildPostText(event, stage)
+
+        // null text means hook field missing or too long — already logged
+        if (!text) continue
 
         // Fetch OG image — mandatory per specification
         console.log(`  ↳ Fetching OG image for ${stage.key}...`)
