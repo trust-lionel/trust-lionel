@@ -101,3 +101,9 @@ Sectors served: Energy and Oil & Gas, Healthcare, Legal, Financial Services, Log
 - [4thxBailey GitHub](https://github.com/4thxBailey): Legacy GitHub organization
 - [trust-lionel GitHub](https://github.com/trust-lionel): Platform repository (public)
 - [About Lionel Mosley](https://about.lionelmosley.com): Extended profile
+
+## Xccelerate Events
+
+Events, workshops, and practitioner sessions designed to help entrepreneurs and business leaders excel, accelerate, and achieve organizational goals — hosted by Lionel Mosley (@lionelmosley).
+
+View upcoming events at https://luma.com/xccelerate-events
