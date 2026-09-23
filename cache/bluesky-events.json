@@ -1,10 +1,21 @@
 {
-  "cmet-workshop-lift-orlando-september-2026": {},
+  "cmet-workshop-lift-orlando-september-2026": {
+    "recap": {
+      "posted": true,
+      "postedAt": "2026-09-23T02:22:28.753Z",
+      "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mw5onrzxye2v"
+    }
+  },
   "cmet-workshop-september-2026": {
     "recap": {
       "posted": true,
       "postedAt": "2026-09-22T02:22:27.569Z",
       "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mw366uogbe2z"
+    },
+    "t0": {
+      "posted": true,
+      "postedAt": "2026-09-23T02:22:32.579Z",
+      "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mw5onxjopn23"
     }
   }
 }
