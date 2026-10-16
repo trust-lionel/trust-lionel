@@ -2,7 +2,7 @@
   "https://trust-lionel.com/posts/microsoft-entra-id-sms-mfa-retirement": {
     "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3muc3leelds2q",
     "postedAt": "2026-08-30T09:34:00.327Z",
-    "checkedAt": "2026-10-16T02:11:55.031Z",
+    "checkedAt": "2026-10-16T08:35:35.786Z",
     "engagement": {
       "likeCount": 0,
       "repostCount": 0,
@@ -18,7 +18,7 @@
   "https://trust-lionel.com/posts/physical-network-skill-shortage": {
     "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3muc3livdif2r",
     "postedAt": "2026-08-30T09:34:05.023Z",
-    "checkedAt": "2026-10-16T02:11:56.648Z",
+    "checkedAt": "2026-10-16T08:35:37.520Z",
     "engagement": {
       "likeCount": 0,
       "repostCount": 0,
@@ -34,7 +34,7 @@
   "https://trust-lionel.com/posts/what-attackers-do-after-mfa": {
     "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3muc3lns47k2t",
     "postedAt": "2026-08-30T09:34:10.432Z",
-    "checkedAt": "2026-10-16T02:11:58.310Z",
+    "checkedAt": "2026-10-16T08:35:39.100Z",
     "engagement": {
       "likeCount": 0,
       "repostCount": 0,
@@ -50,7 +50,7 @@
   "https://trust-lionel.com/posts/macbook-pro-2026": {
     "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3muc3ls3av22t",
     "postedAt": "2026-08-30T09:34:14.661Z",
-    "checkedAt": "2026-10-16T02:12:00.542Z",
+    "checkedAt": "2026-10-16T08:35:41.370Z",
     "engagement": {
       "likeCount": 1,
       "repostCount": 0,
@@ -76,7 +76,7 @@
   "https://trust-lionel.com/posts/connectivity-uptime": {
     "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3muc3lwddjl2t",
     "postedAt": "2026-08-30T09:34:19.120Z",
-    "checkedAt": "2026-10-16T02:12:01.988Z",
+    "checkedAt": "2026-10-16T08:35:43.169Z",
     "engagement": {
       "likeCount": 0,
       "repostCount": 0,
@@ -92,7 +92,7 @@
   "https://trust-lionel.com/posts/cloud-migration": {
     "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3muc3m2rmb32t",
     "postedAt": "2026-08-30T09:34:23.797Z",
-    "checkedAt": "2026-10-16T02:12:03.640Z",
+    "checkedAt": "2026-10-16T08:35:45.057Z",
     "engagement": {
       "likeCount": 0,
       "repostCount": 0,
@@ -108,7 +108,7 @@
   "https://trust-lionel.com/posts/microsoft-notification-abuse": {
     "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3muc3m6pke72z",
     "postedAt": "2026-08-30T09:34:27.809Z",
-    "checkedAt": "2026-10-16T02:12:05.289Z",
+    "checkedAt": "2026-10-16T08:35:47.084Z",
     "engagement": {
       "likeCount": 0,
       "repostCount": 0,
@@ -124,7 +124,7 @@
   "https://trust-lionel.com/posts/three-questions": {
     "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3muc3mcjpun25",
     "postedAt": "2026-08-30T09:34:31.888Z",
-    "checkedAt": "2026-10-16T02:12:06.950Z",
+    "checkedAt": "2026-10-16T08:35:48.954Z",
     "engagement": {
       "likeCount": 0,
       "repostCount": 0,
@@ -140,7 +140,7 @@
   "https://trust-lionel.com/posts/vibe-coding": {
     "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3muc3mg7cgm2r",
     "postedAt": "2026-08-30T09:34:35.711Z",
-    "checkedAt": "2026-10-16T02:12:09.705Z",
+    "checkedAt": "2026-10-16T08:35:51.832Z",
     "engagement": {
       "likeCount": 2,
       "repostCount": 0,
@@ -157,7 +157,7 @@
         {
           "handle": "lofiglow.bsky.social",
           "displayName": "Lofi Glow",
-          "followersCount": 3361
+          "followersCount": 3363
         },
         {
           "handle": "thisisdonebyhumans.bsky.social",
@@ -171,7 +171,7 @@
   "https://trust-lionel.com/posts/macsystools": {
     "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3muc3mkizdo2y",
     "postedAt": "2026-08-30T09:34:40.244Z",
-    "checkedAt": "2026-10-16T02:12:13.653Z",
+    "checkedAt": "2026-10-16T08:35:55.612Z",
     "engagement": {
       "likeCount": 4,
       "repostCount": 0,
@@ -181,14 +181,14 @@
       "topLiker": {
         "handle": "openalternative.co",
         "displayName": "OpenAlternative",
-        "followersCount": 4186
+        "followersCount": 4190
       },
       "topReposter": null,
       "likers": [
         {
           "handle": "adityamitra.bsky.social",
           "displayName": "Aditya Mitra",
-          "followersCount": 619
+          "followersCount": 625
         },
         {
           "handle": "dnulkjkjh.bsky.social",
@@ -198,12 +198,12 @@
         {
           "handle": "bollabai.bsky.social",
           "displayName": "Boltlab AI",
-          "followersCount": 667
+          "followersCount": 668
         },
         {
           "handle": "openalternative.co",
           "displayName": "OpenAlternative",
-          "followersCount": 4186
+          "followersCount": 4190
         }
       ],
       "reposters": []
@@ -212,7 +212,7 @@
   "https://trust-lionel.com/posts/about-lionelmosley-com-post": {
     "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mubbk42yss25",
     "postedAt": "2026-08-30T01:48:00.866Z",
-    "checkedAt": "2026-10-16T02:12:16.170Z",
+    "checkedAt": "2026-10-16T08:35:58.331Z",
     "engagement": {
       "likeCount": 2,
       "repostCount": 0,
@@ -222,19 +222,19 @@
       "topLiker": {
         "handle": "openalternative.co",
         "displayName": "OpenAlternative",
-        "followersCount": 4186
+        "followersCount": 4190
       },
       "topReposter": null,
       "likers": [
         {
           "handle": "adityamitra.bsky.social",
           "displayName": "Aditya Mitra",
-          "followersCount": 619
+          "followersCount": 625
         },
         {
           "handle": "openalternative.co",
           "displayName": "OpenAlternative",
-          "followersCount": 4186
+          "followersCount": 4190
         }
       ],
       "reposters": []
@@ -243,7 +243,7 @@
   "https://trust-lionel.com/posts/infrastructure-week-august-2026": {
     "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mubbka4ypd2k",
     "postedAt": "2026-08-30T01:48:04.970Z",
-    "checkedAt": "2026-10-16T02:12:17.654Z",
+    "checkedAt": "2026-10-16T08:36:00.059Z",
     "engagement": {
       "likeCount": 0,
       "repostCount": 0,
@@ -259,17 +259,17 @@
   "https://trust-lionel.com/posts/from-policy-fluency-to-nist-alignment": {
     "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mubftalrqk2g",
     "postedAt": "2026-08-30T02:15:39.560Z",
-    "checkedAt": "2026-10-16T02:12:21.719Z",
+    "checkedAt": "2026-10-16T08:36:04.529Z",
     "engagement": {
-      "likeCount": 5,
+      "likeCount": 0,
       "repostCount": 0,
-      "replyCount": 1,
+      "replyCount": 0,
       "quoteCount": 0,
-      "score": 7,
+      "score": 0,
       "topLiker": {
         "handle": "nonzerosum.games",
         "displayName": "James",
-        "followersCount": 18353
+        "followersCount": 18356
       },
       "topReposter": null,
       "likers": [
@@ -281,12 +281,12 @@
         {
           "handle": "effectivealtruist.bsky.social",
           "displayName": "Affective Old Truant",
-          "followersCount": 11866
+          "followersCount": 11871
         },
         {
           "handle": "nonzerosum.games",
           "displayName": "James",
-          "followersCount": 18353
+          "followersCount": 18356
         },
         {
           "handle": "mickai.bsky.social",
@@ -296,7 +296,7 @@
         {
           "handle": "frengible.bsky.social",
           "displayName": "Narich Violetfathom",
-          "followersCount": 13278
+          "followersCount": 13301
         }
       ],
       "reposters": []
@@ -305,7 +305,7 @@
   "https://trust-lionel.com/posts/hidden-line-item-saas-subscription": {
     "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mupbkbjuh62q",
     "postedAt": "2026-09-04T15:25:22.731Z",
-    "checkedAt": "2026-10-16T02:12:23.639Z",
+    "checkedAt": "2026-10-16T08:36:06.571Z",
     "engagement": {
       "likeCount": 0,
       "repostCount": 0,
@@ -321,7 +321,7 @@
   "https://trust-lionel.com/posts/your-data-is-somewhere-you-did-not-choose": {
     "uri": "at://did:plc:s3xva6orijlwtablxc62yffb/app.bsky.feed.post/3mv72mhsywa2z",
     "postedAt": "2026-09-10T22:03:56.317Z",
-    "checkedAt": "2026-10-16T02:12:26.004Z",
+    "checkedAt": "2026-10-16T08:36:09.462Z",
     "engagement": {
       "likeCount": 2,
       "repostCount": 0,
@@ -343,7 +343,7 @@
         {
           "handle": "10kweb.co",
           "displayName": "10K Web & Co.",
-          "followersCount": 419
+          "followersCount": 420
         }
       ],
       "reposters": []
